@@ -55,7 +55,8 @@ section.card{background:var(--card);border:1px solid var(--line);border-radius:1
 section.card h3{margin:0 0 10px;font-size:1.2rem;display:flex;align-items:center;gap:10px}
 h4{margin:20px 0 6px;font-size:1.02rem}
 .formula{background:var(--acc-soft);border-left:5px solid var(--acc);border-radius:8px;padding:10px 16px;margin:14px 0;overflow-x:auto;overflow-y:hidden}
-.formula mjx-container{margin:6px 0!important}
+.formula{padding-top:16px;padding-bottom:16px}
+.formula mjx-container{margin:10px 0!important}
 .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:14px 0}
 .mini{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fbfcfe}
 .mini h4{margin:0 0 4px;font-size:.98rem;color:var(--acc)}
@@ -153,17 +154,17 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
 
   <h4>Velocidad media</h4>
   <p>En un intervalo de tiempo finito &Delta;<i>t</i>, cada especie cambia su concentración en &Delta;[i]. Dividir por el coeficiente estequiométrico entrega un único valor para toda la reacción:</p>
-  <div class="formula">\[ \begin{aligned}\bar v&=-\frac{1}{a}\frac{\Delta[\mathrm{A}]}{\Delta t}=-\frac{1}{b}\frac{\Delta[\mathrm{B}]}{\Delta t}\\ &=\frac{1}{c}\frac{\Delta[\mathrm{C}]}{\Delta t}=\frac{1}{d}\frac{\Delta[\mathrm{D}]}{\Delta t}\end{aligned} \]</div>
+  <div class="formula">\[ \begin{aligned}\bar v&=-\frac{1}{a}\frac{\Delta[\mathrm{A}]}{\Delta t}=-\frac{1}{b}\frac{\Delta[\mathrm{B}]}{\Delta t}\\[1.2em] &=\frac{1}{c}\frac{\Delta[\mathrm{C}]}{\Delta t}=\frac{1}{d}\frac{\Delta[\mathrm{D}]}{\Delta t}\end{aligned} \]</div>
   <p>Los reactivos disminuyen (&Delta;[R] &lt; 0), así que se antepone un signo menos y &nbsp;<i>v&#772;</i>&nbsp; resulta positiva.</p>
   <div class="callout tip"><p><span class="lbl">Ejemplo.</span> Para A &rarr; productos, [A] baja de 0,80 M a 0,50 M en 60 s. <i>v&#772;</i> = &minus;(0,50 &minus; 0,80) M / 60 s = 0,30 M / 60 s = 5,0 &times; 10<sup>&minus;3</sup> M s<sup>&minus;1</sup>.</p></div>
 
   <h4>Velocidad instantánea</h4>
   <p>Cuando el intervalo se reduce hasta cero se obtiene la velocidad de reacción en un instante dado:</p>
-  <div class="formula">\[ \begin{aligned}v&=\lim_{\Delta t\to 0}\bar v=-\frac{1}{a}\frac{d[\mathrm{A}]}{dt}=-\frac{1}{b}\frac{d[\mathrm{B}]}{dt}\\ &=\frac{1}{c}\frac{d[\mathrm{C}]}{dt}=\frac{1}{d}\frac{d[\mathrm{D}]}{dt}\end{aligned} \]</div>
+  <div class="formula">\[ \begin{aligned}v&=\lim_{\Delta t\to 0}\bar v=-\frac{1}{a}\frac{d[\mathrm{A}]}{dt}=-\frac{1}{b}\frac{d[\mathrm{B}]}{dt}\\[1.2em] &=\frac{1}{c}\frac{d[\mathrm{C}]}{dt}=\frac{1}{d}\frac{d[\mathrm{D}]}{dt}\end{aligned} \]</div>
   <p>Gráficamente, la velocidad media corresponde a la pendiente de una secante y la velocidad instantánea a la pendiente de la tangente a la curva concentración&ndash;tiempo.</p>
   <figure>
-    <svg id="fig1" viewBox="0 0 560 300" role="img" aria-label="Curvas de concentración contra tiempo para A y C, con una secante y una tangente a la curva de C"></svg>
-    <figcaption>Reacción A &rarr; C. La secante entre dos instantes da la velocidad media. La tangente en un instante da la velocidad de reacción en ese instante.</figcaption>
+    <svg id="fig1" viewBox="0 0 560 320" role="img" aria-label="Concentración del reactivo A contra tiempo, con una secante entre dos puntos y una tangente en un instante"></svg>
+    <figcaption>Reacción A &rarr; productos. La pendiente de [A] es negativa, de modo que <i>v</i> es el negativo de la pendiente. La secante entre dos instantes da la velocidad media. La tangente en un instante da la velocidad instantánea.</figcaption>
   </figure>
   <div class="grid">
     <div class="mini"><h4>Valor único</h4><p>Una sola <i>v</i> describe a la reacción completa, con cualquier especie.</p></div>
@@ -252,7 +253,8 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
     <li>Realizar varios experimentos a la misma temperatura, cada uno con concentraciones iniciales conocidas, y medir la velocidad inicial <i>v</i><sub>0</sub> (pendiente de la curva de concentración contra tiempo en <i>t</i> &asymp; 0).</li>
     <li>Elegir dos experimentos en los que cambie la concentración de una sola especie y las demás se mantengan constantes.</li>
     <li>Comparar las velocidades. Si [A] cambia y [B] se mantiene constante:
-      <div class="formula" style="margin:8px 0">\[ \begin{aligned}\frac{v_2}{v_1}&=\left(\frac{[\mathrm{A}]_2}{[\mathrm{A}]_1}\right)^{m}\\ m&=\frac{\ln(v_2/v_1)}{\ln([\mathrm{A}]_2/[\mathrm{A}]_1)}\end{aligned} \]</div>
+      <div class="formula" style="margin:8px 0">\[ \frac{v_2}{v_1}=\left(\frac{[\mathrm{A}]_2}{[\mathrm{A}]_1}\right)^{m} \]</div>
+      Se calculan ambos cocientes y se busca el exponente <i>m</i> que iguala la potencia con el cociente de velocidades.
     </li>
     <li>Repetir el paso 3 para cada reactivo, sumar los órdenes parciales y calcular <i>k</i> despejándola de cualquier experimento: <i>k</i> = <i>v</i><sub>0</sub> / ([A]<sup><i>m</i></sup>[B]<sup><i>n</i></sup>). Verificar con otro experimento.</li>
   </ol>
@@ -265,12 +267,16 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
     <tr><td>2</td><td>0,020</td><td>0,010</td><td>1,0 &times; 10<sup>&minus;3</sup></td></tr>
     <tr><td>3</td><td>0,010</td><td>0,020</td><td>5,0 &times; 10<sup>&minus;4</sup></td></tr>
   </table></div>
-  <div class="grid">
-    <div class="mini"><h4>Orden en NO (Exp. 1 y 2)</h4><p>[NO] &times;2 con [H<sub>2</sub>] constante; <i>v</i> &times;4. Entonces 2<sup><i>m</i></sup> = 4 y <i>m</i> = 2.</p></div>
-    <div class="mini"><h4>Orden en H<sub>2</sub> (Exp. 1 y 3)</h4><p>[H<sub>2</sub>] &times;2 con [NO] constante; <i>v</i> &times;2. Entonces 2<sup><i>n</i></sup> = 2 y <i>n</i> = 1.</p></div>
-    <div class="mini"><h4>Constante <i>k</i> (Exp. 1)</h4><p><i>k</i> = 2,5&times;10<sup>&minus;4</sup> / (0,010<sup>2</sup> &times; 0,010) = 2,5&times;10<sup>2</sup> M<sup>&minus;2</sup> s<sup>&minus;1</sup>.</p></div>
-  </div>
-  <p>Ley de velocidad: <i>v</i> = <i>k</i>[NO]<sup>2</sup>[H<sub>2</sub>], orden total 3.</p>
+  <p>Suponga la ley de velocidad \( v=k\,[\mathrm{NO}]^{m}[\mathrm{H_2}]^{n} \).</p>
+  <h4>Orden en NO (Exp. 1 y 2)</h4>
+  <p style="margin:0">Cambia sólo [NO]; [H<sub>2</sub>] es constante.</p>
+  <div class="formula">\[ \begin{aligned}\frac{v_2}{v_1}&=\frac{1{,}0\times10^{-3}}{2{,}5\times10^{-4}}=4\\[1.2em] \left(\frac{0{,}020}{0{,}010}\right)^{m}&=2^{m}=4\quad\Rightarrow\quad m=2\end{aligned} \]</div>
+  <h4>Orden en H<sub>2</sub> (Exp. 1 y 3)</h4>
+  <p style="margin:0">Cambia sólo [H<sub>2</sub>]; [NO] es constante.</p>
+  <div class="formula">\[ \begin{aligned}\frac{v_3}{v_1}&=\frac{5{,}0\times10^{-4}}{2{,}5\times10^{-4}}=2\\[1.2em] \left(\frac{0{,}020}{0{,}010}\right)^{n}&=2^{n}=2\quad\Rightarrow\quad n=1\end{aligned} \]</div>
+  <h4>Constante <i>k</i> (Exp. 1)</h4>
+  <div class="formula">\[ \begin{aligned}k&=\frac{v_0}{[\mathrm{NO}]^{2}[\mathrm{H_2}]}=\frac{2{,}5\times10^{-4}\ \mathrm{M\,s^{-1}}}{(0{,}010\ \mathrm{M})^{2}\,(0{,}010\ \mathrm{M})}\\[1.2em] &=2{,}5\times10^{2}\ \mathrm{M^{-2}\,s^{-1}}\end{aligned} \]</div>
+  <p>Ley de velocidad: \( v=k\,[\mathrm{NO}]^{2}[\mathrm{H_2}] \), orden total 3.</p>
 </section>
 
 <!-- AUTOEVALUACIÓN -->
@@ -323,30 +329,48 @@ $('#scrim').addEventListener('click',function(){document.body.classList.remove('
 
 /* ---------- Figura 1 ---------- */
 function drawFig1(){
-  var svg=$('#fig1'),W=560,H=300,L=58,R=22,T=22,B=48;
-  var X=function(t){return L+(t/4)*(W-L-R);},Y=function(c){return H-B-c*(H-T-B);};
-  var C=function(t){return 1-Math.exp(-t);};
-  var a='',c='',i,t;
-  for(i=0;i<=80;i++){t=i/20;a+=(i?'L':'M')+X(t).toFixed(1)+' '+Y(Math.exp(-t)).toFixed(1);c+=(i?'L':'M')+X(t).toFixed(1)+' '+Y(C(t)).toFixed(1);}
-  var t0=0.8,c0=C(t0),s=Math.exp(-t0),t1=0.1,t2=1.7;
-  var tg='M'+X(t1)+' '+Y(c0+s*(t1-t0))+'L'+X(t2)+' '+Y(c0+s*(t2-t0));
-  var ta=0.2,tb=2.4;
-  var sec='M'+X(ta-0.15)+' '+Y(C(ta)+(C(tb)-C(ta))/(tb-ta)*(-0.15))+'L'+X(tb)+' '+Y(C(tb));
-  svg.innerHTML=
-   '<line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-R)+'" y2="'+(H-B)+'" stroke="#59627a" stroke-width="1.5"/>'+
-   '<line x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+(H-B)+'" stroke="#59627a" stroke-width="1.5"/>'+
-   '<path d="'+a+'" fill="none" stroke="#1f5fbf" stroke-width="3"/>'+
-   '<path d="'+c+'" fill="none" stroke="#0c8486" stroke-width="3" stroke-dasharray="9 5"/>'+
-   '<path d="'+sec+'" fill="none" stroke="#59627a" stroke-width="2" stroke-dasharray="2 4"/>'+
-   '<circle cx="'+X(ta)+'" cy="'+Y(C(ta))+'" r="4.5" fill="#59627a"/><circle cx="'+X(tb)+'" cy="'+Y(C(tb))+'" r="4.5" fill="#59627a"/>'+
-   '<path d="'+tg+'" fill="none" stroke="#a8231b" stroke-width="2"/>'+
-   '<circle cx="'+X(t0)+'" cy="'+Y(c0)+'" r="5" fill="#a8231b"/>'+
-   '<text x="'+X(2.55)+'" y="'+(Y(Math.exp(-2.55))-12)+'" fill="#1f5fbf" font-size="15" font-weight="700">[A] reactivo</text>'+
-   '<text x="'+X(2.6)+'" y="'+(Y(1)+4)+'" fill="#0c8486" font-size="15" font-weight="700">[C] producto</text>'+
-   '<text x="'+X(0.3)+'" y="'+Y(0.07)+'" fill="#a8231b" font-size="13">tangente: pendiente = v</text>'+
-   '<text x="'+X(1.55)+'" y="'+Y(0.52)+'" fill="#59627a" font-size="13">secante: pendiente = v media</text>'+
-   '<text x="'+((L+W-R)/2)+'" y="'+(H-10)+'" text-anchor="middle" fill="#59627a" font-size="14">tiempo</text>'+
-   '<text transform="translate(16 '+((T+H-B)/2)+') rotate(-90)" text-anchor="middle" fill="#59627a" font-size="14">concentración</text>';
+  var svg=$('#fig1'),W=560,H=320,L=66,R=26,T=22,B=54,tau=120,tm=300;
+  var X=function(t){return L+(t/tm)*(W-L-R);},Y=function(c){return H-B-c*(H-T-B);};
+  var A=function(t){return Math.exp(-t/tau);};
+  var P=function(x,y){return x.toFixed(1)+' '+y.toFixed(1);};
+  var h='',i,d='';
+  /* rejilla y ticks */
+  [0,0.5,1].forEach(function(c){
+    h+='<line x1="'+L+'" y1="'+Y(c)+'" x2="'+(W-R)+'" y2="'+Y(c)+'" stroke="#e6eaf3"/>'+
+       '<line x1="'+(L-5)+'" y1="'+Y(c)+'" x2="'+L+'" y2="'+Y(c)+'" stroke="#59627a"/>'+
+       '<text x="'+(L-10)+'" y="'+(Y(c)+4)+'" text-anchor="end" font-size="13" fill="#59627a">'+String(c.toFixed(1)).replace('.',',')+'</text>';});
+  [0,100,200,300].forEach(function(t){
+    h+='<line x1="'+X(t)+'" y1="'+(H-B)+'" x2="'+X(t)+'" y2="'+(H-B+5)+'" stroke="#59627a"/>'+
+       '<text x="'+X(t)+'" y="'+(H-B+20)+'" text-anchor="middle" font-size="13" fill="#59627a">'+t+'</text>';});
+  h+='<line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-R)+'" y2="'+(H-B)+'" stroke="#59627a" stroke-width="1.5"/>'+
+     '<line x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+(H-B)+'" stroke="#59627a" stroke-width="1.5"/>';
+  /* curva [A] */
+  for(i=0;i<=120;i++){var t=i*tm/120;d+=(i?'L':'M')+P(X(t),Y(A(t)));}
+  h+='<path d="'+d+'" fill="none" stroke="#1f5fbf" stroke-width="3.2"/>';
+  /* secante entre ta y tb con triangulo */
+  var ta=100,tb=240,ya=A(ta),yb=A(tb);
+  h+='<path d="M'+P(X(ta),Y(ya))+'L'+P(X(tb),Y(yb))+'" stroke="#59627a" stroke-width="2.2" fill="none"/>'+
+     '<path d="M'+P(X(ta),Y(ya))+'L'+P(X(ta),Y(yb))+'L'+P(X(tb),Y(yb))+'" stroke="#59627a" stroke-width="1.4" stroke-dasharray="5 4" fill="none"/>'+
+     '<circle cx="'+X(ta)+'" cy="'+Y(ya)+'" r="4.5" fill="#59627a"/><circle cx="'+X(tb)+'" cy="'+Y(yb)+'" r="4.5" fill="#59627a"/>'+
+     '<text x="'+(X(ta)-8)+'" y="'+(Y((ya+yb)/2)+5)+'" text-anchor="end" font-size="14" fill="#59627a">\u0394[A]</text>'+
+     '<text x="'+X((ta+tb)/2)+'" y="'+(Y(yb)+19)+'" text-anchor="middle" font-size="14" fill="#59627a">\u0394t</text>';
+  /* tangente en t0 */
+  var t0=40,y0=A(t0),m=-y0/tau,t1=0,t2=90;
+  h+='<path d="M'+P(X(t1),Y(y0+m*(t1-t0)))+'L'+P(X(t2),Y(y0+m*(t2-t0)))+'" stroke="#a8231b" stroke-width="2.2" fill="none"/>'+
+     '<circle cx="'+X(t0)+'" cy="'+Y(y0)+'" r="5.5" fill="#a8231b"/>';
+  /* rotulos con guias en zona libre */
+  var xs=X(112);
+  h+='<path d="M'+P(xs-4,Y(0.80)-4)+'L'+P(X(t0)+6,Y(y0)-6)+'" stroke="#a8231b" stroke-width="1" fill="none"/>'+
+     '<text x="'+xs+'" y="'+(Y(0.80))+'" font-size="14" font-weight="600" fill="#a8231b">tangente en t\u2080: pendiente = \u2212v</text>'+
+     '<text x="'+xs+'" y="'+(Y(0.80)+18)+'" font-size="13" fill="#a8231b">(velocidad instant\u00e1nea)</text>';
+  var tl=170,ysl=ya+(yb-ya)*(tl-ta)/(tb-ta),xl=X(tl);
+  h+='<path d="M'+P(xl,Y(0.50)+6)+'L'+P(xl,Y(ysl)-5)+'" stroke="#59627a" stroke-width="1" fill="none"/>'+
+     '<text x="'+(xl-30)+'" y="'+(Y(0.50)-14)+'" font-size="14" font-weight="600" fill="#59627a">secante: pendiente = \u2212v media</text>'+
+     '<text x="'+(xl-30)+'" y="'+(Y(0.50)+2)+'" font-size="13" fill="#59627a">(velocidad media)</text>';
+  h+='<text x="'+X(262)+'" y="'+(Y(A(262))-12)+'" font-size="15" font-weight="700" fill="#1f5fbf">[A]</text>';
+  h+='<text x="'+((L+W-R)/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="14" fill="#59627a">tiempo (s)</text>'+
+     '<text transform="translate(18 '+((T+H-B)/2)+') rotate(-90)" text-anchor="middle" font-size="14" fill="#59627a">[A] (M)</text>';
+  svg.innerHTML=h;
 }
 
 /* ---------- Tabla de velocidades ---------- */
