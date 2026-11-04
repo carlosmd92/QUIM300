@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cinética química: velocidad de reacción y ley de velocidad</title>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+<style>
+:root{
+  --bg:#f5f7fb; --card:#ffffff; --ink:#1c2333; --muted:#59627a; --line:#dfe4ef;
+  --acc:#1f5fbf; --acc-soft:#e8f0fc; --acc2:#0c8486; --acc2-soft:#e3f4f4;
+  --ok:#17703f; --ok-bg:#e6f5ec; --bad:#a8231b; --bad-bg:#fcebe9;
+  --warn-bg:#fff3d9;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;font-size:16px}
+.wrap{max-width:920px;margin:0 auto;padding:0 18px}
+a{color:var(--acc)}
+/* Layout con barra lateral */
+.badge{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--acc);color:#fff;font-size:.95rem;font-weight:700;flex:none}
+.layout{display:flex;min-height:100vh}
+#side{width:272px;flex:none;background:#fff;border-right:1px solid var(--line);position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 14px}
+.brand{padding:4px 10px 16px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.brand b{display:block;font-size:1.12rem;line-height:1.25}
+.brand small{color:var(--muted)}
+#menu a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none;color:var(--ink);font-weight:500;line-height:1.3;margin-bottom:4px}
+#menu a:hover{background:var(--acc-soft)}
+#menu a.on{background:var(--acc);color:#fff}
+#menu a.on .badge{background:#fff;color:var(--acc)}
+#menu a.qz{margin-top:14px;border:1px dashed #9db8e6}
+.content{flex:1;min-width:0}
+.content main{max-width:860px;margin:0 auto;padding:12px 26px 30px}
+#topbar,#scrim{display:none}
+#burger{font:inherit;font-size:1.3rem;line-height:1;cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 12px}
+#tbTitle{font-weight:600;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#pager{display:flex;justify-content:space-between;gap:10px;margin:8px 0 20px}
+#pager a{flex:1;text-align:center;text-decoration:none;border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px 10px;font-weight:600;font-size:.92rem}
+#pager a:hover{background:var(--acc-soft);border-color:var(--acc)}
+#pager span{flex:1}
+@media (max-width:860px){
+  #side{position:fixed;left:0;top:0;z-index:40;width:282px;transform:translateX(-100%);transition:transform .2s;box-shadow:2px 0 18px rgba(0,0,0,.2)}
+  body.open #side{transform:none}
+  body.open #scrim{display:block;position:fixed;inset:0;background:rgba(20,30,60,.4);z-index:30}
+  #topbar{display:flex;position:sticky;top:0;z-index:20;height:52px;align-items:center;gap:12px;padding:0 14px;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
+  .content main{padding:8px 14px 24px}
+  .status{top:60px!important}
+}
+/* Contenido */
+section.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin:16px 0;box-shadow:0 1px 3px rgba(20,30,60,.05)}
+section.card h3{margin:0 0 10px;font-size:1.2rem;display:flex;align-items:center;gap:10px}
+h4{margin:20px 0 6px;font-size:1.02rem}
+.formula{background:var(--acc-soft);border-left:5px solid var(--acc);border-radius:8px;padding:10px 16px;margin:14px 0;overflow-x:auto;overflow-y:hidden}
+.formula mjx-container{margin:6px 0!important}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:14px 0}
+.mini{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fbfcfe}
+.mini h4{margin:0 0 4px;font-size:.98rem;color:var(--acc)}
+.mini p{margin:0;font-size:.93rem;color:var(--muted)}
+.callout{border-radius:10px;padding:12px 16px;margin:14px 0;font-size:.97rem}
+.callout.tip{background:var(--acc2-soft);border-left:5px solid var(--acc2)}
+.callout.warn{background:var(--warn-bg);border-left:5px solid #d9962b;color:#4a3300}
+.callout p{margin:0}
+.lbl{font-weight:700}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:.95rem}
+.tw{overflow-x:auto}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:center}
+th{background:#f0f3f9;font-weight:600}
+td.l,th.l{text-align:left}
+figure{margin:14px 0}
+figure svg{width:100%;height:auto;background:#fcfdff;border:1px solid var(--line);border-radius:12px}
+figcaption{font-size:.88rem;color:var(--muted);margin-top:6px}
+.ctrl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin:10px 0}
+.ctrl label{font-size:.93rem;color:var(--muted)}
+select,input[type=number],input[type=text]{font:inherit;padding:6px 10px;border:1px solid #b9c2d6;border-radius:8px;background:#fff;color:var(--ink);max-width:100%}
+input[type=number]{width:90px}
+input[type=range]{accent-color:var(--acc);width:220px;max-width:100%}
+ol.steps{padding-left:0;list-style:none;counter-reset:s;margin:12px 0}
+ol.steps li{counter-increment:s;position:relative;padding:8px 0 8px 44px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:8px;width:30px;height:30px;border-radius:50%;background:var(--acc2);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.92rem}
+/* Autoevaluación */
+.status{position:sticky;top:0;z-index:10;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin:12px 0;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;font-size:.93rem}
+.status .grow{flex:1;min-width:120px}
+#bar{height:8px;background:#e6eaf3;border-radius:6px;overflow:hidden}
+#bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .3s}
+button.btn{font:inherit;cursor:pointer;border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:8px;padding:7px 16px}
+button.btn.sec{background:#fff;color:var(--acc)}
+button.btn:hover{filter:brightness(1.07)}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #9ec0f2;outline-offset:2px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.tag{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.03em;color:var(--acc);background:var(--acc-soft);border-radius:6px;padding:2px 8px;margin-bottom:6px}
+.qt{margin:0 0 10px}
+.tf{display:flex;gap:10px;flex-wrap:wrap}
+.tf button,.opts button{font:inherit;cursor:pointer;border:1.5px solid #b9c2d6;background:#fff;color:var(--ink);border-radius:10px;padding:8px 18px;text-align:left}
+.tf button:hover:not(:disabled),.opts button:hover:not(:disabled){border-color:var(--acc);background:var(--acc-soft)}
+.opts{display:grid;gap:8px}
+.opts button{width:100%;display:flex;gap:10px;align-items:baseline}
+.opts .ltr{font-weight:700;color:var(--muted);flex:none;width:1.4em}
+button:disabled{cursor:default}
+button.correct{border-color:var(--ok)!important;background:var(--ok-bg)!important}
+button.wrong{border-color:var(--bad)!important;background:var(--bad-bg)!important}
+button.reveal{border-color:var(--ok)!important;border-style:dashed!important}
+button.correct::after{content:" \2713";color:var(--ok);font-weight:700;margin-left:auto}
+button.wrong::after{content:" \2717";color:var(--bad);font-weight:700;margin-left:auto}
+button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;margin-left:auto}
+.fb{margin-top:12px;padding:11px 15px;border-radius:10px;font-size:.95rem}
+.fb.ok{background:var(--ok-bg);border-left:5px solid var(--ok)}
+.fb.bad{background:var(--bad-bg);border-left:5px solid var(--bad)}
+.fb.info{background:var(--warn-bg);border-left:5px solid #d9962b}
+.fb p{margin:6px 0 0}
+.calc-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.calc-row input{width:130px}
+.calc-row .unit{color:var(--muted)}
+.data{background:#fbfcfe;border:1px dashed #aab4cc;border-radius:12px;padding:10px 16px;margin:14px 0}
+.data p{margin:4px 0 8px}
+#topics{list-style:none;padding:0;margin:0}
+#topics li{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:space-between;border-bottom:1px solid var(--line);padding:8px 0}
+#topics li:last-child{border-bottom:none}
+@media (max-width:560px){
+  section.card{padding:18px 16px}
+  .formula{padding:6px 10px;font-size:.9rem}
+  .tf button{flex:1}
+}
+@media print{#side,#topbar,#pager,.status,.ctrl{display:none}.view{display:block!important}section.card,.q{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+
+<div class="layout">
+<aside id="side" aria-label="Bloques de contenido">
+  <div class="brand"><b>Cinética química</b><small>Velocidad de reacción y ley de velocidad</small></div>
+  <nav id="menu">
+    <a href="#s1" data-id="s1"><span class="badge">1</span>Velocidad de reacción</a>
+    <a href="#s2" data-id="s2"><span class="badge">2</span>Aparición y consumo</a>
+    <a href="#s3" data-id="s3"><span class="badge">3</span>Ley de velocidad</a>
+    <a href="#s4" data-id="s4"><span class="badge">4</span>Velocidades iniciales</a>
+    <a href="#quiz" data-id="quiz" class="qz"><span class="badge">&#9998;</span>Autoevaluación</a>
+  </nav>
+</aside>
+<div id="scrim"></div>
+<div class="content">
+<div id="topbar"><button id="burger" type="button" aria-label="Abrir menú" aria-expanded="false">&#9776;</button><span id="tbTitle"></span></div>
+<main>
+
+<!-- 1 -->
+<section class="card view" id="s1" hidden>
+  <h3><span class="badge">1</span>Velocidad de reacción</h3>
+  <p>La velocidad de reacción mide cuán rápido avanza una reacción química. Se calcula con variaciones de concentración en el tiempo. Para una reacción general</p>
+  <div class="formula">\[ a\,\mathrm{A} + b\,\mathrm{B} \longrightarrow c\,\mathrm{C} + d\,\mathrm{D} \]</div>
+
+  <h4>Velocidad media</h4>
+  <p>En un intervalo de tiempo finito &Delta;<i>t</i>, cada especie cambia su concentración en &Delta;[i]. Dividir por el coeficiente estequiométrico entrega un único valor para toda la reacción:</p>
+  <div class="formula">\[ \begin{aligned}\bar v&=-\frac{1}{a}\frac{\Delta[\mathrm{A}]}{\Delta t}=-\frac{1}{b}\frac{\Delta[\mathrm{B}]}{\Delta t}\\ &=\frac{1}{c}\frac{\Delta[\mathrm{C}]}{\Delta t}=\frac{1}{d}\frac{\Delta[\mathrm{D}]}{\Delta t}\end{aligned} \]</div>
+  <p>Los reactivos disminuyen (&Delta;[R] &lt; 0), así que se antepone un signo menos y &nbsp;<i>v&#772;</i>&nbsp; resulta positiva.</p>
+  <div class="callout tip"><p><span class="lbl">Ejemplo.</span> Para A &rarr; productos, [A] baja de 0,80 M a 0,50 M en 60 s. <i>v&#772;</i> = &minus;(0,50 &minus; 0,80) M / 60 s = 0,30 M / 60 s = 5,0 &times; 10<sup>&minus;3</sup> M s<sup>&minus;1</sup>.</p></div>
+
+  <h4>Velocidad instantánea</h4>
+  <p>Cuando el intervalo se reduce hasta cero se obtiene la velocidad de reacción en un instante dado:</p>
+  <div class="formula">\[ \begin{aligned}v&=\lim_{\Delta t\to 0}\bar v=-\frac{1}{a}\frac{d[\mathrm{A}]}{dt}=-\frac{1}{b}\frac{d[\mathrm{B}]}{dt}\\ &=\frac{1}{c}\frac{d[\mathrm{C}]}{dt}=\frac{1}{d}\frac{d[\mathrm{D}]}{dt}\end{aligned} \]</div>
+  <p>Gráficamente, la velocidad media corresponde a la pendiente de una secante y la velocidad instantánea a la pendiente de la tangente a la curva concentración&ndash;tiempo.</p>
+  <figure>
+    <svg id="fig1" viewBox="0 0 560 300" role="img" aria-label="Curvas de concentración contra tiempo para A y C, con una secante y una tangente a la curva de C"></svg>
+    <figcaption>Reacción A &rarr; C. La secante entre dos instantes da la velocidad media. La tangente en un instante da la velocidad de reacción en ese instante.</figcaption>
+  </figure>
+  <div class="grid">
+    <div class="mini"><h4>Valor único</h4><p>Una sola <i>v</i> describe a la reacción completa, con cualquier especie.</p></div>
+    <div class="mini"><h4>Siempre positiva</h4><p>El signo menos compensa la disminución de los reactivos.</p></div>
+    <div class="mini"><h4>Unidades</h4><p>Concentración sobre tiempo: mol L<sup>&minus;1</sup> s<sup>&minus;1</sup> (M s<sup>&minus;1</sup>).</p></div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="card view" id="s2" hidden>
+  <h3><span class="badge">2</span>Velocidad de reacción, de aparición y de consumo</h3>
+  <p>La velocidad de reacción <i>v</i> pertenece a la reacción completa. La velocidad de consumo de un reactivo y la velocidad de aparición de un producto pertenecen a cada especie, y ambas se expresan como cantidades positivas.</p>
+  <div class="grid">
+    <div class="mini"><h4>Consumo de un reactivo R</h4><div>\( -\dfrac{d[\mathrm{R}]}{dt} \)</div></div>
+    <div class="mini"><h4>Aparición de un producto P</h4><div>\( +\dfrac{d[\mathrm{P}]}{dt} \)</div></div>
+    <div class="mini"><h4>Relación con <i>v</i></h4><div>\( r_i=|\nu_i|\,v \)</div></div>
+  </div>
+  <p>Cada especie cambia su concentración con una rapidez proporcional a su coeficiente estequiométrico |&nu;<sub>i</sub>|. Por eso, en una misma reacción, las velocidades de consumo y de aparición de distintas especies difieren entre sí, mientras que <i>v</i> permanece única.</p>
+  <div class="callout tip"><p><span class="lbl">Probar:</span> elija una reacción, cambie el valor de <i>v</i> y observe cómo se reparte entre las especies.</p></div>
+  <div class="ctrl">
+    <label>Reacción: <select id="rxSel"></select></label>
+    <label><i>v</i> = <input type="number" id="vIn" value="1.0" min="0" step="0.1"> &times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup></label>
+  </div>
+  <div class="tw"><table id="rxTab"></table></div>
+</section>
+
+<!-- 3 -->
+<section class="card view" id="s3" hidden>
+  <h3><span class="badge">3</span>Ley de velocidad y órdenes de reacción</h3>
+  <p>La ley de velocidad relaciona <i>v</i> con las concentraciones de los reactivos a temperatura constante:</p>
+  <div class="formula">\[ v=k\,[\mathrm{A}]^{m}\,[\mathrm{B}]^{n} \]</div>
+  <div class="grid">
+    <div class="mini"><h4><i>k</i>: constante de velocidad</h4><p>Depende de la temperatura y de la reacción. Las concentraciones no la modifican.</p></div>
+    <div class="mini"><h4><i>m</i>, <i>n</i>: órdenes parciales</h4><p>Orden respecto de A y respecto de B. Se determinan experimentalmente.</p></div>
+    <div class="mini"><h4>Orden total</h4><div>\( m+n \)</div></div>
+  </div>
+  <div class="callout warn"><p><span class="lbl">Atención:</span> los órdenes parciales y los coeficientes estequiométricos son magnitudes independientes. Sólo coinciden en un paso elemental. Ejemplo: 2 NO + 2 H<sub>2</sub> &rarr; N<sub>2</sub> + 2 H<sub>2</sub>O cumple <i>v</i> = <i>k</i>[NO]<sup>2</sup>[H<sub>2</sub>], con orden 1 en H<sub>2</sub> (su coeficiente es 2) y orden total 3.</p></div>
+
+  <h4>Qué indica el orden parcial</h4>
+  <p>El orden <i>m</i> dice cuánto pesa la concentración de A en la velocidad. Es un exponente, de modo que su efecto se obtiene elevando el factor de cambio de [A] a ese exponente.</p>
+  <p>Sea <i>f</i> el factor por el que se multiplica [A], con [B] constante. Se compara la velocidad antes y después:</p>
+  <ol class="steps">
+    <li>Antes: \( v_1=k[\mathrm{A}]^{m} \)</li>
+    <li>Después: \( v_2=k\,(f[\mathrm{A}])^{m}=f^{m}\,k[\mathrm{A}]^{m} \)</li>
+    <li>Cociente: \( \dfrac{v_2}{v_1}=f^{m} \). La velocidad se multiplica por \( f^{m} \).</li>
+  </ol>
+  <div class="grid">
+    <div class="mini"><h4>Orden 0, [A] &times;2</h4><p>2<sup>0</sup> = 1. La velocidad no cambia.</p></div>
+    <div class="mini"><h4>Orden 1, [A] &times;2</h4><p>2<sup>1</sup> = 2. La velocidad se duplica.</p></div>
+    <div class="mini"><h4>Orden 2, [A] &times;3</h4><p>3<sup>2</sup> = 9. La velocidad se multiplica por nueve.</p></div>
+    <div class="mini"><h4>Orden &minus;1, [A] &times;2</h4><p>2<sup>&minus;1</sup> = 1/2. La velocidad se reduce a la mitad.</p></div>
+  </div>
+  <div class="tw"><table>
+    <tr><th>Orden <i>m</i></th><th>Si [A] se duplica, <i>v</i> se multiplica por</th><th class="l">Significado</th></tr>
+    <tr><td>0</td><td>1</td><td class="l"><i>v</i> es independiente de [A]</td></tr>
+    <tr><td>1</td><td>2</td><td class="l"><i>v</i> es proporcional a [A]</td></tr>
+    <tr><td>2</td><td>4</td><td class="l"><i>v</i> es proporcional a [A]<sup>2</sup></td></tr>
+    <tr><td>1/2</td><td>&asymp; 1,41</td><td class="l">Orden fraccionario, propio de mecanismos complejos</td></tr>
+    <tr><td>&minus;1</td><td>1/2</td><td class="l">Más A frena la reacción</td></tr>
+  </table></div>
+
+  <h4>Explorar con el gráfico</h4>
+  <p style="margin:0 0 6px">Mueva el deslizador para elegir el factor <i>f</i> y compare los tres órdenes.</p>
+  <figure>
+    <svg id="fig2" viewBox="0 0 560 330" role="img" aria-label="Velocidad relativa contra concentración relativa para órdenes 0, 1 y 2"></svg>
+    <figcaption>Velocidad relativa <i>v</i>/<i>v</i><sub>0</sub> en función de [A]/[A]<sub>0</sub>. Los puntos marcan el factor <i>f</i> elegido.</figcaption>
+  </figure>
+  <div class="ctrl">
+    <label>Factor <i>f</i> = <input type="range" id="fSl" min="0.5" max="3" step="0.5" value="2"> <b id="fVal">2</b></label>
+  </div>
+  <p id="fOut" style="margin:4px 0 12px"></p>
+
+  <h4>Unidades de <i>k</i></h4>
+  <p style="margin:0 0 6px"><i>k</i> toma las unidades que dejan a <i>v</i> en M s<sup>&minus;1</sup>. Para orden total <i>N</i> y concentraciones en M: M<sup>1&minus;<i>N</i></sup> s<sup>&minus;1</sup>.</p>
+  <div class="tw"><table>
+    <tr><th>Orden total</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
+    <tr><th><i>k</i></th><td>M s<sup>&minus;1</sup></td><td>s<sup>&minus;1</sup></td><td>M<sup>&minus;1</sup> s<sup>&minus;1</sup></td><td>M<sup>&minus;2</sup> s<sup>&minus;1</sup></td></tr>
+  </table></div>
+</section>
+
+<!-- 4 -->
+<section class="card view" id="s4" hidden>
+  <h3><span class="badge">4</span>Método de las velocidades iniciales</h3>
+  <p>Permite hallar los órdenes parciales y <i>k</i> a partir de una serie de experimentos. Se mide la velocidad al comienzo de cada experimento, cuando las concentraciones de los reactivos son las preparadas y todavía no hay productos que interfieran.</p>
+  <ol class="steps">
+    <li>Realizar varios experimentos a la misma temperatura, cada uno con concentraciones iniciales conocidas, y medir la velocidad inicial <i>v</i><sub>0</sub> (pendiente de la curva de concentración contra tiempo en <i>t</i> &asymp; 0).</li>
+    <li>Elegir dos experimentos en los que cambie la concentración de una sola especie y las demás se mantengan constantes.</li>
+    <li>Comparar las velocidades. Si [A] cambia y [B] se mantiene constante:
+      <div class="formula" style="margin:8px 0">\[ \begin{aligned}\frac{v_2}{v_1}&=\left(\frac{[\mathrm{A}]_2}{[\mathrm{A}]_1}\right)^{m}\\ m&=\frac{\ln(v_2/v_1)}{\ln([\mathrm{A}]_2/[\mathrm{A}]_1)}\end{aligned} \]</div>
+    </li>
+    <li>Repetir el paso 3 para cada reactivo, sumar los órdenes parciales y calcular <i>k</i> despejándola de cualquier experimento: <i>k</i> = <i>v</i><sub>0</sub> / ([A]<sup><i>m</i></sup>[B]<sup><i>n</i></sup>). Verificar con otro experimento.</li>
+  </ol>
+  <div class="callout tip"><p><span class="lbl">Atajo cuando la concentración se duplica:</span> si <i>v</i> no cambia, el orden es 0. Si <i>v</i> se duplica, el orden es 1. Si <i>v</i> se cuadruplica, el orden es 2. Si <i>v</i> se multiplica por 8, el orden es 3.</p></div>
+
+  <h4>Ejemplo resuelto: 2 NO + 2 H<sub>2</sub> &rarr; N<sub>2</sub> + 2 H<sub>2</sub>O</h4>
+  <div class="tw"><table>
+    <tr><th>Exp.</th><th>[NO] (M)</th><th>[H<sub>2</sub>] (M)</th><th><i>v</i><sub>0</sub> (M s<sup>&minus;1</sup>)</th></tr>
+    <tr><td>1</td><td>0,010</td><td>0,010</td><td>2,5 &times; 10<sup>&minus;4</sup></td></tr>
+    <tr><td>2</td><td>0,020</td><td>0,010</td><td>1,0 &times; 10<sup>&minus;3</sup></td></tr>
+    <tr><td>3</td><td>0,010</td><td>0,020</td><td>5,0 &times; 10<sup>&minus;4</sup></td></tr>
+  </table></div>
+  <div class="grid">
+    <div class="mini"><h4>Orden en NO (Exp. 1 y 2)</h4><p>[NO] &times;2 con [H<sub>2</sub>] constante; <i>v</i> &times;4. Entonces 2<sup><i>m</i></sup> = 4 y <i>m</i> = 2.</p></div>
+    <div class="mini"><h4>Orden en H<sub>2</sub> (Exp. 1 y 3)</h4><p>[H<sub>2</sub>] &times;2 con [NO] constante; <i>v</i> &times;2. Entonces 2<sup><i>n</i></sup> = 2 y <i>n</i> = 1.</p></div>
+    <div class="mini"><h4>Constante <i>k</i> (Exp. 1)</h4><p><i>k</i> = 2,5&times;10<sup>&minus;4</sup> / (0,010<sup>2</sup> &times; 0,010) = 2,5&times;10<sup>2</sup> M<sup>&minus;2</sup> s<sup>&minus;1</sup>.</p></div>
+  </div>
+  <p>Ley de velocidad: <i>v</i> = <i>k</i>[NO]<sup>2</sup>[H<sub>2</sub>], orden total 3.</p>
+</section>
+
+<!-- AUTOEVALUACIÓN -->
+<div class="view" id="quiz" hidden>
+  <div class="status" role="status">
+    <span id="st"></span>
+    <span id="pt"></span>
+    <div class="grow"><div id="bar"><i></i></div></div>
+    <button class="btn sec" id="reset" type="button">Reiniciar</button>
+  </div>
+  <h4 style="margin-top:18px">Verdadero o falso</h4>
+  <div id="vf"></div>
+  <h4 style="margin-top:26px">Selección única</h4>
+  <div id="su"></div>
+  <h4 style="margin-top:26px">Cálculos</h4>
+  <div id="calc"></div>
+  <section class="card" style="margin-top:24px">
+    <h3>Resultados por tema</h3>
+    <ul id="topics"></ul>
+  </section>
+</div>
+
+<nav id="pager" aria-label="Navegación entre bloques"></nav>
+</main>
+</div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s);};
+var el=function(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;};
+function fmt(x){return Number(x.toPrecision(3)).toString().replace('.',',');}
+
+/* ---------- Navegación por bloques ---------- */
+var ORDER=['s1','s2','s3','s4','quiz'];
+var TITLES={s1:'1. Velocidad de reacción',s2:'2. Aparición y consumo',s3:'3. Ley de velocidad',s4:'4. Velocidades iniciales',quiz:'Autoevaluación'};
+function show(id){
+  [].forEach.call(document.querySelectorAll('.view'),function(v){v.hidden=(v.id!==id);});
+  [].forEach.call(document.querySelectorAll('#menu a'),function(a){var on=a.dataset.id===id;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  $('#tbTitle').textContent=TITLES[id];
+  var i=ORDER.indexOf(id),p=ORDER[i-1],n=ORDER[i+1];
+  $('#pager').innerHTML=(p?'<a href="#'+p+'">&larr; '+TITLES[p]+'</a>':'<span></span>')+(n?'<a href="#'+n+'">'+TITLES[n]+' &rarr;</a>':'<span></span>');
+  document.body.classList.remove('open');$('#burger').setAttribute('aria-expanded','false');
+  window.scrollTo(0,0);
+}
+function route(){var h=(location.hash||'').slice(1);show(ORDER.indexOf(h)<0?'s1':h);}
+$('#burger').addEventListener('click',function(){var o=document.body.classList.toggle('open');this.setAttribute('aria-expanded',o?'true':'false');});
+$('#scrim').addEventListener('click',function(){document.body.classList.remove('open');});
+
+/* ---------- Figura 1 ---------- */
+function drawFig1(){
+  var svg=$('#fig1'),W=560,H=300,L=58,R=22,T=22,B=48;
+  var X=function(t){return L+(t/4)*(W-L-R);},Y=function(c){return H-B-c*(H-T-B);};
+  var C=function(t){return 1-Math.exp(-t);};
+  var a='',c='',i,t;
+  for(i=0;i<=80;i++){t=i/20;a+=(i?'L':'M')+X(t).toFixed(1)+' '+Y(Math.exp(-t)).toFixed(1);c+=(i?'L':'M')+X(t).toFixed(1)+' '+Y(C(t)).toFixed(1);}
+  var t0=0.8,c0=C(t0),s=Math.exp(-t0),t1=0.1,t2=1.7;
+  var tg='M'+X(t1)+' '+Y(c0+s*(t1-t0))+'L'+X(t2)+' '+Y(c0+s*(t2-t0));
+  var ta=0.2,tb=2.4;
+  var sec='M'+X(ta-0.15)+' '+Y(C(ta)+(C(tb)-C(ta))/(tb-ta)*(-0.15))+'L'+X(tb)+' '+Y(C(tb));
+  svg.innerHTML=
+   '<line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-R)+'" y2="'+(H-B)+'" stroke="#59627a" stroke-width="1.5"/>'+
+   '<line x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+(H-B)+'" stroke="#59627a" stroke-width="1.5"/>'+
+   '<path d="'+a+'" fill="none" stroke="#1f5fbf" stroke-width="3"/>'+
+   '<path d="'+c+'" fill="none" stroke="#0c8486" stroke-width="3" stroke-dasharray="9 5"/>'+
+   '<path d="'+sec+'" fill="none" stroke="#59627a" stroke-width="2" stroke-dasharray="2 4"/>'+
+   '<circle cx="'+X(ta)+'" cy="'+Y(C(ta))+'" r="4.5" fill="#59627a"/><circle cx="'+X(tb)+'" cy="'+Y(C(tb))+'" r="4.5" fill="#59627a"/>'+
+   '<path d="'+tg+'" fill="none" stroke="#a8231b" stroke-width="2"/>'+
+   '<circle cx="'+X(t0)+'" cy="'+Y(c0)+'" r="5" fill="#a8231b"/>'+
+   '<text x="'+X(2.55)+'" y="'+(Y(Math.exp(-2.55))-12)+'" fill="#1f5fbf" font-size="15" font-weight="700">[A] reactivo</text>'+
+   '<text x="'+X(2.6)+'" y="'+(Y(1)+4)+'" fill="#0c8486" font-size="15" font-weight="700">[C] producto</text>'+
+   '<text x="'+X(0.3)+'" y="'+Y(0.07)+'" fill="#a8231b" font-size="13">tangente: pendiente = v</text>'+
+   '<text x="'+X(1.55)+'" y="'+Y(0.52)+'" fill="#59627a" font-size="13">secante: pendiente = v media</text>'+
+   '<text x="'+((L+W-R)/2)+'" y="'+(H-10)+'" text-anchor="middle" fill="#59627a" font-size="14">tiempo</text>'+
+   '<text transform="translate(16 '+((T+H-B)/2)+') rotate(-90)" text-anchor="middle" fill="#59627a" font-size="14">concentración</text>';
+}
+
+/* ---------- Tabla de velocidades ---------- */
+var RX=[
+ {eq:'N<sub>2</sub> + 3 H<sub>2</sub> &rarr; 2 NH<sub>3</sub>',sp:[['N<sub>2</sub>',-1],['H<sub>2</sub>',-3],['NH<sub>3</sub>',2]]},
+ {eq:'2 N<sub>2</sub>O<sub>5</sub> &rarr; 4 NO<sub>2</sub> + O<sub>2</sub>',sp:[['N<sub>2</sub>O<sub>5</sub>',-2],['NO<sub>2</sub>',4],['O<sub>2</sub>',1]]},
+ {eq:'4 NH<sub>3</sub> + 5 O<sub>2</sub> &rarr; 4 NO + 6 H<sub>2</sub>O',sp:[['NH<sub>3</sub>',-4],['O<sub>2</sub>',-5],['NO',4],['H<sub>2</sub>O',6]]}
+];
+function initRates(){
+  var sel=$('#rxSel'),U=' &times; 10<sup>&minus;3</sup> M s<sup>&minus;1</sup>';
+  RX.forEach(function(r,i){var o=document.createElement('option');o.value=i;
+    o.textContent=r.eq.replace(/<sub>(\d)<\/sub>/g,function(m,d){return '₀₁₂₃₄₅₆₇₈₉'.charAt(+d);}).replace(/&rarr;/g,'→');
+    sel.appendChild(o);});
+  function upd(){
+    var r=RX[+sel.value],v=parseFloat($('#vIn').value);if(isNaN(v)||v<0)v=0;
+    var h='<tr><th class="l">Especie</th><th>Papel</th><th>Tipo de velocidad</th><th>Expresión</th><th>Valor</th></tr>';
+    h+='<tr><td class="l" colspan="3"><b>Reacción completa</b></td><td><i>v</i></td><td><b>'+fmt(v)+U+'</b></td></tr>';
+    r.sp.forEach(function(p){
+      var red=p[1]<0,n=Math.abs(p[1]);
+      h+='<tr><td class="l">'+p[0]+'</td><td>'+(red?'Reactivo':'Producto')+'</td><td>'+(red?'Consumo':'Aparición')+'</td>'+
+         '<td>'+(red?'&minus;':'+')+'d['+p[0]+']/d<i>t</i> = '+n+' <i>v</i></td><td><b>'+fmt(n*v)+U+'</b></td></tr>';
+    });
+    $('#rxTab').innerHTML=h;
+  }
+  sel.addEventListener('change',upd);$('#vIn').addEventListener('input',upd);upd();
+}
+
+/* ---------- Figura 2 ---------- */
+function drawFig2(){
+  var svg=$('#fig2'),W=560,H=330,L=58,R=70,T=20,B=48,xm=3,ym=9;
+  var X=function(x){return L+(x/xm)*(W-L-R);},Y=function(y){return H-B-(y/ym)*(H-T-B);};
+  var f=parseFloat($('#fSl').value);$('#fVal').textContent=String(f).replace('.',',');
+  var cfg=[{n:0,c:'#59627a',d:'3 5'},{n:1,c:'#0c8486',d:'9 5'},{n:2,c:'#1f5fbf',d:''}];
+  var h='',i,k;
+  for(i=0;i<=3;i++){h+='<line x1="'+X(i)+'" y1="'+(H-B)+'" x2="'+X(i)+'" y2="'+(H-B+5)+'" stroke="#59627a"/><text x="'+X(i)+'" y="'+(H-B+20)+'" text-anchor="middle" font-size="13" fill="#59627a">'+i+'</text>';}
+  for(i=0;i<=9;i+=3){h+='<line x1="'+(L-5)+'" y1="'+Y(i)+'" x2="'+L+'" y2="'+Y(i)+'" stroke="#59627a"/><text x="'+(L-9)+'" y="'+(Y(i)+4)+'" text-anchor="end" font-size="13" fill="#59627a">'+i+'</text><line x1="'+L+'" y1="'+Y(i)+'" x2="'+(W-R)+'" y2="'+Y(i)+'" stroke="#e6eaf3"/>';}
+  h+='<line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-R)+'" y2="'+(H-B)+'" stroke="#59627a" stroke-width="1.5"/><line x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+(H-B)+'" stroke="#59627a" stroke-width="1.5"/>';
+  cfg.forEach(function(o){
+    var d='';for(k=0;k<=60;k++){var x=k/20;d+=(k?'L':'M')+X(x).toFixed(1)+' '+Y(Math.pow(x,o.n)).toFixed(1);}
+    h+='<path d="'+d+'" fill="none" stroke="'+o.c+'" stroke-width="3"'+(o.d?' stroke-dasharray="'+o.d+'"':'')+'/>';
+    h+='<text x="'+(X(3)+8)+'" y="'+(Y(Math.pow(3,o.n))+4)+'" font-size="14" font-weight="700" fill="'+o.c+'">orden '+o.n+'</text>';
+    h+='<circle cx="'+X(f)+'" cy="'+Y(Math.pow(f,o.n))+'" r="6" fill="'+o.c+'" stroke="#fff" stroke-width="2"/>';
+  });
+  h+='<line x1="'+X(f)+'" y1="'+(H-B)+'" x2="'+X(f)+'" y2="'+Y(Math.pow(f,2))+'" stroke="#a8231b" stroke-width="1" stroke-dasharray="3 4"/>';
+  h+='<text x="'+((L+W-R)/2)+'" y="'+(H-8)+'" text-anchor="middle" fill="#59627a" font-size="14">[A] / [A]₀</text>';
+  h+='<text transform="translate(16 '+((T+H-B)/2)+') rotate(-90)" text-anchor="middle" fill="#59627a" font-size="14">v / v₀</text>';
+  svg.innerHTML=h;
+  $('#fOut').innerHTML='Con <i>f</i> = '+String(f).replace('.',',')+': orden 0 &rarr; &times;'+fmt(1)+'; orden 1 &rarr; &times;'+fmt(f)+'; orden 2 &rarr; &times;'+fmt(f*f)+'.';
+}
+
+/* ---------- Banco de preguntas ---------- */
+var TOPICS={
+  def:{n:'Definición de velocidad de reacción',a:'#s1'},
+  cons:{n:'Velocidad de reacción, aparición y consumo',a:'#s2'},
+  ley:{n:'Ley de velocidad y órdenes de reacción',a:'#s3'},
+  vi:{n:'Método de las velocidades iniciales',a:'#s4'}
+};
+
+var VF=[
+ {t:'cons',q:'En la reacción 2 A &rarr; B, la velocidad de consumo de A es igual a la velocidad de aparición de B.',ans:false,
+  exp:'Por cada molécula de B que se forma se consumen dos de A, de modo que &minus;d[A]/d<i>t</i> = 2 d[B]/d<i>t</i>. La velocidad de reacción <i>v</i> = &minus;&frac12; d[A]/d<i>t</i> = d[B]/d<i>t</i> es la que coincide con la aparición de B.'},
+ {t:'ley',q:'El orden parcial respecto de un reactivo puede leerse directamente del coeficiente estequiométrico de ese reactivo en la ecuación global balanceada.',ans:false,
+  exp:'Los órdenes se determinan experimentalmente. Coinciden con los coeficientes sólo en un paso elemental. En 2 NO + 2 H<sub>2</sub> &rarr; N<sub>2</sub> + 2 H<sub>2</sub>O, el orden en H<sub>2</sub> es 1 aunque su coeficiente es 2.'},
+ {t:'vi',q:'Para hallar el orden respecto de A con el método de velocidades iniciales se comparan dos experimentos en los que cambian simultáneamente [A] y [B].',ans:false,
+  exp:'Si cambian ambas concentraciones, la variación de <i>v</i> mezcla los efectos de A y de B. Para aislar el orden en A se comparan experimentos en los que sólo cambia [A].'}
+];
+
+var SU=[
+ {t:'def',q:'¿Qué expresión define correctamente la velocidad de reacción <i>v</i> para N<sub>2</sub> + 3 H<sub>2</sub> &rarr; 2 NH<sub>3</sub>?',
+  o:[{x:'<i>v</i> = &minus;d[N<sub>2</sub>]/d<i>t</i> = &minus;3 d[H<sub>2</sub>]/d<i>t</i> = 2 d[NH<sub>3</sub>]/d<i>t</i>',w:'Multiplica por los coeficientes. Corresponde dividir por ellos.'},
+     {x:'<i>v</i> = &minus;d[N<sub>2</sub>]/d<i>t</i> = &minus;&#8531; d[H<sub>2</sub>]/d<i>t</i> = &frac12; d[NH<sub>3</sub>]/d<i>t</i>',ok:true,w:'Cada derivada se divide por su coeficiente estequiométrico, con signo menos para los reactivos.'},
+     {x:'<i>v</i> = d[N<sub>2</sub>]/d<i>t</i> = &#8531; d[H<sub>2</sub>]/d<i>t</i> = &minus;&frac12; d[NH<sub>3</sub>]/d<i>t</i>',w:'Los signos están invertidos: <i>v</i> quedaría negativa para los reactivos y los productos tendrían el signo equivocado.'},
+     {x:'<i>v</i> = &minus;d[N<sub>2</sub>]/d<i>t</i> = &minus;d[H<sub>2</sub>]/d<i>t</i> = d[NH<sub>3</sub>]/d<i>t</i>',w:'Omite los coeficientes estequiométricos. Eso sólo sería válido si todos valieran 1.'}]},
+ {t:'ley',q:'Para una reacción de orden total 2, con concentraciones en M y tiempo en s, las unidades de <i>k</i> son:',
+  o:[{x:'s<sup>&minus;1</sup>',w:'Son las unidades de <i>k</i> para orden total 1.'},
+     {x:'M s<sup>&minus;1</sup>',w:'Son las unidades de <i>k</i> para orden total 0, donde <i>v</i> = <i>k</i>.'},
+     {x:'M<sup>&minus;1</sup> s<sup>&minus;1</sup>',ok:true,w:'<i>k</i> = <i>v</i>/M<sup>2</sup> = (M s<sup>&minus;1</sup>)/M<sup>2</sup> = M<sup>&minus;1</sup> s<sup>&minus;1</sup>.'},
+     {x:'M<sup>&minus;2</sup> s<sup>&minus;1</sup>',w:'Son las unidades para orden total 3.'}]},
+ {t:'ley',q:'Al duplicar [A] con [B] constante, la velocidad inicial se cuadruplica. El orden de la reacción respecto de A es:',
+  o:[{x:'0',w:'Con orden 0 la velocidad no cambiaría al duplicar [A].'},
+     {x:'1',w:'Con orden 1 la velocidad sólo se duplicaría.'},
+     {x:'2',ok:true,w:'2<sup><i>m</i></sup> = 4, entonces <i>m</i> = 2.'},
+     {x:'4',w:'El 4 es el factor en que aumenta la velocidad. El orden es el exponente que cumple 2<sup><i>m</i></sup> = 4.'}]}
+];
+
+var CALC=[
+ {t:'vi',pre:true,q:'Con los datos de la tabla, determine el orden total de la reacción.',unit:'',ans:3,
+  hint:'Halle el orden en A comparando dos experimentos en los que sólo cambie [A], y el orden en B de la misma forma. Luego sume ambos.',
+  sol:'Exp. 1 y 2: sólo cambia [A] (&times;2) y <i>v</i> pasa de 2,0&times;10<sup>&minus;3</sup> a 8,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup> (&times;4). Entonces 2<sup><i>m</i></sup> = 4 y <i>m</i> = 2.<br>Exp. 1 y 3: sólo cambia [B] (&times;3) y <i>v</i> pasa de 2,0&times;10<sup>&minus;3</sup> a 6,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup> (&times;3). Entonces 3<sup><i>n</i></sup> = 3 y <i>n</i> = 1.<br>Orden total = 2 + 1 = 3.'},
+ {t:'vi',q:'Con los mismos datos, calcule la constante de velocidad <i>k</i>.',unit:'M<sup>&minus;2</sup> s<sup>&minus;1</sup>',ans:2.0,
+  hint:'Con <i>v</i> = <i>k</i>[A]<sup>2</sup>[B], despeje <i>k</i> = <i>v</i> / ([A]<sup>2</sup>[B]) usando los datos de un experimento.',
+  sol:'<i>v</i> = <i>k</i>[A]<sup>2</sup>[B]. Con Exp. 1: <i>k</i> = 2,0&times;10<sup>&minus;3</sup> / (0,10<sup>2</sup> &times; 0,10) = 2,0&times;10<sup>&minus;3</sup> / 1,0&times;10<sup>&minus;3</sup> = 2,0 M<sup>&minus;2</sup> s<sup>&minus;1</sup>.<br>Verificación con Exp. 2: 2,0 &times; 0,20<sup>2</sup> &times; 0,10 = 8,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup>, igual al valor medido.'}
+];
+
+var TOTAL=VF.length+SU.length+CALC.length;
+var results={};
+
+function mark(id,topic,ok){results[id]={t:topic,ok:ok};updateStatus();}
+function updateStatus(){
+  var ids=Object.keys(results),hits=ids.filter(function(k){return results[k].ok;}).length;
+  $('#st').textContent='Respondidas '+ids.length+' de '+TOTAL;
+  $('#pt').textContent='Aciertos '+hits;
+  $('#bar i').style.width=(ids.length/TOTAL*100)+'%';
+  var cnt={},ans={},okc={};
+  [VF,SU,CALC].forEach(function(arr){arr.forEach(function(q){cnt[q.t]=(cnt[q.t]||0)+1;});});
+  ids.forEach(function(k){var t=results[k].t;ans[t]=(ans[t]||0)+1;if(results[k].ok)okc[t]=(okc[t]||0)+1;});
+  var h='';
+  Object.keys(TOPICS).forEach(function(t){
+    var a=ans[t]||0,o=okc[t]||0,n=cnt[t]||0,extra='';
+    if(a===n&&o<n)extra=' &middot; <a href="'+TOPICS[t].a+'">Repasar bloque</a>';
+    h+='<li><span>'+TOPICS[t].n+'</span><span>'+(a?o+' de '+n+' correctas'+(a<n?' ('+a+' respondidas)':''):'sin responder')+extra+'</span></li>';
+  });
+  $('#topics').innerHTML=h;
+}
+
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function buildVF(){
+  var box=$('#vf');box.innerHTML='';
+  VF.forEach(function(q,i){
+    var card=el('div','q','<span class="tag">V/F '+(i+1)+'</span><p class="qt">'+q.q+'</p><div class="tf"><button type="button" data-v="1">Verdadero</button><button type="button" data-v="0">Falso</button></div><div class="fb" hidden aria-live="polite"></div>');
+    var btns=[].slice.call(card.querySelectorAll('button')),fb=card.querySelector('.fb');
+    btns.forEach(function(b){b.addEventListener('click',function(){
+      var val=b.dataset.v==='1',ok=(val===q.ans);
+      btns.forEach(function(x){x.disabled=true;});
+      b.classList.add(ok?'correct':'wrong');
+      if(!ok)btns.filter(function(x){return (x.dataset.v==='1')===q.ans;})[0].classList.add('reveal');
+      fb.hidden=false;fb.className='fb '+(ok?'ok':'bad');
+      fb.innerHTML='<b>'+(ok?'Correcto.':'Incorrecto.')+'</b> La afirmación es '+(q.ans?'verdadera':'falsa')+'.<p>'+q.exp+'</p>';
+      mark('vf'+i,q.t,ok);
+    });});
+    box.appendChild(card);
+  });
+}
+
+function buildSU(){
+  var box=$('#su');box.innerHTML='';
+  SU.forEach(function(q,i){
+    var opts=shuffle(q.o),L='ABCD';
+    var card=el('div','q','<span class="tag">SELECCIÓN ÚNICA '+(i+1)+'</span><p class="qt">'+q.q+'</p><div class="opts"></div><div class="fb" hidden aria-live="polite"></div>');
+    var wrap=card.querySelector('.opts'),fb=card.querySelector('.fb'),btns=[];
+    opts.forEach(function(o,j){
+      var b=el('button',null,'<span class="ltr">'+L[j]+'.</span><span>'+o.x+'</span>');b.type='button';btns.push(b);
+      b.addEventListener('click',function(){
+        btns.forEach(function(x){x.disabled=true;});
+        var ok=!!o.ok,right=opts.filter(function(p){return p.ok;})[0],ri=opts.indexOf(right);
+        b.classList.add(ok?'correct':'wrong');
+        if(!ok)btns[ri].classList.add('reveal');
+        fb.hidden=false;fb.className='fb '+(ok?'ok':'bad');
+        fb.innerHTML=ok?'<b>Correcto.</b><p>'+o.w+'</p>':'<b>Incorrecto.</b><p>'+o.w+'</p><p><b>Respuesta correcta: '+L[ri]+'.</b> '+right.w+'</p>';
+        mark('su'+i,q.t,ok);
+      });
+      wrap.appendChild(b);
+    });
+    box.appendChild(card);
+  });
+}
+
+function buildCALC(){
+  var box=$('#calc');box.innerHTML='';
+  CALC.forEach(function(q,i){
+    if(q.pre){
+      box.appendChild(el('div','data','<p><b>Datos.</b> Reacción A + B &rarr; P a temperatura constante. Velocidades iniciales medidas:</p><div class="tw"><table><tr><th>Exp.</th><th>[A] (M)</th><th>[B] (M)</th><th><i>v</i><sub>0</sub> (M s<sup>&minus;1</sup>)</th></tr><tr><td>1</td><td>0,10</td><td>0,10</td><td>2,0 &times; 10<sup>&minus;3</sup></td></tr><tr><td>2</td><td>0,20</td><td>0,10</td><td>8,0 &times; 10<sup>&minus;3</sup></td></tr><tr><td>3</td><td>0,10</td><td>0,30</td><td>6,0 &times; 10<sup>&minus;3</sup></td></tr></table></div>'));
+    }
+    var card=el('div','q','<span class="tag">CÁLCULO '+(i+1)+'</span><p class="qt">'+q.q+'</p><div class="calc-row"><input type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 2,5" aria-label="Respuesta numérica"><span class="unit">'+q.unit+'</span><button type="button" class="btn">Comprobar</button><button type="button" class="btn sec">Ver solución</button></div><div class="fb" hidden aria-live="polite"></div>');
+    var inp=card.querySelector('input'),bs=card.querySelectorAll('button'),chk=bs[0],sol=bs[1],fb=card.querySelector('.fb');
+    var tries=0,done=false;
+    function finish(){done=true;inp.disabled=true;chk.disabled=true;sol.disabled=true;}
+    function check(){
+      if(done)return;
+      var v=parseFloat(inp.value.replace(',','.'));
+      if(isNaN(v)){fb.hidden=false;fb.className='fb info';fb.innerHTML='Ingrese un valor numérico.';return;}
+      tries++;
+      var ok=Math.abs(v-q.ans)<=0.02*Math.abs(q.ans);
+      if(ok){
+        fb.hidden=false;fb.className='fb ok';
+        fb.innerHTML='<b>Correcto'+(tries>1?' (tras '+tries+' intentos)':'')+'.</b><p>'+q.sol+'</p>';
+        finish();
+        if(!(('calc'+i) in results))mark('calc'+i,q.t,tries===1);
+      }else{
+        fb.hidden=false;fb.className='fb bad';
+        fb.innerHTML='<b>Incorrecto.</b> Respuesta ingresada: '+fmt(v)+'.<p>Pista: '+q.hint+'</p>';
+        if(!(('calc'+i) in results))mark('calc'+i,q.t,false);
+      }
+    }
+    chk.addEventListener('click',check);
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter')check();});
+    sol.addEventListener('click',function(){
+      if(done)return;
+      fb.hidden=false;fb.className='fb info';fb.innerHTML='<b>Solución.</b><p>'+q.sol+'</p><p>Respuesta: '+fmt(q.ans)+' '+q.unit+'</p>';
+      finish();
+      if(!(('calc'+i) in results))mark('calc'+i,q.t,false);
+    });
+    box.appendChild(card);
+  });
+}
+
+function buildQuiz(){results={};buildVF();buildSU();buildCALC();updateStatus();}
+
+drawFig1();initRates();drawFig2();
+$('#fSl').addEventListener('input',drawFig2);
+$('#reset').addEventListener('click',function(){buildQuiz();window.scrollTo(0,0);});
+buildQuiz();
+window.addEventListener('hashchange',route);
+route();
+})();
+</script>
+</body>
+</html>
