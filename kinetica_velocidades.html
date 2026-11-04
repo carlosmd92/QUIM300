@@ -112,6 +112,7 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
 .fb.bad{background:var(--bad-bg);border-left:5px solid var(--bad)}
 .fb.info{background:var(--warn-bg);border-left:5px solid #d9962b}
 .fb p{margin:6px 0 0}
+.fb .formula{margin:10px 0}
 .calc-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .calc-row input{width:130px}
 .calc-row .unit{color:var(--muted)}
@@ -465,17 +466,17 @@ var SU=[
  {t:'ley',q:'Al duplicar [A] con [B] constante, la velocidad inicial se cuadruplica. El orden de la reacción respecto de A es:',
   o:[{x:'0',w:'Con orden 0 la velocidad no cambiaría al duplicar [A].'},
      {x:'1',w:'Con orden 1 la velocidad sólo se duplicaría.'},
-     {x:'2',ok:true,w:'2<sup><i>m</i></sup> = 4, entonces <i>m</i> = 2.'},
-     {x:'4',w:'El 4 es el factor en que aumenta la velocidad. El orden es el exponente que cumple 2<sup><i>m</i></sup> = 4.'}]}
+     {x:'2',ok:true,w:'\\( 2^{m}=4 \\), entonces \\( m=2 \\).'},
+     {x:'4',w:'El 4 es el factor en que aumenta la velocidad. El orden es el exponente que cumple \\( 2^{m}=4 \\).'}]}
 ];
 
 var CALC=[
  {t:'vi',pre:true,q:'Con los datos de la tabla, determine el orden total de la reacción.',unit:'',ans:3,
   hint:'Halle el orden en A comparando dos experimentos en los que sólo cambie [A], y el orden en B de la misma forma. Luego sume ambos.',
-  sol:'Exp. 1 y 2: sólo cambia [A] (&times;2) y <i>r</i> pasa de 2,0&times;10<sup>&minus;3</sup> a 8,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup> (&times;4). Entonces 2<sup><i>m</i></sup> = 4 y <i>m</i> = 2.<br>Exp. 1 y 3: sólo cambia [B] (&times;3) y <i>r</i> pasa de 2,0&times;10<sup>&minus;3</sup> a 6,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup> (&times;3). Entonces 3<sup><i>n</i></sup> = 3 y <i>n</i> = 1.<br>Orden total = 2 + 1 = 3.'},
+  sol:'<p>Exp. 1 y 2: sólo cambia [A].</p><div class="formula">\\[ \\frac{r_2}{r_1}=\\frac{8{,}0\\times10^{-3}}{2{,}0\\times10^{-3}}=4=\\left(\\frac{0{,}20}{0{,}10}\\right)^{m}=2^{m}\\quad\\Rightarrow\\quad m=2 \\]</div><p>Exp. 1 y 3: sólo cambia [B].</p><div class="formula">\\[ \\frac{r_3}{r_1}=\\frac{6{,}0\\times10^{-3}}{2{,}0\\times10^{-3}}=3=\\left(\\frac{0{,}30}{0{,}10}\\right)^{n}=3^{n}\\quad\\Rightarrow\\quad n=1 \\]</div><p>Orden total: \\( m+n=2+1=3 \\).</p>'},
  {t:'vi',q:'Con los mismos datos, calcule el valor de la constante de velocidad <i>k</i> e indique sus unidades.',unit:'M<sup>&minus;2</sup> s<sup>&minus;1</sup>',uopts:['M s⁻¹','s⁻¹','M⁻¹ s⁻¹','M⁻² s⁻¹'],uok:3,ans:2.0,
   hint:'Con <i>r</i> = <i>k</i>[A]<sup>2</sup>[B], despeje <i>k</i> = <i>r</i> / ([A]<sup>2</sup>[B]) usando los datos de un experimento. Las unidades de <i>k</i> son las que dejan a <i>r</i> en M s<sup>&minus;1</sup> según el orden total.',
-  sol:'<i>r</i> = <i>k</i>[A]<sup>2</sup>[B]. Con Exp. 1: <i>k</i> = 2,0&times;10<sup>&minus;3</sup> / (0,10<sup>2</sup> &times; 0,10) = 2,0&times;10<sup>&minus;3</sup> / 1,0&times;10<sup>&minus;3</sup> = 2,0 M<sup>&minus;2</sup> s<sup>&minus;1</sup>.<br>Verificación con Exp. 2: 2,0 &times; 0,20<sup>2</sup> &times; 0,10 = 8,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup>, igual al valor medido.'}
+  sol:'<p>Con \\( r=k\\,[\\mathrm{A}]^{2}[\\mathrm{B}] \\) y los datos del Exp. 1:</p><div class="formula">\\[ k=\\frac{r}{[\\mathrm{A}]^{2}[\\mathrm{B}]}=\\frac{2{,}0\\times10^{-3}\\ \\mathrm{M\\,s^{-1}}}{(0{,}10\\ \\mathrm{M})^{2}\\,(0{,}10\\ \\mathrm{M})}=2{,}0\\ \\mathrm{M^{-2}\\,s^{-1}} \\]</div><p>Verificación con el Exp. 2:</p><div class="formula">\\[ r=k\\,[\\mathrm{A}]^{2}[\\mathrm{B}]=2{,}0\\times(0{,}20)^{2}\\times0{,}10=8{,}0\\times10^{-3}\\ \\mathrm{M\\,s^{-1}} \\]</div><p>El valor coincide con el medido.</p>'}
 ];
 
 var TOTAL=VF.length+SU.length+CALC.length;
@@ -533,7 +534,7 @@ function buildSU(){
         b.classList.add(ok?'correct':'wrong');
         if(!ok)btns[ri].classList.add('reveal');
         fb.hidden=false;fb.className='fb '+(ok?'ok':'bad');
-        fb.innerHTML=ok?'<b>Correcto.</b><p>'+o.w+'</p>':'<b>Incorrecto.</b><p>'+o.w+'</p><p><b>Respuesta correcta: '+L[ri]+'.</b> '+right.w+'</p>';
+        fb.innerHTML=ok?'<b>Correcto.</b><p>'+o.w+'</p>':'<b>Incorrecto.</b><p>'+o.w+'</p><p><b>Respuesta correcta: '+L[ri]+'.</b> '+right.w+'</p>';typesetFb(fb);
         mark('su'+i,q.t,ok);
       });
       wrap.appendChild(b);
@@ -562,7 +563,8 @@ function buildCALC(){
       var ok=numOk&&unitOk;
       if(ok){
         fb.hidden=false;fb.className='fb ok';
-        fb.innerHTML='<b>Correcto'+(tries>1?' (tras '+tries+' intentos)':'')+'.</b><p>'+q.sol+'</p>';
+        fb.innerHTML='<b>Correcto'+(tries>1?' (tras '+tries+' intentos)':'')+'.</b><div class="sol">'+q.sol+'</div>';
+        typesetFb(fb);
         finish();
         if(!(('calc'+i) in results))mark('calc'+i,q.t,tries===1);
       }else{
@@ -575,7 +577,7 @@ function buildCALC(){
     inp.addEventListener('keydown',function(e){if(e.key==='Enter')check();});
     sol.addEventListener('click',function(){
       if(done)return;
-      fb.hidden=false;fb.className='fb info';fb.innerHTML='<b>Solución.</b><p>'+q.sol+'</p><p>Respuesta: '+fmt(q.ans)+' '+q.unit+'</p>';
+      fb.hidden=false;fb.className='fb info';fb.innerHTML='<b>Solución.</b><div class="sol">'+q.sol+'</div><p>Respuesta: '+fmt(q.ans)+' '+q.unit+'</p>';typesetFb(fb);
       finish();
       if(!(('calc'+i) in results))mark('calc'+i,q.t,false);
     });
@@ -583,6 +585,7 @@ function buildCALC(){
   });
 }
 
+function typesetFb(node){if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([node]).then(fitFormulas);}
 function buildQuiz(){results={};buildVF();buildSU();buildCALC();updateStatus();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([$('#su')]);}
 
 drawFig1();initRates();drawFig2();
