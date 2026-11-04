@@ -154,20 +154,20 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
 
   <h4>Velocidad media</h4>
   <p>En un intervalo de tiempo finito &Delta;<i>t</i>, cada especie cambia su concentración en &Delta;[i]. Dividir por el coeficiente estequiométrico entrega un único valor para toda la reacción:</p>
-  <div class="formula">\[ \bar v=-\frac{1}{a}\frac{\Delta[\mathrm{A}]}{\Delta t}=-\frac{1}{b}\frac{\Delta[\mathrm{B}]}{\Delta t}=\frac{1}{c}\frac{\Delta[\mathrm{C}]}{\Delta t}=\frac{1}{d}\frac{\Delta[\mathrm{D}]}{\Delta t} \]</div>
-  <p>Los reactivos disminuyen (&Delta;[R] &lt; 0), así que se antepone un signo menos y &nbsp;<i>v&#772;</i>&nbsp; resulta positiva.</p>
-  <div class="callout tip"><p><span class="lbl">Ejemplo.</span> Para A &rarr; productos, [A] baja de 0,80 M a 0,50 M en 60 s. <i>v&#772;</i> = &minus;(0,50 &minus; 0,80) M / 60 s = 0,30 M / 60 s = 5,0 &times; 10<sup>&minus;3</sup> M s<sup>&minus;1</sup>.</p></div>
+  <div class="formula">\[ \bar r=-\frac{1}{a}\frac{\Delta[\mathrm{A}]}{\Delta t}=-\frac{1}{b}\frac{\Delta[\mathrm{B}]}{\Delta t}=\frac{1}{c}\frac{\Delta[\mathrm{C}]}{\Delta t}=\frac{1}{d}\frac{\Delta[\mathrm{D}]}{\Delta t} \]</div>
+  <p>Los reactivos disminuyen (&Delta;[R] &lt; 0), así que se antepone un signo menos y &nbsp;<i>r&#772;</i>&nbsp; resulta positiva.</p>
+  <div class="callout tip"><p><span class="lbl">Ejemplo.</span> Para A &rarr; productos, [A] baja de 0,80 M a 0,50 M en 60 s. <i>r&#772;</i> = &minus;(0,50 &minus; 0,80) M / 60 s = 0,30 M / 60 s = 5,0 &times; 10<sup>&minus;3</sup> M s<sup>&minus;1</sup>.</p></div>
 
   <h4>Velocidad instantánea</h4>
   <p>Cuando el intervalo se reduce hasta cero se obtiene la velocidad de reacción en un instante dado:</p>
-  <div class="formula">\[ v=\lim_{\Delta t\to 0}\bar v=-\frac{1}{a}\frac{d[\mathrm{A}]}{dt}=-\frac{1}{b}\frac{d[\mathrm{B}]}{dt}=\frac{1}{c}\frac{d[\mathrm{C}]}{dt}=\frac{1}{d}\frac{d[\mathrm{D}]}{dt} \]</div>
+  <div class="formula">\[ r=\lim_{\Delta t\to 0}\bar r=-\frac{1}{a}\frac{d[\mathrm{A}]}{dt}=-\frac{1}{b}\frac{d[\mathrm{B}]}{dt}=\frac{1}{c}\frac{d[\mathrm{C}]}{dt}=\frac{1}{d}\frac{d[\mathrm{D}]}{dt} \]</div>
   <p>Gráficamente, la velocidad media corresponde a la pendiente de una secante y la velocidad instantánea a la pendiente de la tangente a la curva concentración&ndash;tiempo.</p>
   <figure>
     <svg id="fig1" viewBox="0 0 560 320" role="img" aria-label="Concentración del reactivo A contra tiempo, con una secante entre dos puntos y una tangente en un instante"></svg>
-    <figcaption>Reacción A &rarr; productos. La pendiente de [A] es negativa, de modo que <i>v</i> es el negativo de la pendiente. La secante entre dos instantes da la velocidad media. La tangente en un instante da la velocidad instantánea.</figcaption>
+    <figcaption>Reacción A &rarr; productos. La pendiente de [A] es negativa, de modo que <i>r</i> es el negativo de la pendiente. La secante entre dos instantes da la velocidad media. La tangente en un instante da la velocidad instantánea.</figcaption>
   </figure>
   <div class="grid">
-    <div class="mini"><h4>Valor único</h4><p>Una sola <i>v</i> describe a la reacción completa, con cualquier especie.</p></div>
+    <div class="mini"><h4>Valor único</h4><p>Una sola <i>r</i> describe a la reacción completa, con cualquier especie.</p></div>
     <div class="mini"><h4>Siempre positiva</h4><p>El signo menos compensa la disminución de los reactivos.</p></div>
     <div class="mini"><h4>Unidades</h4><p>Concentración sobre tiempo: mol L<sup>&minus;1</sup> s<sup>&minus;1</sup> (M s<sup>&minus;1</sup>).</p></div>
   </div>
@@ -176,17 +176,17 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
 <!-- 2 -->
 <section class="card view" id="s2" hidden>
   <h3><span class="badge">2</span>Velocidad de reacción, de aparición y de consumo</h3>
-  <p>La velocidad de reacción <i>v</i> pertenece a la reacción completa. La velocidad de consumo de un reactivo y la velocidad de aparición de un producto pertenecen a cada especie, y ambas se expresan como cantidades positivas.</p>
+  <p>La velocidad de reacción <i>r</i> pertenece a la reacción completa. La velocidad de consumo de un reactivo y la velocidad de aparición de un producto pertenecen a cada especie, y ambas se expresan como cantidades positivas.</p>
   <div class="grid">
     <div class="mini"><h4>Consumo de un reactivo R</h4><div>\( -\dfrac{d[\mathrm{R}]}{dt} \)</div></div>
     <div class="mini"><h4>Aparición de un producto P</h4><div>\( +\dfrac{d[\mathrm{P}]}{dt} \)</div></div>
-    <div class="mini"><h4>Relación con <i>v</i></h4><div>\( r_i=|\nu_i|\,v \)</div></div>
+    <div class="mini"><h4>Relación con <i>r</i></h4><div>\( r_i=|\nu_i|\,r \)</div></div>
   </div>
-  <p>Cada especie cambia su concentración con una rapidez proporcional a su coeficiente estequiométrico |&nu;<sub>i</sub>|. Por eso, en una misma reacción, las velocidades de consumo y de aparición de distintas especies difieren entre sí, mientras que <i>v</i> permanece única.</p>
-  <div class="callout tip"><p><span class="lbl">Probar:</span> elija una reacción, cambie el valor de <i>v</i> y observe cómo se reparte entre las especies.</p></div>
+  <p>Cada especie cambia su concentración con una rapidez proporcional a su coeficiente estequiométrico |&nu;<sub>i</sub>|. Por eso, en una misma reacción, las velocidades de consumo y de aparición de distintas especies difieren entre sí, mientras que <i>r</i> permanece única.</p>
+  <div class="callout tip"><p><span class="lbl">Probar:</span> elija una reacción, cambie el valor de <i>r</i> y observe cómo se reparte entre las especies.</p></div>
   <div class="ctrl">
     <label>Reacción: <select id="rxSel"></select></label>
-    <label><i>v</i> = <input type="number" id="vIn" value="1.0" min="0" step="0.1"> &times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup></label>
+    <label><i>r</i> = <input type="number" id="vIn" value="1.0" min="0" step="0.1"> &times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup></label>
   </div>
   <div class="tw"><table id="rxTab"></table></div>
 </section>
@@ -194,22 +194,22 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
 <!-- 3 -->
 <section class="card view" id="s3" hidden>
   <h3><span class="badge">3</span>Ley de velocidad y órdenes de reacción</h3>
-  <p>La ley de velocidad relaciona <i>v</i> con las concentraciones de los reactivos a temperatura constante:</p>
-  <div class="formula">\[ v=k\,[\mathrm{A}]^{m}\,[\mathrm{B}]^{n} \]</div>
+  <p>La ley de velocidad relaciona <i>r</i> con las concentraciones de los reactivos a temperatura constante:</p>
+  <div class="formula">\[ r=k\,[\mathrm{A}]^{m}\,[\mathrm{B}]^{n} \]</div>
   <div class="grid">
     <div class="mini"><h4><i>k</i>: constante de velocidad</h4><p>Depende de la temperatura y de la reacción. Las concentraciones no la modifican.</p></div>
     <div class="mini"><h4><i>m</i>, <i>n</i>: órdenes parciales</h4><p>Orden respecto de A y respecto de B. Se determinan experimentalmente.</p></div>
     <div class="mini"><h4>Orden total</h4><div>\( m+n \)</div></div>
   </div>
-  <div class="callout warn"><p><span class="lbl">Atención:</span> los órdenes parciales y los coeficientes estequiométricos son magnitudes independientes. Sólo coinciden en un paso elemental. Ejemplo: 2 NO + 2 H<sub>2</sub> &rarr; N<sub>2</sub> + 2 H<sub>2</sub>O cumple <i>v</i> = <i>k</i>[NO]<sup>2</sup>[H<sub>2</sub>], con orden 1 en H<sub>2</sub> (su coeficiente es 2) y orden total 3.</p></div>
+  <div class="callout warn"><p><span class="lbl">Atención:</span> los órdenes parciales y los coeficientes estequiométricos son magnitudes independientes. Sólo coinciden en un paso elemental. Ejemplo: 2 NO + 2 H<sub>2</sub> &rarr; N<sub>2</sub> + 2 H<sub>2</sub>O cumple <i>r</i> = <i>k</i>[NO]<sup>2</sup>[H<sub>2</sub>], con orden 1 en H<sub>2</sub> (su coeficiente es 2) y orden total 3.</p></div>
 
   <h4>Qué indica el orden parcial</h4>
   <p>El orden <i>m</i> dice cuánto pesa la concentración de A en la velocidad. Es un exponente, de modo que su efecto se obtiene elevando el factor de cambio de [A] a ese exponente.</p>
   <p>Sea <i>f</i> el factor por el que se multiplica [A], con [B] constante. Se compara la velocidad antes y después:</p>
   <ol class="steps">
-    <li>Antes: \( v_1=k[\mathrm{A}]^{m} \)</li>
-    <li>Después: \( v_2=k\,(f[\mathrm{A}])^{m}=f^{m}\,k[\mathrm{A}]^{m} \)</li>
-    <li>Cociente: \( \dfrac{v_2}{v_1}=f^{m} \). La velocidad se multiplica por \( f^{m} \).</li>
+    <li>Antes: \( r_1=k[\mathrm{A}]^{m} \)</li>
+    <li>Después: \( r_2=k\,(f[\mathrm{A}])^{m}=f^{m}\,k[\mathrm{A}]^{m} \)</li>
+    <li>Cociente: \( \dfrac{r_2}{r_1}=f^{m} \). La velocidad se multiplica por \( f^{m} \).</li>
   </ol>
   <div class="grid">
     <div class="mini"><h4>Orden 0, [A] &times;2</h4><p>2<sup>0</sup> = 1. La velocidad no cambia.</p></div>
@@ -218,10 +218,10 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
     <div class="mini"><h4>Orden &minus;1, [A] &times;2</h4><p>2<sup>&minus;1</sup> = 1/2. La velocidad se reduce a la mitad.</p></div>
   </div>
   <div class="tw"><table>
-    <tr><th>Orden <i>m</i></th><th>Si [A] se duplica, <i>v</i> se multiplica por</th><th class="l">Significado</th></tr>
-    <tr><td>0</td><td>1</td><td class="l"><i>v</i> es independiente de [A]</td></tr>
-    <tr><td>1</td><td>2</td><td class="l"><i>v</i> es proporcional a [A]</td></tr>
-    <tr><td>2</td><td>4</td><td class="l"><i>v</i> es proporcional a [A]<sup>2</sup></td></tr>
+    <tr><th>Orden <i>m</i></th><th>Si [A] se duplica, <i>r</i> se multiplica por</th><th class="l">Significado</th></tr>
+    <tr><td>0</td><td>1</td><td class="l"><i>r</i> es independiente de [A]</td></tr>
+    <tr><td>1</td><td>2</td><td class="l"><i>r</i> es proporcional a [A]</td></tr>
+    <tr><td>2</td><td>4</td><td class="l"><i>r</i> es proporcional a [A]<sup>2</sup></td></tr>
     <tr><td>1/2</td><td>&asymp; 1,41</td><td class="l">Orden fraccionario, propio de mecanismos complejos</td></tr>
     <tr><td>&minus;1</td><td>1/2</td><td class="l">Más A frena la reacción</td></tr>
   </table></div>
@@ -230,7 +230,7 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
   <p style="margin:0 0 6px">Mueva el deslizador para elegir el factor <i>f</i> y compare los tres órdenes.</p>
   <figure>
     <svg id="fig2" viewBox="0 0 560 330" role="img" aria-label="Velocidad relativa contra concentración relativa para órdenes 0, 1 y 2"></svg>
-    <figcaption>Velocidad relativa <i>v</i>/<i>v</i><sub>0</sub> en función de [A]/[A]<sub>0</sub>. Los puntos marcan el factor <i>f</i> elegido.</figcaption>
+    <figcaption>Velocidad relativa <i>r</i>/<i>r</i><sub>0</sub> en función de [A]/[A]<sub>0</sub>. Los puntos marcan el factor <i>f</i> elegido.</figcaption>
   </figure>
   <div class="ctrl">
     <label>Factor <i>f</i> = <input type="range" id="fSl" min="0.5" max="3" step="0.5" value="2"> <b id="fVal">2</b></label>
@@ -238,7 +238,7 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
   <p id="fOut" style="margin:4px 0 12px"></p>
 
   <h4>Unidades de <i>k</i></h4>
-  <p style="margin:0 0 6px"><i>k</i> toma las unidades que dejan a <i>v</i> en M s<sup>&minus;1</sup>. Para orden total <i>N</i> y concentraciones en M: M<sup>1&minus;<i>N</i></sup> s<sup>&minus;1</sup>.</p>
+  <p style="margin:0 0 6px"><i>k</i> toma las unidades que dejan a <i>r</i> en M s<sup>&minus;1</sup>. Para orden total <i>N</i> y concentraciones en M: M<sup>1&minus;<i>N</i></sup> s<sup>&minus;1</sup>.</p>
   <div class="tw"><table>
     <tr><th>Orden total</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
     <tr><th><i>k</i></th><td>M s<sup>&minus;1</sup></td><td>s<sup>&minus;1</sup></td><td>M<sup>&minus;1</sup> s<sup>&minus;1</sup></td><td>M<sup>&minus;2</sup> s<sup>&minus;1</sup></td></tr>
@@ -250,33 +250,33 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
   <h3><span class="badge">4</span>Método de las velocidades iniciales</h3>
   <p>Permite hallar los órdenes parciales y <i>k</i> a partir de una serie de experimentos. Se mide la velocidad al comienzo de cada experimento, cuando las concentraciones de los reactivos son las preparadas y todavía no hay productos que interfieran.</p>
   <ol class="steps">
-    <li>Realizar varios experimentos a la misma temperatura, cada uno con concentraciones iniciales conocidas, y medir la velocidad inicial <i>v</i><sub>0</sub> (pendiente de la curva de concentración contra tiempo en <i>t</i> &asymp; 0).</li>
+    <li>Realizar varios experimentos a la misma temperatura, cada uno con concentraciones iniciales conocidas, y medir la velocidad inicial <i>r</i><sub>0</sub> (pendiente de la curva de concentración contra tiempo en <i>t</i> &asymp; 0).</li>
     <li>Elegir dos experimentos en los que cambie la concentración de una sola especie y las demás se mantengan constantes.</li>
     <li>Comparar las velocidades. Si [A] cambia y [B] se mantiene constante:
-      <div class="formula" style="margin:8px 0">\[ \frac{v_2}{v_1}=\left(\frac{[\mathrm{A}]_2}{[\mathrm{A}]_1}\right)^{m} \]</div>
+      <div class="formula" style="margin:8px 0">\[ \frac{r_2}{r_1}=\left(\frac{[\mathrm{A}]_2}{[\mathrm{A}]_1}\right)^{m} \]</div>
       Se calculan ambos cocientes y se busca el exponente <i>m</i> que iguala la potencia con el cociente de velocidades.
     </li>
-    <li>Repetir el paso 3 para cada reactivo, sumar los órdenes parciales y calcular <i>k</i> despejándola de cualquier experimento: <i>k</i> = <i>v</i><sub>0</sub> / ([A]<sup><i>m</i></sup>[B]<sup><i>n</i></sup>). Verificar con otro experimento.</li>
+    <li>Repetir el paso 3 para cada reactivo, sumar los órdenes parciales y calcular <i>k</i> despejándola de cualquier experimento: <i>k</i> = <i>r</i><sub>0</sub> / ([A]<sup><i>m</i></sup>[B]<sup><i>n</i></sup>). Verificar con otro experimento.</li>
   </ol>
-  <div class="callout tip"><p><span class="lbl">Atajo cuando la concentración se duplica:</span> si <i>v</i> no cambia, el orden es 0. Si <i>v</i> se duplica, el orden es 1. Si <i>v</i> se cuadruplica, el orden es 2. Si <i>v</i> se multiplica por 8, el orden es 3.</p></div>
+  <div class="callout tip"><p><span class="lbl">Atajo cuando la concentración se duplica:</span> si <i>r</i> no cambia, el orden es 0. Si <i>r</i> se duplica, el orden es 1. Si <i>r</i> se cuadruplica, el orden es 2. Si <i>r</i> se multiplica por 8, el orden es 3.</p></div>
 
   <h4>Ejemplo resuelto: 2 NO + 2 H<sub>2</sub> &rarr; N<sub>2</sub> + 2 H<sub>2</sub>O</h4>
   <div class="tw"><table>
-    <tr><th>Exp.</th><th>[NO] (M)</th><th>[H<sub>2</sub>] (M)</th><th><i>v</i><sub>0</sub> (M s<sup>&minus;1</sup>)</th></tr>
+    <tr><th>Exp.</th><th>[NO] (M)</th><th>[H<sub>2</sub>] (M)</th><th><i>r</i><sub>0</sub> (M s<sup>&minus;1</sup>)</th></tr>
     <tr><td>1</td><td>0,010</td><td>0,010</td><td>2,5 &times; 10<sup>&minus;4</sup></td></tr>
     <tr><td>2</td><td>0,020</td><td>0,010</td><td>1,0 &times; 10<sup>&minus;3</sup></td></tr>
     <tr><td>3</td><td>0,010</td><td>0,020</td><td>5,0 &times; 10<sup>&minus;4</sup></td></tr>
   </table></div>
-  <p>Suponga la ley de velocidad \( v=k\,[\mathrm{NO}]^{m}[\mathrm{H_2}]^{n} \).</p>
+  <p>Suponga la ley de velocidad \( r=k\,[\mathrm{NO}]^{m}[\mathrm{H_2}]^{n} \).</p>
   <h4>Orden en NO (Exp. 1 y 2)</h4>
   <p style="margin:0">Cambia sólo [NO]; [H<sub>2</sub>] es constante.</p>
-  <div class="formula">\[ \frac{v_2}{v_1}=\frac{1{,}0\times10^{-3}}{2{,}5\times10^{-4}}=4=\left(\frac{0{,}020}{0{,}010}\right)^{m}=2^{m}\quad\Rightarrow\quad m=2 \]</div>
+  <div class="formula">\[ \frac{r_2}{r_1}=\frac{1{,}0\times10^{-3}}{2{,}5\times10^{-4}}=4=\left(\frac{0{,}020}{0{,}010}\right)^{m}=2^{m}\quad\Rightarrow\quad m=2 \]</div>
   <h4>Orden en H<sub>2</sub> (Exp. 1 y 3)</h4>
   <p style="margin:0">Cambia sólo [H<sub>2</sub>]; [NO] es constante.</p>
-  <div class="formula">\[ \frac{v_3}{v_1}=\frac{5{,}0\times10^{-4}}{2{,}5\times10^{-4}}=2=\left(\frac{0{,}020}{0{,}010}\right)^{n}=2^{n}\quad\Rightarrow\quad n=1 \]</div>
+  <div class="formula">\[ \frac{r_3}{r_1}=\frac{5{,}0\times10^{-4}}{2{,}5\times10^{-4}}=2=\left(\frac{0{,}020}{0{,}010}\right)^{n}=2^{n}\quad\Rightarrow\quad n=1 \]</div>
   <h4>Constante <i>k</i> (Exp. 1)</h4>
-  <div class="formula">\[ k=\frac{v_0}{[\mathrm{NO}]^{2}[\mathrm{H_2}]}=\frac{2{,}5\times10^{-4}\ \mathrm{M\,s^{-1}}}{(0{,}010\ \mathrm{M})^{2}\,(0{,}010\ \mathrm{M})}=2{,}5\times10^{2}\ \mathrm{M^{-2}\,s^{-1}} \]</div>
-  <p>Ley de velocidad: \( v=k\,[\mathrm{NO}]^{2}[\mathrm{H_2}] \), orden total 3.</p>
+  <div class="formula">\[ k=\frac{r_0}{[\mathrm{NO}]^{2}[\mathrm{H_2}]}=\frac{2{,}5\times10^{-4}\ \mathrm{M\,s^{-1}}}{(0{,}010\ \mathrm{M})^{2}\,(0{,}010\ \mathrm{M})}=2{,}5\times10^{2}\ \mathrm{M^{-2}\,s^{-1}} \]</div>
+  <p>Ley de velocidad: \( r=k\,[\mathrm{NO}]^{2}[\mathrm{H_2}] \), orden total 3.</p>
 </section>
 
 <!-- AUTOEVALUACIÓN -->
@@ -374,11 +374,11 @@ function drawFig1(){
   /* rotulos con guias en zona libre */
   var xs=X(112);
   h+='<path d="M'+P(xs-4,Y(0.80)-4)+'L'+P(X(t0)+6,Y(y0)-6)+'" stroke="#a8231b" stroke-width="1" fill="none"/>'+
-     '<text x="'+xs+'" y="'+(Y(0.80))+'" font-size="14" font-weight="600" fill="#a8231b">tangente en t\u2080: pendiente = \u2212v</text>'+
+     '<text x="'+xs+'" y="'+(Y(0.80))+'" font-size="14" font-weight="600" fill="#a8231b">tangente en t\u2080: pendiente = \u2212r</text>'+
      '<text x="'+xs+'" y="'+(Y(0.80)+18)+'" font-size="13" fill="#a8231b">(velocidad instant\u00e1nea)</text>';
   var tl=170,ysl=ya+(yb-ya)*(tl-ta)/(tb-ta),xl=X(tl);
   h+='<path d="M'+P(xl,Y(0.50)+6)+'L'+P(xl,Y(ysl)-5)+'" stroke="#59627a" stroke-width="1" fill="none"/>'+
-     '<text x="'+(xl-30)+'" y="'+(Y(0.50)-14)+'" font-size="14" font-weight="600" fill="#59627a">secante: pendiente = \u2212v media</text>'+
+     '<text x="'+(xl-30)+'" y="'+(Y(0.50)-14)+'" font-size="14" font-weight="600" fill="#59627a">secante: pendiente = \u2212r media</text>'+
      '<text x="'+(xl-30)+'" y="'+(Y(0.50)+2)+'" font-size="13" fill="#59627a">(velocidad media)</text>';
   h+='<text x="'+X(262)+'" y="'+(Y(A(262))-12)+'" font-size="15" font-weight="700" fill="#1f5fbf">[A]</text>';
   h+='<text x="'+((L+W-R)/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="14" fill="#59627a">tiempo (s)</text>'+
@@ -400,11 +400,11 @@ function initRates(){
   function upd(){
     var r=RX[+sel.value],v=parseFloat($('#vIn').value);if(isNaN(v)||v<0)v=0;
     var h='<tr><th class="l">Especie</th><th>Papel</th><th>Tipo de velocidad</th><th>Expresión</th><th>Valor</th></tr>';
-    h+='<tr><td class="l" colspan="3"><b>Reacción completa</b></td><td><i>v</i></td><td><b>'+fmt(v)+U+'</b></td></tr>';
+    h+='<tr><td class="l" colspan="3"><b>Reacción completa</b></td><td><i>r</i></td><td><b>'+fmt(v)+U+'</b></td></tr>';
     r.sp.forEach(function(p){
       var red=p[1]<0,n=Math.abs(p[1]);
       h+='<tr><td class="l">'+p[0]+'</td><td>'+(red?'Reactivo':'Producto')+'</td><td>'+(red?'Consumo':'Aparición')+'</td>'+
-         '<td>'+(red?'&minus;':'+')+'d['+p[0]+']/d<i>t</i> = '+n+' <i>v</i></td><td><b>'+fmt(n*v)+U+'</b></td></tr>';
+         '<td>'+(red?'&minus;':'+')+'d['+p[0]+']/d<i>t</i> = '+n+' <i>r</i></td><td><b>'+fmt(n*v)+U+'</b></td></tr>';
     });
     $('#rxTab').innerHTML=h;
   }
@@ -429,7 +429,7 @@ function drawFig2(){
   });
   h+='<line x1="'+X(f)+'" y1="'+(H-B)+'" x2="'+X(f)+'" y2="'+Y(Math.pow(f,2))+'" stroke="#a8231b" stroke-width="1" stroke-dasharray="3 4"/>';
   h+='<text x="'+((L+W-R)/2)+'" y="'+(H-8)+'" text-anchor="middle" fill="#59627a" font-size="14">[A] / [A]₀</text>';
-  h+='<text transform="translate(16 '+((T+H-B)/2)+') rotate(-90)" text-anchor="middle" fill="#59627a" font-size="14">v / v₀</text>';
+  h+='<text transform="translate(16 '+((T+H-B)/2)+') rotate(-90)" text-anchor="middle" fill="#59627a" font-size="14">r / r₀</text>';
   svg.innerHTML=h;
   $('#fOut').innerHTML='Con <i>f</i> = '+String(f).replace('.',',')+': orden 0 &rarr; &times;'+fmt(1)+'; orden 1 &rarr; &times;'+fmt(f)+'; orden 2 &rarr; &times;'+fmt(f*f)+'.';
 }
@@ -444,23 +444,23 @@ var TOPICS={
 
 var VF=[
  {t:'cons',q:'En la reacción 2 A &rarr; B, la velocidad de consumo de A es igual a la velocidad de aparición de B.',ans:false,
-  exp:'Por cada molécula de B que se forma se consumen dos de A, de modo que &minus;d[A]/d<i>t</i> = 2 d[B]/d<i>t</i>. La velocidad de reacción <i>v</i> = &minus;&frac12; d[A]/d<i>t</i> = d[B]/d<i>t</i> es la que coincide con la aparición de B.'},
+  exp:'Por cada molécula de B que se forma se consumen dos de A, de modo que &minus;d[A]/d<i>t</i> = 2 d[B]/d<i>t</i>. La velocidad de reacción <i>r</i> = &minus;&frac12; d[A]/d<i>t</i> = d[B]/d<i>t</i> es la que coincide con la aparición de B.'},
  {t:'ley',q:'El orden parcial respecto de un reactivo puede leerse directamente del coeficiente estequiométrico de ese reactivo en la ecuación global balanceada.',ans:false,
   exp:'Los órdenes se determinan experimentalmente. Coinciden con los coeficientes sólo en un paso elemental. En 2 NO + 2 H<sub>2</sub> &rarr; N<sub>2</sub> + 2 H<sub>2</sub>O, el orden en H<sub>2</sub> es 1 aunque su coeficiente es 2.'},
  {t:'vi',q:'Para hallar el orden respecto de A con el método de velocidades iniciales se comparan dos experimentos en los que cambian simultáneamente [A] y [B].',ans:false,
-  exp:'Si cambian ambas concentraciones, la variación de <i>v</i> mezcla los efectos de A y de B. Para aislar el orden en A se comparan experimentos en los que sólo cambia [A].'}
+  exp:'Si cambian ambas concentraciones, la variación de <i>r</i> mezcla los efectos de A y de B. Para aislar el orden en A se comparan experimentos en los que sólo cambia [A].'}
 ];
 
 var SU=[
- {t:'def',q:'¿Qué expresión define correctamente la velocidad de reacción <i>v</i> para N<sub>2</sub> + 3 H<sub>2</sub> &rarr; 2 NH<sub>3</sub>?',
-  o:[{x:'\\( v=-\\dfrac{d[\\mathrm{N_2}]}{dt}=-3\\,\\dfrac{d[\\mathrm{H_2}]}{dt}=2\\,\\dfrac{d[\\mathrm{NH_3}]}{dt} \\)',w:'Multiplica por los coeficientes. Corresponde dividir por ellos.'},
-     {x:'\\( v=-\\dfrac{d[\\mathrm{N_2}]}{dt}=-\\dfrac{1}{3}\\dfrac{d[\\mathrm{H_2}]}{dt}=\\dfrac{1}{2}\\dfrac{d[\\mathrm{NH_3}]}{dt} \\)',ok:true,w:'Cada derivada se divide por su coeficiente estequiométrico, con signo menos para los reactivos.'},
-     {x:'\\( v=\\dfrac{d[\\mathrm{N_2}]}{dt}=\\dfrac{1}{3}\\dfrac{d[\\mathrm{H_2}]}{dt}=-\\dfrac{1}{2}\\dfrac{d[\\mathrm{NH_3}]}{dt} \\)',w:'Los signos están invertidos: <i>v</i> quedaría negativa para los reactivos y los productos tendrían el signo equivocado.'},
-     {x:'\\( v=-\\dfrac{d[\\mathrm{N_2}]}{dt}=-\\dfrac{d[\\mathrm{H_2}]}{dt}=\\dfrac{d[\\mathrm{NH_3}]}{dt} \\)',w:'Omite los coeficientes estequiométricos. Eso sólo sería válido si todos valieran 1.'}]},
+ {t:'def',q:'¿Qué expresión define correctamente la velocidad de reacción <i>r</i> para N<sub>2</sub> + 3 H<sub>2</sub> &rarr; 2 NH<sub>3</sub>?',
+  o:[{x:'\\( r=-\\dfrac{d[\\mathrm{N_2}]}{dt}=-3\\,\\dfrac{d[\\mathrm{H_2}]}{dt}=2\\,\\dfrac{d[\\mathrm{NH_3}]}{dt} \\)',w:'Multiplica por los coeficientes. Corresponde dividir por ellos.'},
+     {x:'\\( r=-\\dfrac{d[\\mathrm{N_2}]}{dt}=-\\dfrac{1}{3}\\dfrac{d[\\mathrm{H_2}]}{dt}=\\dfrac{1}{2}\\dfrac{d[\\mathrm{NH_3}]}{dt} \\)',ok:true,w:'Cada derivada se divide por su coeficiente estequiométrico, con signo menos para los reactivos.'},
+     {x:'\\( r=\\dfrac{d[\\mathrm{N_2}]}{dt}=\\dfrac{1}{3}\\dfrac{d[\\mathrm{H_2}]}{dt}=-\\dfrac{1}{2}\\dfrac{d[\\mathrm{NH_3}]}{dt} \\)',w:'Los signos están invertidos: <i>r</i> quedaría negativa para los reactivos y los productos tendrían el signo equivocado.'},
+     {x:'\\( r=-\\dfrac{d[\\mathrm{N_2}]}{dt}=-\\dfrac{d[\\mathrm{H_2}]}{dt}=\\dfrac{d[\\mathrm{NH_3}]}{dt} \\)',w:'Omite los coeficientes estequiométricos. Eso sólo sería válido si todos valieran 1.'}]},
  {t:'ley',q:'Para una reacción de orden total 2, con concentraciones en M y tiempo en s, las unidades de <i>k</i> son:',
   o:[{x:'s<sup>&minus;1</sup>',w:'Son las unidades de <i>k</i> para orden total 1.'},
-     {x:'M s<sup>&minus;1</sup>',w:'Son las unidades de <i>k</i> para orden total 0, donde <i>v</i> = <i>k</i>.'},
-     {x:'M<sup>&minus;1</sup> s<sup>&minus;1</sup>',ok:true,w:'<i>k</i> = <i>v</i>/M<sup>2</sup> = (M s<sup>&minus;1</sup>)/M<sup>2</sup> = M<sup>&minus;1</sup> s<sup>&minus;1</sup>.'},
+     {x:'M s<sup>&minus;1</sup>',w:'Son las unidades de <i>k</i> para orden total 0, donde <i>r</i> = <i>k</i>.'},
+     {x:'M<sup>&minus;1</sup> s<sup>&minus;1</sup>',ok:true,w:'<i>k</i> = <i>r</i>/M<sup>2</sup> = (M s<sup>&minus;1</sup>)/M<sup>2</sup> = M<sup>&minus;1</sup> s<sup>&minus;1</sup>.'},
      {x:'M<sup>&minus;2</sup> s<sup>&minus;1</sup>',w:'Son las unidades para orden total 3.'}]},
  {t:'ley',q:'Al duplicar [A] con [B] constante, la velocidad inicial se cuadruplica. El orden de la reacción respecto de A es:',
   o:[{x:'0',w:'Con orden 0 la velocidad no cambiaría al duplicar [A].'},
@@ -472,10 +472,10 @@ var SU=[
 var CALC=[
  {t:'vi',pre:true,q:'Con los datos de la tabla, determine el orden total de la reacción.',unit:'',ans:3,
   hint:'Halle el orden en A comparando dos experimentos en los que sólo cambie [A], y el orden en B de la misma forma. Luego sume ambos.',
-  sol:'Exp. 1 y 2: sólo cambia [A] (&times;2) y <i>v</i> pasa de 2,0&times;10<sup>&minus;3</sup> a 8,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup> (&times;4). Entonces 2<sup><i>m</i></sup> = 4 y <i>m</i> = 2.<br>Exp. 1 y 3: sólo cambia [B] (&times;3) y <i>v</i> pasa de 2,0&times;10<sup>&minus;3</sup> a 6,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup> (&times;3). Entonces 3<sup><i>n</i></sup> = 3 y <i>n</i> = 1.<br>Orden total = 2 + 1 = 3.'},
+  sol:'Exp. 1 y 2: sólo cambia [A] (&times;2) y <i>r</i> pasa de 2,0&times;10<sup>&minus;3</sup> a 8,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup> (&times;4). Entonces 2<sup><i>m</i></sup> = 4 y <i>m</i> = 2.<br>Exp. 1 y 3: sólo cambia [B] (&times;3) y <i>r</i> pasa de 2,0&times;10<sup>&minus;3</sup> a 6,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup> (&times;3). Entonces 3<sup><i>n</i></sup> = 3 y <i>n</i> = 1.<br>Orden total = 2 + 1 = 3.'},
  {t:'vi',q:'Con los mismos datos, calcule el valor de la constante de velocidad <i>k</i> e indique sus unidades.',unit:'M<sup>&minus;2</sup> s<sup>&minus;1</sup>',uopts:['M s⁻¹','s⁻¹','M⁻¹ s⁻¹','M⁻² s⁻¹'],uok:3,ans:2.0,
-  hint:'Con <i>v</i> = <i>k</i>[A]<sup>2</sup>[B], despeje <i>k</i> = <i>v</i> / ([A]<sup>2</sup>[B]) usando los datos de un experimento. Las unidades de <i>k</i> son las que dejan a <i>v</i> en M s<sup>&minus;1</sup> según el orden total.',
-  sol:'<i>v</i> = <i>k</i>[A]<sup>2</sup>[B]. Con Exp. 1: <i>k</i> = 2,0&times;10<sup>&minus;3</sup> / (0,10<sup>2</sup> &times; 0,10) = 2,0&times;10<sup>&minus;3</sup> / 1,0&times;10<sup>&minus;3</sup> = 2,0 M<sup>&minus;2</sup> s<sup>&minus;1</sup>.<br>Verificación con Exp. 2: 2,0 &times; 0,20<sup>2</sup> &times; 0,10 = 8,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup>, igual al valor medido.'}
+  hint:'Con <i>r</i> = <i>k</i>[A]<sup>2</sup>[B], despeje <i>k</i> = <i>r</i> / ([A]<sup>2</sup>[B]) usando los datos de un experimento. Las unidades de <i>k</i> son las que dejan a <i>r</i> en M s<sup>&minus;1</sup> según el orden total.',
+  sol:'<i>r</i> = <i>k</i>[A]<sup>2</sup>[B]. Con Exp. 1: <i>k</i> = 2,0&times;10<sup>&minus;3</sup> / (0,10<sup>2</sup> &times; 0,10) = 2,0&times;10<sup>&minus;3</sup> / 1,0&times;10<sup>&minus;3</sup> = 2,0 M<sup>&minus;2</sup> s<sup>&minus;1</sup>.<br>Verificación con Exp. 2: 2,0 &times; 0,20<sup>2</sup> &times; 0,10 = 8,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup>, igual al valor medido.'}
 ];
 
 var TOTAL=VF.length+SU.length+CALC.length;
@@ -546,7 +546,7 @@ function buildCALC(){
   var box=$('#calc');box.innerHTML='';
   CALC.forEach(function(q,i){
     if(q.pre){
-      box.appendChild(el('div','data','<p><b>Datos.</b> Reacción A + B &rarr; P a temperatura constante. Velocidades iniciales medidas:</p><div class="tw"><table><tr><th>Exp.</th><th>[A] (M)</th><th>[B] (M)</th><th><i>v</i><sub>0</sub> (M s<sup>&minus;1</sup>)</th></tr><tr><td>1</td><td>0,10</td><td>0,10</td><td>2,0 &times; 10<sup>&minus;3</sup></td></tr><tr><td>2</td><td>0,20</td><td>0,10</td><td>8,0 &times; 10<sup>&minus;3</sup></td></tr><tr><td>3</td><td>0,10</td><td>0,30</td><td>6,0 &times; 10<sup>&minus;3</sup></td></tr></table></div>'));
+      box.appendChild(el('div','data','<p><b>Datos.</b> Reacción A + B &rarr; P a temperatura constante. Velocidades iniciales medidas:</p><div class="tw"><table><tr><th>Exp.</th><th>[A] (M)</th><th>[B] (M)</th><th><i>r</i><sub>0</sub> (M s<sup>&minus;1</sup>)</th></tr><tr><td>1</td><td>0,10</td><td>0,10</td><td>2,0 &times; 10<sup>&minus;3</sup></td></tr><tr><td>2</td><td>0,20</td><td>0,10</td><td>8,0 &times; 10<sup>&minus;3</sup></td></tr><tr><td>3</td><td>0,10</td><td>0,30</td><td>6,0 &times; 10<sup>&minus;3</sup></td></tr></table></div>'));
     }
     var card=el('div','q','<span class="tag">CÁLCULO '+(i+1)+'</span><p class="qt">'+q.q+'</p><div class="calc-row"><input type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 2,5" aria-label="Respuesta numérica">'+(q.uopts?'<select aria-label="Unidades de k"><option value="">Unidades</option>'+q.uopts.map(function(u,j){return '<option value="'+j+'">'+u+'</option>';}).join('')+'</select>':'<span class="unit">'+q.unit+'</span>')+'<button type="button" class="btn">Comprobar</button><button type="button" class="btn sec">Ver solución</button></div><div class="fb" hidden aria-live="polite"></div>');
     var inp=card.querySelector('input'),bs=card.querySelectorAll('button'),chk=bs[0],sol=bs[1],fb=card.querySelector('.fb');
