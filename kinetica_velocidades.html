@@ -154,13 +154,13 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
 
   <h4>Velocidad media</h4>
   <p>En un intervalo de tiempo finito &Delta;<i>t</i>, cada especie cambia su concentración en &Delta;[i]. Dividir por el coeficiente estequiométrico entrega un único valor para toda la reacción:</p>
-  <div class="formula">\[ \begin{aligned}\bar v&=-\frac{1}{a}\frac{\Delta[\mathrm{A}]}{\Delta t}=-\frac{1}{b}\frac{\Delta[\mathrm{B}]}{\Delta t}\\[1.2em] &=\frac{1}{c}\frac{\Delta[\mathrm{C}]}{\Delta t}=\frac{1}{d}\frac{\Delta[\mathrm{D}]}{\Delta t}\end{aligned} \]</div>
+  <div class="formula">\[ \bar v=-\frac{1}{a}\frac{\Delta[\mathrm{A}]}{\Delta t}=-\frac{1}{b}\frac{\Delta[\mathrm{B}]}{\Delta t}=\frac{1}{c}\frac{\Delta[\mathrm{C}]}{\Delta t}=\frac{1}{d}\frac{\Delta[\mathrm{D}]}{\Delta t} \]</div>
   <p>Los reactivos disminuyen (&Delta;[R] &lt; 0), así que se antepone un signo menos y &nbsp;<i>v&#772;</i>&nbsp; resulta positiva.</p>
   <div class="callout tip"><p><span class="lbl">Ejemplo.</span> Para A &rarr; productos, [A] baja de 0,80 M a 0,50 M en 60 s. <i>v&#772;</i> = &minus;(0,50 &minus; 0,80) M / 60 s = 0,30 M / 60 s = 5,0 &times; 10<sup>&minus;3</sup> M s<sup>&minus;1</sup>.</p></div>
 
   <h4>Velocidad instantánea</h4>
   <p>Cuando el intervalo se reduce hasta cero se obtiene la velocidad de reacción en un instante dado:</p>
-  <div class="formula">\[ \begin{aligned}v&=\lim_{\Delta t\to 0}\bar v=-\frac{1}{a}\frac{d[\mathrm{A}]}{dt}=-\frac{1}{b}\frac{d[\mathrm{B}]}{dt}\\[1.2em] &=\frac{1}{c}\frac{d[\mathrm{C}]}{dt}=\frac{1}{d}\frac{d[\mathrm{D}]}{dt}\end{aligned} \]</div>
+  <div class="formula">\[ v=\lim_{\Delta t\to 0}\bar v=-\frac{1}{a}\frac{d[\mathrm{A}]}{dt}=-\frac{1}{b}\frac{d[\mathrm{B}]}{dt}=\frac{1}{c}\frac{d[\mathrm{C}]}{dt}=\frac{1}{d}\frac{d[\mathrm{D}]}{dt} \]</div>
   <p>Gráficamente, la velocidad media corresponde a la pendiente de una secante y la velocidad instantánea a la pendiente de la tangente a la curva concentración&ndash;tiempo.</p>
   <figure>
     <svg id="fig1" viewBox="0 0 560 320" role="img" aria-label="Concentración del reactivo A contra tiempo, con una secante entre dos puntos y una tangente en un instante"></svg>
@@ -270,12 +270,12 @@ button.reveal::after{content:" (correcta)";color:var(--ok);font-size:.85rem;marg
   <p>Suponga la ley de velocidad \( v=k\,[\mathrm{NO}]^{m}[\mathrm{H_2}]^{n} \).</p>
   <h4>Orden en NO (Exp. 1 y 2)</h4>
   <p style="margin:0">Cambia sólo [NO]; [H<sub>2</sub>] es constante.</p>
-  <div class="formula">\[ \begin{aligned}\frac{v_2}{v_1}&=\frac{1{,}0\times10^{-3}}{2{,}5\times10^{-4}}=4\\[1.2em] \left(\frac{0{,}020}{0{,}010}\right)^{m}&=2^{m}=4\quad\Rightarrow\quad m=2\end{aligned} \]</div>
+  <div class="formula">\[ \frac{v_2}{v_1}=\frac{1{,}0\times10^{-3}}{2{,}5\times10^{-4}}=4=\left(\frac{0{,}020}{0{,}010}\right)^{m}=2^{m}\quad\Rightarrow\quad m=2 \]</div>
   <h4>Orden en H<sub>2</sub> (Exp. 1 y 3)</h4>
   <p style="margin:0">Cambia sólo [H<sub>2</sub>]; [NO] es constante.</p>
-  <div class="formula">\[ \begin{aligned}\frac{v_3}{v_1}&=\frac{5{,}0\times10^{-4}}{2{,}5\times10^{-4}}=2\\[1.2em] \left(\frac{0{,}020}{0{,}010}\right)^{n}&=2^{n}=2\quad\Rightarrow\quad n=1\end{aligned} \]</div>
+  <div class="formula">\[ \frac{v_3}{v_1}=\frac{5{,}0\times10^{-4}}{2{,}5\times10^{-4}}=2=\left(\frac{0{,}020}{0{,}010}\right)^{n}=2^{n}\quad\Rightarrow\quad n=1 \]</div>
   <h4>Constante <i>k</i> (Exp. 1)</h4>
-  <div class="formula">\[ \begin{aligned}k&=\frac{v_0}{[\mathrm{NO}]^{2}[\mathrm{H_2}]}=\frac{2{,}5\times10^{-4}\ \mathrm{M\,s^{-1}}}{(0{,}010\ \mathrm{M})^{2}\,(0{,}010\ \mathrm{M})}\\[1.2em] &=2{,}5\times10^{2}\ \mathrm{M^{-2}\,s^{-1}}\end{aligned} \]</div>
+  <div class="formula">\[ k=\frac{v_0}{[\mathrm{NO}]^{2}[\mathrm{H_2}]}=\frac{2{,}5\times10^{-4}\ \mathrm{M\,s^{-1}}}{(0{,}010\ \mathrm{M})^{2}\,(0{,}010\ \mathrm{M})}=2{,}5\times10^{2}\ \mathrm{M^{-2}\,s^{-1}} \]</div>
   <p>Ley de velocidad: \( v=k\,[\mathrm{NO}]^{2}[\mathrm{H_2}] \), orden total 3.</p>
 </section>
 
@@ -322,7 +322,20 @@ function show(id){
   $('#pager').innerHTML=(p?'<a href="#'+p+'">&larr; '+TITLES[p]+'</a>':'<span></span>')+(n?'<a href="#'+n+'">'+TITLES[n]+' &rarr;</a>':'<span></span>');
   document.body.classList.remove('open');$('#burger').setAttribute('aria-expanded','false');
   window.scrollTo(0,0);
+  fitFormulas();
 }
+/* Reduce una ecuacion solo si no cabe en el ancho de su caja */
+function fitFormulas(){
+  [].forEach.call(document.querySelectorAll('.formula'),function(f){
+    var c=f.querySelector('mjx-container'),s=c&&c.querySelector('svg');
+    if(!s||!f.clientWidth)return;
+    c.style.zoom=1;
+    var cs=getComputedStyle(f),avail=f.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight),w=s.getBoundingClientRect().width;
+    if(w>avail)c.style.zoom=Math.max(0.5,avail/w).toFixed(3);
+  });
+}
+window.addEventListener('resize',fitFormulas);
+window.addEventListener('load',function(){if(window.MathJax&&MathJax.startup)MathJax.startup.promise.then(fitFormulas);});
 function route(){var h=(location.hash||'').slice(1);show(ORDER.indexOf(h)<0?'s1':h);}
 $('#burger').addEventListener('click',function(){var o=document.body.classList.toggle('open');this.setAttribute('aria-expanded',o?'true':'false');});
 $('#scrim').addEventListener('click',function(){document.body.classList.remove('open');});
