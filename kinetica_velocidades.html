@@ -453,10 +453,10 @@ var VF=[
 
 var SU=[
  {t:'def',q:'¿Qué expresión define correctamente la velocidad de reacción <i>v</i> para N<sub>2</sub> + 3 H<sub>2</sub> &rarr; 2 NH<sub>3</sub>?',
-  o:[{x:'<i>v</i> = &minus;d[N<sub>2</sub>]/d<i>t</i> = &minus;3 d[H<sub>2</sub>]/d<i>t</i> = 2 d[NH<sub>3</sub>]/d<i>t</i>',w:'Multiplica por los coeficientes. Corresponde dividir por ellos.'},
-     {x:'<i>v</i> = &minus;d[N<sub>2</sub>]/d<i>t</i> = &minus;&#8531; d[H<sub>2</sub>]/d<i>t</i> = &frac12; d[NH<sub>3</sub>]/d<i>t</i>',ok:true,w:'Cada derivada se divide por su coeficiente estequiométrico, con signo menos para los reactivos.'},
-     {x:'<i>v</i> = d[N<sub>2</sub>]/d<i>t</i> = &#8531; d[H<sub>2</sub>]/d<i>t</i> = &minus;&frac12; d[NH<sub>3</sub>]/d<i>t</i>',w:'Los signos están invertidos: <i>v</i> quedaría negativa para los reactivos y los productos tendrían el signo equivocado.'},
-     {x:'<i>v</i> = &minus;d[N<sub>2</sub>]/d<i>t</i> = &minus;d[H<sub>2</sub>]/d<i>t</i> = d[NH<sub>3</sub>]/d<i>t</i>',w:'Omite los coeficientes estequiométricos. Eso sólo sería válido si todos valieran 1.'}]},
+  o:[{x:'\\( v=-\\dfrac{d[\\mathrm{N_2}]}{dt}=-3\\,\\dfrac{d[\\mathrm{H_2}]}{dt}=2\\,\\dfrac{d[\\mathrm{NH_3}]}{dt} \\)',w:'Multiplica por los coeficientes. Corresponde dividir por ellos.'},
+     {x:'\\( v=-\\dfrac{d[\\mathrm{N_2}]}{dt}=-\\dfrac{1}{3}\\dfrac{d[\\mathrm{H_2}]}{dt}=\\dfrac{1}{2}\\dfrac{d[\\mathrm{NH_3}]}{dt} \\)',ok:true,w:'Cada derivada se divide por su coeficiente estequiométrico, con signo menos para los reactivos.'},
+     {x:'\\( v=\\dfrac{d[\\mathrm{N_2}]}{dt}=\\dfrac{1}{3}\\dfrac{d[\\mathrm{H_2}]}{dt}=-\\dfrac{1}{2}\\dfrac{d[\\mathrm{NH_3}]}{dt} \\)',w:'Los signos están invertidos: <i>v</i> quedaría negativa para los reactivos y los productos tendrían el signo equivocado.'},
+     {x:'\\( v=-\\dfrac{d[\\mathrm{N_2}]}{dt}=-\\dfrac{d[\\mathrm{H_2}]}{dt}=\\dfrac{d[\\mathrm{NH_3}]}{dt} \\)',w:'Omite los coeficientes estequiométricos. Eso sólo sería válido si todos valieran 1.'}]},
  {t:'ley',q:'Para una reacción de orden total 2, con concentraciones en M y tiempo en s, las unidades de <i>k</i> son:',
   o:[{x:'s<sup>&minus;1</sup>',w:'Son las unidades de <i>k</i> para orden total 1.'},
      {x:'M s<sup>&minus;1</sup>',w:'Son las unidades de <i>k</i> para orden total 0, donde <i>v</i> = <i>k</i>.'},
@@ -473,8 +473,8 @@ var CALC=[
  {t:'vi',pre:true,q:'Con los datos de la tabla, determine el orden total de la reacción.',unit:'',ans:3,
   hint:'Halle el orden en A comparando dos experimentos en los que sólo cambie [A], y el orden en B de la misma forma. Luego sume ambos.',
   sol:'Exp. 1 y 2: sólo cambia [A] (&times;2) y <i>v</i> pasa de 2,0&times;10<sup>&minus;3</sup> a 8,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup> (&times;4). Entonces 2<sup><i>m</i></sup> = 4 y <i>m</i> = 2.<br>Exp. 1 y 3: sólo cambia [B] (&times;3) y <i>v</i> pasa de 2,0&times;10<sup>&minus;3</sup> a 6,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup> (&times;3). Entonces 3<sup><i>n</i></sup> = 3 y <i>n</i> = 1.<br>Orden total = 2 + 1 = 3.'},
- {t:'vi',q:'Con los mismos datos, calcule la constante de velocidad <i>k</i>.',unit:'M<sup>&minus;2</sup> s<sup>&minus;1</sup>',ans:2.0,
-  hint:'Con <i>v</i> = <i>k</i>[A]<sup>2</sup>[B], despeje <i>k</i> = <i>v</i> / ([A]<sup>2</sup>[B]) usando los datos de un experimento.',
+ {t:'vi',q:'Con los mismos datos, calcule el valor de la constante de velocidad <i>k</i> e indique sus unidades.',unit:'M<sup>&minus;2</sup> s<sup>&minus;1</sup>',uopts:['M s⁻¹','s⁻¹','M⁻¹ s⁻¹','M⁻² s⁻¹'],uok:3,ans:2.0,
+  hint:'Con <i>v</i> = <i>k</i>[A]<sup>2</sup>[B], despeje <i>k</i> = <i>v</i> / ([A]<sup>2</sup>[B]) usando los datos de un experimento. Las unidades de <i>k</i> son las que dejan a <i>v</i> en M s<sup>&minus;1</sup> según el orden total.',
   sol:'<i>v</i> = <i>k</i>[A]<sup>2</sup>[B]. Con Exp. 1: <i>k</i> = 2,0&times;10<sup>&minus;3</sup> / (0,10<sup>2</sup> &times; 0,10) = 2,0&times;10<sup>&minus;3</sup> / 1,0&times;10<sup>&minus;3</sup> = 2,0 M<sup>&minus;2</sup> s<sup>&minus;1</sup>.<br>Verificación con Exp. 2: 2,0 &times; 0,20<sup>2</sup> &times; 0,10 = 8,0&times;10<sup>&minus;3</sup> M s<sup>&minus;1</sup>, igual al valor medido.'}
 ];
 
@@ -548,16 +548,18 @@ function buildCALC(){
     if(q.pre){
       box.appendChild(el('div','data','<p><b>Datos.</b> Reacción A + B &rarr; P a temperatura constante. Velocidades iniciales medidas:</p><div class="tw"><table><tr><th>Exp.</th><th>[A] (M)</th><th>[B] (M)</th><th><i>v</i><sub>0</sub> (M s<sup>&minus;1</sup>)</th></tr><tr><td>1</td><td>0,10</td><td>0,10</td><td>2,0 &times; 10<sup>&minus;3</sup></td></tr><tr><td>2</td><td>0,20</td><td>0,10</td><td>8,0 &times; 10<sup>&minus;3</sup></td></tr><tr><td>3</td><td>0,10</td><td>0,30</td><td>6,0 &times; 10<sup>&minus;3</sup></td></tr></table></div>'));
     }
-    var card=el('div','q','<span class="tag">CÁLCULO '+(i+1)+'</span><p class="qt">'+q.q+'</p><div class="calc-row"><input type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 2,5" aria-label="Respuesta numérica"><span class="unit">'+q.unit+'</span><button type="button" class="btn">Comprobar</button><button type="button" class="btn sec">Ver solución</button></div><div class="fb" hidden aria-live="polite"></div>');
+    var card=el('div','q','<span class="tag">CÁLCULO '+(i+1)+'</span><p class="qt">'+q.q+'</p><div class="calc-row"><input type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 2,5" aria-label="Respuesta numérica">'+(q.uopts?'<select aria-label="Unidades de k"><option value="">Unidades</option>'+q.uopts.map(function(u,j){return '<option value="'+j+'">'+u+'</option>';}).join('')+'</select>':'<span class="unit">'+q.unit+'</span>')+'<button type="button" class="btn">Comprobar</button><button type="button" class="btn sec">Ver solución</button></div><div class="fb" hidden aria-live="polite"></div>');
     var inp=card.querySelector('input'),bs=card.querySelectorAll('button'),chk=bs[0],sol=bs[1],fb=card.querySelector('.fb');
-    var tries=0,done=false;
-    function finish(){done=true;inp.disabled=true;chk.disabled=true;sol.disabled=true;}
+    var usel=card.querySelector('select'),tries=0,done=false;
+    function finish(){done=true;inp.disabled=true;chk.disabled=true;sol.disabled=true;if(usel)usel.disabled=true;}
     function check(){
       if(done)return;
       var v=parseFloat(inp.value.replace(',','.'));
       if(isNaN(v)){fb.hidden=false;fb.className='fb info';fb.innerHTML='Ingrese un valor numérico.';return;}
+      if(usel&&usel.value===''){fb.hidden=false;fb.className='fb info';fb.innerHTML='Seleccione las unidades.';return;}
       tries++;
-      var ok=Math.abs(v-q.ans)<=0.02*Math.abs(q.ans);
+      var numOk=Math.abs(v-q.ans)<=0.02*Math.abs(q.ans),unitOk=!usel||usel.value===String(q.uok);
+      var ok=numOk&&unitOk;
       if(ok){
         fb.hidden=false;fb.className='fb ok';
         fb.innerHTML='<b>Correcto'+(tries>1?' (tras '+tries+' intentos)':'')+'.</b><p>'+q.sol+'</p>';
@@ -565,7 +567,7 @@ function buildCALC(){
         if(!(('calc'+i) in results))mark('calc'+i,q.t,tries===1);
       }else{
         fb.hidden=false;fb.className='fb bad';
-        fb.innerHTML='<b>Incorrecto.</b> Respuesta ingresada: '+fmt(v)+'.<p>Pista: '+q.hint+'</p>';
+        fb.innerHTML='<b>Incorrecto.</b> '+(numOk?'El valor numérico es correcto, pero las unidades no.':'Respuesta ingresada: '+fmt(v)+(usel?' '+usel.options[usel.selectedIndex].text:'')+'.')+'<p>Pista: '+q.hint+'</p>';
         if(!(('calc'+i) in results))mark('calc'+i,q.t,false);
       }
     }
@@ -581,7 +583,7 @@ function buildCALC(){
   });
 }
 
-function buildQuiz(){results={};buildVF();buildSU();buildCALC();updateStatus();}
+function buildQuiz(){results={};buildVF();buildSU();buildCALC();updateStatus();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([$('#su')]);}
 
 drawFig1();initRates();drawFig2();
 $('#fSl').addEventListener('input',drawFig2);
