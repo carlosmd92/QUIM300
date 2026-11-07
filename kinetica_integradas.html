@@ -370,7 +370,7 @@ function drawSucc(){
     c.text(T(i),Math.pow(2,-i),'1/'+Math.pow(2,i),{c:'#a8231b',dx:6,dy:-8,s:12,w:600});
   }
   c.done();
-  var msg=n===0?'Cada vida media dura la mitad que la anterior: la reacci\u00f3n termina en 2 unidades.':n===1?'Todas las vidas medias duran lo mismo: es la firma del primer orden.':'Cada vida media dura el doble que la anterior: al diluirse, la reacci\u00f3n se vuelve m\u00e1s lenta.';
+  var msg=n===0?'Cada vida media dura la mitad que la anterior: la reacci\u00f3n termina en 2 unidades.':n===1?'Todas las vidas medias duran lo mismo: la vida media del primer orden no depende de la concentración.':'Cada vida media dura el doble que la anterior: al diluirse, la reacci\u00f3n se vuelve m\u00e1s lenta.';
   $('#outSucc').innerHTML='Duraciones sucesivas: '+d.map(function(x){return M(tn(x,3));}).join(', ')+'. '+msg;
 }
 

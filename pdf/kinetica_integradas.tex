@@ -2,36 +2,45 @@
 \usepackage{resumen}
 \AtBeginDocument{\shorthandoff{<>}}
 
+% Ajustes locales de espaciado (más aire entre bloques)
+\setlength{\parskip}{4pt plus 1pt}
+\tcbset{clave/.append style={top=5pt,bottom=5pt,before skip=7pt,after skip=7pt},
+        apoyo/.append style={top=4pt,bottom=4pt,before skip=8pt,after skip=8pt},
+        nota/.append style={top=4pt,bottom=4pt,before skip=8pt,after skip=8pt},
+        alerta/.append style={top=4pt,bottom=4pt,before skip=8pt,after skip=8pt}}
+\titlespacing*{\section}{0pt}{10pt plus 2pt}{5pt}
+
 \begin{document}
 \titulo{Cinética química II}{Ecuaciones integradas, vida media y dependencia con la temperatura}
 
 %------------------------------------------------------------------
 \section{Ecuaciones integradas y tiempo de vida media}
-Integrar la ley de velocidad entrega la concentración en función del tiempo. Para A $\to$ productos con orden $n$, se separan las variables y se integra desde $[\mathrm{A}]_0$ en $t=0$ hasta $[\mathrm{A}]$ en $t$:
+Integrar la ley de velocidad permite conocer la concentración en función del tiempo. Para A $\to$ productos con orden $n$, se separan las variables y se integra entre $[\mathrm{A}]_0$ (en $t=0$) y $[\mathrm{A}]$ (en $t$):
 \begin{clave}
 $\displaystyle r=-\frac{d[\mathrm{A}]}{dt}=k\,[\mathrm{A}]^{n}\quad\Longrightarrow\quad \int_{[\mathrm{A}]_0}^{[\mathrm{A}]}\frac{d[\mathrm{A}]}{[\mathrm{A}]^{n}}=-k\int_0^{t}dt$
 \end{clave}
 
-La vida media $t_{1/2}$ es el tiempo en que $[\mathrm{A}]$ cae a $[\mathrm{A}]_0/2$; se obtiene reemplazando esa condición en cada ecuación integrada.
+La vida media $t_{1/2}$ es el tiempo que tarda $[\mathrm{A}]$ en reducirse a $[\mathrm{A}]_0/2$; al imponer esa condición en cada ecuación integrada resulta la última columna.
 
 \begin{center}\small
-\renewcommand{\arraystretch}{1.85}
-\begin{tabular}{@{}c c c c c c c@{}}
+\renewcommand{\arraystretch}{2.0}
+\begin{tabular}{@{}c c c c c c@{}}
 \toprule
-Orden & Ecuación integrada & Recta contra $t$ & Pendiente & Intercepto & $k$ & $t_{1/2}$\\
+Orden & Ecuación integrada & Recta contra $t$ & Pendiente & Unidades de $k$ & $t_{1/2}$\\
 \midrule
-0 & $[\mathrm{A}]=[\mathrm{A}]_0-kt$ & $[\mathrm{A}]$ & $-k$ & $[\mathrm{A}]_0$ & \si{\molar\per\second} & $\dfrac{[\mathrm{A}]_0}{2k}$\\
-1 & $\ln[\mathrm{A}]=\ln[\mathrm{A}]_0-kt$ & $\ln[\mathrm{A}]$ & $-k$ & $\ln[\mathrm{A}]_0$ & \si{\per\second} & $\dfrac{\ln 2}{k}$\\
-2 & $\dfrac{1}{[\mathrm{A}]}-\dfrac{1}{[\mathrm{A}]_0}=kt$ & $1/[\mathrm{A}]$ & $+k$ & $1/[\mathrm{A}]_0$ & \si{\per\molar\per\second} & $\dfrac{1}{k[\mathrm{A}]_0}$\\
+0 & $[\mathrm{A}]=[\mathrm{A}]_0-kt$ & $[\mathrm{A}]$ & $-k$ & \si{\molar\per\second} & $\dfrac{[\mathrm{A}]_0}{2k}$\\
+1 & $\ln[\mathrm{A}]=\ln[\mathrm{A}]_0-kt$ & $\ln[\mathrm{A}]$ & $-k$ & \si{\per\second} & $\dfrac{\ln 2}{k}$\\
+2 & $\dfrac{1}{[\mathrm{A}]}-\dfrac{1}{[\mathrm{A}]_0}=kt$ & $1/[\mathrm{A}]$ & $+k$ & \si{\per\molar\per\second} & $\dfrac{1}{k[\mathrm{A}]_0}$\\
 \bottomrule
 \end{tabular}
 \end{center}
-\vspace{-2pt}
-{\small Formas explícitas ($\ln 2=0{,}693$): orden 1, $[\mathrm{A}]=[\mathrm{A}]_0\,e^{-kt}$; orden 2, $[\mathrm{A}]=[\mathrm{A}]_0/(1+kt[\mathrm{A}]_0)$. En primer orden $t_{1/2}$ no depende de $[\mathrm{A}]_0$; en orden 0 es proporcional a $[\mathrm{A}]_0$ y en orden 2 inversamente proporcional.}
 
+En forma explícita, $[\mathrm{A}]=[\mathrm{A}]_0\,e^{-kt}$ en primer orden (con $\ln 2=0{,}693$) y $[\mathrm{A}]=[\mathrm{A}]_0/(1+kt[\mathrm{A}]_0)$ en segundo. La vida media crece con $[\mathrm{A}]_0$ en orden 0, no depende de ella en orden 1 y disminuye con ella en orden 2.
+
+\vspace{4pt}
 \begin{minipage}[t]{0.50\linewidth}\vspace{0pt}
 \begin{tikzpicture}
-\begin{axis}[resumen,width=\linewidth,height=4.5cm,xlabel={$t$ (en unidades de la primera $t_{1/2}$)},ylabel={$[\mathrm{A}]/[\mathrm{A}]_0$},
+\begin{axis}[resumen,width=\linewidth,height=3.9cm,xlabel={$t$ (en unidades de la primera $t_{1/2}$)},ylabel={$[\mathrm{A}]/[\mathrm{A}]_0$},
   xmin=0,xmax=4,ymin=0,ymax=1.05,xtick={0,1,2,3,4},ytick={0,0.5,1},legend pos=north east,legend style={font=\scriptsize,draw=none,fill=white,fill opacity=0.8,text opacity=1}]
 \addplot[acc,domain=0:2,samples=2]{1-x/2};
 \addplot[teal,domain=0:4,samples=60]{2^(-x)};
@@ -41,38 +50,33 @@ Orden & Ecuación integrada & Recta contra $t$ & Pendiente & Intercepto & $k$ & 
 \end{axis}
 \end{tikzpicture}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.46\linewidth}\vspace{4pt}
-\begin{nota}\small
-\textbf{Firma de cada orden.} Con una misma $t_{1/2}$ inicial: en orden 0 cada vida media dura la mitad de la anterior; en orden 1 todas duran lo mismo (queda $1/2$, $1/4$, $1/8$); en orden 2 cada una dura el doble.
-\end{nota}
-\begin{apoyo}\small
-\textbf{Ejemplo, orden 1.} $^{99\mathrm{m}}$Tc, $t_{1/2}=\SI{6,01}{\hour}$, $A_0=\SI{740}{\mega\becquerel}$: $k=\SI{0,1153}{\per\hour}$; a las \SI{6,5}{\hour} quedan $A_0e^{-kt}=\SI{350}{\mega\becquerel}$.
-\end{apoyo}
+\begin{minipage}[t]{0.46\linewidth}\vspace{4pt}\small\raggedright
+\textbf{Vidas medias sucesivas.} Si cada intervalo parte de la mitad de la concentración anterior, en orden 0 cada vida media dura la mitad de la anterior; en orden 1 todas duran lo mismo y queda $1/2$, $1/4$, $1/8$ del reactivo; en orden 2 cada una dura el doble.
+\vspace{8pt}
+
+\textbf{Ejemplo, orden 1.} Una dosis de $^{99\mathrm{m}}$Tc ($t_{1/2}=\SI{6,01}{\hour}$) tiene $A_0=\SI{740}{\mega\becquerel}$. Con $k=\ln 2/t_{1/2}=\SI{0,1153}{\per\hour}$, a las \SI{6,5}{\hour} queda $A_0e^{-kt}=\SI{350}{\mega\becquerel}$.
 \end{minipage}
 
 %------------------------------------------------------------------
 \section{Determinación del orden}
-Hay tres vías; las dos últimas parten de concentraciones medidas en el tiempo.
-\begin{itemize}
-\item \textbf{Velocidades iniciales} (Cinética I): se comparan experimentos que cambian la concentración de una sola especie.
-\item \textbf{Ecuaciones integradas} (prueba y error): se linealizan los datos como $[\mathrm{A}]$, $\ln[\mathrm{A}]$ y $1/[\mathrm{A}]$ contra $t$, se ajusta una recta a cada serie y se elige la de mayor $R^{2}$ (más cercano a 1); además no debe haber curvatura sistemática.
-\item \textbf{Tiempo de vida media}, válido para $n\neq1$ (abajo).
-\end{itemize}
-\begin{apoyo}\small
-\textbf{Ejemplo (ecuaciones integradas).} Un fármaco en disolución, 8 mediciones entre 0 y \SI{16}{\hour}: $R^{2}=0{,}9832$ (orden 0), $\mathbf{0{,}9966}$ (orden 1) y $0{,}9891$ (orden 2). Gana el orden 1; la pendiente de $\ln[\mathrm{A}]$ es $-0{,}0441$, de modo que $k=\SI{0,0441}{\per\hour}$.
-\end{apoyo}
+El orden se obtiene por velocidades iniciales (Cinética I), por ajuste de las ecuaciones integradas o por el tiempo de vida media. Las ecuaciones integradas requieren $[\mathrm{A}]$ medida en el tiempo en un experimento; la vida media, $t_{1/2}$ para distintas $[\mathrm{A}]_0$.
 
+\subsection*{Ecuaciones integradas}
+Se linealizan los datos como $[\mathrm{A}]$, $\ln[\mathrm{A}]$ y $1/[\mathrm{A}]$ contra $t$, se ajusta una recta a cada serie y se adopta el orden de la de mayor $R^{2}$, siempre que los residuos no muestren curvatura sistemática. Un fármaco en disolución, con 8 mediciones entre 0 y \SI{16}{\hour}, da $R^{2}=0{,}9832$ (orden 0), $0{,}9966$ (orden 1) y $0{,}9891$ (orden 2); se adopta el orden 1, y la pendiente de $\ln[\mathrm{A}]$, $-0{,}0441$, entrega $k=\SI{0,0441}{\per\hour}$.
+
+\clearpage
 \subsection*{Método del tiempo de vida media}
-Para un orden $n$ cualquiera, con $[\mathrm{A}]=[\mathrm{A}]_0/2$ y $t=t_{1/2}$ en la ecuación integrada general $\dfrac{1}{n-1}\Big(\dfrac{1}{[\mathrm{A}]^{n-1}}-\dfrac{1}{[\mathrm{A}]_0^{\,n-1}}\Big)=kt$:
+Con $[\mathrm{A}]=[\mathrm{A}]_0/2$ y $t=t_{1/2}$ en la ecuación integrada general $\dfrac{1}{n-1}\Big(\dfrac{1}{[\mathrm{A}]^{n-1}}-\dfrac{1}{[\mathrm{A}]_0^{\,n-1}}\Big)=kt$ se obtiene
 \begin{clave}
 $\displaystyle t_{1/2}=\frac{2^{\,n-1}-1}{(n-1)\,k\,[\mathrm{A}]_0^{\,n-1}}\qquad\Longrightarrow\qquad
 \log t_{1/2}=\log\frac{2^{\,n-1}-1}{(n-1)\,k}-(n-1)\,\log[\mathrm{A}]_0$
 \end{clave}
-El gráfico de $\log t_{1/2}$ contra $\log[\mathrm{A}]_0$ es una recta. \textbf{Pendiente} $=-(n-1)$, de donde $n=1-\text{pendiente}$. El \textbf{coeficiente de posición} (intercepto) es $\log\frac{2^{n-1}-1}{(n-1)k}$ y entrega $k$ una vez conocido $n$.
+El gráfico de $\log t_{1/2}$ contra $\log[\mathrm{A}]_0$ es una recta de pendiente $-(n-1)$, de donde $n=1-\text{pendiente}$; el intercepto (coeficiente de posición) permite despejar $k$ una vez conocido $n$. El método no es aplicable a $n=1$, pues entonces $t_{1/2}=\ln 2/k$ no depende de $[\mathrm{A}]_0$ y la pendiente es nula.
 
+\vspace{4pt}
 \begin{minipage}[t]{0.50\linewidth}\vspace{0pt}
 \begin{tikzpicture}
-\begin{axis}[resumen,width=\linewidth,height=4.4cm,xlabel={$\log[\mathrm{A}]_0$},ylabel={$\log t_{1/2}$},
+\begin{axis}[resumen,width=\linewidth,height=3.6cm,xlabel={$\log[\mathrm{A}]_0$},ylabel={$\log t_{1/2}$},
   xmin=-1.15,xmax=0.05,ymin=1.4,ymax=2.5,xtick={-1,-0.8,-0.6,-0.4,-0.2,0},ytick={1.5,2,2.5}]
 \addplot[only marks,mark=*,acc,mark size=2pt] coordinates {(-1.0,2.4014)(-0.69897,2.0934)(-0.39794,1.7993)(-0.09691,1.4983)};
 \addplot[teal,domain=-1.15:0.05,samples=2]{1.4009-0.9977*x};
@@ -81,36 +85,31 @@ El gráfico de $\log t_{1/2}$ contra $\log[\mathrm{A}]_0$ es una recta. \textbf{
 \end{tikzpicture}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.46\linewidth}\vspace{2pt}\small\raggedright
-\textbf{Ejemplo: peróxido en disolución.} Con $[\mathrm{A}]_0=0{,}10;\ 0{,}20;\ 0{,}40;\ \SI{0,80}{\molar}$ se midió $t_{1/2}=252;\ 124;\ 63{,}0;\ \SI{31,5}{\second}$. Ajuste de la recta: pendiente $-0{,}998$ e intercepto $1{,}401$.
+\textbf{Ejemplo: peróxido en disolución.} Con $[\mathrm{A}]_0=0{,}10;\ 0{,}20;\ 0{,}40;\ \SI{0,80}{\molar}$ se midió $t_{1/2}=252;\ 124;\ 63{,}0;\ \SI{31,5}{\second}$. La recta de ajuste tiene pendiente $-0{,}998$ e intercepto $1{,}401$:
 \begin{align*}
 n&=1-(-0{,}998)=1{,}998\approx2\\
 \log\tfrac{1}{k}&=1{,}401\ \Rightarrow\ k=10^{-1{,}401}\\
 &=\SI{0,040}{\per\molar\per\second}
 \end{align*}
-\vspace{-6pt}
+\vspace{-8pt}
 \end{minipage}
-\begin{alerta}\small
-\textbf{No vale para $n=1$:} $t_{1/2}=\ln2/k$ no depende de $[\mathrm{A}]_0$, la pendiente es 0 y el intercepto no entrega $k$. En ese caso $k=\ln 2/t_{1/2}$.
-\end{alerta}
+
+\vspace{2pt}
+{\small\textit{Verificación de sanidad.} En orden 2, al duplicar $[\mathrm{A}]_0$ la vida media se reduce a la mitad ($252\to\SI{124}{\second}$), coherente con $n\approx2$.}
 
 %------------------------------------------------------------------
 \section{Dependencia de $k$ con la temperatura}
-Según la teoría de colisiones, reaccionan las moléculas que chocan bien orientadas y con energía suficiente; la energía de activación $E_a$ es la energía umbral. La relación empírica de Arrhenius, y sus formas lineal y con dos temperaturas, son:
+Según la teoría de colisiones, reaccionan las moléculas que chocan con orientación adecuada y energía suficiente, y la energía de activación $E_a$ es la energía umbral. La relación de Arrhenius, en sus formas exponencial, lineal y de dos temperaturas, es
 \begin{clave}
 $\displaystyle k=A\,e^{-E_a/RT}\qquad\qquad \ln k=\ln A-\frac{E_a}{R}\,\frac{1}{T}\qquad\qquad \ln\frac{k_2}{k_1}=-\frac{E_a}{R}\Big(\frac{1}{T_2}-\frac{1}{T_1}\Big)$
 \end{clave}
-\begin{center}\small
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
-$A$: factor preexponencial o de colisión, con las unidades de $k$. A mayor $A$, mayor $k$. &
-$E_a$: energía de activación (energía por mol). A mayor $E_a$, menor $k$. &
-$R=\SI{8,314}{\joule\per\mole\per\kelvin}$; $T$ en kelvin y $E_a$ en \si{\joule\per\mole}. En $\ln k$ contra $1/T$: pendiente $-E_a/R$, intercepto $\ln A$.\\
-\end{tabularx}
-\end{center}
+Aquí $A$ es el factor preexponencial o de colisión, con las unidades de $k$, y $E_a$ la energía de activación, en \si{\joule\per\mole} si $R=\SI{8,314}{\joule\per\mole\per\kelvin}$ y $T$ está en kelvin. En el gráfico de $\ln k$ contra $1/T$ la pendiente es $-E_a/R$ y el intercepto, $\ln A$. Un catalizador ofrece una ruta con menor $E_a$ y no modifica la diferencia de energía entre reactivos y productos.
 
+\vspace{2pt}
 \begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
 \begin{tikzpicture}
-\begin{axis}[resumen,width=\linewidth,height=4.5cm,xlabel={$1000/T$ (\si{\per\kelvin})},ylabel={$\ln k$},
-  xmin=2.95,xmax=3.42,ymin=-8,ymax=-3.4,xtick={3,3.1,3.2,3.3,3.4},ytick={-8,-7,-6,-5,-4}]
+\begin{axis}[resumen,width=\linewidth,height=3.7cm,xlabel={$1000/T$ (\si{\per\kelvin})},ylabel={$\ln k$},
+  xmin=2.95,xmax=3.42,ymin=-8.4,ymax=-3.4,xtick={3,3.1,3.2,3.3,3.4},ytick={-8,-7,-6,-5,-4}]
 \addplot[only marks,mark=*,acc,mark size=2pt] coordinates {(3.1933,-5.8091)(3.0945,-4.8728)(3.0017,-3.9737)};
 \addplot[teal,dashed,domain=2.95:3.42,samples=2]{24.7548-9.57211*x};
 \addplot[only marks,mark=*,bad,mark size=2.4pt] coordinates {(3.3540,-7.3500)};
@@ -119,7 +118,7 @@ $R=\SI{8,314}{\joule\per\mole\per\kelvin}$; $T$ en kelvin y $E_a$ en \si{\joule\
 \end{tikzpicture}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.47\linewidth}\vspace{0pt}
-\begin{tikzpicture}[x=1cm,y=1cm,font=\scriptsize]
+\begin{tikzpicture}[x=1cm,y=1cm,font=\scriptsize,scale=0.8,transform shape]
 \draw[->,line width=0.6pt] (0,0) -- (0,3.6) node[above] {energía};
 \draw[->,line width=0.6pt] (0,0) -- (6.4,0) node[right] {avance};
 \draw[acc,line width=1.3pt] (0.3,1.0) .. controls (1.4,1.0) and (1.8,3.3) .. (3.1,3.3) .. controls (4.4,3.3) and (4.8,0.4) .. (6.0,0.4);
@@ -136,7 +135,7 @@ $R=\SI{8,314}{\joule\per\mole\per\kelvin}$; $T$ en kelvin y $E_a$ en \si{\joule\
 
 \vspace{2pt}
 \begin{minipage}[t]{0.49\linewidth}\vspace{0pt}\small\raggedright
-\textbf{Ejemplo: estabilidad acelerada.} Degradación de primer orden de una solución oral: $k=0{,}00300;\ 0{,}00765;\ \SI{0,0188}{\per\day}$ a $40;\ 50;\ \SI{60}{\celsius}$. Se aplica la forma lineal y se extrapola a \SI{25}{\celsius}:
+\textbf{Ejemplo: estabilidad acelerada.} La degradación de una solución oral es de primer orden, con $k=0{,}00300;\ 0{,}00765;\ \SI{0,0188}{\per\day}$ a $40;\ 50;\ \SI{60}{\celsius}$. Se aplica la forma lineal y se extrapola a \SI{25}{\celsius}.
 \end{minipage}\hfill
 \begin{minipage}[t]{0.47\linewidth}\vspace{-4pt}\small
 \begin{align*}
@@ -147,13 +146,7 @@ k_{25}&=\SI{6,42e-4}{\per\day}\ \Rightarrow\ t_{90}=\frac{\ln(1/0{,}9)}{k}=\SI{1
 \vspace{-8pt}
 \end{minipage}
 
-\begin{nota}\small
-\textbf{Catalizadores.} Ofrecen una ruta con menor $E_a$ y aumentan la velocidad; no aparecen en la estequiometría global, pero participan en al menos un paso del mecanismo, y no cambian la diferencia de energía entre reactivos y productos.
-\end{nota}
-\begin{apoyo}\small
-\textbf{Qué método usar.} Con $[\mathrm{A}]$ contra $t$ de un solo experimento: ecuaciones integradas. Con varias vidas medias medidas a distintas $[\mathrm{A}]_0$: método del tiempo de vida media ($n\neq1$). Con velocidades iniciales de experimentos que cambian una concentración a la vez: método de las velocidades iniciales. Con $k$ a distintas temperaturas: Arrhenius.
-\end{apoyo}
 \begin{alerta}\small
-\textbf{Errores frecuentes.} Usar $T$ en \si{\celsius} en lugar de kelvin; mezclar $E_a$ en \si{\kilo\joule\per\mole} con $R$ en \si{\joule\per\mole\per\kelvin}; decidir el orden con pocos puntos o con $R^{2}$ casi iguales sin revisar la curvatura; extrapolar la recta de Arrhenius más allá del intervalo en que el mecanismo se mantiene.
+\textbf{Errores frecuentes.} Usar $T$ en \si{\celsius}; combinar $E_a$ en \si{\kilo\joule\per\mole} con $R$ en \si{\joule\per\mole\per\kelvin}; extrapolar fuera del intervalo de validez.
 \end{alerta}
 \end{document}

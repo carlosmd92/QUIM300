@@ -57,7 +57,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <div class="mini"><h4>Relación con \( r \)</h4><div>\( r_i=|\nu_i|\,r \)</div></div>
   </div>
   <p>Cada especie cambia su concentración con una rapidez proporcional a su coeficiente estequiométrico \( |\nu_i| \). Por eso, en una misma reacción, las velocidades de consumo y de aparición de distintas especies difieren entre sí, mientras que \( r \) permanece única.</p>
-  <div class="callout tip"><p><span class="lbl">Probar:</span> elija una reacción, cambie el valor de \( r \) y observe cómo se reparte entre las especies.</p></div>
+  <div class="callout tip"><p><span class="lbl">Exploración.</span> Al elegir una reacción y cambiar el valor de \( r \), se observa cómo se reparte entre las especies.</p></div>
   <div class="ctrl">
     <label>Reacción: <select id="rxSel"></select></label>
     <label>\( r= \) <input type="number" id="vIn" value="1.0" min="0" step="0.1"> \( \times10^{-3}\ \mathrm{M\,s^{-1}} \)</label>
@@ -101,7 +101,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   </table></div>
 
   <h4>Explorar con el gráfico</h4>
-  <p style="margin:0 0 6px">Mueva el deslizador para elegir el factor \( f \) y compare los tres órdenes.</p>
+  <p style="margin:0 0 6px">Con el deslizador se elige el factor \( f \) y se comparan los tres órdenes.</p>
   <figure>
     <svg id="fig2" viewBox="0 0 560 330" role="img" aria-label="Velocidad relativa contra concentración relativa para órdenes 0, 1 y 2"></svg>
     <figcaption>Velocidad relativa \( r/r_0 \) en función de \( [\mathrm{A}]/[\mathrm{A}]_0 \). Los puntos marcan el factor \( f \) elegido.</figcaption>
@@ -132,7 +132,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     </li>
     <li>Repetir el paso 3 para cada reactivo, sumar los órdenes parciales y calcular \( k \) despejándola de cualquier experimento: \( k=r_0/([\mathrm{A}]^{m}[\mathrm{B}]^{n}) \). Verificar con otro experimento.</li>
   </ol>
-  <div class="callout tip"><p><span class="lbl">Atajo cuando la concentración se duplica:</span> si \( r \) no cambia, el orden es 0. Si \( r \) se duplica, el orden es 1. Si \( r \) se cuadruplica, el orden es 2. Si \( r \) se multiplica por 8, el orden es 3.</p></div>
+  <div class="callout tip"><p><span class="lbl">Verificación de sanidad.</span> El orden obtenido debe concordar con lo esperado al duplicar \( [\mathrm{A}] \): si \( r \) no cambia, \( m=0 \); si se duplica, \( m=1 \); si se cuadruplica, \( m=2 \); si se multiplica por 8, \( m=3 \).</p></div>
 
   <h4>Ejemplo resuelto: \( 2\,\mathrm{NO}+2\,\mathrm{H_2}\rightarrow\mathrm{N_2}+2\,\mathrm{H_2O} \)</h4>
   <div class="tw"><table>

@@ -1,54 +1,68 @@
 \documentclass[10pt,letterpaper]{article}
 \usepackage{resumen}
+\usepackage{needspace}
 \usetikzlibrary{babel}
 \DeclareSIUnit\AA{\mbox{\AA}}
 \DeclareSIUnit\erg{erg}
+
+% Más aire: separaciones locales (no se modifica resumen.sty)
+\setlength{\parskip}{5pt plus 1.5pt}
+\titlespacing*{\section}{0pt}{13pt plus 3pt}{6pt}
+\titlespacing*{\subsection}{0pt}{9pt plus 2pt}{3pt}
+\tcbset{
+  clave/.append style={before skip=9pt,after skip=9pt,top=4pt,bottom=4pt},
+  apoyo/.append style={before skip=9pt,after skip=9pt,top=4pt,bottom=4pt},
+  nota/.append style={before skip=9pt,after skip=9pt,top=4pt,bottom=4pt},
+  alerta/.append style={before skip=9pt,after skip=9pt,top=4pt,bottom=4pt}
+}
+
 \begin{document}
 \titulo{Fisicoquímica de superficies}{Tensión superficial, Young--Laplace, Kelvin, capilaridad y adsorción de Gibbs}
 
 %------------------------------------------------------------------ 1
 \section{Interfase y tensión superficial}
-La \textbf{interfase} es la zona tridimensional, de \SIrange{10}{100}{\AA}, que separa dos fases. Dentro de una fase las atracciones sobre una molécula se anulan; en la interfase queda una \emph{fuerza neta hacia el interior}, de modo que el sistema tiende a minimizar su superficie. La \textbf{tensión superficial} $\gamma$ es la energía necesaria para aumentar la superficie en una unidad de área: mide las fuerzas internas que se deben vencer.
+La \textbf{interfase} es la zona tridimensional, de \SIrange{10}{100}{\AA} de espesor, que separa dos fases. En el interior de una fase las atracciones sobre una molécula se anulan; en la interfase queda una \emph{fuerza neta hacia el interior}, por lo que el sistema tiende a minimizar su superficie. La \textbf{tensión superficial} $\gamma$ es la energía necesaria para aumentar la superficie en una unidad de área, y mide las fuerzas internas que deben vencerse.
 
+\vspace{2pt}
 \begin{minipage}[t]{0.47\linewidth}\vspace{0pt}
 \centering
-\begin{tikzpicture}[scale=0.82,>=Stealth]
+\begin{tikzpicture}[scale=0.76,>=Stealth]
   \fill[accsoft] (0,0) rectangle (5.2,2.6);
   \draw[acc,line width=1.2pt] (0,2.6)--(5.2,2.6);
   \node[muted,font=\scriptsize,anchor=south west] at (0.05,2.65) {vapor};
   \node[muted,font=\scriptsize,anchor=north west] at (0.05,2.55) {líquido};
-  % molécula interior
   \fill[acc] (1.3,1.45) circle (0.13);
   \foreach \a in {0,45,...,315}{\draw[->,acc,thick] (1.3,1.45)++(\a:0.2)--++(\a:0.55);}
-  % molécula de superficie
   \fill[acc] (3.9,2.45) circle (0.13);
   \foreach \a in {180,0,-45,-135}{\draw[->,acc,thick] (3.9,2.45)++(\a:0.2)--++(\a:0.55);}
   \draw[->,bad,line width=1.6pt] (3.9,2.3)--(3.9,1.0);
   \node[bad,font=\scriptsize,anchor=west] at (4.0,1.35) {fuerza neta};
   \node[font=\scriptsize,align=center] at (1.3,0.2) {interior: fuerzas se anulan};
-\end{tikzpicture}\\[-2pt]
+\end{tikzpicture}\\[2pt]
 {\small Fuerzas sobre una molécula en el interior y en la superficie.}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.50\linewidth}\vspace{0pt}
 \centering
 \begin{tikzpicture}
-\begin{axis}[resumen,width=\linewidth,height=3.9cm,xlabel={$T$ (K)},ylabel={$\gamma$ (\si{\milli\newton\per\meter})},
+\begin{axis}[resumen,width=\linewidth,height=3.5cm,xlabel={$T$ (K)},ylabel={$\gamma$ (\si{\milli\newton\per\meter})},
   xmin=280,xmax=400,ymin=8,ymax=26,xtick={300,340,380},ytick={10,15,20,25}]
   \addplot[teal,domain=280:400,samples=40]{22.0*((1-x/513.9)/(1-298.15/513.9))^(11/9)};
   \addplot[only marks,mark=*,bad,mark size=1.8pt] coordinates {(298.15,22.0)};
 \end{axis}
-\end{tikzpicture}\\[-2pt]
-{\small $\gamma$ del etanol disminuye al subir $T$.}
+\end{tikzpicture}\\[2pt]
+{\small Tensión superficial del etanol en función de $T$.}
 \end{minipage}
 
 \subsection*{Formulación termodinámica}
-A $P$ y $T$ constantes la superficie es trabajo almacenado como energía de Gibbs. Como $\gamma>0$, el área disminuye de forma espontánea:
+A presión y temperatura constantes, el trabajo necesario para aumentar el área de la interfase se almacena como energía de Gibbs. Como $\gamma>0$, un sistema que puede reducir su área lo hace de forma espontánea:
 \begin{clave}
 $\displaystyle dG=\gamma\,d\mathcal{A}\qquad\gamma=\left(\frac{\partial G}{\partial\mathcal{A}}\right)_{T,P}>0\qquad \Delta G=\gamma\,(\mathcal{A}_2-\mathcal{A}_1)$
 \end{clave}
 
+El signo de $\Delta G$ decide si el cambio de área es espontáneo; la magnitud de $\gamma$ refleja la intensidad de las interacciones intermoleculares.
+
 \begin{minipage}[t]{0.40\linewidth}\vspace{0pt}
-\centering\small
+\centering\small\renewcommand{\arraystretch}{1.3}
 \begin{tabular}{@{}ccl@{}}\toprule
 $\Delta G$ & $\Delta\mathcal{A}$ & Proceso\\\midrule
 $>0$ & $\mathcal{A}_2>\mathcal{A}_1$ & No espontáneo\\
@@ -57,7 +71,7 @@ $<0$ & $\mathcal{A}_2<\mathcal{A}_1$ & Espontáneo\\\bottomrule
 \end{tabular}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.57\linewidth}\vspace{0pt}
-\centering\small
+\centering\small\renewcommand{\arraystretch}{1.3}
 \begin{tabular}{@{}lcl@{}}\toprule
 Líquido & $\gamma$ (\si{\dina\per\centi\meter}) & Interacción dominante\\\midrule
 Hg & 476 & enlace metálico\\
@@ -67,64 +81,63 @@ Heptano & 19,7 & fuerzas de dispersión\\\bottomrule
 \end{tabular}
 \end{minipage}
 
-\smallskip
-\textbf{Unidades:} \SI{1}{\dina\per\centi\meter} = \SI{1}{\milli\newton\per\meter} y \SI{1}{\erg\per\centi\meter\squared} = \SI{1}{\milli\joule\per\meter\squared}.
+\vspace{2pt}
+Equivalencias de unidades: \SI{1}{\dina\per\centi\meter} = \SI{1}{\milli\newton\per\meter} y \SI{1}{\erg\per\centi\meter\squared} = \SI{1}{\milli\joule\per\meter\squared}.
 
 \subsection*{Dependencia con la temperatura}
-$\gamma$ disminuye al subir $T$ y se anula en la temperatura crítica $T_c$. Katayama--Guggenheim, con $\gamma_0$ constante del líquido y $n=11/9\approx1{,}22\approx1$ para orgánicos:
+La tensión superficial disminuye al aumentar la temperatura y se anula en la temperatura crítica $T_c$. La ecuación empírica de Katayama--Guggenheim la describe con $\gamma_0$, constante propia del líquido, y con $n=11/9\approx1{,}22$ para líquidos orgánicos. Con dos temperaturas, $\gamma_0$ se elimina (con $T$ y $T_c$ en kelvin):
 \begin{clave}
 $\displaystyle \gamma=\gamma_0\left(1-\frac{T}{T_c}\right)^{n}\qquad\Rightarrow\qquad \gamma_2=\gamma_1\left(\frac{1-T_2/T_c}{1-T_1/T_c}\right)^{n}$
 \end{clave}
-\begin{apoyo}\small\textbf{Ejemplo.} Etanol ($T_c=\SI{513,9}{\kelvin}$), $\gamma_1=\SI{22,0}{\milli\newton\per\meter}$ a \SI{25}{\celsius}. A \SI{50}{\celsius}:
-$\displaystyle \gamma_2=22{,}0\left(\frac{1-323{,}15/513{,}9}{1-298{,}15/513{,}9}\right)^{11/9}=\SI{18,9}{\milli\newton\per\meter}$.
+\begin{apoyo}\small\textbf{Ejemplo.} El etanol ($T_c=\SI{513,9}{\kelvin}$) tiene $\gamma_1=\SI{22,0}{\milli\newton\per\meter}$ a \SI{25}{\celsius}. A \SI{50}{\celsius}, $\gamma_2=22{,}0\,(0{,}884)^{11/9}=\SI{18,9}{\milli\newton\per\meter}$, con $0{,}884=(1-323{,}15/513{,}9)/(1-298{,}15/513{,}9)$.
 \end{apoyo}
-
-\begin{alerta}\small\textbf{Errores frecuentes.} Una película de jabón tiene dos caras: $\Delta\mathcal{A}=2\ell\,\Delta x$. En Katayama--Guggenheim $T$ y $T_c$ van en kelvin, nunca en \si{\celsius}. $\gamma$ es positiva: el área tiende a disminuir sola, y aumentarla siempre requiere trabajo.\end{alerta}
 
 %------------------------------------------------------------------ 2
 \clearpage
 \section{Interfases curvas: Young--Laplace}
-Al minimizar el área las interfases se curvan y aparece una diferencia de presión entre el interior y el exterior de la fase. Explica gotas, aerosoles, ascenso capilar y condensación capilar.
+Al minimizar el área, las interfases se curvan y aparece una diferencia de presión entre el interior y el exterior de la fase. Esta relación explica la formación de gotas, los aerosoles, el ascenso capilar y la condensación capilar.
 \begin{clave}
 $\displaystyle P_{\mathrm{in}}=P_{\mathrm{ext}}+\frac{2\gamma}{r}\quad\Rightarrow\quad\Delta P=\frac{2\gamma}{r}$
 \end{clave}
-\textbf{Gota} (líquido rodeado por su vapor) y \textbf{burbuja} (cavidad de vapor o gas en un líquido): $\Delta P=2\gamma/r$. \textbf{Pompa} (película con dos interfases): $\Delta P=4\gamma/r$.
-\begin{apoyo}\small\textbf{Ejemplo.} Gota acuosa de diámetro \SI{5,0}{\micro\meter} ($\gamma=\SI{72,0}{\milli\newton\per\meter}$):
-$\displaystyle\Delta P=\frac{2\,(\SI{72,0e-3}{\newton\per\meter})}{\SI{2,5e-6}{\meter}}=\SI{5,76e4}{\pascal}=\SI{57,6}{\kilo\pascal}=\SI{0,57}{atm}$.
+Esta expresión vale para una \textbf{gota} (líquido rodeado por su vapor) y para una \textbf{burbuja}, que en rigor es una cavidad de vapor o de gas dentro de un líquido. Una \textbf{pompa} es una película de líquido con dos interfases, y en ella $\Delta P=4\gamma/r$.
+\begin{apoyo}\small\textbf{Ejemplo.} Gota acuosa de \SI{5,0}{\micro\meter} de diámetro ($\gamma=\SI{72,0}{\milli\newton\per\meter}$), de radio $r=\SI{2,5}{\micro\meter}$:
+\[\Delta P=\frac{2\,(\SI{72,0e-3}{\newton\per\meter})}{\SI{2,5e-6}{\meter}}=\SI{5,76e4}{\pascal}=\SI{57,6}{\kilo\pascal}=\SI{0,57}{atm}\]
 \end{apoyo}
-\begin{alerta}\small\textbf{Errores frecuentes.} Usar el diámetro en lugar del radio duplica $\Delta P$; olvidar las dos interfases de la pompa da la mitad; $\gamma$ debe ir en \si{\newton\per\meter} para obtener pascales.\end{alerta}
 
 %------------------------------------------------------------------ 3
+\Needspace{9\baselineskip}
 \section{Ecuación de Kelvin}
-En partículas pequeñas la energía superficial modifica la presión de vapor ($V$ volumen molar del líquido):
+Cuando una gota o una partícula es suficientemente pequeña, la energía superficial modifica su presión de vapor. Con $V$ el volumen molar del líquido:
 \begin{clave}
 $\displaystyle \ln\frac{P}{P_0}=\frac{2\gamma}{r}\,\frac{V}{RT}\qquad V=\frac{M}{\rho}$
 \end{clave}
-\textbf{Gota (convexo):} $P>P_0$, más cuanto menor $r$. \textbf{Poro que moja (cóncavo):} el radio cuenta como negativo y $P<P_0$ (condensación capilar). A pocos nanómetros la tensión superficial macroscópica deja de describir bien la interfase.
-\begin{apoyo}\small\textbf{Ejemplos} (agua, \SI{298,15}{\kelvin}, $\gamma=\SI{71,97}{\milli\newton\per\meter}$, $V=\SI{1,807e-5}{\meter\cubed\per\mole}$).\\
+Sobre una gota, con menisco convexo, $P>P_0$ y la diferencia crece al disminuir $r$. Dentro de un poro cuyas paredes moja el líquido, el menisco es cóncavo, el radio de curvatura se toma negativo y $P<P_0$: es la condensación capilar. Cuando el radio es de pocos nanómetros, el concepto macroscópico de tensión superficial deja de describir bien la interfase.
+\begin{apoyo}\small\textbf{Ejemplos} (agua a \SI{298,15}{\kelvin}, $\gamma=\SI{71,97}{\milli\newton\per\meter}$, $V=\SI{1,807e-5}{\meter\cubed\per\mole}$).\\[3pt]
 \textit{Nanogota de \SI{20}{\nano\meter} de radio:}
 \[\ln\frac{P}{P_0}=\frac{2\,(\SI{71,97e-3}{\newton\per\meter})(\SI{1,807e-5}{\meter\cubed\per\mole})}{(\SI{20e-9}{\meter})(\SI{8,314}{\joule\per\mole\per\kelvin})(\SI{298,15}{\kelvin})}=0{,}0525\quad\Rightarrow\quad\frac{P}{P_0}=1{,}054\]
-\textit{Poro de sílice de \SI{4,0}{\nano\meter} de radio, que el agua moja} (radio negativo): $\ln\dfrac{P}{P_0}=-0{,}262\Rightarrow\dfrac{P}{P_0}=0{,}769$ ($\approx\SI{77}{\percent}$ de humedad relativa).
+\textit{Poro de sílice de \SI{4,0}{\nano\meter} de radio, que el agua moja} (radio negativo): $\ln\dfrac{P}{P_0}=-0{,}262$, de modo que $\dfrac{P}{P_0}=0{,}769$, equivalente a una humedad relativa de \SI{77}{\percent}.
 \end{apoyo}
 
 %------------------------------------------------------------------ 4
+\Needspace{9\baselineskip}
 \section{Capilaridad}
-Intervienen tres interfases: líquido/sólido, líquido/gas y sólido/gas. El equilibrio en la línea de contacto es la ecuación de Young:
+En un capilar intervienen tres interfases: líquido--sólido, líquido--gas y sólido--gas. El equilibrio en la línea de contacto es la ecuación de Young:
 \begin{clave}
 $\displaystyle\gamma_{SG}=\gamma_{SL}+\gamma_{LG}\cos\theta\quad\Rightarrow\quad\cos\theta=\frac{\gamma_{SG}-\gamma_{SL}}{\gamma_{LG}}$
 \end{clave}
 
-\begin{minipage}[t]{0.50\linewidth}\vspace{0pt}
+\Needspace{14\baselineskip}
+\begin{minipage}[t]{0.52\linewidth}\vspace{0pt}
 \small
-\textbf{Moja} ($0\le\theta<90^\circ$): domina la adhesión (moléculas distintas); menisco cóncavo; \emph{ascenso}.\\[2pt]
-\textbf{No moja} ($90^\circ<\theta\le180^\circ$): domina la cohesión (moléculas iguales); menisco convexo; \emph{descenso} (Hg).\\[4pt]
-El peso de la columna iguala a la fuerza de la tensión sobre el contorno:
-$\pi r^2 g\,h\,(\rho^L-\rho^V)=2\pi r\,\gamma\cos\theta$.
+Si el líquido moja el sólido ($0\le\theta<90^\circ$), domina la adhesión entre moléculas distintas, el menisco es cóncavo y el líquido asciende. Si no lo moja ($90^\circ<\theta\le180^\circ$, caso del mercurio), domina la cohesión entre moléculas iguales, el menisco es convexo y el líquido desciende.
+
+\medskip
+El peso de la columna iguala a la fuerza vertical de la tensión superficial sobre el contorno del tubo:
+\[\pi r^2 g\,h\,(\rho^L-\rho^V)=2\pi r\,\gamma\cos\theta\]
 \end{minipage}\hfill
-\begin{minipage}[t]{0.47\linewidth}\vspace{0pt}
+\begin{minipage}[t]{0.45\linewidth}\vspace{0pt}
 \centering
 \begin{tikzpicture}[scale=0.78]
-  % izquierda: moja
   \fill[accsoft] (0,0) rectangle (1.9,0.9);
   \draw[acc,thick] (0,0.9)--(0.45,0.9); \draw[acc,thick] (1.45,0.9)--(1.9,0.9);
   \draw[line width=1.3pt,muted] (0.45,0.2)--(0.45,2.3); \draw[line width=1.3pt,muted] (1.45,0.2)--(1.45,2.3);
@@ -133,7 +146,6 @@ $\pi r^2 g\,h\,(\rho^L-\rho^V)=2\pi r\,\gamma\cos\theta$.
   \fill[accsoft] (0.45,1.75) -- (0.45,1.9) .. controls (0.8,1.55) and (1.1,1.55) .. (1.45,1.9) -- (1.45,1.75) -- cycle;
   \draw[<->,bad,thick] (1.7,0.9)--(1.7,1.72); \node[bad,font=\scriptsize,anchor=west] at (1.72,1.3) {$h>0$};
   \node[font=\scriptsize,align=center] at (0.95,-0.35) {moja: cóncavo};
-  % derecha: no moja
   \begin{scope}[xshift=3.1cm]
   \fill[accsoft] (0,0) rectangle (1.9,0.9);
   \draw[acc,thick] (0,0.9)--(0.45,0.9); \draw[acc,thick] (1.45,0.9)--(1.9,0.9);
@@ -150,24 +162,34 @@ $\pi r^2 g\,h\,(\rho^L-\rho^V)=2\pi r\,\gamma\cos\theta$.
 \begin{clave}
 $\displaystyle h=\frac{2\gamma\cos\theta}{g\,(\rho^L-\rho^V)\,r}\ \longrightarrow\ h=\frac{2\gamma}{r\,g\,\rho^L}\quad(\theta=0,\ \rho^L\gg\rho^V)$
 \end{clave}
-$h>0$ ascenso, $h<0$ descenso; $h\propto1/r$.
-\begin{apoyo}\small\textbf{Ejemplo.} Capilar de microhematocrito, diámetro interno \SI{1,1}{\milli\meter}; sangre $\gamma=\SI{58}{\milli\newton\per\meter}$, $\rho=\SI{1050}{\kilo\gram\per\meter\cubed}$, $\theta=0$:
-$\displaystyle h=\frac{2\,(\SI{58e-3}{\newton\per\meter})}{(\SI{0,55e-3}{\meter})(\SI{9,81}{\meter\per\second\squared})(\SI{1050}{\kilo\gram\per\meter\cubed})}=\SI{2,05e-2}{\meter}\approx\SI{2,0}{\centi\meter}$.
+Un valor positivo de $h$ indica ascenso y uno negativo, descenso. Como $h\propto1/r$, el efecto es mayor en los tubos finos.
+\begin{apoyo}\small\textbf{Ejemplo.} Capilar de microhematocrito de \SI{1,1}{\milli\meter} de diámetro interno; sangre con $\gamma=\SI{58}{\milli\newton\per\meter}$, $\rho=\SI{1050}{\kilo\gram\per\meter\cubed}$ y $\theta=0$:
+\[h=\frac{2\,(\SI{58e-3}{\newton\per\meter})}{(\SI{0,55e-3}{\meter})(\SI{9,81}{\meter\per\second\squared})(\SI{1050}{\kilo\gram\per\meter\cubed})}=\SI{2,05e-2}{\meter}\approx\SI{2,0}{\centi\meter}\]
 \end{apoyo}
 
 %------------------------------------------------------------------ 5
-\clearpage
+\Needspace{9\baselineskip}
 \section{Tensión superficial en disoluciones: isoterma de Gibbs}
-\begin{minipage}[t]{0.50\linewidth}\vspace{0pt}
+\begin{minipage}[t]{0.52\linewidth}\vspace{0pt}
 \small
-\textbf{Tipo I:} $\gamma$ sube levemente (sales inorgánicas, sacarosa); adsorción negativa.\\
-\textbf{Tipo II:} $\gamma$ baja gradualmente (orgánicos solubles con grupo polar y cadena hidrocarbonada).\\
-\textbf{Tipo III:} $\gamma$ cae con muy poco soluto (anfifílicos, detergentes); adsorción positiva.
+Al agregar un soluto, la tensión superficial del disolvente cambia según tres comportamientos.
+
+\smallskip
+\textbf{Tipo I.} $\gamma$ aumenta levemente (sales inorgánicas, sacarosa) y la adsorción es negativa.
+
+\smallskip
+\textbf{Tipo II.} $\gamma$ disminuye de forma gradual (compuestos orgánicos solubles, con un grupo polar y una cadena hidrocarbonada).
+
+\smallskip
+\textbf{Tipo III.} $\gamma$ cae bruscamente con muy poco soluto (anfifílicos y detergentes).
+
+\smallskip
+Los tipos II y III presentan adsorción positiva.
 \end{minipage}\hfill
-\begin{minipage}[t]{0.47\linewidth}\vspace{0pt}
+\begin{minipage}[t]{0.44\linewidth}\vspace{0pt}
 \centering
 \begin{tikzpicture}
-\begin{axis}[resumen,width=\linewidth,height=3.7cm,xlabel={$c_2$},ylabel={$\gamma$},xmin=0,xmax=1,ymin=0.2,ymax=1.15,
+\begin{axis}[resumen,width=\linewidth,height=4.3cm,xlabel={$c_2$},ylabel={$\gamma$},xmin=0,xmax=1,ymin=0.2,ymax=1.15,
   xtick=\empty,ytick=\empty,axis lines=left]
   \addplot[bad,domain=0:1]{0.8+0.12*x} node[pos=0.9,above,font=\scriptsize]{I};
   \addplot[acc,domain=0:1,samples=30]{0.8-0.45*x^0.8} node[pos=0.85,above right,font=\scriptsize]{II};
@@ -176,46 +198,19 @@ $\displaystyle h=\frac{2\,(\SI{58e-3}{\newton\per\meter})}{(\SI{0,55e-3}{\meter}
 \end{tikzpicture}
 \end{minipage}
 
-El \textbf{exceso superficial} es la cantidad de soluto por unidad de área que se acumula (positivo) o falta (negativo) en la superficie, y la isoterma de Gibbs lo obtiene desde $\gamma$:
+\vspace{6pt}
+El \textbf{exceso superficial} $\Gamma_{2(1)}$ es la cantidad de soluto por unidad de área que se acumula (valor positivo) o falta (valor negativo) en la superficie. La isoterma de adsorción de Gibbs lo relaciona con la variación de $\gamma$:
 \begin{clave}
 $\displaystyle \Gamma_{2(1)}=\frac{n^{\mathcal{A}}_{2(1)}}{\mathcal{A}}\quad n^{\mathcal{A}}_{2(1)}=n_2-\sum n_2^{\alpha}\qquad
 \Gamma_{2(1)}=-\frac{c_2}{RT}\left(\frac{\partial\gamma}{\partial c_2}\right)_T=-\frac{1}{RT}\left(\frac{\partial\gamma}{\partial\ln c_2}\right)_T$
 \end{clave}
-$\partial\gamma/\partial c_2<0\Rightarrow\Gamma_{2(1)}>0$ (adsorción positiva); $\partial\gamma/\partial c_2>0\Rightarrow\Gamma_{2(1)}<0$. Área por molécula: $\sigma=1/(\Gamma_{2(1)}N_A)$.
+Si $\gamma$ disminuye al aumentar la concentración, $\Gamma_{2(1)}>0$ (adsorción positiva); si aumenta, $\Gamma_{2(1)}<0$ (adsorción negativa). A partir del exceso superficial se obtiene el área por molécula, $\sigma=1/(\Gamma_{2(1)}N_A)$.
 
-\begin{apoyo}\small\textbf{Ejemplo 1.} Laurilsulfato de sodio a \SI{298,15}{\kelvin}, $(\partial\gamma/\partial\ln c)_T=\SI{-9,0}{\milli\newton\per\meter}$:
+\begin{apoyo}\small\textbf{Ejemplo.} Laurilsulfato de sodio a \SI{298,15}{\kelvin}, con $(\partial\gamma/\partial\ln c)_T=\SI{-9,0}{\milli\newton\per\meter}$:
 \[\Gamma=\frac{\SI{9,0e-3}{\newton\per\meter}}{(\SI{8,314}{\joule\per\mole\per\kelvin})(\SI{298,15}{\kelvin})}=\SI{3,63e-6}{\mole\per\meter\squared}\quad\Rightarrow\quad\sigma=\frac{1}{\Gamma N_A}=\SI{4,57e-19}{\meter\squared}=\SI{45,7}{\AA\squared}\]
-\textbf{Ejemplo 2.} Polisorbato bajo su CMC: $\gamma=\gamma_0-RT\,\Gamma_{\max}\ln(1+c/a)$, $\Gamma_{\max}=\SI{2,8e-6}{\mole\per\meter\squared}$, $a=\SI{0,10}{\micro\mole\per\liter}$. Como $(\partial\gamma/\partial c)_T=-RT\Gamma_{\max}/(a+c)$, a $c=\SI{2,0}{\micro\mole\per\liter}$:
-$\displaystyle\Gamma=\Gamma_{\max}\frac{c}{a+c}=\SI{2,67e-6}{\mole\per\meter\squared}$, $\sigma=\SI{62}{\AA\squared}$.
 \end{apoyo}
-\begin{alerta}\small\textbf{Errores frecuentes.} Con la pendiente de $\gamma$ contra $\ln c$, el factor $c$ ya está dentro de la derivada. El signo menos de la isoterma es el que hace positivo a $\Gamma$ cuando $\gamma$ disminuye.\end{alerta}
+\begin{alerta}\small\textbf{Errores frecuentes.} Cuando se usa la pendiente de $\gamma$ contra $\ln c$, el factor $c$ ya está incluido en la derivada y no se multiplica de nuevo. El signo menos de la isoterma es el que hace positivo a $\Gamma$ cuando $\gamma$ disminuye.\end{alerta}
 
-%------------------------------------------------------------------ hoja
-\section{Hoja de fórmulas}
-{\small\renewcommand{\arraystretch}{1.35}
-\begin{tabularx}{\linewidth}{@{}>{\bfseries}l>{\raggedright\arraybackslash}Xl@{}}\toprule
-Tema & Ecuación & Unidades\\\midrule
-Termodinámica & $dG=\gamma\,d\mathcal{A}$;\quad $\Delta G=\gamma(\mathcal{A}_2-\mathcal{A}_1)$ & $\gamma$ en \si{\newton\per\meter}\\
-Temperatura & $\gamma=\gamma_0(1-T/T_c)^{n}$,\quad $n=11/9$ & $T$ en \si{\kelvin}\\
-Gota y burbuja & $\Delta P=2\gamma/r$ & \si{\pascal}\\
-Pompa & $\Delta P=4\gamma/r$ & \si{\pascal}\\
-Kelvin & $\ln(P/P_0)=2\gamma V/(rRT)$,\quad $V=M/\rho$ & $V$ en \si{\meter\cubed\per\mole}\\
-Young & $\cos\theta=(\gamma_{SG}-\gamma_{SL})/\gamma_{LG}$ & ---\\
-Altura capilar & $h=2\gamma\cos\theta\big/[g(\rho^L-\rho^V)\,r]$ & $h$ en \si{\meter}\\
-Gibbs & $\Gamma_{2(1)}=-\dfrac{c_2}{RT}\left(\dfrac{\partial\gamma}{\partial c_2}\right)_T=-\dfrac{1}{RT}\left(\dfrac{\partial\gamma}{\partial\ln c_2}\right)_T$ & \si{\mole\per\meter\squared}\\
-Área por molécula & $\sigma=1/(\Gamma_{2(1)}N_A)$ & \si{\meter\squared}\\\bottomrule
-\end{tabularx}}
-
-\subsection*{Guía de decisión}
-\begin{multicols}{2}\small
-\begin{itemize}
-  \item Cambio de área de una película, trabajo: $\Delta G=\gamma\,\Delta\mathcal{A}$ (cuenta las caras).
-  \item Gota, aerosol, burbuja: Laplace con $2\gamma/r$; pompa con $4\gamma/r$.
-  \item Presión de vapor de una gota o de un poro: Kelvin, con el signo del radio según el menisco.
-  \item Ascenso o descenso en un tubo: Young para $\theta$ y luego $h$; el signo de $\cos\theta$ manda.
-  \item Soluto que baja $\gamma$ con $c$: Gibbs da $\Gamma>0$; con la pendiente en $\ln c$ no se multiplica otra vez por $c$.
-  \item Antes de reemplazar: $\gamma$ en \si{\newton\per\meter}, $r$ en \si{\meter}, $T$ en \si{\kelvin}.
-\end{itemize}
-\end{multicols}
+\begin{nota}\small\textbf{Verificación de sanidad.} Dos errores habituales son usar el diámetro en lugar del radio, con lo que $\Delta P$ resulta la mitad del valor correcto, y olvidar que la pompa tiene dos interfases. Antes de sustituir conviene expresar $\gamma$ en \si{\newton\per\meter}, $r$ y $h$ en \si{\meter}, $T$ en \si{\kelvin} y $c$ en \si{\mole\per\meter\cubed}; así $\Delta P$ resulta en pascales, $\Gamma$ en \si{\mole\per\meter\squared} y $\sigma$ en \si{\meter\squared}. Los órdenes de magnitud también orientan: una gota de \SI{2,5}{\micro\meter} de radio soporta una sobrepresión cercana a \SI{0,5}{atm}, el agua asciende unos \SI{2}{\centi\meter} en un capilar de \SI{0,55}{\milli\meter} de radio, y un tensioactivo ocupa entre 45 y \SI{65}{\AA\squared} por molécula.\end{nota}
 
 \end{document}

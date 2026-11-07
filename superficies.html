@@ -29,7 +29,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <!-- 1 -->
 <section class="card" id="s1">
   <h3><span class="badge">1</span>Interfase y tensión superficial</h3>
-  <p>La <b>interfase</b> es la zona tridimensional, de 10 a 100 \( \mathring{A} \), que separa dos fases. Dentro de una fase cada molécula está rodeada en todas direcciones y las atracciones se anulan. En la interfase eso no ocurre, y de ahí sale todo lo que sigue.</p>
+  <p>La <b>interfase</b> es la zona tridimensional, de 10 a 100 \( \mathring{A} \), que separa dos fases. Dentro de una fase cada molécula está rodeada en todas direcciones y las atracciones se anulan. En la interfase esa simetría se rompe, y de esa asimetría proceden los fenómenos que se estudian a continuación.</p>
   <div class="ctrl">
     <label><i>T</i> = <b id="tVal"></b> K <input type="range" id="tSl" min="280" max="400" step="5" value="300"></label>
     <button class="btn sec" type="button" id="btnMol">Pausar</button>
@@ -98,14 +98,14 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <div class="mini"><h4>Burbuja (cavidad)</h4><p>Hueco de vapor o gas dentro de un líquido. \( \Delta P=2\gamma/r \).</p></div>
     <div class="mini"><h4>Pompa</h4><p>Película con dos interfases. \( \Delta P=4\gamma/r \).</p></div>
   </div>
-  <p>Esto explica la formación de gotas, los aerosoles, el ascenso capilar y la condensación capilar. Elija el sistema y el radio; el manómetro es logarítmico.</p>
+  <p>Esta relación explica la formación de gotas, los aerosoles, el ascenso capilar y la condensación capilar. En la figura se puede variar el sistema y el radio; el manómetro tiene escala logarítmica.</p>
   <div class="ctrl">
     <label>Sistema <select id="lqSel"></select></label>
     <label>Radio <b id="rVal"></b> <input type="range" id="rSl" min="0" max="100" value="55"></label>
   </div>
   <figure><svg id="figLap" role="img" aria-label="Gota y manómetro con la sobrepresión de Laplace"></svg><figcaption>La sobrepresión crece al disminuir el radio. La marca roja es \( 1\ \mathrm{atm} \).</figcaption></figure>
   <p class="readout" id="outLap"></p>
-  <div class="callout warn"><p><span class="lbl">Errores frecuentes.</span> Usar el diámetro en lugar del radio duplica \( \Delta P \). Olvidar que la pompa tiene dos interfases da la mitad. Y \( \gamma \) debe ir en \( \mathrm{N\,m^{-1}} \) para obtener pascales.</p></div>
+  <div class="callout warn"><p><span class="lbl">Errores frecuentes.</span> Si se usa el diámetro en lugar del radio, \( \Delta P \) resulta la mitad del valor correcto. En la pompa deben contarse las dos interfases. Además, \( \gamma \) debe expresarse en \( \mathrm{N\,m^{-1}} \) para obtener pascales.</p></div>
   <p><b>Ejemplo.</b> Gota acuosa de \( 5{,}0\ \mu\mathrm{m} \) de diámetro (\( \gamma=72{,}0\ \mathrm{mN\,m^{-1}} \)) en las vías respiratorias:</p>
   <div class="formula key">\[ \Delta P=\frac{2\gamma}{r}=\frac{2\,(72{,}0\times10^{-3}\ \mathrm{N\,m^{-1}})}{2{,}5\times10^{-6}\ \mathrm{m}}=5{,}76\times10^{4}\ \mathrm{Pa}=57{,}6\ \mathrm{kPa}=0{,}57\ \mathrm{atm} \]</div>
 </section>
@@ -138,7 +138,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <!-- 4 -->
 <section class="card" id="s4">
   <h3><span class="badge">4</span>Capilaridad</h3>
-  <p>Al introducir un tubo capilar en un líquido, éste asciende o desciende. Lo determinan tres interfases: líquido/sólido, líquido/gas y sólido/gas. El balance de fuerzas en la línea de contacto da la ecuación de Young:</p>
+  <p>Al introducir un tubo capilar en un líquido, este asciende o desciende. Lo determinan tres interfases: líquido/sólido, líquido/gas y sólido/gas. El balance de fuerzas en la línea de contacto da la ecuación de Young:</p>
   <div class="formula key">\[ \gamma_{SG}=\gamma_{SL}+\gamma_{LG}\cos\theta\quad\Rightarrow\quad \cos\theta=\frac{\gamma_{SG}-\gamma_{SL}}{\gamma_{LG}} \]</div>
   <div class="cols3">
     <div class="mini"><h4>\( 0\le\theta\lt90^\circ \): moja</h4><p>Domina la adhesión (moléculas distintas). Menisco cóncavo: ascenso.</p></div>

@@ -6,13 +6,26 @@
 \newcommand{\B}{[\mathrm{B}]}
 \newcommand{\vel}{\mathrm{M\,s^{-1}}}
 
+% Más aire: separaciones locales (la plantilla no se modifica)
+\setlength{\parskip}{5pt plus 1pt}
+\renewcommand{\arraystretch}{1.3}
+\titlespacing*{\section}{0pt}{15pt plus 3pt}{7pt}
+\tcbset{
+  clave/.append style={top=4pt,bottom=4pt,before skip=9pt,after skip=9pt},
+  apoyo/.append style={top=4pt,bottom=4pt,before skip=8pt,after skip=8pt},
+  nota/.append style={top=4pt,bottom=4pt,before skip=9pt,after skip=5pt},
+  alerta/.append style={top=4pt,bottom=4pt,before skip=11pt,after skip=5pt}
+}
+\setlist{itemsep=4pt}
+
 \begin{document}
 \titulo{Cinética química I}{Velocidad de reacción y ley de velocidad}
 
 %------------------------------------------------------------------
 \section{Velocidad de reacción}
-Para una reacción general $a\,\mathrm{A}+b\,\mathrm{B}\to c\,\mathrm{C}+d\,\mathrm{D}$, dividir el cambio de cada
-concentración por su coeficiente estequiométrico entrega un único valor para toda la reacción:
+Para una reacción general $a\,\mathrm{A}+b\,\mathrm{B}\to c\,\mathrm{C}+d\,\mathrm{D}$, la velocidad de reacción se define
+dividiendo el cambio de cada concentración por su coeficiente estequiométrico, de modo que una sola magnitud describe a
+toda la reacción:
 
 \begin{clave}
 $\displaystyle \bar r=-\frac{1}{a}\frac{\Delta[\mathrm{A}]}{\Delta t}=-\frac{1}{b}\frac{\Delta[\mathrm{B}]}{\Delta t}
@@ -25,22 +38,22 @@ $\displaystyle r=\lim_{\Delta t\to0}\bar r=-\frac{1}{a}\frac{d[\mathrm{A}]}{dt}=
 \hfill\small velocidad instantánea
 \end{clave}
 
-\begin{minipage}[t]{0.50\linewidth}\vspace{0pt}
-\begin{itemize}
-\item Los reactivos disminuyen ($\Delta[\mathrm{R}]<0$): el signo menos hace positiva a $r$.
-\item $r$ es una sola para toda la reacción, sin importar la especie con que se mida.
-\item Unidades: concentración sobre tiempo, $\mathrm{mol\,L^{-1}\,s^{-1}}$ ($\vel$).
-\item En el gráfico de $\A$ contra $t$, $\bar r$ es el negativo de la pendiente de una secante y $r$, el negativo de la
-pendiente de la tangente.
-\end{itemize}
+\vspace{4pt}
+\begin{minipage}[t]{0.48\linewidth}\vspace{0pt}
+Como los reactivos disminuyen ($\Delta[\mathrm{R}]<0$), el signo menos hace que $r$ sea positiva. La velocidad $r$ es
+única para la reacción completa, sea cual sea la especie con que se mida, y sus unidades son concentración sobre tiempo,
+$\mathrm{mol\,L^{-1}\,s^{-1}}$ ($\vel$).\par\vspace{6pt}
+En el gráfico de $\A$ contra $t$, la velocidad media es el negativo de la pendiente de una secante y la instantánea, el
+negativo de la pendiente de la tangente.
+
 \begin{apoyo}
-\textbf{Ejemplo.} $\A$ baja de \SI{0,80}{\molar} a \SI{0,50}{\molar} en \SI{60}{\second}:\\[2pt]
+\textbf{Ejemplo.} $\A$ baja de \SI{0,80}{\molar} a \SI{0,50}{\molar} en \SI{60}{\second}:\\[4pt]
 \centering $\displaystyle \bar r=-\frac{(0{,}50-0{,}80)\ \mathrm{M}}{60\ \mathrm{s}}=\SI{5,0e-3}{\molar\per\second}$
 \end{apoyo}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.46\linewidth}\vspace{0pt}
 \begin{tikzpicture}
-\begin{axis}[resumen,width=\linewidth,height=4.5cm,xlabel={$t$ (s)},ylabel={$[\mathrm{A}]$ (M)},
+\begin{axis}[resumen,width=\linewidth,height=4.9cm,xlabel={$t$ (s)},ylabel={$[\mathrm{A}]$ (M)},
   xmin=0,xmax=300,ymin=0,ymax=1.05,xtick={0,100,200,300},ytick={0,0.5,1},clip=false]
 \addplot[acc,domain=0:300,samples=60,line width=1.5pt]{exp(-x/120)};
 % secante entre t=100 y t=240
@@ -61,18 +74,19 @@ pendiente de la tangente.
 
 %------------------------------------------------------------------
 \section{Aparición y consumo}
-Cada especie cambia su concentración con una rapidez proporcional a su coeficiente estequiométrico $|\nu_i|$. Las
+Cada especie cambia su concentración con una rapidez proporcional a su coeficiente estequiométrico $|\nu_i|$. Por eso las
 velocidades de consumo o de aparición difieren entre especies, mientras que $r$ es única:
 
-\begin{minipage}[t]{0.40\linewidth}\vspace{0pt}
+\vspace{2pt}
+\begin{minipage}[t]{0.38\linewidth}\vspace{0pt}
 \begin{clave}
 $\displaystyle r_i=|\nu_i|\,r$
 \end{clave}
-\small $-\dfrac{d[\mathrm{R}]}{dt}$: consumo de un reactivo.\\[3pt]
+\small $-\dfrac{d[\mathrm{R}]}{dt}$: consumo de un reactivo.\\[5pt]
 $+\dfrac{d[\mathrm{P}]}{dt}$: aparición de un producto.
 \end{minipage}\hfill
-\begin{minipage}[t]{0.57\linewidth}\vspace{0pt}
-\small\setlength{\tabcolsep}{5pt}
+\begin{minipage}[t]{0.58\linewidth}\vspace{0pt}
+\small\setlength{\tabcolsep}{6pt}
 \begin{tabular}{@{}lccc@{}}
 \toprule
 $\mathrm{N_2}+3\,\mathrm{H_2}\to2\,\mathrm{NH_3}$ & $\mathrm{N_2}$ & $\mathrm{H_2}$ & $\mathrm{NH_3}$\\
@@ -81,7 +95,7 @@ Tipo & consumo & consumo & aparición\\
 $r_i$ & $1\,r$ & $3\,r$ & $2\,r$\\
 valor ($10^{-3}\ \mathrm{M\,s^{-1}}$) & $1{,}0$ & $3{,}0$ & $2{,}0$\\
 \bottomrule
-\end{tabular}\\[-1pt]
+\end{tabular}\\[3pt]
 {\footnotesize Valores para $r=1{,}0\times10^{-3}\ \mathrm{M\,s^{-1}}$.}
 \end{minipage}
 
@@ -92,20 +106,18 @@ A temperatura constante, la velocidad depende de las concentraciones de los reac
 $\displaystyle r=k\,\A^{m}\,\B^{n}$\hfill\small orden total $=m+n$
 \end{clave}
 
+\vspace{2pt}
 \begin{minipage}[t]{0.47\linewidth}\vspace{0pt}
-\begin{itemize}
-\item $k$ es la constante de velocidad: depende de la reacción, de la temperatura y del catalizador; las
-concentraciones no la modifican.
-\item $m$ y $n$ son los órdenes parciales y se determinan experimentalmente.
-\item Si $\A$ se multiplica por $f$ con $\B$ constante, $r$ se multiplica por $f^{m}$:
-\end{itemize}
+La constante de velocidad $k$ depende de la reacción, de la temperatura y del catalizador, pero no de las
+concentraciones. Los órdenes parciales $m$ y $n$ se determinan experimentalmente.\par\vspace{6pt}
+Si $\A$ se multiplica por $f$ con $\B$ constante, $r$ se multiplica por $f^{m}$:
 \begin{apoyo}
 $\displaystyle \frac{r_2}{r_1}=\frac{k\,(f\A)^{m}}{k\,\A^{m}}=f^{m}$
 \end{apoyo}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
 \begin{tikzpicture}
-\begin{axis}[resumen,width=0.86\linewidth,height=4.4cm,xlabel={$[\mathrm{A}]/[\mathrm{A}]_0$},ylabel={$r/r_0$},
+\begin{axis}[resumen,width=0.86\linewidth,height=4.6cm,xlabel={$[\mathrm{A}]/[\mathrm{A}]_0$},ylabel={$r/r_0$},
   xmin=0,xmax=3,ymin=0,ymax=9,xtick={0,1,2,3},ytick={0,3,6,9},clip=false]
 \addplot[muted,dash pattern=on 2pt off 2pt,domain=0:3]{1};
 \addplot[teal,dashed,domain=0:3]{x};
@@ -115,25 +127,9 @@ $\displaystyle \frac{r_2}{r_1}=\frac{k\,(f\A)^{m}}{k\,\A^{m}}=f^{m}$
 \node[font=\scriptsize,acc,anchor=west] at (axis cs:3.05,8.6) {orden 2};
 \end{axis}
 \end{tikzpicture}
-\end{minipage}
 
-\medskip
-\begin{minipage}[t]{0.47\linewidth}\vspace{0pt}
-\small
-\begin{tabularx}{\linewidth}{@{}c>{\centering\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
-\toprule
-$m$ & $\A\times2$ & efecto en $r$\\
-\midrule
-$0$ & $2^{0}=1$ & no cambia\\
-$1$ & $2^{1}=2$ & se duplica\\
-$2$ & $2^{2}=4$ & se cuadruplica\\
-$1/2$ & $2^{1/2}\approx1{,}41$ & orden fraccionario\\
-$-1$ & $2^{-1}=1/2$ & se reduce a la mitad\\
-\bottomrule
-\end{tabularx}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
-\small\textbf{Unidades de $k$.} Con orden total $N$ y concentraciones en M, $k$ queda en $\mathrm{M^{1-N}\,s^{-1}}$:\\[3pt]
+\vspace{12pt}
+\small\textbf{Unidades de $k$.} Con orden total $N$ y concentraciones en M, $k$ queda en $\mathrm{M^{1-N}\,s^{-1}}$:\\[6pt]
 \begin{tabular}{@{}lcccc@{}}
 \toprule
 $N$ & $0$ & $1$ & $2$ & $3$\\
@@ -144,35 +140,39 @@ $k$ & $\mathrm{M\,s^{-1}}$ & $\mathrm{s^{-1}}$ & $\mathrm{M^{-1}\,s^{-1}}$ & $\m
 \end{minipage}
 
 \begin{alerta}
-\textbf{Errores frecuentes.} Los órdenes no se leen de la ecuación balanceada: solo coinciden con los coeficientes en un
+\textbf{Errores frecuentes.} Los órdenes no se deducen de la ecuación balanceada: solo coinciden con los coeficientes en un
 paso elemental. Por ejemplo, $2\,\mathrm{NO}+2\,\mathrm{H_2}\to\mathrm{N_2}+2\,\mathrm{H_2O}$ cumple
-$r=k[\mathrm{NO}]^{2}[\mathrm{H_2}]$, con orden 1 en $\mathrm{H_2}$ aunque su coeficiente es 2 y orden total 3.
+$r=k[\mathrm{NO}]^{2}[\mathrm{H_2}]$, con orden 1 en $\mathrm{H_2}$ aunque su coeficiente es 2, y orden total 3.
 \end{alerta}
 
 %------------------------------------------------------------------
 \section{Método de las velocidades iniciales}
-Permite hallar los órdenes parciales y $k$ de una serie de experimentos a la misma temperatura. Se mide la velocidad al
-comienzo de cada experimento, cuando no hay productos que interfieran.
+Permite hallar los órdenes parciales y $k$ a partir de una serie de experimentos a la misma temperatura. La velocidad
+se mide al comienzo de cada experimento, cuando aún no hay productos que interfieran.
 
+\vspace{2pt}
 \begin{minipage}[t]{0.47\linewidth}\vspace{0pt}
 \begin{enumerate}[label=\textbf{\arabic*.}]
-\item Medir la velocidad inicial $r_0$ con distintas concentraciones iniciales.
-\item Elegir dos experimentos en los que cambie la concentración de una sola especie.
-\item Comparar las velocidades:
+\item Se mide la velocidad inicial $r_0$ con distintas concentraciones iniciales.
+\item Se eligen dos experimentos en los que cambia la concentración de una sola especie.
+\item Se comparan las velocidades:
 \end{enumerate}
 \begin{clave}
 $\displaystyle \frac{r_2}{r_1}=\left(\frac{\A_2}{\A_1}\right)^{m}$
 \end{clave}
 \begin{enumerate}[label=\textbf{\arabic*.},start=4]
-\item Repetir para cada reactivo, sumar los órdenes y calcular $k=r_0/(\A^{m}\B^{n})$; verificar con otro experimento.
+\item Se repite el procedimiento para cada reactivo, se suman los órdenes parciales y se calcula $k=r_0/(\A^{m}\B^{n})$, que
+se verifica con otro experimento.
 \end{enumerate}
 \begin{nota}
-\textbf{Atajo.} Si $[\mathrm{A}]\times2$ y $r$ no cambia, el orden es 0; si se duplica, 1; si se cuadruplica, 2; si se
-multiplica por 8, 3.
+\textbf{Verificación de sanidad.} El orden obtenido debe concordar con lo esperado al duplicar $\A$: si $r$ no cambia,
+$m=0$; si se duplica, $m=1$; si se cuadruplica, $m=2$; si se multiplica por 8, $m=3$.
 \end{nota}
+\vspace{6pt}
+En el ejemplo, la ley de velocidad resulta $r=k\,[\mathrm{NO}]^{2}[\mathrm{H_2}]$, de orden total 3.
 \end{minipage}\hfill
 \begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
-\textbf{Ejemplo:} $2\,\mathrm{NO}+2\,\mathrm{H_2}\to\mathrm{N_2}+2\,\mathrm{H_2O}$\\[3pt]
+\textbf{Ejemplo:} $2\,\mathrm{NO}+2\,\mathrm{H_2}\to\mathrm{N_2}+2\,\mathrm{H_2O}$\\[5pt]
 \small
 \begin{tabular}{@{}cccc@{}}
 \toprule
@@ -182,7 +182,7 @@ Exp. & $[\mathrm{NO}]$ (M) & $[\mathrm{H_2}]$ (M) & $r_0$ ($\mathrm{M\,s^{-1}}$)
 2 & 0,020 & 0,010 & \num{1,0e-3}\\
 3 & 0,010 & 0,020 & \num{5,0e-4}\\
 \bottomrule
-\end{tabular}\\[4pt]
+\end{tabular}\\[8pt]
 \normalsize
 Exp.\ 1 y 2 (cambia $[\mathrm{NO}]$):\vspace{-2pt}
 \begin{apoyo}\small
@@ -197,20 +197,6 @@ Constante, con el Exp.\ 1:\vspace{-2pt}
 $\displaystyle\begin{aligned}k&=\frac{r_0}{[\mathrm{NO}]^{2}[\mathrm{H_2}]}=\frac{2{,}5\times10^{-4}\ \mathrm{M\,s^{-1}}}{(0{,}010\ \mathrm{M})^{2}(0{,}010\ \mathrm{M})}\\
 &=2{,}5\times10^{2}\ \mathrm{M^{-2}\,s^{-1}}\end{aligned}$
 \end{clave}
-$r=k\,[\mathrm{NO}]^{2}[\mathrm{H_2}]$: orden total 3.
 \end{minipage}
-
-%------------------------------------------------------------------
-\section{Resumen en una mirada}
-\begin{apoyo}
-\renewcommand{\arraystretch}{1.35}
-\begin{tabularx}{\linewidth}{@{}>{\bfseries\raggedright\arraybackslash}p{4.1cm}>{\raggedright\arraybackslash}X@{}}
-Velocidad de reacción & $\displaystyle r=-\frac{1}{a}\frac{d[\mathrm{A}]}{dt}=\frac{1}{c}\frac{d[\mathrm{C}]}{dt}$;\quad única para toda la reacción, en $\mathrm{M\,s^{-1}}$\\
-Velocidad de una especie & $r_i=|\nu_i|\,r$\\
-Ley de velocidad & $r=k\,\A^{m}\B^{n}$;\quad orden total $m+n$;\quad $k$ en $\mathrm{M^{1-N}\,s^{-1}}$\\
-Efecto de una concentración & $\A\to f\,\A$ multiplica $r$ por $f^{m}$\\
-Velocidades iniciales & $\dfrac{r_2}{r_1}=\left(\dfrac{\A_2}{\A_1}\right)^{m}$ con una sola concentración cambiada;\quad $k=\dfrac{r_0}{\A^{m}\B^{n}}$\\
-\end{tabularx}
-\end{apoyo}
 
 \end{document}
