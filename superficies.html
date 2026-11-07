@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fisicoquímica de superficies: tensión superficial, capilaridad y adsorción</title>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'none'}};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+<link rel="stylesheet" href="css/base.css">
+<style>@page{@top-right{content:"Fisicoquímica de superficies"}}</style>
+</head>
+<body>
+<div class="layout">
+<aside id="side" aria-label="Bloques de contenido"></aside>
+<div id="scrim"></div>
+<div class="content">
+<div id="topbar"></div>
+<main>
+
+<!-- 1 -->
+<section class="card" id="s1">
+  <h3><span class="badge">1</span>Interfase y tensión superficial</h3>
+  <p>Muchos fenómenos, procesos y reacciones ocurren en interfases. Una <b>interfase</b> es la zona tridimensional ubicada entre dos fases. Su espesor es pequeño, del orden de \( 10 \) a \( 100\ \mathring{A} \), pero sus propiedades son distintas de las de cada fase.</p>
+
+  <h4>Origen molecular</h4>
+  <p>La fuerza que actúa sobre una molécula no es la misma en el interior de una fase que en la interfase, porque su entorno molecular es distinto.</p>
+  <figure>
+    <svg id="figMol" role="img" aria-label="Fuerzas sobre una molécula en el interior de un líquido y sobre una molécula de la superficie"></svg>
+    <figcaption>En el interior las atracciones se compensan. En la superficie queda una fuerza neta hacia el interior del líquido: el sistema tiende a minimizar su superficie.</figcaption>
+  </figure>
+
+  <h4>Tensión superficial</h4>
+  <p>La tensión superficial \( \gamma \) es la energía que hay que aplicar para aumentar la superficie de un líquido en una unidad de área. Mide las fuerzas internas que se deben vencer para expandir la superficie.</p>
+  <div class="grid">
+    <div class="mini"><h4>Unidades</h4><p>\( 1\ \mathrm{dina\,cm^{-1}}=1\ \mathrm{mN\,m^{-1}} \)<br>\( 1\ \mathrm{erg\,cm^{-2}}=1\ \mathrm{mJ\,m^{-2}} \)</p></div>
+    <div class="mini"><h4>Se relaciona con</h4><p>La intensidad de las interacciones intermoleculares del líquido.</p></div>
+  </div>
+  <div class="tw"><table>
+    <tr><th class="l">Sustancia</th><th>\( \gamma\ (\mathrm{dina\,cm^{-1}}) \)</th><th class="l">Interacción intermolecular</th></tr>
+    <tr><td class="l">Hg</td><td>\( 476 \)</td><td class="l">Enlace metálico</td></tr>
+    <tr><td class="l">\( \mathrm{H_2O} \)</td><td>\( 72{,}8 \)</td><td class="l">Enlace de hidrógeno</td></tr>
+    <tr><td class="l">\( \mathrm{C_6H_6} \)</td><td>\( 28{,}9 \)</td><td class="l">Interacción entre electrones \( \pi \)</td></tr>
+    <tr><td class="l">Heptano</td><td>\( 19{,}7 \)</td><td class="l">Fuerzas de dispersión</td></tr>
+  </table></div>
+
+  <h4>Formulación termodinámica</h4>
+  <p>A \( P \) y \( T \) constantes, el trabajo para aumentar el área de la interfase en \( d\mathcal{A} \) es el cambio de energía de Gibbs:</p>
+  <div class="formula key">\[ dG=\gamma\,d\mathcal{A}\qquad\Longrightarrow\qquad \gamma=\left(\frac{\partial G}{\partial \mathcal{A}}\right)_{T,P}>0 \]</div>
+  <p>Como \( \gamma>0 \), la energía de Gibbs aumenta al aumentar la superficie. La condición de equilibrio, a \( T \) y \( P \) constantes, es que el sistema reduzca su área al mínimo. Por eso las gotas son esféricas. Para una variación finita de área con \( \gamma \) constante:</p>
+  <div class="formula">\[ \Delta G=\int_{\mathcal{A}_1}^{\mathcal{A}_2}\gamma\,d\mathcal{A}\quad\Rightarrow\quad \Delta G=\gamma\,(\mathcal{A}_2-\mathcal{A}_1) \]</div>
+  <div class="tw"><table>
+    <tr><th>\( \Delta G \)</th><th>\( \Delta\mathcal{A} \)</th><th>Proceso</th></tr>
+    <tr><td>\( \gt 0 \)</td><td>\( \mathcal{A}_2\gt\mathcal{A}_1 \)</td><td>No espontáneo</td></tr>
+    <tr><td>\( =0 \)</td><td>\( \mathcal{A}_2=\mathcal{A}_1 \)</td><td>Equilibrio</td></tr>
+    <tr><td>\( \lt 0 \)</td><td>\( \mathcal{A}_2\lt\mathcal{A}_1 \)</td><td>Espontáneo</td></tr>
+  </table></div>
+
+  <h4>Dependencia de \( \gamma \) con la temperatura</h4>
+  <p>La tensión superficial disminuye al aumentar la temperatura y se anula en la temperatura crítica. Una de las ecuaciones empíricas más usadas es la de Katayama&ndash;Guggenheim:</p>
+  <div class="formula key">\[ \gamma=\gamma_0\left(1-\frac{T}{T_c}\right)^{n} \]</div>
+  <p>\( \gamma_0 \) es una constante del líquido y \( T_c \) su temperatura crítica. Para líquidos orgánicos \( n=11/9\approx1{,}22 \). La figura muestra datos del agua (\( T_c=647{,}1\ \mathrm{K} \)) y la curva de la ecuación. Cambie \( \gamma_0 \) y \( n \) para ver cómo se ajusta.</p>
+  <div class="ctrl">
+    <label>\( \gamma_0= \) <b id="g0Val"></b> \( \mathrm{mN\,m^{-1}} \) <input type="range" id="g0Sl" min="100" max="200" step="1" value="163"></label>
+    <label>\( n= \) <b id="nVal"></b> <input type="range" id="nSl" min="80" max="140" step="1" value="122"></label>
+  </div>
+  <figure><svg id="figKG" role="img" aria-label="Tensión superficial del agua contra la temperatura, con la curva de Katayama-Guggenheim"></svg><figcaption>Tensión superficial del agua. Los puntos son datos; la curva, la ecuación de Katayama&ndash;Guggenheim.</figcaption></figure>
+  <p class="readout" id="outKG"></p>
+</section>
+
+<!-- 2 -->
+<section class="card" id="s2">
+  <h3><span class="badge">2</span>Interfases curvas: ecuación de Young&ndash;Laplace</h3>
+  <p>Al minimizar el área interfacial, las interfases se curvan. La curvatura provoca una diferencia de presión entre el interior y el exterior de la fase, descrita por la ecuación de Young&ndash;Laplace.</p>
+  <p>Una fase \( \alpha \) forma una esfera de radio \( r \) en el interior de una fase \( \beta \). Si \( \alpha \) es un líquido y \( \beta \) el vapor, es una <b>gota</b>. Si \( \alpha \) es el vapor y \( \beta \) el líquido, es una <b>burbuja</b>, que en rigor es una cavidad.</p>
+  <div class="formula key">\[ P_{\mathrm{in}}=P_{\mathrm{ext}}+\frac{2\gamma}{r}\quad\Rightarrow\quad \Delta P=P_{\mathrm{in}}-P_{\mathrm{ext}}=\frac{2\gamma}{r} \]</div>
+  <div class="grid">
+    <div class="mini"><h4>Gota</h4><p>Pequeño volumen de líquido rodeado por su vapor. \( \Delta P=2\gamma/r \).</p></div>
+    <div class="mini"><h4>Burbuja (cavidad)</h4><p>Hueco lleno de vapor dentro de un líquido. \( \Delta P=2\gamma/r \).</p></div>
+    <div class="mini"><h4>Pompa</h4><p>Película fina de líquido con vapor a ambos lados: dos interfases. \( \Delta P=4\gamma/r \).</p></div>
+  </div>
+  <p>Esta ecuación explica la formación de gotas, los aerosoles, el ascenso capilar y la condensación capilar. A menor radio, mayor sobrepresión.</p>
+
+  <h4>Ejemplo</h4>
+  <p>Calcule a \( 20\ ^{\circ}\mathrm{C} \) la presión en el interior de una burbuja de gas en agua si la presión del agua es \( 760\ \mathrm{torr} \) y el radio de la burbuja es \( 0{,}040\ \mathrm{cm} \). \( \gamma_{\mathrm{H_2O}}=73\ \mathrm{dina\,cm^{-1}} \).</p>
+  <div class="formula">\[ P_{\mathrm{ext}}=760\ \mathrm{torr}=101325\ \mathrm{Pa},\quad \gamma=73\times10^{-3}\ \mathrm{N\,m^{-1}},\quad r=4{,}0\times10^{-4}\ \mathrm{m} \]</div>
+  <div class="formula">\[ P_{\mathrm{in}}=101325\ \mathrm{Pa}+\frac{2\,(73\times10^{-3}\ \mathrm{N\,m^{-1}})}{4{,}0\times10^{-4}\ \mathrm{m}}=101690\ \mathrm{Pa} \]</div>
+  <div class="formula key">\[ P_{\mathrm{in}}=101690\ \mathrm{Pa}\times\frac{760\ \mathrm{mmHg}}{101325\ \mathrm{Pa}}=762{,}7\ \mathrm{mmHg} \]</div>
+  <p>Las unidades de \( \gamma/r \) son \( \dfrac{\mathrm{N\,m^{-1}}}{\mathrm{m}}=\mathrm{N\,m^{-2}}=\mathrm{Pa} \).</p>
+
+  <h4>Explorar</h4>
+  <p style="margin:0 0 6px">Elija el líquido y el radio. El gráfico usa escalas logarítmicas: la sobrepresión es inversamente proporcional al radio, de modo que forma una recta de pendiente \( -1 \).</p>
+  <div class="ctrl">
+    <label>Líquido <select id="lqSel"></select></label>
+    <label>Geometría <select id="gmSel"><option value="2">Gota o burbuja (2&gamma;/r)</option><option value="4">Pompa (4&gamma;/r)</option></select></label>
+    <label>Radio <b id="rVal"></b> <input type="range" id="rSl" min="0" max="100" value="50"></label>
+  </div>
+  <figure><svg id="figLap" role="img" aria-label="Sobrepresión contra radio en escalas logarítmicas"></svg><figcaption>Sobrepresión contra radio. La línea punteada corresponde a la otra geometría.</figcaption></figure>
+  <p class="readout" id="outLap"></p>
+</section>
+
+<!-- 3 -->
+<section class="card" id="s3">
+  <h3><span class="badge">3</span>Ecuación de Kelvin</h3>
+  <p>Si una partícula es suficientemente pequeña, la energía superficial produce efectos medibles en sus propiedades. Un ejemplo es la mayor presión de vapor de las gotas pequeñas, descrita por la ecuación de Kelvin:</p>
+  <div class="formula key">\[ \ln\!\left(\frac{P}{P_0}\right)=\frac{2\gamma}{r}\cdot\frac{V}{RT} \]</div>
+  <div class="grid">
+    <div class="mini"><h4>\( P \)</h4><p>Presión de vapor sobre la superficie curva, a \( T \).</p></div>
+    <div class="mini"><h4>\( P_0 \)</h4><p>Presión de vapor del líquido con superficie plana, a \( T \).</p></div>
+    <div class="mini"><h4>\( V \)</h4><p>Volumen molar del líquido, \( V=M/\rho \).</p></div>
+    <div class="mini"><h4>\( r \)</h4><p>Radio de la gota o del capilar. \( T \) en kelvin.</p></div>
+  </div>
+  <div class="callout tip"><p><span class="lbl">Signo de la curvatura.</span> Sobre una gota (menisco convexo) \( P\gt P_0 \). Dentro de un poro o capilar donde el líquido moja las paredes (menisco cóncavo), el radio de curvatura cuenta como negativo y \( P\lt P_0 \): el vapor condensa en el poro a una presión menor que \( P_0 \). Es la condensación capilar.</p></div>
+  <div class="callout warn"><p><span class="lbl">Alcance.</span> Para radios de pocos nanómetros la ecuación llega al límite de su validez, porque el concepto macroscópico de tensión superficial deja de aplicarse con rigor.</p></div>
+
+  <h4>Ejemplo</h4>
+  <p>Calcule a \( 293\ \mathrm{K} \) la presión de vapor del agua (\( \gamma=72{,}75\ \mathrm{mN\,m^{-1}} \)) en un sólido poroso cuyos poros tienen un diámetro de \( 10\ \mathring{A} \). La presión de vapor del agua es \( 3{,}66\ \mathrm{kPa} \) y su densidad \( 997\ \mathrm{kg\,m^{-3}} \) a \( 293\ \mathrm{K} \).</p>
+  <div class="formula">\[ V=\frac{M}{\rho}=\frac{18{,}015\times10^{-3}\ \mathrm{kg\,mol^{-1}}}{997\ \mathrm{kg\,m^{-3}}}=1{,}81\times10^{-5}\ \mathrm{m^3\,mol^{-1}},\qquad r=5{,}0\times10^{-10}\ \mathrm{m} \]</div>
+  <div class="formula">\[ \frac{2\gamma V}{rRT}=\frac{2\,(72{,}75\times10^{-3})\,(1{,}81\times10^{-5})}{(5{,}0\times10^{-10})(8{,}314)(293)}=2{,}16 \]</div>
+  <div class="formula key">\[ \ln\frac{P}{P_0}=-2{,}16\quad\Rightarrow\quad P=3{,}66\ \mathrm{kPa}\times e^{-2{,}16}=0{,}42\ \mathrm{kPa} \]</div>
+
+  <h4>Explorar</h4>
+  <p style="margin:0 0 6px">Agua a \( 293\ \mathrm{K} \). Mueva el radio y compare una gota con un poro.</p>
+  <div class="ctrl"><label>Radio <b id="rkVal"></b> <input type="range" id="rkSl" min="0" max="100" value="45"></label></div>
+  <figure><svg id="figKel" role="img" aria-label="P sobre P0 contra radio para una gota y para un poro"></svg><figcaption>Cociente \( P/P_0 \) contra el radio de curvatura.</figcaption></figure>
+  <p class="readout" id="outKel"></p>
+</section>
+
+<!-- 4 -->
+<section class="card" id="s4">
+  <h3><span class="badge">4</span>Capilaridad</h3>
+  <p>Al introducir un tubo capilar en un líquido, éste asciende o desciende por el tubo: es la <b>capilaridad</b>. El fenómeno depende de las interfases que limitan la columna de líquido: líquido&ndash;sólido, líquido&ndash;gas y sólido&ndash;gas.</p>
+
+  <h4>Ángulo de contacto</h4>
+  <p>Un balance de fuerzas en el equilibrio, en la línea de contacto, entrega la ecuación de Young:</p>
+  <div class="formula key">\[ \gamma_{SG}=\gamma_{SL}+\gamma_{LG}\cos\theta\quad\Rightarrow\quad \cos\theta=\frac{\gamma_{SG}-\gamma_{SL}}{\gamma_{LG}} \]</div>
+  <div class="grid">
+    <div class="mini"><h4>Líquido que moja</h4><p>\( 0\le\theta\lt90^\circ \). Predomina la adhesión (fuerzas entre moléculas distintas, como \( \mathrm{H_2O} \)&ndash;\( \mathrm{SiO_2} \)). Menisco cóncavo. El líquido asciende. Es el caso de la mayoría de los líquidos.</p></div>
+    <div class="mini"><h4>Líquido que no moja</h4><p>\( 90^\circ\lt\theta\le180^\circ \). Predomina la cohesión (fuerzas entre moléculas iguales, como Hg&ndash;Hg). Menisco convexo. El líquido desciende. Es el caso del mercurio.</p></div>
+  </div>
+
+  <h4>Altura de la columna</h4>
+  <p>En el equilibrio, el peso de la columna de líquido iguala a la fuerza vertical que ejerce la tensión superficial sobre la circunferencia del tubo:</p>
+  <div class="formula">\[ \pi r^{2}\,g\,h\,(\rho^{L}-\rho^{V})=2\pi r\,\gamma\cos\theta \]</div>
+  <div class="formula key">\[ h=\frac{2\gamma}{g\,(\rho^{L}-\rho^{V})}\cdot\frac{\cos\theta}{r} \]</div>
+  <p>Si el líquido moja completamente al sólido (\( \theta=0 \), \( \cos\theta=1 \)) y \( \rho^{L}\gg\rho^{V} \):</p>
+  <div class="formula">\[ h=\frac{2\gamma}{r\,g\,\rho^{L}} \]</div>
+  <p>Aquí \( r \) es el radio del capilar, \( g \) la aceleración de gravedad, \( \rho^{L} \) y \( \rho^{V} \) las densidades del líquido y del vapor. Si \( h\gt0 \) hay ascenso y si \( h\lt0 \), descenso. Como \( h\propto1/r \), cuanto más fino el tubo, mayor el efecto.</p>
+
+  <h4>Ejemplo</h4>
+  <p>Determine el descenso capilar del Hg en un tubo de vidrio de \( 1\ \mathrm{mm} \) de diámetro. \( \rho_{\mathrm{Hg}}=13\ \mathrm{g\,mL^{-1}} \) y \( \gamma=480\ \mathrm{dina\,cm^{-1}} \) a \( 25\ ^{\circ}\mathrm{C} \). Suponga que el mercurio no moja al vidrio (\( \theta=180^\circ \)) y desprecie la densidad del aire.</p>
+  <div class="formula key">\[ h=\frac{2\,(0{,}480\ \mathrm{N\,m^{-1}})\cos180^\circ}{(0{,}50\times10^{-3}\ \mathrm{m})(9{,}81\ \mathrm{m\,s^{-2}})(13000\ \mathrm{kg\,m^{-3}})}=-1{,}5\times10^{-2}\ \mathrm{m} \]</div>
+  <p>El nivel desciende \( 1{,}5\ \mathrm{cm} \) respecto del nivel exterior.</p>
+
+  <h4>Explorar</h4>
+  <p style="margin:0 0 6px">Elija un líquido y ajuste el radio del capilar y el ángulo de contacto.</p>
+  <div class="ctrl">
+    <label>Líquido <select id="cpSel"></select></label>
+    <label>Radio del capilar <b id="rcVal"></b> \( \mathrm{mm} \) <input type="range" id="rcSl" min="5" max="100" value="25"></label>
+    <label>\( \theta= \) <b id="thVal"></b>\( ^{\circ} \) <input type="range" id="thSl" min="0" max="180" value="0"></label>
+  </div>
+  <figure><svg id="figCap" style="max-width:380px;display:block;margin:0 auto" role="img" aria-label="Capilar sumergido en un líquido con menisco y altura de la columna"></svg><figcaption>Esquema a escala cualitativa: la altura se recorta si excede el dibujo.</figcaption></figure>
+  <p class="readout" id="outCap"></p>
+</section>
+
+<!-- 5 -->
+<section class="card" id="s5">
+  <h3><span class="badge">5</span>Tensión superficial en disoluciones y adsorción</h3>
+  <p>La tensión superficial del disolvente cambia al agregar un soluto. El efecto depende de la concentración, de la naturaleza de la interacción soluto&ndash;solvente y de la temperatura. Según cómo varía \( \gamma \) con la concentración se distinguen tres tipos de solutos.</p>
+  <div class="grid">
+    <div class="mini"><h4>Tipo I</h4><p>\( \gamma \) aumenta levemente. Sales inorgánicas, sacarosa. Adsorción negativa: el soluto se aleja de la interfase.</p></div>
+    <div class="mini"><h4>Tipo II</h4><p>\( \gamma \) disminuye gradualmente. Compuestos orgánicos solubles en agua, con un grupo polar (\( -\mathrm{COOH} \), \( -\mathrm{OH} \), \( -\mathrm{NH_3^+} \)) y una cadena hidrocarbonada.</p></div>
+    <div class="mini"><h4>Tipo III</h4><p>\( \gamma \) cae bruscamente a baja concentración. Moléculas anfifílicas o detergentes: sales de ácidos orgánicos de cadena larga, alquilsulfatos, polioxietilenos.</p></div>
+  </div>
+  <div class="callout tip"><p><span class="lbl">Adsorción.</span> En la adsorción <b>positiva</b> el soluto se acumula en la interfase y \( \gamma \) disminuye. En la adsorción <b>negativa</b> el soluto es expulsado de la interfase y \( \gamma \) aumenta.</p></div>
+
+  <h4>Exceso superficial e isoterma de Gibbs</h4>
+  <p>El exceso superficial \( \Gamma_{2(1)} \) expresa cuántos moles de soluto por unidad de área se acumulan (si es positivo) o faltan (si es negativo) en la superficie:</p>
+  <div class="formula">\[ \Gamma_{2(1)}=\frac{n_{2(1)}^{\mathcal{A}}}{\mathcal{A}},\qquad n_{2(1)}^{\mathcal{A}}=n_2-\sum n_2^{\alpha} \]</div>
+  <p>donde \( n_2 \) son los moles totales de soluto y \( n_2^{\alpha} \) los moles de soluto en cada fase. La isoterma de adsorción de Gibbs relaciona \( \Gamma_{2(1)} \) con la variación de la tensión superficial:</p>
+  <div class="formula key">\[ \Gamma_{2(1)}=-\frac{c_2}{RT}\left(\frac{\partial\gamma}{\partial c_2}\right)_T=-\frac{1}{RT}\left(\frac{\partial\gamma}{\partial\ln c_2}\right)_T \]</div>
+  <div class="grid">
+    <div class="mini"><h4>Tipo I</h4><p>\( \partial\gamma/\partial c_2\gt0 \), de modo que \( \Gamma_{2(1)}\lt0 \).</p></div>
+    <div class="mini"><h4>Tipos II y III</h4><p>\( \partial\gamma/\partial c_2\lt0 \), de modo que \( \Gamma_{2(1)}\gt0 \).</p></div>
+  </div>
+
+  <h4>Ejemplo 1: surfactante no iónico</h4>
+  <p>La pendiente límite de \( \gamma \) contra \( \ln c_2 \) para el surfactante \( \mathrm{C_{12}H_{25}O(CH_2CH_2O)_{12}H} \) es \( (\partial\gamma/\partial\ln c_2)_T=-5{,}2937\ \mathrm{dina\,cm^{-1}} \) a \( 23{,}0\ ^{\circ}\mathrm{C} \). Calcule \( \Gamma_{2(1)} \) y el área por molécula.</p>
+  <div class="formula">\[ \Gamma_{2(1)}=-\frac{1}{RT}\left(\frac{\partial\gamma}{\partial\ln c_2}\right)_T=\frac{5{,}2937\times10^{-3}\ \mathrm{N\,m^{-1}}}{(8{,}314\ \mathrm{J\,mol^{-1}K^{-1}})(296\ \mathrm{K})}=2{,}15\times10^{-6}\ \mathrm{mol\,m^{-2}} \]</div>
+  <div class="formula key">\[ \Gamma_{2(1)}=2{,}15\times10^{-10}\ \mathrm{mol\,cm^{-2}} \]</div>
+  <div class="formula">\[ \sigma=\frac{1}{\Gamma_{2(1)}\,N_A}=\frac{1}{(2{,}15\times10^{-6}\ \mathrm{mol\,m^{-2}})(6{,}022\times10^{23}\ \mathrm{mol^{-1}})}=7{,}7\times10^{-19}\ \mathrm{m^2}=77\ \mathrm{\mathring{A}^{2}} \]</div>
+
+  <h4>Ejemplo 2: ácido fenilpropiónico</h4>
+  <p>A \( 21\ ^{\circ}\mathrm{C} \) se midió la tensión superficial de disoluciones de \( \mathrm{C_6H_5CH_2CH_2COOH} \). Los datos se ajustan a un polinomio de segundo grado en la concentración, con \( c \) en molal y \( \gamma \) en \( \mathrm{dina\,cm^{-1}} \):</p>
+  <div class="formula">\[ \gamma=72{,}16-975{,}2\,c+8965{,}2\,c^{2} \quad\Rightarrow\quad \left(\frac{\partial\gamma}{\partial c}\right)_T=-975{,}2+2\,(8965{,}2)\,c \]</div>
+  <p>Para \( c=20\times10^{-3}\ \mathrm{molal} \) (en disolución diluida, molal y molar son casi iguales):</p>
+  <div class="formula">\[ \Gamma_{2(1)}=-\frac{c}{RT}\left(\frac{\partial\gamma}{\partial c}\right)_T=\frac{(20\times10^{-3})\,(616{,}6)}{(8{,}314\times10^{7})(294)}=5{,}05\times10^{-10}\ \mathrm{mol\,cm^{-2}} \]</div>
+  <p style="margin:0 0 6px">Mueva la concentración: la tangente a la curva es la pendiente que entra en la isoterma.</p>
+  <div class="ctrl"><label>\( c= \) <b id="cgVal"></b> \( \mathrm{mmol\,kg^{-1}} \) <input type="range" id="cgSl" min="3" max="42" step="0.5" value="20"></label></div>
+  <figure><svg id="figGib" role="img" aria-label="Tensión superficial contra concentración con tangente"></svg><figcaption>Tensión superficial del ácido fenilpropiónico. Puntos: datos. Curva: ajuste cuadrático. Recta roja: tangente en la concentración elegida.</figcaption></figure>
+  <p class="readout" id="outGib"></p>
+</section>
+
+</main>
+</div>
+</div>
+<script src="js/base.js"></script>
+<script>
+(function(){
+"use strict";
+var $=QUIM.$,M=QUIM.m,R=8.314;
+function comma(x,d){return x.toFixed(d).replace('.',',').replace('-','\u2212');}
+/* Número a TeX con coma decimal (d decimales) y notación científica con d decimales en la mantisa */
+function fx(x,d){return x.toFixed(d).replace('.','{,}');}
+function ts(x,d){var s=x.toExponential(d).split('e');return s[0].replace('.','{,}')+'\\times10^{'+parseInt(s[1],10)+'}';}
+function p10(v){
+  if(v===0)return '0';
+  var sup={'0':'\u2070','1':'\u00b9','2':'\u00b2','3':'\u00b3','4':'\u2074','5':'\u2075','6':'\u2076','7':'\u2077','8':'\u2078','9':'\u2079','-':'\u207b'};
+  var e=Math.floor(Math.log(Math.abs(v))/Math.LN10+1e-9),m=v/Math.pow(10,e);
+  m=Math.round(m*10)/10;if(m>=10){m=1;e+=1;}
+  return (m===1?'':String(m).replace('.',',')+'\u00d7')+'10'+String(e).split('').map(function(c){return sup[c];}).join('');
+}
+var lg=function(x){return Math.log(x)/Math.LN10;};
+
+/* ---------- Esquema molecular ---------- */
+function arrow(x,y,dx,dy,c,w){
+  var L=Math.sqrt(dx*dx+dy*dy),ux=dx/L,uy=dy/L,ex=x+dx,ey=y+dy;
+  return '<line x1="'+x+'" y1="'+y+'" x2="'+(ex-ux*8)+'" y2="'+(ey-uy*8)+'" stroke="'+c+'" stroke-width="'+(w||2)+'"/>'+
+    '<polygon points="'+ex+','+ey+' '+(ex-ux*10-uy*5)+','+(ey-uy*10+ux*5)+' '+(ex-ux*10+uy*5)+','+(ey-uy*10-ux*5)+'" fill="'+c+'"/>';
+}
+function drawMol(){
+  var svg=$('#figMol');svg.setAttribute('viewBox','0 60 560 225');
+  var h='<rect x="20" y="105" width="520" height="175" rx="4" fill="#d7e8fb"/><line x1="20" y1="105" x2="540" y2="105" stroke="#1f5fbf" stroke-width="2.5"/>'+
+    '<text x="30" y="92" font-size="13" fill="#59627a">gas</text><text x="30" y="124" font-size="13" fill="#59627a">l\u00edquido</text>';
+  var cx=150,cy=185,i;
+  for(i=0;i<8;i++){var a=i*Math.PI/4;h+=arrow(cx,cy,Math.cos(a)*40,Math.sin(a)*40,'#1f5fbf',2);}
+  h+='<circle cx="'+cx+'" cy="'+cy+'" r="12" fill="#1f5fbf" stroke="#fff" stroke-width="2"/>';
+  h+='<text x="'+cx+'" y="245" text-anchor="middle" font-size="14" font-weight="600" fill="#1c2333">Interior: fuerzas iguales</text>'+
+     '<text x="'+cx+'" y="262" text-anchor="middle" font-size="13" fill="#59627a">en todas las direcciones; se anulan</text>';
+  var sx=400,sy=120;
+  [[-1,0],[1,0],[-0.7,0.7],[0.7,0.7],[0,1]].forEach(function(d){h+=arrow(sx,sy,d[0]*40,d[1]*40,'#1f5fbf',2);});
+  h+=arrow(sx,sy+14,0,70,'#a8231b',3.5);
+  h+='<circle cx="'+sx+'" cy="'+sy+'" r="12" fill="#1f5fbf" stroke="#fff" stroke-width="2"/>';
+  h+='<text x="'+(sx+14)+'" y="205" font-size="13" font-weight="600" fill="#a8231b">fuerza neta</text><text x="'+(sx+14)+'" y="221" font-size="13" fill="#a8231b">hacia el interior</text>';
+  h+='<text x="'+sx+'" y="245" text-anchor="middle" font-size="14" font-weight="600" fill="#1c2333">Superficie: sin vecinos arriba</text>'+
+     '<text x="'+sx+'" y="262" text-anchor="middle" font-size="13" fill="#59627a">queda una atracci\u00f3n neta hacia el l\u00edquido</text>';
+  svg.innerHTML=h;
+}
+
+/* ---------- Katayama-Guggenheim (agua) ---------- */
+var TW=[273.16,303.16,333.16,363.16,393.16,423.16,453.16,483.16,513.16,543.16,573.16,603.16,633.16];
+var GW=[75.646,71.193,66.237,60.814,54.966,48.739,42.188,35.378,28.391,21.334,14.357,7.7005,1.8755];
+function drawKG(){
+  var g0=+$('#g0Sl').value,n=+$('#nSl').value/100,Tc=647.1;
+  $('#g0Val').textContent=g0;$('#nVal').textContent=comma(n,2);
+  var f=function(T){return g0*Math.pow(1-T/Tc,n);};
+  var c=QUIM.chart($('#figKG'),{x:[250,660],y:[0,80],xt:[300,350,400,450,500,550,600,650],yt:[0,20,40,60,80],xl:'T (K)',yl:'\u03b3 (mN m\u207b\u00b9)',W:520,H:310,l:62});
+  c.fn(f,250,Tc,160,'#0c8486',3);
+  c.dots(TW.map(function(t,i){return [t,GW[i]];}),'#1f5fbf',5);
+  c.done();
+  var ss=0,mx=0;TW.forEach(function(t,i){var e=GW[i]-f(t);ss+=e*e;mx=Math.max(mx,Math.abs(e));});
+  var U='\\ \\mathrm{mN\\,m^{-1}}';
+  $('#outKG').innerHTML='Desviaci\u00f3n cuadr\u00e1tica media (rms) = <b>'+M(fx(Math.sqrt(ss/TW.length),1)+U)+'</b>; desviaci\u00f3n m\u00e1xima = '+M(fx(mx,1)+U)+'. Con '+M('n=11/9')+' y '+M('\\gamma_0=163')+' el ajuste al agua es regular; con '+M('n')+' cercano a '+M('1{,}0')+' y '+M('\\gamma_0')+' cercano a '+M('133')+' mejora.';
+}
+
+/* ---------- Young-Laplace ---------- */
+var LQ=[{n:'Agua (72,8 mN/m)',g:72.8e-3},{n:'Benceno (28,9 mN/m)',g:28.9e-3},{n:'Heptano (19,7 mN/m)',g:19.7e-3},{n:'Mercurio (476 mN/m)',g:476e-3}];
+function rFrom(s){return Math.pow(10,-7+4*s/100);}
+function rTex(r){return r<1e-6?fx(r*1e9,0)+'\\ \\mathrm{nm}':r<1e-3?fx(r*1e6,r<1e-5?1:0)+'\\ \\mu\\mathrm{m}':fx(r*1e3,2)+'\\ \\mathrm{mm}';}
+function drawLap(){
+  var q=LQ[+$('#lqSel').value],m=+$('#gmSel').value,r=rFrom(+$('#rSl').value);
+  $('#rVal').innerHTML=M(rTex(r));
+  var dP=m*q.g/r,xs=lg(r);
+  var lx={'-7':'0,1 \u00b5m','-6':'1 \u00b5m','-5':'10 \u00b5m','-4':'100 \u00b5m','-3':'1 mm'};
+  var c=QUIM.chart($('#figLap'),{x:[-7,-3],y:[1,8],xt:[-7,-6,-5,-4,-3],yt:[1,2,3,4,5,6,7,8],xf:function(v){return lx[String(v)];},yf:function(v){return p10(Math.pow(10,v));},xl:'radio',yl:'\u0394P (Pa)',W:520,H:310,l:66,xgrid:true});
+  var other=m===2?4:2;
+  c.line(-7,lg(other*q.g)+7,-3,lg(other*q.g)+3,'#98a1b8',1.6,'6 4');
+  c.line(-7,lg(m*q.g)+7,-3,lg(m*q.g)+3,'#0c8486',3);
+  c.line(xs,1,xs,lg(dP),'#a8231b',1.3,'4 4');
+  c.dots([[xs,lg(dP)]],'#a8231b',5.5);
+  c.done();
+  $('#outLap').innerHTML=M('\\Delta P='+m+'\\gamma/r=')+' <b>'+M(ts(dP,2)+'\\ \\mathrm{Pa}')+'</b> = '+M(ts(dP/101325,2)+'\\ \\mathrm{atm}')+'. Con '+M(rTex(r))+' de radio, '+(dP>101325?'la sobrepresi\u00f3n supera a la presi\u00f3n atmosf\u00e9rica.':'la sobrepresi\u00f3n es menor que la presi\u00f3n atmosf\u00e9rica.');
+}
+
+/* ---------- Kelvin ---------- */
+var GK=72.75e-3,VK=18.015e-3/997,TK=293;
+function kf(r){return 2*GK*VK/(r*R*TK);}
+function drawKel(){
+  var r=Math.pow(10,-9+3*(+$('#rkSl').value)/100);
+  $('#rkVal').innerHTML=M(r<1e-7?fx(r*1e9,1)+'\\ \\mathrm{nm}':r<1e-6?fx(r*1e9,0)+'\\ \\mathrm{nm}':fx(r*1e6,2)+'\\ \\mu\\mathrm{m}');
+  var lx={'-9':'1 nm','-8':'10 nm','-7':'100 nm','-6':'1 \u00b5m'},xs=lg(r);
+  var c=QUIM.chart($('#figKel'),{x:[-9,-6],y:[0,3.1],xt:[-9,-8,-7,-6],yt:[0,0.5,1,1.5,2,2.5,3],xf:function(v){return lx[String(v)];},xl:'radio de curvatura',yl:'P / P\u2080',W:520,H:310,l:60,xgrid:true});
+  c.line(-9,1,-6,1,'#98a1b8',1.4,'5 4');
+  c.fn(function(x){return Math.exp(kf(Math.pow(10,x)));},-9,-6,120,'#1f5fbf',3);
+  c.fn(function(x){return Math.exp(-kf(Math.pow(10,x)));},-9,-6,120,'#0c8486',3);
+  c.dots([[xs,Math.exp(kf(r))]],'#1f5fbf',5.5).dots([[xs,Math.exp(-kf(r))]],'#0c8486',5.5);
+  c.text(-8.2,2.7,'gota (convexo)',{c:'#1f5fbf',w:600}).text(-8.2,0.15,'poro que moja (c\u00f3ncavo)',{c:'#0c8486',w:600});
+  c.done();
+  var x=kf(r),kP='\\ \\mathrm{kPa}';
+  $('#outKel').innerHTML='Exponente '+M('\\dfrac{2\\gamma V}{rRT}=')+' <b>'+M(fx(x,3))+'</b>. Gota: '+M('P/P_0=')+' <b>'+M(fx(Math.exp(x),3))+'</b>. Poro: '+M('P/P_0=')+' <b>'+M(fx(Math.exp(-x),3))+'</b>. Con '+M('P_0=3{,}66'+kP)+': gota '+M(fx(3.66*Math.exp(x),2)+kP)+', poro '+M(fx(3.66*Math.exp(-x),2)+kP)+'.';
+}
+
+/* ---------- Capilaridad ---------- */
+var CP=[{n:'Agua en vidrio',g:72.8e-3,rho:998,th:0},{n:'Etanol en vidrio',g:22.3e-3,rho:789,th:0},{n:'Benceno en vidrio',g:28.9e-3,rho:876,th:0},{n:'Mercurio en vidrio',g:480e-3,rho:13534,th:140}];
+function drawCap(){
+  var p=CP[+$('#cpSel').value],rm=+$('#rcSl').value/100,th=+$('#thSl').value;
+  $('#rcVal').textContent=comma(rm,2);$('#thVal').textContent=th;
+  var h=2*p.g*Math.cos(th*Math.PI/180)/(rm*1e-3*9.81*p.rho),hc=h*100;
+  var svg=$('#figCap'),W=420,H=330;svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  var lev=250,px=Math.max(-42,Math.min(170,hc*28)),top=lev-px,dep=14,cx=210,wl=cx-45,wr=cx+45;
+  var conc=Math.cos(th*Math.PI/180)>=0,edge=conc?top-dep:top+dep;
+  var s='<rect x="40" y="'+lev+'" width="340" height="70" fill="#d7e8fb"/><line x1="40" y1="'+lev+'" x2="380" y2="'+lev+'" stroke="#1f5fbf" stroke-width="2"/>';
+  if(px<0)s+='<rect x="'+wl+'" y="'+(lev+1)+'" width="'+(wr-wl)+'" height="'+(top-lev)+'" fill="#fcfdff"/>';
+  s+='<path d="M'+wl+' '+edge+' Q'+cx+' '+(conc?top+dep*1.5:top-dep*1.5)+' '+wr+' '+edge+' L'+wr+' 295 L'+wl+' 295 Z" fill="#d7e8fb"/>';
+  s+='<path d="M'+wl+' '+edge+' Q'+cx+' '+(conc?top+dep*1.5:top-dep*1.5)+' '+wr+' '+edge+'" fill="none" stroke="#1f5fbf" stroke-width="2.5"/>';
+  s+='<line x1="'+wl+'" y1="20" x2="'+wl+'" y2="300" stroke="#59627a" stroke-width="3"/><line x1="'+wr+'" y1="20" x2="'+wr+'" y2="300" stroke="#59627a" stroke-width="3"/>';
+  s+='<line x1="'+(wr+25)+'" y1="'+lev+'" x2="'+(wr+25)+'" y2="'+(top+(conc?dep*0.75:-dep*0.75))+'" stroke="#a8231b" stroke-width="2"/>';
+  s+='<line x1="'+(wr+18)+'" y1="'+lev+'" x2="'+(wr+32)+'" y2="'+lev+'" stroke="#a8231b" stroke-width="2"/>'+
+     '<text x="'+(wr+38)+'" y="'+((lev+top)/2+5)+'" font-size="15" font-weight="700" fill="#a8231b">h</text>';
+  s+='<text x="50" y="'+(lev-6)+'" font-size="12" fill="#59627a">nivel exterior</text>';
+  s+='<text x="'+cx+'" y="14" text-anchor="middle" font-size="13" fill="#59627a">\u03b8 = '+th+'\u00b0 \u00b7 menisco '+(conc?'c\u00f3ncavo':'convexo')+'</text>';
+  svg.innerHTML=s;
+  var hz=Math.abs(hc)<0.005?0:hc;
+  $('#outCap').innerHTML=M('h=\\dfrac{2\\gamma\\cos\\theta}{r\\,g\\,\\rho}=')+' <b>'+M(fx(hz,2)+'\\ \\mathrm{cm}')+'</b> ('+(hz>0?'ascenso':hz<0?'descenso':'sin desplazamiento')+'). Con '+M('\\gamma='+fx(p.g*1e3,1)+'\\ \\mathrm{mN\\,m^{-1}}')+', '+M('\\rho='+Math.round(p.rho)+'\\ \\mathrm{kg\\,m^{-3}}')+' y '+M('r='+fx(rm,2)+'\\ \\mathrm{mm}')+'.';
+}
+
+/* ---------- Gibbs ---------- */
+var CG=[3.35,6.40,9.99,11.66,15.66,19.99,27.40,40.80],GG=[69.0,66.5,63.6,61.3,59.2,56.1,52.5,47.2];
+function gfit(m){return 72.16036-975.23098*m+8965.21823*m*m;}
+function drawGib(){
+  var cm=+$('#cgSl').value;$('#cgVal').textContent=comma(cm,1);
+  var m=cm/1000,sl=-975.23098+2*8965.21823*m,g0=gfit(m);
+  var c=QUIM.chart($('#figGib'),{x:[0,45],y:[44,74],xt:[0,10,20,30,40],yt:[45,50,55,60,65,70],xl:'c (mmol kg\u207b\u00b9)',yl:'\u03b3 (dina cm\u207b\u00b9)',W:520,H:310,l:62});
+  c.fn(function(x){return gfit(x/1000);},0,45,120,'#0c8486',3);
+  c.dots(CG.map(function(v,i){return [v,GG[i]];}),'#1f5fbf',5);
+  var a=Math.max(0,cm-9),b=Math.min(45,cm+9);
+  c.line(a,g0+sl/1000*(a-cm),b,g0+sl/1000*(b-cm),'#a8231b',2.2);
+  c.dots([[cm,g0]],'#a8231b',5.5);
+  c.done();
+  var Gam=-m/(8.314e7*294)*sl;
+  $('#outGib').innerHTML=M('c='+fx(cm,1)+'\\ \\mathrm{mmol\\,kg^{-1}}')+': '+M('\\left(\\dfrac{\\partial\\gamma}{\\partial c}\\right)_T=')+' <b>'+M(fx(sl,1)+'\\ \\mathrm{dina\\,cm^{-1}\\,molal^{-1}}')+'</b>; '+M('\\Gamma_{2(1)}=')+' <b>'+M(ts(Gam,2)+'\\ \\mathrm{mol\\,cm^{-2}}')+'</b> = '+M(ts(Gam*1e4,2)+'\\ \\mathrm{mol\\,m^{-2}}')+'.';
+}
+
+/* ---------- Banco de preguntas ---------- */
+var TOPICS={
+  tens:{n:'Tensión superficial y formulación termodinámica',a:'#s1'},
+  lap:{n:'Ecuación de Young–Laplace',a:'#s2'},
+  kel:{n:'Ecuación de Kelvin',a:'#s3'},
+  cap:{n:'Capilaridad',a:'#s4'},
+  gib:{n:'Adsorción e isoterma de Gibbs',a:'#s5'}
+};
+var VF=[
+ {t:'tens',q:'La tensión superficial de un líquido aumenta al aumentar la temperatura.',ans:false,
+  exp:'Disminuye con la temperatura y se anula en la temperatura crítica. La ecuación de Katayama&ndash;Guggenheim, \\( \\gamma=\\gamma_0(1-T/T_c)^{n} \\), lo expresa.'},
+ {t:'lap',q:'En una pompa de jabón, que tiene una película de líquido con dos interfases, la sobrepresión interior es \\( 4\\gamma/r \\).',ans:true,
+  exp:'Cada una de las dos interfases aporta \\( 2\\gamma/r \\), de modo que \\( \\Delta P=4\\gamma/r \\). En una gota o en una cavidad hay una sola interfase y \\( \\Delta P=2\\gamma/r \\).'},
+ {t:'gib',q:'Un soluto que disminuye la tensión superficial del agua al aumentar su concentración presenta adsorción positiva en la superficie.',ans:true,
+  exp:'Si \\( (\\partial\\gamma/\\partial c_2)_T\\lt0 \\), la isoterma de Gibbs \\( \\Gamma_{2(1)}=-(c_2/RT)(\\partial\\gamma/\\partial c_2)_T \\) da \\( \\Gamma_{2(1)}\\gt0 \\): el soluto se acumula en la superficie.'}
+];
+var SU=[
+ {t:'kel',q:'Según la ecuación de Kelvin, la presión de vapor sobre una gota pequeña, comparada con la de la superficie plana del mismo líquido a igual temperatura, es:',
+  o:[{x:'mayor, y la diferencia aumenta al disminuir el radio de la gota',ok:true,w:'\\( \\ln(P/P_0)=2\\gamma V/(rRT)\\gt0 \\): \\( P\\gt P_0 \\), y el efecto crece cuando \\( r \\) disminuye.'},
+     {x:'menor, y la diferencia aumenta al disminuir el radio de la gota',w:'Eso ocurre en un menisco cóncavo, como el de un líquido que moja un poro, no en una gota.'},
+     {x:'igual, porque la presión de vapor sólo depende de la temperatura',w:'La curvatura de la interfase modifica la presión de vapor: es el efecto Kelvin.'},
+     {x:'mayor, y la diferencia disminuye al disminuir el radio de la gota',w:'El exponente \\( 2\\gamma V/(rRT) \\) crece cuando \\( r \\) disminuye, no al revés.'}]},
+ {t:'cap',q:'El mercurio forma un ángulo de contacto de \\( 140^\\circ \\) con el vidrio. En un tubo capilar de vidrio sumergido en mercurio, el nivel dentro del tubo, respecto del nivel exterior:',
+  o:[{x:'desciende, porque \\( \\cos\\theta\\lt0 \\)',ok:true,w:'\\( h=2\\gamma\\cos\\theta/(r g\\rho) \\) es negativa cuando \\( \\theta\\gt90^\\circ \\): el líquido no moja y desciende.'},
+     {x:'asciende, porque la tensión superficial del mercurio es muy alta',w:'La tensión superficial alta no basta: el signo lo fija \\( \\cos\\theta \\), y con \\( \\theta=140^\\circ \\) es negativo.'},
+     {x:'no cambia, porque el mercurio es muy denso',w:'La densidad reduce la magnitud de \\( h \\), pero no anula el efecto.'},
+     {x:'asciende, porque \\( \\cos\\theta\\gt0 \\)',w:'Con \\( \\theta=140^\\circ \\), \\( \\cos\\theta\\lt0 \\).'}]},
+ {t:'gib',q:'Al aumentar la concentración de un soluto, la tensión superficial de la disolución aumenta levemente, como ocurre con las sales inorgánicas. El exceso superficial del soluto es:',
+  o:[{x:'negativo: el soluto se aleja de la interfase',ok:true,w:'\\( (\\partial\\gamma/\\partial c_2)_T\\gt0 \\) implica \\( \\Gamma_{2(1)}=-(c_2/RT)(\\partial\\gamma/\\partial c_2)_T\\lt0 \\): adsorción negativa.'},
+     {x:'positivo: el soluto se acumula en la interfase',w:'La acumulación de soluto (\\( \\Gamma_{2(1)}\\gt0 \\)) ocurre cuando \\( \\gamma \\) disminuye con la concentración.'},
+     {x:'cero, porque \\( \\gamma \\) casi no cambia',w:'Aunque el cambio sea leve, la isoterma de Gibbs da un valor negativo, que es la adsorción negativa.'},
+     {x:'igual a la concentración en el seno de la disolución',w:'\\( \\Gamma_{2(1)} \\) es un exceso por unidad de área en la superficie, y no la concentración del seno de la disolución.'}]}
+];
+var CALC=[
+ {t:'lap',q:'Una gota de agua en el aire tiene \\( 0{,}50\\ \\mu\\mathrm{m} \\) de radio. Con \\( \\gamma=72{,}8\\ \\mathrm{mN\\,m^{-1}} \\), calcule la sobrepresión en su interior respecto del aire.',
+  unit:'\\mathrm{kPa}',ans:291.2,ansTex:'291\\ \\mathrm{kPa}',ph:'ej. 100',
+  hint:'Para una gota, \\( \\Delta P=2\\gamma/r \\). Exprese \\( \\gamma \\) en \\( \\mathrm{N\\,m^{-1}} \\) y \\( r \\) en \\( \\mathrm{m} \\).',
+  sol:'<div class="formula">\\[ \\Delta P=\\frac{2\\gamma}{r}=\\frac{2\\,(72{,}8\\times10^{-3}\\ \\mathrm{N\\,m^{-1}})}{0{,}50\\times10^{-6}\\ \\mathrm{m}}=2{,}91\\times10^{5}\\ \\mathrm{Pa}=291\\ \\mathrm{kPa} \\]</div><p>Es casi tres veces la presión atmosférica.</p>'},
+ {t:'cap',q:'Calcule el ascenso del agua (\\( \\gamma=72{,}8\\ \\mathrm{mN\\,m^{-1}} \\), \\( \\rho=998\\ \\mathrm{kg\\,m^{-3}} \\), \\( \\theta=0 \\)) en un capilar de vidrio de \\( 0{,}250\\ \\mathrm{mm} \\) de radio. Use \\( g=9{,}81\\ \\mathrm{m\\,s^{-2}} \\).',
+  unit:'\\mathrm{cm}',ans:5.95,ansTex:'5{,}95\\ \\mathrm{cm}',ph:'ej. 3,0',
+  hint:'Con \\( \\theta=0 \\) y \\( \\rho^{V}\\ll\\rho^{L} \\): \\( h=2\\gamma/(r\\,g\\,\\rho^{L}) \\).',
+  sol:'<div class="formula">\\[ h=\\frac{2\\gamma}{r\\,g\\,\\rho^{L}}=\\frac{2\\,(72{,}8\\times10^{-3}\\ \\mathrm{N\\,m^{-1}})}{(0{,}250\\times10^{-3}\\ \\mathrm{m})(9{,}81\\ \\mathrm{m\\,s^{-2}})(998\\ \\mathrm{kg\\,m^{-3}})}=5{,}95\\times10^{-2}\\ \\mathrm{m} \\]</div>'},
+ {t:'kel',q:'Calcule la razón \\( P/P_0 \\) para una gota de agua de \\( 10\\ \\mathrm{nm} \\) de radio a \\( 293\\ \\mathrm{K} \\) (\\( \\gamma=72{,}75\\ \\mathrm{mN\\,m^{-1}} \\), \\( \\rho=997\\ \\mathrm{kg\\,m^{-3}} \\), \\( M=18{,}015\\ \\mathrm{g\\,mol^{-1}} \\)).',
+  unit:'\\text{(sin unidades)}',ans:1.114,ansTex:'1{,}11',ph:'ej. 1,5',tol:0.01,
+  hint:'Calcule \\( V=M/\\rho \\) en \\( \\mathrm{m^3\\,mol^{-1}} \\) y luego \\( \\ln(P/P_0)=2\\gamma V/(rRT) \\). Despeje \\( P/P_0 \\) con la exponencial.',
+  sol:'<div class="formula">\\[ \\ln\\frac{P}{P_0}=\\frac{2\\,(72{,}75\\times10^{-3})\\,(1{,}807\\times10^{-5})}{(10\\times10^{-9})(8{,}314)(293)}=0{,}108 \\]</div><div class="formula">\\[ \\frac{P}{P_0}=e^{0{,}108}=1{,}11 \\]</div><p>La gota tiene una presión de vapor 11 % mayor que la del líquido plano.</p>'},
+ {t:'gib',q:'A \\( 298{,}15\\ \\mathrm{K} \\), la pendiente límite de una gráfica de \\( \\gamma \\) contra \\( \\ln c_2 \\) para un surfactante es \\( -8{,}0\\ \\mathrm{mN\\,m^{-1}} \\). Calcule el exceso superficial \\( \\Gamma_{2(1)} \\) e indique sus unidades.',
+  uopts:['\\mathrm{mol\\,m^{-2}}','\\mathrm{mol\\,m^{-3}}','\\mathrm{N\\,m^{-1}}','\\mathrm{mol\\,m^{-1}}'],uok:0,ans:3.23e-6,ansTex:'3{,}23\\times10^{-6}\\ \\mathrm{mol\\,m^{-2}}',ph:'ej. 1e-6',
+  hint:'\\( \\Gamma_{2(1)}=-\\dfrac{1}{RT}\\left(\\dfrac{\\partial\\gamma}{\\partial\\ln c_2}\\right)_T \\), con la pendiente en \\( \\mathrm{N\\,m^{-1}} \\) y \\( R \\) en \\( \\mathrm{J\\,mol^{-1}\\,K^{-1}} \\). El resultado es moles por unidad de área.',
+  sol:'<div class="formula">\\[ \\Gamma_{2(1)}=-\\frac{1}{RT}\\left(\\frac{\\partial\\gamma}{\\partial\\ln c_2}\\right)_T=\\frac{8{,}0\\times10^{-3}\\ \\mathrm{N\\,m^{-1}}}{(8{,}314\\ \\mathrm{J\\,mol^{-1}K^{-1}})(298{,}15\\ \\mathrm{K})}=3{,}23\\times10^{-6}\\ \\mathrm{mol\\,m^{-2}} \\]</div><p>Es positivo: el surfactante se acumula en la superficie.</p>'}
+];
+
+QUIM.init({
+  title:'Fisicoquímica de superficies',
+  subtitle:'Tensión superficial, capilaridad y adsorción de Gibbs',
+  pdf:'pdf/superficies.pdf',
+  sections:[
+    {id:'s1',title:'Interfase y tensión superficial'},
+    {id:'s2',title:'Young–Laplace'},
+    {id:'s3',title:'Ecuación de Kelvin'},
+    {id:'s4',title:'Capilaridad'},
+    {id:'s5',title:'Disoluciones y adsorción'}
+  ],
+  quiz:{topics:TOPICS,vf:VF,su:SU,calc:CALC},
+  ready:function(){
+    LQ.forEach(function(q,i){var o=document.createElement('option');o.value=i;o.textContent=q.n;$('#lqSel').appendChild(o);});
+    CP.forEach(function(q,i){var o=document.createElement('option');o.value=i;o.textContent=q.n;$('#cpSel').appendChild(o);});
+    ['#g0Sl','#nSl'].forEach(function(s){$(s).addEventListener('input',drawKG);});
+    ['#lqSel','#gmSel','#rSl'].forEach(function(s){$(s).addEventListener('input',drawLap);});
+    $('#rkSl').addEventListener('input',drawKel);
+    $('#cpSel').addEventListener('change',function(){$('#thSl').value=CP[+this.value].th;drawCap();});
+    ['#rcSl','#thSl'].forEach(function(s){$(s).addEventListener('input',drawCap);});
+    $('#cgSl').addEventListener('input',drawGib);
+    drawMol();drawKG();drawLap();drawKel();drawCap();drawGib();
+  }
+});
+})();
+</script>
+</body>
+</html>

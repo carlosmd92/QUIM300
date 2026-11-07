@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cinética química II: ecuaciones integradas, vida media y temperatura</title>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'none'}};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+<link rel="stylesheet" href="css/base.css">
+<style>@page{@top-right{content:"Cinética química II"}}</style>
+</head>
+<body>
+<div class="layout">
+<aside id="side" aria-label="Bloques de contenido"></aside>
+<div id="scrim"></div>
+<div class="content">
+<div id="topbar"></div>
+<main>
+
+<!-- 1 -->
+<section class="card" id="s1">
+  <h3><span class="badge">1</span>Ecuaciones de velocidad integradas</h3>
+  <p>La ley de velocidad entrega la velocidad en un instante. Al integrarla en el tiempo se obtiene cómo cambia la concentración: la ecuación concentración&ndash;tiempo. Para A &rarr; productos con orden \( n \):</p>
+  <div class="formula">\[ r=-\frac{d[\mathrm{A}]}{dt}=k\,[\mathrm{A}]^{n} \]</div>
+  <p>Se separan las variables y se integra desde \( [\mathrm{A}]_0 \) en \( t=0 \) hasta \( [\mathrm{A}] \) en el tiempo \( t \).</p>
+
+  <h4>Orden cero</h4>
+  <div class="formula">\[ \int_{[\mathrm{A}]_0}^{[\mathrm{A}]}d[\mathrm{A}]=-k\int_0^{t}dt \]</div>
+  <div class="formula key">\[ [\mathrm{A}]=[\mathrm{A}]_0-k\,t \]</div>
+
+  <h4>Primer orden</h4>
+  <div class="formula">\[ \int_{[\mathrm{A}]_0}^{[\mathrm{A}]}\frac{d[\mathrm{A}]}{[\mathrm{A}]}=-k\int_0^{t}dt\quad\Rightarrow\quad \ln\frac{[\mathrm{A}]}{[\mathrm{A}]_0}=-k\,t \]</div>
+  <div class="formula key">\[ [\mathrm{A}]=[\mathrm{A}]_0\,e^{-k\,t} \]</div>
+
+  <h4>Segundo orden</h4>
+  <div class="formula">\[ \int_{[\mathrm{A}]_0}^{[\mathrm{A}]}\frac{d[\mathrm{A}]}{[\mathrm{A}]^{2}}=-k\int_0^{t}dt\quad\Rightarrow\quad \frac{1}{[\mathrm{A}]}-\frac{1}{[\mathrm{A}]_0}=k\,t \]</div>
+  <div class="formula key">\[ [\mathrm{A}]=\frac{[\mathrm{A}]_0}{1+k\,t\,[\mathrm{A}]_0} \]</div>
+
+  <h4>Resumen</h4>
+  <div class="tw"><table>
+    <tr><th>Orden</th><th>Ecuación integrada</th><th>Gráfico lineal</th><th>Pendiente</th><th>Unidades de \( k \)</th></tr>
+    <tr><td>0</td><td>\( [\mathrm{A}]=[\mathrm{A}]_0-k\,t \)</td><td>\( [\mathrm{A}] \) contra \( t \)</td><td>\( -k \)</td><td>\( \mathrm{M\,s^{-1}} \)</td></tr>
+    <tr><td>1</td><td>\( \ln[\mathrm{A}]=\ln[\mathrm{A}]_0-k\,t \)</td><td>\( \ln[\mathrm{A}] \) contra \( t \)</td><td>\( -k \)</td><td>\( \mathrm{s^{-1}} \)</td></tr>
+    <tr><td>2</td><td>\( \dfrac{1}{[\mathrm{A}]}=\dfrac{1}{[\mathrm{A}]_0}+k\,t \)</td><td>\( 1/[\mathrm{A}] \) contra \( t \)</td><td>\( +k \)</td><td>\( \mathrm{M^{-1}\,s^{-1}} \)</td></tr>
+  </table></div>
+
+  <h4>Explorar</h4>
+  <p style="margin:0 0 6px">Elija el orden, la constante de velocidad y la concentración inicial. A la izquierda, la concentración contra el tiempo, con la vida media marcada. A la derecha, la representación que se vuelve recta.</p>
+  <div class="ctrl">
+    <label>Orden <select id="ordSel"><option value="0">0</option><option value="1" selected>1</option><option value="2">2</option></select></label>
+    <label>\( k= \) <b id="kVal"></b> <span id="kUn"></span> <input type="range" id="kSl" min="0" max="100" value="50"></label>
+    <label>\( [\mathrm{A}]_0= \) <b id="aVal"></b> \( \mathrm{M} \) <input type="range" id="aSl" min="2" max="20" value="10"></label>
+  </div>
+  <div class="figpair">
+    <figure><svg id="figInt1" role="img" aria-label="Concentración de A contra el tiempo con la vida media marcada"></svg><figcaption>Concentración contra tiempo. Las líneas punteadas marcan \( [\mathrm{A}]_0/2 \) y \( t_{1/2} \).</figcaption></figure>
+    <figure><svg id="figInt2" role="img" aria-label="Representación lineal según el orden"></svg><figcaption id="capInt2"></figcaption></figure>
+  </div>
+  <p class="readout" id="outInt"></p>
+</section>
+
+<!-- 2 -->
+<section class="card" id="s2">
+  <h3><span class="badge">2</span>Tiempo de vida media</h3>
+  <p>La vida media \( t_{1/2} \) de un reactivo es el tiempo que debe transcurrir para que su concentración se reduzca a la mitad.</p>
+  <div class="formula">\[ [\mathrm{A}]_{t_{1/2}}=\frac{[\mathrm{A}]_0}{2} \]</div>
+  <p>Se reemplaza esa condición en cada ecuación integrada y se despeja \( t_{1/2} \).</p>
+
+  <h4>Orden cero</h4>
+  <div class="formula">\[ \frac{[\mathrm{A}]_0}{2}=[\mathrm{A}]_0-k\,t_{1/2}\quad\Rightarrow\quad t_{1/2}=\frac{[\mathrm{A}]_0}{2k} \]</div>
+  <h4>Primer orden</h4>
+  <div class="formula">\[ \ln\frac{[\mathrm{A}]_0}{[\mathrm{A}]_0/2}=k\,t_{1/2}\quad\Rightarrow\quad t_{1/2}=\frac{\ln 2}{k}=\frac{0{,}693}{k} \]</div>
+  <h4>Segundo orden</h4>
+  <div class="formula">\[ \frac{2}{[\mathrm{A}]_0}-\frac{1}{[\mathrm{A}]_0}=k\,t_{1/2}\quad\Rightarrow\quad t_{1/2}=\frac{1}{k\,[\mathrm{A}]_0} \]</div>
+
+  <div class="tw"><table>
+    <tr><th>Orden</th><th>\( t_{1/2} \)</th><th>Dependencia de \( [\mathrm{A}]_0 \)</th></tr>
+    <tr><td>0</td><td>\( \dfrac{[\mathrm{A}]_0}{2k} \)</td><td class="l">Proporcional a \( [\mathrm{A}]_0 \): a más reactivo, más tiempo</td></tr>
+    <tr><td>1</td><td>\( \dfrac{\ln 2}{k} \)</td><td class="l">Independiente de \( [\mathrm{A}]_0 \): es una constante de la reacción</td></tr>
+    <tr><td>2</td><td>\( \dfrac{1}{k\,[\mathrm{A}]_0} \)</td><td class="l">Inversamente proporcional a \( [\mathrm{A}]_0 \): a más reactivo, menos tiempo</td></tr>
+  </table></div>
+
+  <div class="callout tip"><p><span class="lbl">Primer orden.</span> Como la vida media no depende de la concentración, cada intervalo de \( t_{1/2} \) reduce \( [\mathrm{A}] \) a la mitad de lo que había al comienzo del intervalo: después de 1, 2 y 3 vidas medias queda \( 1/2 \), \( 1/4 \) y \( 1/8 \) del reactivo inicial. Esta propiedad se usa en farmacocinética y en la datación radiactiva.</p></div>
+
+  <h4>Ejemplo comparativo</h4>
+  <p>La descomposición de un compuesto A tiene \( k=1{,}0\times10^{-5} \) en las unidades que corresponden a cada orden, con \( [\mathrm{A}]_0=1{,}000\ \mathrm{M} \). Se calcula \( [\mathrm{A}] \) a las 12 h, el tiempo para llegar a \( [\mathrm{A}]=0{,}200\ \mathrm{M} \) y la vida media. Con \( t=12\ \mathrm{h}=43\,200\ \mathrm{s} \):</p>
+  <div class="tw"><table>
+    <tr><th>Orden</th><th>\( k \)</th><th>\( [\mathrm{A}] \) a las \( 12\ \mathrm{h} \)</th><th>\( t \) para \( [\mathrm{A}]=0{,}200\ \mathrm{M} \)</th><th>\( t_{1/2} \)</th></tr>
+    <tr><td>0</td><td>\( 1{,}0\times10^{-5}\ \mathrm{M\,s^{-1}} \)</td><td>\( 0{,}57\ \mathrm{M} \)</td><td>\( 8{,}0\times10^{4}\ \mathrm{s}=22\ \mathrm{h} \)</td><td>\( 5{,}0\times10^{4}\ \mathrm{s}=14\ \mathrm{h} \)</td></tr>
+    <tr><td>1</td><td>\( 1{,}0\times10^{-5}\ \mathrm{s^{-1}} \)</td><td>\( 0{,}65\ \mathrm{M} \)</td><td>\( 1{,}6\times10^{5}\ \mathrm{s}=45\ \mathrm{h} \)</td><td>\( 6{,}9\times10^{4}\ \mathrm{s}=19\ \mathrm{h} \)</td></tr>
+    <tr><td>2</td><td>\( 1{,}0\times10^{-5}\ \mathrm{M^{-1}\,s^{-1}} \)</td><td>\( 0{,}70\ \mathrm{M} \)</td><td>\( 4{,}0\times10^{5}\ \mathrm{s}=111\ \mathrm{h} \)</td><td>\( 1{,}0\times10^{5}\ \mathrm{s}=28\ \mathrm{h} \)</td></tr>
+  </table></div>
+  <p>Con \( k\,t=(1{,}0\times10^{-5})(43200)=0{,}432 \), expresado en las unidades de cada orden (\( \mathrm{M} \) para el orden 0, sin unidades para el 1 y \( \mathrm{M^{-1}} \) para el 2), las concentraciones a las 12 h son:</p>
+  <p style="margin:0">Orden 0:</p>
+  <div class="formula">\[ [\mathrm{A}]=1{,}000\ \mathrm{M}-0{,}432\ \mathrm{M}=0{,}57\ \mathrm{M} \]</div>
+  <p style="margin:0">Orden 1:</p>
+  <div class="formula">\[ [\mathrm{A}]=1{,}000\ \mathrm{M}\;e^{-0{,}432}=0{,}65\ \mathrm{M} \]</div>
+  <p style="margin:0">Orden 2:</p>
+  <div class="formula">\[ [\mathrm{A}]=\frac{1}{\dfrac{1}{1{,}000\ \mathrm{M}}+0{,}432\ \mathrm{M^{-1}}}=\frac{1}{1{,}432\ \mathrm{M^{-1}}}=0{,}70\ \mathrm{M} \]</div>
+  <p>Con el mismo valor numérico de \( k \), el orden cambia por completo el tiempo que tarda la reacción en avanzar.</p>
+</section>
+
+<!-- 3 -->
+<section class="card" id="s3">
+  <h3><span class="badge">3</span>Determinación del orden de reacción</h3>
+  <p>Además del método de las velocidades iniciales, hay dos formas de obtener el orden y \( k \) a partir de un solo experimento o de una serie de ellos.</p>
+
+  <h4>Método de las ecuaciones integradas</h4>
+  <p>Con datos de concentración contra tiempo de un experimento, se transforman los datos según cada ecuación integrada y se ajusta una recta. El orden correcto es aquel cuya representación es más lineal, y se discrimina con el coeficiente de determinación \( R^{2} \): cuanto más cercano a 1, mejor el ajuste.</p>
+  <div class="grid">
+    <div class="mini"><h4>Orden 0</h4><p>\( [\mathrm{A}] \) contra \( t \). Pendiente \( -k \).</p></div>
+    <div class="mini"><h4>Orden 1</h4><p>\( \ln[\mathrm{A}] \) contra \( t \). Pendiente \( -k \).</p></div>
+    <div class="mini"><h4>Orden 2</h4><p>\( 1/[\mathrm{A}] \) contra \( t \). Pendiente \( k \).</p></div>
+  </div>
+  <p style="margin:0 0 6px">Elija un conjunto de datos. Se calculan las tres representaciones y el \( R^{2} \) de cada recta.</p>
+  <div class="ctrl"><label>Datos: <select id="dsSel"></select></label></div>
+  <div class="tw"><table id="dsTab"></table></div>
+  <div class="figgrid">
+    <figure><svg id="figO0" role="img" aria-label="Ajuste de orden 0"></svg><figcaption id="capO0"></figcaption></figure>
+    <figure><svg id="figO1" role="img" aria-label="Ajuste de orden 1"></svg><figcaption id="capO1"></figcaption></figure>
+    <figure><svg id="figO2" role="img" aria-label="Ajuste de orden 2"></svg><figcaption id="capO2"></figcaption></figure>
+  </div>
+  <p class="readout" id="outDs"></p>
+
+  <h4>Método del tiempo de vida media</h4>
+  <p>Válido para órdenes distintos de 1. La vida media depende de \( [\mathrm{A}]_0 \) como una potencia que contiene el orden. A partir de la ecuación integrada general:</p>
+  <div class="formula">\[ \frac{1}{n-1}\left(\frac{1}{[\mathrm{A}]^{\,n-1}}-\frac{1}{[\mathrm{A}]_0^{\,n-1}}\right)=k\,t \]</div>
+  <p>Con \( [\mathrm{A}]=[\mathrm{A}]_0/2 \) y \( t=t_{1/2} \):</p>
+  <div class="formula key">\[ t_{1/2}=\frac{2^{\,n-1}-1}{(n-1)\,k}\,[\mathrm{A}]_0^{\,1-n} \]</div>
+  <p>Dos experimentos con distinta \( [\mathrm{A}]_0 \) permiten hallar el orden sin graficar:</p>
+  <div class="formula">\[ \frac{t_{1/2,1}}{t_{1/2,2}}=\left(\frac{[\mathrm{A}]_{0,2}}{[\mathrm{A}]_{0,1}}\right)^{n-1} \]</div>
+  <p>Con varios experimentos se usa la forma lineal de la misma ecuación:</p>
+  <div class="formula">\[ \log t_{1/2}=\log\frac{2^{\,n-1}-1}{(n-1)\,k}-(n-1)\,\log[\mathrm{A}]_0 \]</div>
+  <p>El gráfico de \( \log t_{1/2} \) contra \( \log[\mathrm{A}]_0 \) es una recta. De la pendiente se obtiene el orden, \( n=1-\text{pendiente} \), y del intercepto, \( k \).</p>
+
+  <h4>Ejemplo: descomposición térmica de una sonda fluorescente</h4>
+  <p>En disolución alcalina a \( 1030\ \mathrm{K} \) se midió el tiempo de vida media para varias concentraciones iniciales. Determine el orden y la constante de velocidad.</p>
+  <div class="tw"><table>
+    <tr><th>\( C_0\ (\mathrm{mM}) \)</th><th>\( t_{1/2}\ (\mathrm{s}) \)</th><th>\( \log C_0 \)</th><th>\( \log t_{1/2} \)</th></tr>
+    <tr><td>52,5</td><td>1454</td><td>1,720</td><td>3,163</td></tr>
+    <tr><td>139</td><td>549</td><td>2,143</td><td>2,740</td></tr>
+    <tr><td>296</td><td>256</td><td>2,471</td><td>2,408</td></tr>
+    <tr><td>360</td><td>212</td><td>2,556</td><td>2,326</td></tr>
+  </table></div>
+  <figure><svg id="figHL" role="img" aria-label="log de la vida media contra log de la concentración inicial, con recta de ajuste"></svg><figcaption>Los puntos forman una recta de pendiente \( -1{,}0019 \) e intercepto \( 4{,}886 \).</figcaption></figure>
+  <div class="formula">\[ -(n-1)=-1{,}0019\quad\Rightarrow\quad n\approx 2 \]</div>
+  <div class="formula">\[ \log\frac{2^{\,2-1}-1}{(2-1)\,k}=\log\frac{1}{k}=4{,}886\quad\Rightarrow\quad k=10^{-4{,}886}=1{,}30\times10^{-5}\ \mathrm{mM^{-1}\,s^{-1}} \]</div>
+  <p>Con los dos primeros experimentos y sin graficar: \( \dfrac{1454}{549}=2{,}65=\left(\dfrac{139}{52{,}5}\right)^{n-1}=2{,}65^{\,n-1} \), de modo que \( n-1=1 \) y \( n=2 \).</p>
+</section>
+
+<!-- 4 -->
+<section class="card" id="s4">
+  <h3><span class="badge">4</span>Dependencia de \( k \) con la temperatura</h3>
+  <p>En general la velocidad de una reacción aumenta con la temperatura. Según la teoría de colisiones, dos moléculas reaccionan si chocan con una orientación adecuada y con energía suficiente. La energía mínima necesaria es la energía de activación \( E_a \).</p>
+  <figure>
+    <svg id="figEa" role="img" aria-label="Perfil de energía de una reacción con y sin catalizador"></svg>
+    <figcaption>Perfil de energía. El catalizador abre una ruta con menor \( E_a \); la diferencia de energía entre reactivos y productos no cambia.</figcaption>
+  </figure>
+
+  <h4>Ecuación de Arrhenius</h4>
+  <div class="formula key">\[ k=A\,e^{-E_a/RT} \]</div>
+  <div class="grid">
+    <div class="mini"><h4>\( A \): factor preexponencial</h4><p>Factor de colisión. Tiene las mismas unidades que \( k \). Más \( A \), mayor \( k \).</p></div>
+    <div class="mini"><h4>\( E_a \): energía de activación</h4><p>Unidades de energía por mol. Más \( E_a \), menor \( k \).</p></div>
+    <div class="mini"><h4>\( R=8{,}314\ \mathrm{J\,mol^{-1}\,K^{-1}} \)</h4><p>\( T \) en kelvin. Con \( R \) en joule, \( E_a \) debe ir en joule por mol.</p></div>
+  </div>
+  <p>La forma lineal permite obtener \( E_a \) y \( A \) de un gráfico de \( \ln k \) contra \( 1/T \):</p>
+  <div class="formula">\[ \ln k=\ln A-\frac{E_a}{R}\,\frac{1}{T} \]</div>
+  <p>La pendiente vale \( -E_a/R \) y el intercepto \( \ln A \). Con la constante a dos temperaturas, \( A \) se elimina:</p>
+  <div class="formula key">\[ k_2=k_1\,\exp\!\left[\frac{E_a}{R}\left(\frac{1}{T_1}-\frac{1}{T_2}\right)\right] \]</div>
+
+  <h4>Explorar</h4>
+  <p style="margin:0 0 6px">Con \( A=1{,}0\times10^{10}\ \mathrm{s^{-1}} \) fijo, cambie \( E_a \) y la temperatura.</p>
+  <div class="ctrl">
+    <label>\( E_a= \) <b id="eaVal"></b> \( \mathrm{kJ\,mol^{-1}} \) <input type="range" id="eaSl" min="20" max="150" step="5" value="50"></label>
+    <label>\( T= \) <b id="tVal"></b> \( \mathrm{K} \) <input type="range" id="tSl" min="250" max="600" step="5" value="300"></label>
+  </div>
+  <div class="figpair">
+    <figure><svg id="figArr1" role="img" aria-label="k contra T"></svg><figcaption>\( k \) contra \( T \): crece exponencialmente.</figcaption></figure>
+    <figure><svg id="figArr2" role="img" aria-label="ln k contra 1/T"></svg><figcaption>\( \ln k \) contra \( 1/T \): recta de pendiente \( -E_a/R \).</figcaption></figure>
+  </div>
+  <p class="readout" id="outArr"></p>
+
+  <h4>Ejemplo 1: constante a otra temperatura</h4>
+  <p>La constante de velocidad de una reacción de primer orden es \( 3{,}46\times10^{-2}\ \mathrm{s^{-1}} \) a \( 298\ \mathrm{K} \). Calcule su valor a \( 350\ \mathrm{K} \) si \( E_a=50{,}2\ \mathrm{kJ\,mol^{-1}} \).</p>
+  <div class="formula">\[ k_2=3{,}46\times10^{-2}\,\exp\!\left[\frac{50200}{8{,}314}\left(\frac{1}{298}-\frac{1}{350}\right)\right]=3{,}46\times10^{-2}\,e^{3{,}01} \]</div>
+  <div class="formula key">\[ k_2=0{,}702\ \mathrm{s^{-1}} \]</div>
+
+  <h4>Ejemplo 2: energía de activación</h4>
+  <p>Las constantes de una reacción de segundo orden son \( 0{,}035\ \mathrm{dm^{3}\,mol^{-1}\,s^{-1}} \) a \( 730\ \mathrm{K} \) y \( 2{,}17\ \mathrm{dm^{3}\,mol^{-1}\,s^{-1}} \) a \( 840\ \mathrm{K} \). Calcule \( E_a \).</p>
+  <div class="formula">\[ E_a=\frac{R\,\ln(k_2/k_1)}{1/T_1-1/T_2}=\frac{8{,}314\ \mathrm{J\,mol^{-1}K^{-1}}\times\ln(62{,}0)}{1{,}794\times10^{-4}\ \mathrm{K^{-1}}} \]</div>
+  <div class="formula key">\[ E_a=1{,}91\times10^{5}\ \mathrm{J\,mol^{-1}}=191\ \mathrm{kJ\,mol^{-1}} \]</div>
+
+  <h4>Catalizadores</h4>
+  <div class="grid">
+    <div class="mini"><h4>Aumentan \( r \)</h4><p>Ofrecen una ruta con menor \( E_a \) y no se consumen.</p></div>
+    <div class="mini"><h4>No cambian la termodinámica</h4><p>La diferencia de energía entre reactivos y productos es la misma, con o sin catalizador.</p></div>
+    <div class="mini"><h4>Fuera de la estequiometría</h4><p>No aparecen en la ecuación global, pero participan en al menos un paso del mecanismo.</p></div>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+<script src="js/base.js"></script>
+<script>
+(function(){
+"use strict";
+var $=QUIM.$,fmt=QUIM.fmt,M=QUIM.m,tn=QUIM.tn,R=8.314;
+/* decimales fijos en TeX (coma decimal) */
+function fx(x,d){return x.toFixed(d).replace('.','{,}');}
+/* texto plano con coma, solo para rotulos dentro de los graficos SVG */
+function comma(x,d){return x.toFixed(d).replace('.',',').replace('-','\u2212');}
+
+/* ---------- Explorador de ecuaciones integradas ---------- */
+var KR={0:{min:0.01,max:0.10,u:'\\mathrm{M\\,s^{-1}}'},1:{min:0.01,max:0.10,u:'\\mathrm{s^{-1}}'},2:{min:0.01,max:0.20,u:'\\mathrm{M^{-1}\\,s^{-1}}'}};
+function drawInt(){
+  var n=+$('#ordSel').value,kr=KR[n],A0=+$('#aSl').value/10;
+  var k=kr.min+(kr.max-kr.min)*(+$('#kSl').value)/100;
+  $('#kVal').innerHTML=M(fx(k,3));$('#kUn').innerHTML=M(kr.u);$('#aVal').innerHTML=M(fx(A0,1));
+  var th=n===0?A0/(2*k):n===1?Math.LN2/k:1/(k*A0);
+  var tmax=n===0?2.4*th:4*th;
+  var A=function(t){return n===0?Math.max(A0-k*t,0):n===1?A0*Math.exp(-k*t):A0/(1+k*t*A0);};
+  var tt=QUIM.nice(0,tmax,5);
+  var c1=QUIM.chart($('#figInt1'),{x:[0,tmax],y:[0,A0*1.05],xt:tt,yt:QUIM.nice(0,A0,4),xl:'tiempo (s)',yl:'[A] (M)',W:420,H:300,l:60});
+  c1.line(0,A0/2,th,A0/2,'#a8231b',1.4,'5 4').line(th,A0/2,th,0,'#a8231b',1.4,'5 4');
+  c1.fn(A,0,tmax,160,'#1f5fbf',3.2);
+  c1.dots([[th,A0/2]],'#a8231b',5);
+  c1.text(th,0,'t\u00bd',{c:'#a8231b',dy:-8,dx:6,w:600});
+  c1.done();
+  var y=n===0?A:n===1?function(t){return Math.log(A(t));}:function(t){return 1/A(t);};
+  var tl=n===0?2*th:tmax,ylo,yhi,lab,sl;
+  if(n===0){ylo=0;yhi=A0*1.05;lab='[A] (M)';sl='-k';}
+  else if(n===1){ylo=Math.log(A(tmax));yhi=Math.log(A0)+0.1;lab='ln [A]';sl='-k';}
+  else{ylo=1/A0-0.05;yhi=1/A(tmax)+0.2;lab='1/[A] (M\u207b\u00b9)';sl='+k';}
+  var c2=QUIM.chart($('#figInt2'),{x:[0,tmax],y:[ylo,yhi],xt:tt,yt:QUIM.nice(ylo,yhi,4),xl:'tiempo (s)',yl:lab,W:420,H:300,l:60});
+  c2.fn(y,0,tl,160,'#0c8486',3.2);
+  c2.done();
+  var ax=n===0?'[\\mathrm{A}]':n===1?'\\ln[\\mathrm{A}]':'1/[\\mathrm{A}]';
+  $('#capInt2').innerHTML=M(ax)+' contra '+M('t')+': recta de pendiente '+M(sl)+'.';
+  var rt=n===0?'t_{1/2}=\\frac{[\\mathrm{A}]_0}{2k}':n===1?'t_{1/2}=\\frac{\\ln 2}{k}':'t_{1/2}=\\frac{1}{k\\,[\\mathrm{A}]_0}';
+  $('#outInt').innerHTML='Orden '+n+': '+M(rt+'='+tn(th,3)+'\\ \\mathrm{s}')+'. '+(n===0?'La concentración llega a cero en '+M(tn(2*th,3)+'\\ \\mathrm{s}')+'.':n===1?'La vida media no cambia al variar '+M('[\\mathrm{A}]_0')+'.':'Al aumentar '+M('[\\mathrm{A}]_0')+' la vida media disminuye.');
+}
+
+/* ---------- Ajuste de orden con datos experimentales ---------- */
+var DS=[
+ {n:'Piroxicam, degradación por radiación lumínica',tu:'\\mathrm{semanas}',cu:'\\mathrm{mmol\\,dm^{-3}}',ku:['\\mathrm{mmol\\,dm^{-3}\\,semana^{-1}}','\\mathrm{semana^{-1}}','\\mathrm{mmol^{-1}\\,dm^{3}\\,semana^{-1}}'],
+  t:[0,1,2,3,4,5],A:[100.1,82.0,60.5,40.1,22.0,11.5]},
+ {n:'Homotropina, descomposición en disolución ácida',tu:'\\mathrm{s}',cu:'\\mathrm{M}',ku:['\\mathrm{M\\,s^{-1}}','\\mathrm{s^{-1}}','\\mathrm{M^{-1}\\,s^{-1}}'],
+  t:[0,1.38,3,6,8.6,12,17],A:[1,0.934,0.852,0.759,0.631,0.522,0.418]}
+];
+function drawDs(){
+  var d=DS[+$('#dsSel').value],T=d.t,A=d.A,i;
+  var ys=[A,A.map(Math.log),A.map(function(a){return 1/a;})];
+  var reg=ys.map(function(y){return QUIM.regress(T,y);});
+  var h='<tr><th>'+M('t\\ ('+d.tu+')')+'</th><th>'+M('[\\mathrm{A}]\\ ('+d.cu+')')+'</th><th>'+M('\\ln[\\mathrm{A}]')+'</th><th>'+M('1/[\\mathrm{A}]\\ \\left('+d.cu+'\\right)^{-1}')+'</th></tr>';
+  for(i=0;i<T.length;i++)h+='<tr><td>'+fmt(T[i])+'</td><td>'+fmt(A[i],4)+'</td><td>'+comma(ys[1][i],3)+'</td><td>'+fmt(ys[2][i],4)+'</td></tr>';
+  $('#dsTab').innerHTML=h;
+  var tmax=T[T.length-1],tt=QUIM.nice(0,tmax,5),best=0;
+  [0,1,2].forEach(function(j){
+    var y=ys[j],lo=Math.min.apply(null,y),hi=Math.max.apply(null,y),pad=(hi-lo)*0.12;
+    var c=QUIM.chart($('#figO'+j),{x:[0,tmax*1.04],y:[lo-pad,hi+pad],xt:tt,yt:QUIM.nice(lo-pad,hi+pad,4),xl:'t',yl:['[A]','ln [A]','1/[A]'][j],W:360,H:280,l:62,yf:function(v){return QUIM.tick(Number(v.toPrecision(3)));}});
+    c.line(0,reg[j].b,tmax*1.04,reg[j].b+reg[j].m*tmax*1.04,'#0c8486',2.2);
+    c.dots(T.map(function(t,k){return [t,y[k]];}),'#1f5fbf',4.5);
+    c.done();
+    $('#capO'+j).innerHTML='Orden '+j+': '+M('R^{2}='+tn(reg[j].r2,4));
+    if(reg[j].r2>reg[best].r2)best=j;
+  });
+  var k=-reg[best].m*(best===2?-1:1);
+  var th=best===0?A[0]/(2*k):best===1?Math.LN2/k:1/(k*A[0]);
+  $('#outDs').innerHTML='Mayor '+M('R^{2}')+': <b>orden '+best+'</b> ('+M(tn(reg[best].r2,4))+'). Pendiente '+M((best===2?'+':'-')+'k')+', de modo que '+M('k='+tn(k,3)+'\\ '+d.ku[best])+'. Vida media '+M('t_{1/2}='+tn(th,4)+'\\ '+d.tu)+'.';
+}
+
+/* ---------- Método de la vida media: log-log ---------- */
+function drawHL(){
+  var C=[52.5,139,296,360],th=[1454,549,256,212],x=C.map(function(v){return Math.log(v)/Math.LN10;}),y=th.map(function(v){return Math.log(v)/Math.LN10;});
+  var rg=QUIM.regress(x,y);
+  var c=QUIM.chart($('#figHL'),{x:[1.5,2.8],y:[2,3.3],xt:[1.6,1.8,2,2.2,2.4,2.6,2.8],yt:[2,2.2,2.4,2.6,2.8,3,3.2],xl:'log C\u2080',yl:'log t\u00bd',W:520,H:300,l:62,xgrid:true});
+  c.line(1.5,rg.b+rg.m*1.5,2.8,rg.b+rg.m*2.8,'#0c8486',2.2);
+  c.dots(x.map(function(v,i){return [v,y[i]];}),'#1f5fbf',5);
+  c.text(2.1,3.05,'y = '+comma(rg.m,4)+' x + '+comma(rg.b,3),{c:'#59627a',s:13});
+  c.done();
+}
+
+/* ---------- Perfil de energía ---------- */
+function drawEa(){
+  var svg=$('#figEa'),W=640,H=300;svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  var h='<line x1="70" y1="250" x2="610" y2="250" stroke="#59627a" stroke-width="1.5"/><line x1="70" y1="20" x2="70" y2="250" stroke="#59627a" stroke-width="1.5"/>'+
+   '<text x="340" y="285" text-anchor="middle" font-size="14" fill="#59627a">avance de la reacci\u00f3n</text>'+
+   '<text transform="translate(20 135) rotate(-90)" text-anchor="middle" font-size="14" fill="#59627a">energ\u00eda</text>';
+  h+='<path d="M90 190 C150 190 190 190 240 120 C270 75 300 50 330 50 C360 50 390 75 420 120 C470 200 500 225 560 225" fill="none" stroke="#1f5fbf" stroke-width="3.2"/>';
+  h+='<path d="M90 190 C150 190 190 190 235 150 C260 130 290 105 330 105 C370 105 400 130 425 160 C470 215 500 225 560 225" fill="none" stroke="#0c8486" stroke-width="3" stroke-dasharray="8 5"/>';
+  h+='<line x1="90" y1="190" x2="330" y2="190" stroke="#98a1b8" stroke-dasharray="3 4"/><line x1="330" y1="50" x2="390" y2="50" stroke="#98a1b8" stroke-dasharray="3 4"/><line x1="500" y1="225" x2="560" y2="225" stroke="#98a1b8" stroke-dasharray="3 4"/>';
+  h+='<line x1="355" y1="190" x2="355" y2="54" stroke="#a8231b" stroke-width="2"/><polygon points="355,50 350,62 360,62" fill="#a8231b"/>'+
+     '<text x="363" y="140" font-size="15" font-weight="700" fill="#a8231b">E<tspan dy="4" font-size="11">a</tspan></text>';
+  h+='<line x1="305" y1="190" x2="305" y2="109" stroke="#0c8486" stroke-width="2"/><polygon points="305,105 300,117 310,117" fill="#0c8486"/>'+
+     '<text x="272" y="165" font-size="15" font-weight="700" fill="#0c8486">E<tspan dy="4" font-size="11">a</tspan></text>'+
+     '<line x1="92" y1="42" x2="128" y2="42" stroke="#1f5fbf" stroke-width="3.2"/><text x="136" y="47" font-size="14" fill="#1c2333">sin catalizador</text>'+
+     '<line x1="92" y1="66" x2="128" y2="66" stroke="#0c8486" stroke-width="3" stroke-dasharray="8 5"/><text x="136" y="71" font-size="14" fill="#1c2333">con catalizador</text>';
+  h+='<text x="95" y="212" font-size="14" fill="#1c2333">Reactivos</text><text x="505" y="246" font-size="14" fill="#1c2333">Productos</text>'+
+     '<text x="330" y="38" text-anchor="middle" font-size="14" fill="#1c2333">Estado de transici\u00f3n</text>';
+  svg.innerHTML=h;
+}
+
+/* ---------- Arrhenius ---------- */
+function p10(v){
+  if(v===0)return '0';
+  var sup={'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻'};
+  var e=Math.floor(Math.log(Math.abs(v))/Math.LN10+1e-9),m=v/Math.pow(10,e);
+  m=Math.round(m*10)/10;if(m>=10){m=1;e+=1;}
+  var es=String(e).split('').map(function(c){return sup[c];}).join('');
+  return (m===1?'':String(m).replace('.',',')+'×')+'10'+es;
+}
+
+function drawArr(){
+  var Ea=+$('#eaSl').value*1000,T=+$('#tSl').value,A=1e10;
+  $('#eaVal').innerHTML=M(String(+$('#eaSl').value));$('#tVal').innerHTML=M(String(T));
+  var kf=function(t){return A*Math.exp(-Ea/(R*t));},kT=kf(T);
+  var kmax=kf(600),tt=[250,300,350,400,450,500,550,600];
+  var c1=QUIM.chart($('#figArr1'),{x:[250,600],y:[0,kmax*1.05],xt:tt,yt:QUIM.nice(0,kmax,4),xl:'T (K)',yl:'k (s⁻¹)',W:420,H:300,l:74,yf:p10});
+  c1.fn(kf,250,600,120,'#1f5fbf',3.2);
+  c1.line(T,0,T,kT,'#a8231b',1.3,'4 4');
+  c1.dots([[T,kT]],'#a8231b',5.5);
+  c1.done();
+  var xs=function(t){return 1000/t;},lk=function(t){return Math.log(kf(t));};
+  var ylo=lk(250),yhi=lk(600);
+  var c2=QUIM.chart($('#figArr2'),{x:[1.6,4.1],y:[Math.floor(ylo)-1,Math.ceil(yhi)+1],xt:[1.8,2.2,2.6,3,3.4,3.8],yt:QUIM.nice(Math.floor(ylo)-1,Math.ceil(yhi)+1,5),xl:'1000 / T (K\u207b\u00b9)',yl:'ln k',W:420,H:300,l:60});
+  c2.line(xs(600),lk(600),xs(250),lk(250),'#0c8486',3);
+  c2.dots([[xs(T),lk(T)]],'#a8231b',5.5);
+  c2.done();
+  var k10=kf(T+10)/kT;
+  $('#outArr').innerHTML='A '+M(T+'\\ \\mathrm{K}')+': '+M('k='+tn(kT,3)+'\\ \\mathrm{s^{-1}}')+'; '+M('\\ln k='+fx(Math.log(kT),2))+'. Pendiente de la recta: '+M('-E_a/R='+fx(-Ea/R,0)+'\\ \\mathrm{K}')+'. Al subir 10 K, '+M('k')+' se multiplica por '+M(fx(k10,2))+'.';
+}
+
+/* ---------- Datos y banco de preguntas ---------- */
+var TOPICS={
+  int:{n:'Ecuaciones de velocidad integradas',a:'#s1'},
+  vm:{n:'Tiempo de vida media',a:'#s2'},
+  ord:{n:'Determinación del orden de reacción',a:'#s3'},
+  arr:{n:'Dependencia de k con la temperatura',a:'#s4'}
+};
+var VF=[
+ {t:'vm',q:'En una reacción de primer orden, el tiempo de vida media depende de la concentración inicial del reactivo.',ans:false,
+  exp:'Para primer orden \\( t_{1/2}=\\ln 2/k \\): sólo depende de \\( k \\). Por eso cada intervalo de una vida media reduce la concentración a la mitad, parta de la que parta.'},
+ {t:'int',q:'Para una reacción de segundo orden en A, el gráfico de \\( 1/[\\mathrm{A}] \\) contra el tiempo es una recta de pendiente \\( k \\).',ans:true,
+  exp:'De \\( \\dfrac{1}{[\\mathrm{A}]}=\\dfrac{1}{[\\mathrm{A}]_0}+k\\,t \\), la pendiente es \\( k \\) (positiva) y el intercepto es \\( 1/[\\mathrm{A}]_0 \\).'},
+ {t:'arr',q:'Un catalizador aumenta la velocidad de reacción porque disminuye la energía de Gibbs de la reacción global.',ans:false,
+  exp:'El catalizador ofrece una ruta con menor energía de activación. La diferencia de energía entre reactivos y productos, y con ello la termodinámica de la reacción global, no cambia.'}
+];
+var SU=[
+ {t:'int',q:'Para una reacción de primer orden en A, ¿qué representación gráfica entrega una recta?',
+  o:[{x:'\\( [\\mathrm{A}] \\) contra \\( t \\)',w:'Esa recta corresponde al orden cero.'},
+     {x:'\\( \\ln[\\mathrm{A}] \\) contra \\( t \\)',ok:true,w:'De \\( \\ln[\\mathrm{A}]=\\ln[\\mathrm{A}]_0-k\\,t \\): recta de pendiente \\( -k \\).'},
+     {x:'\\( 1/[\\mathrm{A}] \\) contra \\( t \\)',w:'Esa recta corresponde al segundo orden.'},
+     {x:'\\( \\ln[\\mathrm{A}] \\) contra \\( 1/T \\)',w:'Ese es el gráfico de Arrhenius, que relaciona \\( k \\) con la temperatura y no la concentración con el tiempo.'}]},
+ {t:'ord',q:'Al duplicar la concentración inicial de un reactivo, su vida media se reduce a la mitad. El orden de la reacción es:',
+  o:[{x:'0',w:'Con orden cero la vida media aumentaría al duplicar \\( [\\mathrm{A}]_0 \\).'},
+     {x:'1',w:'Con primer orden la vida media no cambia.'},
+     {x:'2',ok:true,w:'\\( t_{1/2}\\propto[\\mathrm{A}]_0^{\\,1-n} \\): para que al duplicar \\( [\\mathrm{A}]_0 \\) el tiempo se reduzca a la mitad, \\( 2^{\\,1-n}=1/2 \\) y \\( n=2 \\).'},
+     {x:'3',w:'Con \\( n=3 \\) la vida media se reduciría a la cuarta parte.'}]},
+ {t:'arr',q:'En un gráfico de \\( \\ln k \\) contra \\( 1/T \\) se obtiene una recta de pendiente \\( -6{,}0\\times10^{3}\\ \\mathrm{K} \\). La energía de activación es:',
+  o:[{x:'\\( 49{,}9\\ \\mathrm{kJ\\,mol^{-1}} \\)',ok:true,w:'\\( E_a=-\\text{pendiente}\\times R=6{,}0\\times10^{3}\\ \\mathrm{K}\\times8{,}314\\ \\mathrm{J\\,mol^{-1}K^{-1}}=4{,}99\\times10^{4}\\ \\mathrm{J\\,mol^{-1}} \\).'},
+     {x:'\\( 6{,}0\\ \\mathrm{kJ\\,mol^{-1}} \\)',w:'La pendiente no es la energía de activación: hay que multiplicarla por \\( R \\).'},
+     {x:'\\( 0{,}72\\ \\mathrm{kJ\\,mol^{-1}} \\)',w:'Se dividió la pendiente entre \\( R \\), en vez de multiplicarla.'},
+     {x:'\\( -49{,}9\\ \\mathrm{kJ\\,mol^{-1}} \\)',w:'La energía de activación es positiva: el signo menos ya está en la ecuación, \\( \\text{pendiente}=-E_a/R \\).'}]}
+];
+var CALC=[
+ {t:'int',q:'Un fármaco se degrada con cinética de primer orden. Su concentración baja de \\( 2{,}00 \\) a \\( 0{,}500\\ \\mathrm{mg\\,mL^{-1}} \\) en \\( 12{,}0\\ \\mathrm{h} \\). Calcule la constante de velocidad e indique sus unidades.',
+  uopts:['\\mathrm{mg\\,mL^{-1}\\,h^{-1}}','\\mathrm{h^{-1}}','\\mathrm{mL\\,mg^{-1}\\,h^{-1}}','\\mathrm{h}'],uok:1,ans:0.1155,ansTex:'0{,}116\\ \\mathrm{h^{-1}}',ph:'ej. 0,25',
+  hint:'En primer orden, \\( k=\\dfrac{1}{t}\\ln\\dfrac{[\\mathrm{A}]_0}{[\\mathrm{A}]} \\). La constante tiene unidades de inverso del tiempo.',
+  sol:'<div class="formula">\\[ k=\\frac{1}{t}\\ln\\frac{[\\mathrm{A}]_0}{[\\mathrm{A}]}=\\frac{1}{12{,}0\\ \\mathrm{h}}\\ln\\frac{2{,}00}{0{,}500}=0{,}116\\ \\mathrm{h^{-1}} \\]</div><p>La concentración se redujo a la cuarta parte, es decir, dos vidas medias: \\( t_{1/2}=6{,}00\\ \\mathrm{h} \\).</p>'},
+ {t:'vm',q:'Una reacción de segundo orden en A tiene \\( k=2{,}5\\times10^{-3}\\ \\mathrm{M^{-1}\\,s^{-1}} \\). Calcule su tiempo de vida media si \\( [\\mathrm{A}]_0=0{,}40\\ \\mathrm{M} \\).',
+  unit:'\\mathrm{s}',ans:1000,ansTex:'1{,}0\\times10^{3}\\ \\mathrm{s}',ph:'ej. 500',
+  hint:'Para segundo orden, \\( t_{1/2}=\\dfrac{1}{k\\,[\\mathrm{A}]_0} \\).',
+  sol:'<div class="formula">\\[ t_{1/2}=\\frac{1}{k\\,[\\mathrm{A}]_0}=\\frac{1}{(2{,}5\\times10^{-3}\\ \\mathrm{M^{-1}s^{-1}})(0{,}40\\ \\mathrm{M})}=1{,}0\\times10^{3}\\ \\mathrm{s} \\]</div><p>Equivale a \\( 16{,}7\\ \\mathrm{min} \\).</p>'},
+ {t:'arr',q:'La constante de velocidad de una reacción es \\( 1{,}20\\times10^{-3}\\ \\mathrm{s^{-1}} \\) a \\( 300\\ \\mathrm{K} \\) y su energía de activación es \\( 75{,}0\\ \\mathrm{kJ\\,mol^{-1}} \\). Calcule la constante a \\( 320\\ \\mathrm{K} \\).',
+  unit:'\\mathrm{s^{-1}}',ans:7.86e-3,ansTex:'7{,}86\\times10^{-3}\\ \\mathrm{s^{-1}}',ph:'ej. 0,005',
+  hint:'Use \\( k_2=k_1\\exp\\!\\left[\\dfrac{E_a}{R}\\left(\\dfrac{1}{T_1}-\\dfrac{1}{T_2}\\right)\\right] \\) con \\( E_a \\) en \\( \\mathrm{J\\,mol^{-1}} \\).',
+  sol:'<div class="formula">\\[ k_2=1{,}20\\times10^{-3}\\exp\\!\\left[\\frac{75000}{8{,}314}\\left(\\frac{1}{300}-\\frac{1}{320}\\right)\\right]=1{,}20\\times10^{-3}\\,e^{1{,}879} \\]</div><div class="formula">\\[ k_2=7{,}86\\times10^{-3}\\ \\mathrm{s^{-1}} \\]</div>'}
+];
+
+QUIM.init({
+  title:'Cinética química II',
+  subtitle:'Ecuaciones integradas, vida media y temperatura',
+  pdf:'pdf/kinetica_integradas.pdf',
+  sections:[
+    {id:'s1',title:'Ecuaciones integradas'},
+    {id:'s2',title:'Tiempo de vida media'},
+    {id:'s3',title:'Determinación del orden'},
+    {id:'s4',title:'Dependencia con T'}
+  ],
+  quiz:{topics:TOPICS,vf:VF,su:SU,calc:CALC},
+  ready:function(){
+    ['#ordSel','#kSl','#aSl'].forEach(function(s){$(s).addEventListener('input',drawInt);});
+    $('#ordSel').addEventListener('change',function(){$('#kSl').value=50;drawInt();});
+    DS.forEach(function(d,i){var o=document.createElement('option');o.value=i;o.textContent=d.n;$('#dsSel').appendChild(o);});
+    $('#dsSel').addEventListener('change',drawDs);
+    ['#eaSl','#tSl'].forEach(function(s){$(s).addEventListener('input',drawArr);});
+    drawInt();drawDs();drawHL();drawEa();drawArr();
+  }
+});
+})();
+</script>
+</body>
+</html>

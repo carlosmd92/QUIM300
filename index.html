@@ -13,22 +13,32 @@ h1{margin:0 0 4px;font-size:1.6rem}
 .sub{margin:0 0 28px;color:var(--muted)}
 h2{font-size:1.05rem;margin:28px 0 10px;color:var(--muted);font-weight:600;letter-spacing:.02em}
 ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-li a{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px}
-li a:hover{border-color:var(--acc);background:var(--acc-soft)}
+li{display:flex;gap:8px;align-items:stretch}
+li a.main{flex:1;display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+li a.main:hover{border-color:var(--acc);background:var(--acc-soft)}
 li b{display:block;color:var(--acc)}
 li span{font-size:.93rem;color:var(--muted)}
+li a.pdf{display:flex;align-items:center;justify-content:center;flex:none;width:76px;text-decoration:none;color:var(--acc);background:var(--card);border:1px solid var(--acc);border-radius:14px;font-weight:600;font-size:.9rem}
+li a.pdf:hover{background:var(--acc-soft)}
 footer{margin-top:36px;font-size:.88rem;color:var(--muted)}
 a:focus-visible{outline:3px solid #9ec0f2;outline-offset:2px}
+@media (max-width:480px){li{flex-direction:column}li a.pdf{width:auto;padding:8px}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>QUIM300 Fisicoquímica Aplicada</h1>
-  <p class="sub">Actividades interactivas de estudio. Universidad Andrés Bello, semestre 2026-2.</p>
+  <p class="sub">Resúmenes interactivos de estudio, con autoevaluación y PDF descargable. Universidad Andrés Bello, semestre 2026-2.</p>
 
   <h2>Cinética química</h2>
   <ul>
-    <li><a href="kinetica_velocidades.html"><b>Velocidad de reacción y ley de velocidad</b><span>Velocidad media e instantánea, aparición y consumo, órdenes de reacción, método de las velocidades iniciales y autoevaluación.</span></a></li>
+    <li><a class="main" href="kinetica_velocidades.html"><b>Cinética química I: velocidad de reacción y ley de velocidad</b><span>Velocidad media e instantánea, aparición y consumo, órdenes de reacción, método de las velocidades iniciales.</span></a><a class="pdf" href="pdf/kinetica_velocidades.pdf" download>PDF</a></li>
+    <li><a class="main" href="kinetica_integradas.html"><b>Cinética química II: ecuaciones integradas, vida media y temperatura</b><span>Ecuaciones integradas de orden 0, 1 y 2, tiempo de vida media, determinación del orden y ecuación de Arrhenius.</span></a><a class="pdf" href="pdf/kinetica_integradas.pdf" download>PDF</a></li>
+  </ul>
+
+  <h2>Fenómenos de superficie</h2>
+  <ul>
+    <li><a class="main" href="superficies.html"><b>Fisicoquímica de superficies</b><span>Tensión superficial, Young&ndash;Laplace, Kelvin, capilaridad y adsorción de Gibbs.</span></a><a class="pdf" href="pdf/superficies.pdf" download>PDF</a></li>
   </ul>
 
   <footer>Prof. Carlos Morales</footer>
