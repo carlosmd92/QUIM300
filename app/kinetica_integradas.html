@@ -249,7 +249,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 "use strict";
 var $=QUIM.$,fmt=QUIM.fmt,M=QUIM.m,tn=QUIM.tn,R=8.314;
 function comma(x,d){return x.toFixed(d).replace('.',',').replace('-','\u2212');}
-var reduce=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+var reduce=false;
 
 /* ================= Bloque 1: animación ================= */
 var KR={0:{min:0.02,max:0.12,u:'\\mathrm{M\\,s^{-1}}'},1:{min:0.04,max:0.20,u:'\\mathrm{s^{-1}}'},2:{min:0.04,max:0.30,u:'\\mathrm{M^{-1}\\,s^{-1}}'}};
