@@ -225,7 +225,7 @@ function p10(v){
 }
 /* ---------- Animación: bucle único y suavizado ---------- */
 var ticks=[];
-(function loop(t){ticks.forEach(function(f){f(t);});requestAnimationFrame(loop);})(0);
+(function loop(t){requestAnimationFrame(loop);ticks.forEach(function(f){try{f(t);}catch(e){}});})(0);
 function glide(o,key,to,ms,draw){
   if(RM||!ms){o[key]=to;draw();return;}
   var from=o[key],t0=null,id=o._g=(o._g||0)+1;
@@ -561,26 +561,26 @@ QUIM.init({
   ],
   quiz:{topics:TOPICS,vf:VF,su:SU,calc:CALC},
   ready:function(){
-    LAP.forEach(function(q,i){var o=document.createElement('option');o.value=i;o.textContent=q.n;$('#lqSel').appendChild(o);});
-    CP.forEach(function(q,i){var o=document.createElement('option');o.value=i;o.textContent=q.n;$('#cpSel').appendChild(o);});
-    $('#tSl').addEventListener('input',drawGT);
-    $('#btnMol').addEventListener('click',function(){mol.run=!mol.run;this.textContent=mol.run?'Pausar':'Animar';});
-    $('#btnMol').textContent=mol.run?'Pausar':'Animar';
-    $('#dxSl').addEventListener('input',function(){fr._g=(fr._g||0)+1;fr.dx=+this.value/10;paintFrame();});
-    $('#btnSoltar').addEventListener('click',function(){glide(fr,'dx',0,1100,function(){$('#dxSl').value=Math.round(fr.dx*10);paintFrame();});});
-    ['#lqSel','#rSl'].forEach(function(s){$(s).addEventListener('input',drawLap);});
-    ['#kmSel','#rkSl'].forEach(function(s){$(s).addEventListener('input',drawKel);});
-    $('#cpSel').addEventListener('change',function(){$('#thSl').value=CP[+this.value].th;drawCap(true);});
-    ['#rcSl','#thSl'].forEach(function(s){$(s).addEventListener('input',function(){drawCap(false);});});
-    $('#btnSub').addEventListener('click',function(){drawCap(true);});
-    ['#slSel','#cgSl'].forEach(function(s){$(s).addEventListener('input',drawGib);});
-    $('#btnGib').addEventListener('click',function(){gib.run=!gib.run;this.textContent=gib.run?'Pausar':'Animar';});
-    $('#btnGib').textContent=gib.run?'Pausar':'Animar';
-    initMol();drawGT();paintFrame();
-    lapG.f=Math.max(0,Math.min(1,(lg(LAP[0].k*LAP[0].g/rLap())-1)/6));lapD.rad=25+70*(lg(rLap())+7)/5;drawLap();
-    kel.rad=14+56*(lg(rKel())+9)/3;kel.bar=Math.exp(kx(rKel()));drawKel();
-    cap.px=0;drawCap(false);
-    initGib();drawGib();
+    try{LAP.forEach(function(q,i){var o=document.createElement('option');o.value=i;o.textContent=q.n;$('#lqSel').appendChild(o);});}catch(e){}
+    try{CP.forEach(function(q,i){var o=document.createElement('option');o.value=i;o.textContent=q.n;$('#cpSel').appendChild(o);});}catch(e){}
+    try{$('#tSl').addEventListener('input',drawGT);}catch(e){}
+    try{$('#btnMol').addEventListener('click',function(){mol.run=!mol.run;this.textContent=mol.run?'Pausar':'Animar';});}catch(e){}
+    try{$('#btnMol').textContent=mol.run?'Pausar':'Animar';}catch(e){}
+    try{$('#dxSl').addEventListener('input',function(){fr._g=(fr._g||0)+1;fr.dx=+this.value/10;paintFrame();});}catch(e){}
+    try{$('#btnSoltar').addEventListener('click',function(){glide(fr,'dx',0,1100,function(){$('#dxSl').value=Math.round(fr.dx*10);paintFrame();});});}catch(e){}
+    try{['#lqSel','#rSl'].forEach(function(s){$(s).addEventListener('input',drawLap);});}catch(e){}
+    try{['#kmSel','#rkSl'].forEach(function(s){$(s).addEventListener('input',drawKel);});}catch(e){}
+    try{$('#cpSel').addEventListener('change',function(){$('#thSl').value=CP[+this.value].th;drawCap(true);});}catch(e){}
+    try{['#rcSl','#thSl'].forEach(function(s){$(s).addEventListener('input',function(){drawCap(false);});});}catch(e){}
+    try{$('#btnSub').addEventListener('click',function(){drawCap(true);});}catch(e){}
+    try{['#slSel','#cgSl'].forEach(function(s){$(s).addEventListener('input',drawGib);});}catch(e){}
+    try{$('#btnGib').addEventListener('click',function(){gib.run=!gib.run;this.textContent=gib.run?'Pausar':'Animar';});}catch(e){}
+    try{$('#btnGib').textContent=gib.run?'Pausar':'Animar';}catch(e){}
+    try{initMol();drawGT();paintFrame();}catch(e){}
+    try{lapG.f=Math.max(0,Math.min(1,(lg(LAP[0].k*LAP[0].g/rLap())-1)/6));lapD.rad=25+70*(lg(rLap())+7)/5;drawLap();}catch(e){}
+    try{kel.rad=14+56*(lg(rKel())+9)/3;kel.bar=Math.exp(kx(rKel()));drawKel();}catch(e){}
+    try{cap.px=0;drawCap(false);}catch(e){}
+    try{initGib();drawGib();}catch(e){}
   }
 });
 })();
