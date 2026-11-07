@@ -100,6 +100,7 @@ valor ($10^{-3}\ \mathrm{M\,s^{-1}}$) & $1{,}0$ & $3{,}0$ & $2{,}0$\\
 \end{minipage}
 
 %------------------------------------------------------------------
+\clearpage
 \section{Ley de velocidad y órdenes de reacción}
 A temperatura constante, la velocidad depende de las concentraciones de los reactivos:
 \begin{clave}
@@ -117,7 +118,7 @@ $\displaystyle \frac{r_2}{r_1}=\frac{k\,(f\A)^{m}}{k\,\A^{m}}=f^{m}$
 \end{minipage}\hfill
 \begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
 \begin{tikzpicture}
-\begin{axis}[resumen,width=0.86\linewidth,height=4.6cm,xlabel={$[\mathrm{A}]/[\mathrm{A}]_0$},ylabel={$r/r_0$},
+\begin{axis}[resumen,width=0.86\linewidth,height=3.6cm,xlabel={$[\mathrm{A}]/[\mathrm{A}]_0$},ylabel={$r/r_0$},
   xmin=0,xmax=3,ymin=0,ymax=9,xtick={0,1,2,3},ytick={0,3,6,9},clip=false]
 \addplot[muted,dash pattern=on 2pt off 2pt,domain=0:3]{1};
 \addplot[teal,dashed,domain=0:3]{x};
@@ -128,7 +129,7 @@ $\displaystyle \frac{r_2}{r_1}=\frac{k\,(f\A)^{m}}{k\,\A^{m}}=f^{m}$
 \end{axis}
 \end{tikzpicture}
 
-\vspace{12pt}
+\vspace{8pt}
 \small\textbf{Unidades de $k$.} Con orden total $N$ y concentraciones en M, $k$ queda en $\mathrm{M^{1-N}\,s^{-1}}$:\\[6pt]
 \begin{tabular}{@{}lcccc@{}}
 \toprule
@@ -142,7 +143,7 @@ $k$ & $\mathrm{M\,s^{-1}}$ & $\mathrm{s^{-1}}$ & $\mathrm{M^{-1}\,s^{-1}}$ & $\m
 \begin{alerta}
 \textbf{Errores frecuentes.} Los órdenes no se deducen de la ecuación balanceada: solo coinciden con los coeficientes en un
 paso elemental. Por ejemplo, $2\,\mathrm{NO}+2\,\mathrm{H_2}\to\mathrm{N_2}+2\,\mathrm{H_2O}$ cumple
-$r=k[\mathrm{NO}]^{2}[\mathrm{H_2}]$, con orden 1 en $\mathrm{H_2}$ aunque su coeficiente es 2, y orden total 3.
+$r=k[\mathrm{NO}]^{2}[\mathrm{H_2}]$, con orden 1 en $\mathrm{H_2}$ aunque su coeficiente es 2.
 \end{alerta}
 
 %------------------------------------------------------------------
@@ -168,8 +169,6 @@ se verifica con otro experimento.
 \textbf{Verificación de sanidad.} El orden obtenido debe concordar con lo esperado al duplicar $\A$: si $r$ no cambia,
 $m=0$; si se duplica, $m=1$; si se cuadruplica, $m=2$; si se multiplica por 8, $m=3$.
 \end{nota}
-\vspace{6pt}
-En el ejemplo, la ley de velocidad resulta $r=k\,[\mathrm{NO}]^{2}[\mathrm{H_2}]$, de orden total 3.
 \end{minipage}\hfill
 \begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
 \textbf{Ejemplo:} $2\,\mathrm{NO}+2\,\mathrm{H_2}\to\mathrm{N_2}+2\,\mathrm{H_2O}$\\[5pt]
@@ -182,21 +181,19 @@ Exp. & $[\mathrm{NO}]$ (M) & $[\mathrm{H_2}]$ (M) & $r_0$ ($\mathrm{M\,s^{-1}}$)
 2 & 0,020 & 0,010 & \num{1,0e-3}\\
 3 & 0,010 & 0,020 & \num{5,0e-4}\\
 \bottomrule
-\end{tabular}\\[8pt]
+\end{tabular}\\[5pt]
 \normalsize
-Exp.\ 1 y 2 (cambia $[\mathrm{NO}]$):\vspace{-2pt}
+Exp.\ 1 y 2 cambia $[\mathrm{NO}]$; Exp.\ 1 y 3 cambia $[\mathrm{H_2}]$:\vspace{-2pt}
 \begin{apoyo}\small
-$\displaystyle\frac{r_2}{r_1}=\frac{1{,}0\times10^{-3}}{2{,}5\times10^{-4}}=4=\left(\frac{0{,}020}{0{,}010}\right)^{m}=2^{m}\Rightarrow m=2$
-\end{apoyo}
-Exp.\ 1 y 3 (cambia $[\mathrm{H_2}]$):\vspace{-2pt}
-\begin{apoyo}\small
-$\displaystyle\frac{r_3}{r_1}=\frac{5{,}0\times10^{-4}}{2{,}5\times10^{-4}}=2=\left(\frac{0{,}020}{0{,}010}\right)^{n}=2^{n}\Rightarrow n=1$
+$\displaystyle\begin{aligned}\frac{r_2}{r_1}&=\frac{1{,}0\times10^{-3}}{2{,}5\times10^{-4}}=4=\left(\frac{0{,}020}{0{,}010}\right)^{m}=2^{m}\Rightarrow m=2\\[5pt]
+\frac{r_3}{r_1}&=\frac{5{,}0\times10^{-4}}{2{,}5\times10^{-4}}=2=\left(\frac{0{,}020}{0{,}010}\right)^{n}=2^{n}\Rightarrow n=1\end{aligned}$
 \end{apoyo}
 Constante, con el Exp.\ 1:\vspace{-2pt}
 \begin{clave}\small
 $\displaystyle\begin{aligned}k&=\frac{r_0}{[\mathrm{NO}]^{2}[\mathrm{H_2}]}=\frac{2{,}5\times10^{-4}\ \mathrm{M\,s^{-1}}}{(0{,}010\ \mathrm{M})^{2}(0{,}010\ \mathrm{M})}\\
 &=2{,}5\times10^{2}\ \mathrm{M^{-2}\,s^{-1}}\end{aligned}$
 \end{clave}
+Ley de velocidad: $r=k\,[\mathrm{NO}]^{2}[\mathrm{H_2}]$; orden total 3.
 \end{minipage}
 
 \end{document}
