@@ -132,7 +132,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   <p><b>Ejemplo 1.</b> Nanogota de agua de \( 20\ \mathrm{nm} \) de radio a \( 298{,}15\ \mathrm{K} \) (\( \gamma=71{,}97\ \mathrm{mN\,m^{-1}} \), \( V=1{,}807\times10^{-5}\ \mathrm{m^3\,mol^{-1}} \)):</p>
   <div class="formula">\[ \ln\frac{P}{P_0}=\frac{2\,(71{,}97\times10^{-3})(1{,}807\times10^{-5})}{(20\times10^{-9})(8{,}314)(298{,}15)}=0{,}0525\ \Rightarrow\ \frac{P}{P_0}=1{,}054 \]</div>
   <p><b>Ejemplo 2.</b> Poro cilíndrico de sílice de \( 4{,}0\ \mathrm{nm} \) de radio que el agua moja: el radio entra negativo.</p>
-  <div class="formula key">\[ \ln\frac{P}{P_0}=-\frac{2\,(71{,}97\times10^{-3})(1{,}807\times10^{-5})}{(4{,}0\times10^{-9})(8{,}314)(298{,}15)}=-0{,}262\ \Rightarrow\ \frac{P}{P_0}=0{,}769\ (\approx77\ \%\ \text{de humedad relativa}) \]</div>
+  <div class="formula key">\[ \begin{aligned}\ln\frac{P}{P_0}&=-\frac{2\,(71{,}97\times10^{-3})(1{,}807\times10^{-5})}{(4{,}0\times10^{-9})(8{,}314)(298{,}15)}=-0{,}262\\[0.6em] \frac{P}{P_0}&=e^{-0{,}262}=0{,}769\ (\approx77\ \%\ \text{de humedad relativa})\end{aligned} \]</div>
 </section>
 
 <!-- 4 -->
@@ -199,9 +199,9 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   </div>
   <p class="readout" id="outGib"></p>
   <p><b>Ejemplo 1.</b> Pendiente límite \( (\partial\gamma/\partial\ln c)_T=-9{,}0\ \mathrm{mN\,m^{-1}} \) para laurilsulfato de sodio a \( 298{,}15\ \mathrm{K} \):</p>
-  <div class="formula">\[ \Gamma=\frac{9{,}0\times10^{-3}\ \mathrm{N\,m^{-1}}}{(8{,}314\ \mathrm{J\,mol^{-1}K^{-1}})(298{,}15\ \mathrm{K})}=3{,}63\times10^{-6}\ \mathrm{mol\,m^{-2}}\ \Rightarrow\ \sigma=\frac{1}{\Gamma N_A}=4{,}57\times10^{-19}\ \mathrm{m^2}=45{,}7\ \mathring{A}^{2} \]</div>
+  <div class="formula">\[ \begin{aligned}\Gamma&=\frac{9{,}0\times10^{-3}\ \mathrm{N\,m^{-1}}}{(8{,}314\ \mathrm{J\,mol^{-1}K^{-1}})(298{,}15\ \mathrm{K})}=3{,}63\times10^{-6}\ \mathrm{mol\,m^{-2}}\\[0.6em] \sigma&=\frac{1}{\Gamma N_A}=4{,}57\times10^{-19}\ \mathrm{m^2}=45{,}7\ \mathring{A}^{2}\end{aligned} \]</div>
   <p><b>Ejemplo 2.</b> Un polisorbato por debajo de su concentración micelar crítica sigue \( \gamma=\gamma_0-RT\,\Gamma_{\max}\ln(1+c/a) \), con \( \Gamma_{\max}=2{,}8\times10^{-6}\ \mathrm{mol\,m^{-2}} \) y \( a=0{,}10\ \mu\mathrm{mol\,L^{-1}} \). Derivando, \( (\partial\gamma/\partial c)_T=-RT\Gamma_{\max}/(a+c) \), y la isoterma da, a \( c=2{,}0\ \mu\mathrm{mol\,L^{-1}} \):</p>
-  <div class="formula key">\[ \Gamma=-\frac{c}{RT}\left(\frac{\partial\gamma}{\partial c}\right)_T=\Gamma_{\max}\frac{c}{a+c}=(2{,}8\times10^{-6})\frac{2{,}0}{2{,}1}=2{,}67\times10^{-6}\ \mathrm{mol\,m^{-2}}\ \Rightarrow\ \sigma=62\ \mathring{A}^{2} \]</div>
+  <div class="formula key">\[ \begin{aligned}\Gamma&=-\frac{c}{RT}\left(\frac{\partial\gamma}{\partial c}\right)_T=\Gamma_{\max}\frac{c}{a+c}=(2{,}8\times10^{-6})\frac{2{,}0}{2{,}1}=2{,}67\times10^{-6}\ \mathrm{mol\,m^{-2}}\\[0.6em] \sigma&=\frac{1}{\Gamma N_A}=62\ \mathring{A}^{2}\end{aligned} \]</div>
   <div class="callout warn"><p><span class="lbl">Errores frecuentes.</span> Con la pendiente de \( \gamma \) contra \( \ln c \), el factor \( c \) ya está dentro de la derivada: no se multiplica otra vez. El signo menos de la isoterma es el que hace positivo a \( \Gamma \) cuando \( \gamma \) disminuye.</p></div>
 </section>
 

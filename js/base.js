@@ -18,7 +18,7 @@ QUIM.tick=function(v){return Number(v.toPrecision(6)).toString().replace('.',','
 /* ---------- MathJax síncrono para salidas dinámicas ---------- */
 /* Devuelve el SVG de una expresión (ya renderizado) o, si MathJax aún no cargó, \( ... \) para que lo procese el typeset inicial. */
 QUIM.m=function(tex){
-  if(window.MathJax&&MathJax.tex2svg){try{return MathJax.tex2svg(tex).outerHTML;}catch(e){}}
+  if(window.MathJax&&MathJax.tex2svg){try{return MathJax.tex2svg(tex.split('\\dfrac').join('\\frac'),{display:false}).outerHTML;}catch(e){}}
   return '\\('+tex+'\\)';
 };
 /* Número a TeX con coma decimal y notación científica fuera de [1e-3, 1e5) */

@@ -76,15 +76,18 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 
   <h4>Ejemplo: actividad de un radiofármaco</h4>
   <p>Una dosis de \( {}^{99\mathrm{m}}\mathrm{Tc} \) (vida media \( 6{,}01\ \mathrm{h} \)) tiene \( 740\ \mathrm{MBq} \) a las 08:00. La desintegración es de primer orden. ¿Qué actividad queda a las 14:30 y cuándo baja a \( 100\ \mathrm{MBq} \)?</p>
-  <div class="cols3">
-    <div class="formula">\[ k=\frac{\ln 2}{t_{1/2}}=\frac{0{,}693}{6{,}01\ \mathrm{h}}=0{,}1153\ \mathrm{h^{-1}} \]</div>
-    <div class="formula">\[ A=A_0\,e^{-k\,t}=740\,e^{-(0{,}1153)(6{,}5)}=350\ \mathrm{MBq} \]</div>
-    <div class="formula">\[ t=\frac{1}{k}\ln\frac{A_0}{A}=\frac{1}{0{,}1153}\ln\frac{740}{100}=17{,}4\ \mathrm{h} \]</div>
-  </div>
-  <div class="grid">
-    <div class="callout tip" style="margin:0"><p><span class="lbl">Orden 0.</span> Un parche con \( 12\ \mathrm{mg} \) libera \( 0{,}35\ \mathrm{mg\,h^{-1}} \). El 80 % sale cuando \( t=\dfrac{0{,}80\,(12\ \mathrm{mg})}{0{,}35\ \mathrm{mg\,h^{-1}}}=27\ \mathrm{h} \).</p></div>
-    <div class="callout tip" style="margin:0"><p><span class="lbl">Orden 2.</span> Un éster con una base de igual concentración, \( [\mathrm{A}]_0=0{,}020\ \mathrm{M} \) y \( k=0{,}112\ \mathrm{M^{-1}\,s^{-1}} \). A los \( 300\ \mathrm{s} \): \( [\mathrm{A}]=\dfrac{1}{1/0{,}020+(0{,}112)(300)}=0{,}0120\ \mathrm{M} \).</p></div>
-  </div>
+  <ol class="steps">
+    <li>Constante de desintegración:
+      <div class="formula">\[ k=\frac{\ln 2}{t_{1/2}}=\frac{0{,}693}{6{,}01\ \mathrm{h}}=0{,}1153\ \mathrm{h^{-1}} \]</div></li>
+    <li>Actividad a las 14:30, es decir, \( 6{,}5\ \mathrm{h} \) después:
+      <div class="formula">\[ A=A_0\,e^{-k\,t}=740\ \mathrm{MBq}\;e^{-(0{,}1153\ \mathrm{h^{-1}})(6{,}5\ \mathrm{h})}=350\ \mathrm{MBq} \]</div></li>
+    <li>Tiempo para llegar a \( 100\ \mathrm{MBq} \):
+      <div class="formula">\[ t=\frac{1}{k}\ln\frac{A_0}{A}=\frac{1}{0{,}1153\ \mathrm{h^{-1}}}\ln\frac{740}{100}=17{,}4\ \mathrm{h} \]</div></li>
+  </ol>
+  <div class="callout tip"><p><span class="lbl">Orden 0.</span> Un parche con \( 12\ \mathrm{mg} \) de fármaco libera \( 0{,}35\ \mathrm{mg\,h^{-1}} \). ¿Cuánto tarda en salir el 80 %?</p></div>
+  <div class="formula">\[ t=\frac{0{,}80\,(12\ \mathrm{mg})}{0{,}35\ \mathrm{mg\,h^{-1}}}=27\ \mathrm{h} \]</div>
+  <div class="callout tip"><p><span class="lbl">Orden 2.</span> Un éster reacciona con una base de igual concentración: \( [\mathrm{A}]_0=0{,}020\ \mathrm{M} \) y \( k=0{,}112\ \mathrm{M^{-1}\,s^{-1}} \). ¿Cuánto queda a los \( 300\ \mathrm{s} \)?</p></div>
+  <div class="formula">\[ [\mathrm{A}]=\frac{1}{\dfrac{1}{0{,}020\ \mathrm{M}}+(0{,}112\ \mathrm{M^{-1}\,s^{-1}})(300\ \mathrm{s})}=0{,}0120\ \mathrm{M} \]</div>
 </section>
 
 <!-- 2 -->
@@ -115,15 +118,15 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   <p>La vida media \( t_{1/2} \) de un reactivo es el tiempo que debe transcurrir para que su concentración se reduzca a la mitad: \( [\mathrm{A}]_{t_{1/2}}=[\mathrm{A}]_0/2 \). Se obtiene reemplazando esa condición en cada ecuación integrada.</p>
   <div class="cols3">
     <div class="mini"><h4>Orden 0</h4>
-      <p>\( \dfrac{[\mathrm{A}]_0}{2}=[\mathrm{A}]_0-k\,t_{1/2} \)</p>
+      <p>\( \frac{[\mathrm{A}]_0}{2}=[\mathrm{A}]_0-k\,t_{1/2} \)</p>
       <div class="formula key">\[ t_{1/2}=\frac{[\mathrm{A}]_0}{2k} \]</div>
       <p>Proporcional a \( [\mathrm{A}]_0 \).</p></div>
     <div class="mini"><h4>Orden 1</h4>
-      <p>\( \ln\dfrac{[\mathrm{A}]_0}{[\mathrm{A}]_0/2}=k\,t_{1/2} \)</p>
+      <p>\( \ln\frac{[\mathrm{A}]_0}{[\mathrm{A}]_0/2}=k\,t_{1/2} \)</p>
       <div class="formula key">\[ t_{1/2}=\frac{\ln 2}{k}=\frac{0{,}693}{k} \]</div>
       <p>No depende de \( [\mathrm{A}]_0 \).</p></div>
     <div class="mini"><h4>Orden 2</h4>
-      <p>\( \dfrac{2}{[\mathrm{A}]_0}=\dfrac{1}{[\mathrm{A}]_0}+k\,t_{1/2} \)</p>
+      <p>\( \frac{2}{[\mathrm{A}]_0}=\frac{1}{[\mathrm{A}]_0}+k\,t_{1/2} \)</p>
       <div class="formula key">\[ t_{1/2}=\frac{1}{k\,[\mathrm{A}]_0} \]</div>
       <p>Inversamente proporcional a \( [\mathrm{A}]_0 \).</p></div>
   </div>
@@ -148,13 +151,15 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <!-- 4 -->
 <section class="card" id="s4">
   <h3><span class="badge">4</span>Método del tiempo de vida media</h3>
-  <p>Sirve para reacciones de orden distinto de 1. Para un orden \( n \) cualquiera, la ecuación integrada es \( \dfrac{1}{n-1}\left(\dfrac{1}{[\mathrm{A}]^{n-1}}-\dfrac{1}{[\mathrm{A}]_0^{\,n-1}}\right)=k\,t \). Con \( [\mathrm{A}]=[\mathrm{A}]_0/2 \) y \( t=t_{1/2} \):</p>
+  <p>Sirve para reacciones de orden distinto de 1. Para un orden \( n \) cualquiera, la ecuación integrada es:</p>
+  <div class="formula">\[ \frac{1}{n-1}\left(\frac{1}{[\mathrm{A}]^{n-1}}-\frac{1}{[\mathrm{A}]_0^{\,n-1}}\right)=k\,t \]</div>
+  <p>Con \( [\mathrm{A}]=[\mathrm{A}]_0/2 \) y \( t=t_{1/2} \):</p>
   <div class="formula key">\[ t_{1/2}=\frac{2^{\,n-1}-1}{(n-1)\,k\,[\mathrm{A}]_0^{\,n-1}} \]</div>
   <p>Al tomar logaritmo, \( \log t_{1/2} \) es una función lineal de \( \log[\mathrm{A}]_0 \):</p>
   <div class="formula key">\[ \log t_{1/2}=\log\frac{2^{\,n-1}-1}{(n-1)\,k}-(n-1)\,\log[\mathrm{A}]_0 \]</div>
   <div class="cols3">
     <div class="mini"><h4>Pendiente</h4><p>Vale \( -(n-1) \). El orden sale directamente: \( n=1-\text{pendiente} \).</p></div>
-    <div class="mini"><h4>Coeficiente de posición</h4><p>Es \( \log\dfrac{2^{n-1}-1}{(n-1)k} \). Una vez conocido \( n \), se despeja \( k \).</p></div>
+    <div class="mini"><h4>Coeficiente de posición</h4><p>Es \( \log\frac{2^{n-1}-1}{(n-1)k} \). Una vez conocido \( n \), se despeja \( k \).</p></div>
     <div class="mini"><h4>No vale para \( n=1 \)</h4><p>Allí \( t_{1/2} \) no depende de \( [\mathrm{A}]_0 \) y la pendiente es 0. Se usa \( t_{1/2}=\ln 2/k \).</p></div>
   </div>
 
@@ -169,11 +174,14 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 
   <h4>Ejemplo: descomposición de un peróxido en disolución (reacción A)</h4>
   <p>Con \( [\mathrm{A}]_0 \) de \( 0{,}10 \) a \( 0{,}80\ \mathrm{M} \) se midieron las vidas medias de la tabla. La recta de ajuste tiene pendiente \( -0{,}998 \) e intercepto \( 1{,}401 \).</p>
-  <div class="cols3">
-    <div class="formula">\[ n=1-(-0{,}998)=1{,}998\approx2 \]</div>
-    <div class="formula">\[ \log\frac{2^{2-1}-1}{(2-1)\,k}=\log\frac{1}{k}=1{,}401 \]</div>
-    <div class="formula">\[ k=10^{-1{,}401}=0{,}040\ \mathrm{M^{-1}\,s^{-1}} \]</div>
-  </div>
+  <ol class="steps">
+    <li>El orden sale de la pendiente:
+      <div class="formula">\[ n=1-(-0{,}998)=1{,}998\approx2 \]</div></li>
+    <li>Con \( n=2 \), el coeficiente de posición es \( \log(1/k) \):
+      <div class="formula">\[ \log\frac{2^{2-1}-1}{(2-1)\,k}=\log\frac{1}{k}=1{,}401 \]</div></li>
+    <li>Constante de velocidad:
+      <div class="formula">\[ k=10^{-1{,}401}=0{,}040\ \mathrm{M^{-1}\,s^{-1}} \]</div></li>
+  </ol>
 </section>
 
 <!-- 5 -->
@@ -226,10 +234,8 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <figure><svg id="figSt" role="img" aria-label="ln k contra 1000 sobre T con extrapolación a 25 grados Celsius"></svg></figure>
   </div>
   <p class="readout" id="outSt"></p>
-  <div class="cols2">
-    <div class="formula">\[ \ln k=24{,}755-\frac{9572\ \mathrm{K}}{T}\ \Rightarrow\ E_a=(9572\ \mathrm{K})\,R=79{,}6\ \mathrm{kJ\,mol^{-1}} \]</div>
-    <div class="formula">\[ k_{25\,^\circ\mathrm{C}}=6{,}42\times10^{-4}\ \mathrm{d^{-1}}\ \Rightarrow\ t_{90}=\frac{\ln(1/0{,}9)}{k}=164\ \mathrm{d} \]</div>
-  </div>
+  <div class="formula">\[ \ln k=24{,}755-\frac{9572\ \mathrm{K}}{T}\ \Rightarrow\ E_a=(9572\ \mathrm{K})\,R=79{,}6\ \mathrm{kJ\,mol^{-1}} \]</div>
+  <div class="formula">\[ k_{25\,^\circ\mathrm{C}}=6{,}42\times10^{-4}\ \mathrm{d^{-1}}\ \Rightarrow\ t_{90}=\frac{\ln(1/0{,}9)}{k}=164\ \mathrm{d} \]</div>
   <div class="callout warn"><p><span class="lbl">Límites.</span> La extrapolación supone el mismo mecanismo entre 25 y 60 &deg;C. Un cambio de fase, la fusión de un excipiente o la humedad pueden romper la recta.</p></div>
 </section>
 
