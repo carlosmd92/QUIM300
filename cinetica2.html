@@ -1,0 +1,766 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cinética química II &#8212; Fisicoquímica Aplicada QUIM300</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b8dd5e65" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=bb6f747e"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cinetica2';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="_static/embed.js?v=95691c4f"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Autoevaluación: Cinética química II" href="cinetica2_autoevaluacion.html" />
+    <link rel="prev" title="Autoevaluación: Cinética química I" href="cinetica1_autoevaluacion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Fisicoquímica Aplicada QUIM300</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Cinética química</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="cinetica1.html">Cinética química I</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cinetica1_autoevaluacion.html">Autoevaluación: Cinética química I</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Cinética química II</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cinetica2_autoevaluacion.html">Autoevaluación: Cinética química II</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fenómenos de superficie</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="superficies.html">Fisicoquímica de superficies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="superficies_autoevaluacion.html">Autoevaluación: Fisicoquímica de superficies</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Cinética química II</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuaciones-integradas">Ecuaciones integradas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orden-desde-las-ecuaciones-integradas">Orden desde las ecuaciones integradas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tiempo-de-vida-media">Tiempo de vida media</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-tiempo-de-vida-media">Método del tiempo de vida media</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencia-de-k-con-la-temperatura">Dependencia de <span class="math notranslate nohighlight">\(k\)</span> con la temperatura</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catalizadores">Catalizadores</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cinetica-quimica-ii">
+<h1>Cinética química II<a class="headerlink" href="#cinetica-quimica-ii" title="Link to this heading">#</a></h1>
+<p><strong>Ecuaciones integradas, vida media y dependencia con la temperatura</strong></p>
+<a class="pdf-link" data-pdf="pdf/kinetica_integradas.pdf" href="#">Descargar el resumen en PDF</a><section id="ecuaciones-integradas">
+<h2>Ecuaciones integradas<a class="headerlink" href="#ecuaciones-integradas" title="Link to this heading">#</a></h2>
+<p>La ley de velocidad entrega la rapidez con que cambia la concentración en cada instante. Al integrarla en el tiempo se obtiene la concentración en función del tiempo, es decir, la ecuación concentración–tiempo. Para A → productos de orden <span class="math notranslate nohighlight">\(n\)</span>, se separan las variables y se integra desde <span class="math notranslate nohighlight">\([\mathrm{A}]_0\)</span> en <span class="math notranslate nohighlight">\(t=0\)</span> hasta <span class="math notranslate nohighlight">\([\mathrm{A}]\)</span> en el tiempo <span class="math notranslate nohighlight">\(t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+r=-\frac{d[\mathrm{A}]}{dt}=k\,[\mathrm{A}]^{n}\quad\Rightarrow\quad \int_{[\mathrm{A}]_0}^{[\mathrm{A}]}\frac{d[\mathrm{A}]}{[\mathrm{A}]^{n}}=-k\int_0^{t}dt
+\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p></p></th>
+<th class="head text-center"><p>Orden 0</p></th>
+<th class="head text-center"><p>Orden 1</p></th>
+<th class="head text-center"><p>Orden 2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Ecuación integrada</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\([\mathrm{A}]=[\mathrm{A}]_0-k\,t\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\ln[\mathrm{A}]=\ln[\mathrm{A}]_0-k\,t\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\dfrac{1}{[\mathrm{A}]}-\dfrac{1}{[\mathrm{A}]_0}=k\,t\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Forma explícita</p></td>
+<td class="text-center"><p>(ya es explícita)</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\([\mathrm{A}]=[\mathrm{A}]_0\,e^{-k\,t}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\([\mathrm{A}]=\dfrac{[\mathrm{A}]_0}{1+k\,t\,[\mathrm{A}]_0}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Recta de</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\([\mathrm{A}]\)</span> contra <span class="math notranslate nohighlight">\(t\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\ln[\mathrm{A}]\)</span> contra <span class="math notranslate nohighlight">\(t\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(1/[\mathrm{A}]\)</span> contra <span class="math notranslate nohighlight">\(t\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Pendiente</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(-k\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(-k\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(+k\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Unidades de <span class="math notranslate nohighlight">\(k\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\mathrm{M\,s^{-1}}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\mathrm{s^{-1}}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\mathrm{M^{-1}\,s^{-1}}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En la simulación cada punto azul es una molécula de A con <span class="math notranslate nohighlight">\([\mathrm{A}]_0=1{,}00\ \mathrm{M}\)</span>, que pasa a producto (gris) al reaccionar. Se puede elegir el orden y la constante, y arrastrar el tiempo o reproducir la reacción.</p>
+<iframe class="quim-embed" title="Ecuaciones integradas: orden, constante y tiempo" data-src="app/kinetica_integradas.html?embed=1&only=%23s1%20.ctrl%7C%23s1%20.legend%7C%23s1%20.figgrid%7C%23outRx"></iframe><div class="admonition-ejemplo-actividad-de-un-radiofarmaco admonition">
+<p class="admonition-title">Ejemplo: actividad de un radiofármaco</p>
+<p>Una dosis de <span class="math notranslate nohighlight">\({}^{99\mathrm{m}}\mathrm{Tc}\)</span> (vida media <span class="math notranslate nohighlight">\(6{,}01\ \mathrm{h}\)</span>) tiene <span class="math notranslate nohighlight">\(740\ \mathrm{MBq}\)</span> a las 08:00. La desintegración es de primer orden. ¿Qué actividad queda a las 14:30 y cuándo baja a <span class="math notranslate nohighlight">\(100\ \mathrm{MBq}\)</span>?</p>
+<p>Constante de desintegración:</p>
+<div class="math notranslate nohighlight">
+\[
+k=\frac{\ln 2}{t_{1/2}}=\frac{0{,}693}{6{,}01\ \mathrm{h}}=0{,}1153\ \mathrm{h^{-1}}
+\]</div>
+<p>Actividad a las 14:30, es decir, <span class="math notranslate nohighlight">\(6{,}5\ \mathrm{h}\)</span> después:</p>
+<div class="math notranslate nohighlight">
+\[
+A=A_0\,e^{-k\,t}=740\ \mathrm{MBq}\;e^{-(0{,}1153\ \mathrm{h^{-1}})(6{,}5\ \mathrm{h})}=350\ \mathrm{MBq}
+\]</div>
+<p>Tiempo para llegar a <span class="math notranslate nohighlight">\(100\ \mathrm{MBq}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+t=\frac{1}{k}\ln\frac{A_0}{A}=\frac{1}{0{,}1153\ \mathrm{h^{-1}}}\ln\frac{740}{100}=17{,}4\ \mathrm{h}
+\]</div>
+</div>
+<p>Los otros dos órdenes se resuelven con su propia ecuación integrada.</p>
+<div class="admonition-orden-0 admonition">
+<p class="admonition-title">Orden 0</p>
+<p>Un parche con <span class="math notranslate nohighlight">\(12\ \mathrm{mg}\)</span> de fármaco libera <span class="math notranslate nohighlight">\(0{,}35\ \mathrm{mg\,h^{-1}}\)</span>. ¿Cuánto tarda en salir el 80 %?</p>
+<div class="math notranslate nohighlight">
+\[
+t=\frac{0{,}80\,(12\ \mathrm{mg})}{0{,}35\ \mathrm{mg\,h^{-1}}}=27\ \mathrm{h}
+\]</div>
+</div>
+<div class="admonition-orden-2 admonition">
+<p class="admonition-title">Orden 2</p>
+<p>Un éster reacciona con una base de igual concentración, con <span class="math notranslate nohighlight">\([\mathrm{A}]_0=0{,}020\ \mathrm{M}\)</span> y <span class="math notranslate nohighlight">\(k=0{,}112\ \mathrm{M^{-1}\,s^{-1}}\)</span>. ¿Cuánto queda a los <span class="math notranslate nohighlight">\(300\ \mathrm{s}\)</span>?</p>
+<div class="math notranslate nohighlight">
+\[
+[\mathrm{A}]=\frac{1}{\dfrac{1}{0{,}020\ \mathrm{M}}+(0{,}112\ \mathrm{M^{-1}\,s^{-1}})(300\ \mathrm{s})}=0{,}0120\ \mathrm{M}
+\]</div>
+</div>
+</section>
+<section id="orden-desde-las-ecuaciones-integradas">
+<h2>Orden desde las ecuaciones integradas<a class="headerlink" href="#orden-desde-las-ecuaciones-integradas" title="Link to this heading">#</a></h2>
+<p>Con las concentraciones medidas a distintos tiempos en un solo experimento, los datos se transforman según cada ecuación integrada (<span class="math notranslate nohighlight">\([\mathrm{A}]\)</span>, <span class="math notranslate nohighlight">\(\ln[\mathrm{A}]\)</span> y <span class="math notranslate nohighlight">\(1/[\mathrm{A}]\)</span>) y se ajusta una recta a cada serie. El orden es el de la recta mejor ajustada, y se discrimina con el coeficiente de determinación <span class="math notranslate nohighlight">\(R^{2}\)</span>: cuanto más cercano a 1, mejor es el ajuste lineal. Junto con las velocidades iniciales (<a class="reference internal" href="cinetica1.html"><span class="doc">Cinética química I</span></a>) y la vida media (sección siguiente), es una de las tres vías para determinar el orden.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Orden</p></th>
+<th class="head text-center"><p>0</p></th>
+<th class="head text-center"><p>1</p></th>
+<th class="head text-center"><p>2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Gráfico recto</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\([\mathrm{A}]\)</span> contra <span class="math notranslate nohighlight">\(t\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\ln[\mathrm{A}]\)</span> contra <span class="math notranslate nohighlight">\(t\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(1/[\mathrm{A}]\)</span> contra <span class="math notranslate nohighlight">\(t\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(k\)</span> sale de</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(-\text{pendiente}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(-\text{pendiente}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(+\text{pendiente}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Se elige un conjunto de datos, se decide el orden antes de ver los ajustes y se pulsa Comprobar.</p>
+<iframe class="quim-embed" title="Determinación del orden por linealización" data-src="app/kinetica_integradas.html?embed=1&only=%23s2%20.ctrl%7C%23dsTab%7C%23s2%20.figgrid%7C%23outDs"></iframe></section>
+<section id="tiempo-de-vida-media">
+<h2>Tiempo de vida media<a class="headerlink" href="#tiempo-de-vida-media" title="Link to this heading">#</a></h2>
+<p>La vida media <span class="math notranslate nohighlight">\(t_{1/2}\)</span> de un reactivo es el tiempo que debe transcurrir para que su concentración se reduzca a la mitad, <span class="math notranslate nohighlight">\([\mathrm{A}]_{t_{1/2}}=[\mathrm{A}]_0/2\)</span>. Se obtiene reemplazando esa condición en cada ecuación integrada:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Orden 0</p></th>
+<th class="head text-center"><p>Orden 1</p></th>
+<th class="head text-center"><p>Orden 2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(\dfrac{[\mathrm{A}]_0}{2}=[\mathrm{A}]_0-k\,t_{1/2}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\ln\dfrac{[\mathrm{A}]_0}{[\mathrm{A}]_0/2}=k\,t_{1/2}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\dfrac{2}{[\mathrm{A}]_0}=\dfrac{1}{[\mathrm{A}]_0}+k\,t_{1/2}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(t_{1/2}=\dfrac{[\mathrm{A}]_0}{2k}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(t_{1/2}=\dfrac{\ln 2}{k}=\dfrac{0{,}693}{k}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(t_{1/2}=\dfrac{1}{k\,[\mathrm{A}]_0}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Proporcional a <span class="math notranslate nohighlight">\([\mathrm{A}]_0\)</span></p></td>
+<td class="text-center"><p>No depende de <span class="math notranslate nohighlight">\([\mathrm{A}]_0\)</span></p></td>
+<td class="text-center"><p>Inversamente proporcional a <span class="math notranslate nohighlight">\([\mathrm{A}]_0\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Al encadenar vidas medias sucesivas, cada una arranca con la mitad de la concentración que tenía la anterior. El tiempo se mide en unidades de la primera vida media.</p>
+<iframe class="quim-embed" title="Vidas medias sucesivas" data-src="app/kinetica_integradas.html?embed=1&only=%23s3%20.ctrl%7C%23s3%20figure%7C%23outSucc"></iframe><div class="admonition-ejemplo-eliminacion-de-un-antibiotico admonition">
+<p class="admonition-title">Ejemplo: eliminación de un antibiótico</p>
+<p>La concentración plasmática baja de <span class="math notranslate nohighlight">\(24{,}0\)</span> a <span class="math notranslate nohighlight">\(3{,}0\ \mathrm{mg\,L^{-1}}\)</span> en <span class="math notranslate nohighlight">\(9{,}0\ \mathrm{h}\)</span> con eliminación de primer orden. Calcule la vida media y la concentración a las <span class="math notranslate nohighlight">\(10{,}0\ \mathrm{h}\)</span>.</p>
+<p>Como <span class="math notranslate nohighlight">\(24{,}0/3{,}0=8=2^{3}\)</span>, transcurrieron tres vidas medias:</p>
+<div class="math notranslate nohighlight">
+\[
+t_{1/2}=\frac{9{,}0\ \mathrm{h}}{3}=3{,}0\ \mathrm{h}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+[\mathrm{A}]=24{,}0\ \mathrm{mg\,L^{-1}}\;2^{-10{,}0/3{,}0}=2{,}38\ \mathrm{mg\,L^{-1}}
+\]</div>
+</div>
+</section>
+<section id="metodo-del-tiempo-de-vida-media">
+<h2>Método del tiempo de vida media<a class="headerlink" href="#metodo-del-tiempo-de-vida-media" title="Link to this heading">#</a></h2>
+<p>Este método se usa para reacciones de orden distinto de 1. Para un orden <span class="math notranslate nohighlight">\(n\)</span> cualquiera, la ecuación integrada es:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{n-1}\left(\frac{1}{[\mathrm{A}]^{n-1}}-\frac{1}{[\mathrm{A}]_0^{\,n-1}}\right)=k\,t
+\]</div>
+<p>Con <span class="math notranslate nohighlight">\([\mathrm{A}]=[\mathrm{A}]_0/2\)</span> y <span class="math notranslate nohighlight">\(t=t_{1/2}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+t_{1/2}=\frac{2^{\,n-1}-1}{(n-1)\,k\,[\mathrm{A}]_0^{\,n-1}}
+\]</div>
+<p>Al tomar logaritmo, <span class="math notranslate nohighlight">\(\log t_{1/2}\)</span> es una función lineal de <span class="math notranslate nohighlight">\(\log[\mathrm{A}]_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\log t_{1/2}=\log\frac{2^{\,n-1}-1}{(n-1)\,k}-(n-1)\,\log[\mathrm{A}]_0
+\]</div>
+<ul class="simple">
+<li><p>La <strong>pendiente</strong> vale <span class="math notranslate nohighlight">\(-(n-1)\)</span>, de modo que el orden sale directamente: <span class="math notranslate nohighlight">\(n=1-\text{pendiente}\)</span>.</p></li>
+<li><p>El <strong>intercepto</strong> es <span class="math notranslate nohighlight">\(\log\dfrac{2^{n-1}-1}{(n-1)k}\)</span>. Una vez conocido <span class="math notranslate nohighlight">\(n\)</span>, se despeja <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Para <span class="math notranslate nohighlight">\(n=1\)</span> el método no sirve: <span class="math notranslate nohighlight">\(t_{1/2}\)</span> no depende de <span class="math notranslate nohighlight">\([\mathrm{A}]_0\)</span> y la pendiente es 0. Se usa <span class="math notranslate nohighlight">\(t_{1/2}=\ln 2/k\)</span>.</p></li>
+</ul>
+<p>La simulación presenta tres reacciones con la vida media medida a cuatro concentraciones iniciales. El ajuste lineal de <span class="math notranslate nohighlight">\(\log t_{1/2}\)</span> contra <span class="math notranslate nohighlight">\(\log[\mathrm{A}]_0\)</span> se hace en vivo.</p>
+<iframe class="quim-embed" title="Método de la vida media" data-src="app/kinetica_integradas.html?embed=1&only=%23s4%20.ctrl%7C%23s4%20.figpair%7C%23outHL"></iframe><div class="admonition-ejemplo-descomposicion-de-un-peroxido-en-disolucion-reaccion-a admonition">
+<p class="admonition-title">Ejemplo: descomposición de un peróxido en disolución (reacción A)</p>
+<p>Con <span class="math notranslate nohighlight">\([\mathrm{A}]_0\)</span> de <span class="math notranslate nohighlight">\(0{,}10\)</span> a <span class="math notranslate nohighlight">\(0{,}80\ \mathrm{M}\)</span> se midieron las vidas medias de la tabla. La recta de ajuste tiene pendiente <span class="math notranslate nohighlight">\(-0{,}998\)</span> e intercepto <span class="math notranslate nohighlight">\(1{,}401\)</span>.</p>
+<p>El orden sale de la pendiente:</p>
+<div class="math notranslate nohighlight">
+\[
+n=1-(-0{,}998)=1{,}998\approx2
+\]</div>
+<p>Con <span class="math notranslate nohighlight">\(n=2\)</span>, el intercepto es <span class="math notranslate nohighlight">\(\log(1/k)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\log\frac{2^{2-1}-1}{(2-1)\,k}=\log\frac{1}{k}=1{,}401
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+k=10^{-1{,}401}=0{,}040\ \mathrm{M^{-1}\,s^{-1}}
+\]</div>
+</div>
+</section>
+<section id="dependencia-de-k-con-la-temperatura">
+<h2>Dependencia de <span class="math notranslate nohighlight">\(k\)</span> con la temperatura<a class="headerlink" href="#dependencia-de-k-con-la-temperatura" title="Link to this heading">#</a></h2>
+<p>Según la teoría de colisiones, una reacción ocurre cuando las moléculas chocan bien orientadas y con energía suficiente. La energía de activación <span class="math notranslate nohighlight">\(E_a\)</span> es esa energía umbral. La constante de velocidad sigue la relación empírica de Arrhenius:</p>
+<div class="math notranslate nohighlight">
+\[
+k=A\,e^{-E_a/RT}
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A\)</span> es el factor preexponencial (factor de colisión) y tiene las mismas unidades que <span class="math notranslate nohighlight">\(k\)</span>. A mayor <span class="math notranslate nohighlight">\(A\)</span>, mayor <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(E_a\)</span> se expresa en energía por mol. A mayor <span class="math notranslate nohighlight">\(E_a\)</span>, menor <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(R=8{,}314\ \mathrm{J\,mol^{-1}\,K^{-1}}\)</span>, con <span class="math notranslate nohighlight">\(T\)</span> en kelvin y <span class="math notranslate nohighlight">\(E_a\)</span> en <span class="math notranslate nohighlight">\(\mathrm{J\,mol^{-1}}\)</span>.</p></li>
+</ul>
+<p>Tomando logaritmo se obtiene la forma lineal, y con la constante a dos temperaturas se elimina <span class="math notranslate nohighlight">\(A\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\ln k=\ln A-\frac{E_a}{R}\,\frac{1}{T}
+\qquad\qquad
+\ln\frac{k_2}{k_1}=-\frac{E_a}{R}\left(\frac{1}{T_2}-\frac{1}{T_1}\right)
+\]</div>
+<p>En el gráfico de <span class="math notranslate nohighlight">\(\ln k\)</span> contra <span class="math notranslate nohighlight">\(1/T\)</span> la pendiente es <span class="math notranslate nohighlight">\(-E_a/R\)</span> y el intercepto es <span class="math notranslate nohighlight">\(\ln A\)</span>.</p>
+<p>A la izquierda se muestra la distribución de energías moleculares, donde la zona roja es la fracción con <span class="math notranslate nohighlight">\(E\ge E_a\)</span>, la que reacciona. A la derecha, <span class="math notranslate nohighlight">\(\ln k\)</span> contra <span class="math notranslate nohighlight">\(1000/T\)</span> con <span class="math notranslate nohighlight">\(A=1{,}0\times10^{10}\ \mathrm{s^{-1}}\)</span>. Se usan temperaturas altas para que la cola de la distribución se aprecie.</p>
+<iframe class="quim-embed" title="Distribución de energías y gráfico de Arrhenius" data-src="app/kinetica_integradas.html?embed=1&only=%23ctrlEn%7C%23pairEn%7C%23outEn"></iframe><section id="catalizadores">
+<h3>Catalizadores<a class="headerlink" href="#catalizadores" title="Link to this heading">#</a></h3>
+<p>Un catalizador aumenta la velocidad ofreciendo una ruta con menor <span class="math notranslate nohighlight">\(E_a\)</span>. No aparece en la estequiometría global, pero participa en al menos un paso del mecanismo, y no cambia la diferencia de energía entre reactivos y productos. Como <span class="math notranslate nohighlight">\(k\)</span> depende de <span class="math notranslate nohighlight">\(E_a\)</span> de forma exponencial, una reducción moderada de la barrera multiplica <span class="math notranslate nohighlight">\(k\)</span> muchas veces.</p>
+<p>Con <span class="math notranslate nohighlight">\(E_a=80\ \mathrm{kJ\,mol^{-1}}\)</span> sin catalizador, se puede bajar la <span class="math notranslate nohighlight">\(E_a\)</span> con catalizador y observar cuánto crece <span class="math notranslate nohighlight">\(k\)</span> a <span class="math notranslate nohighlight">\(298\ \mathrm{K}\)</span>.</p>
+<iframe class="quim-embed" title="Efecto de un catalizador" data-src="app/kinetica_integradas.html?embed=1&only=%23ctrlCat%7C%23pairCat"></iframe><div class="admonition-ejemplo-estabilidad-acelerada-de-una-solucion-oral admonition">
+<p class="admonition-title">Ejemplo: estabilidad acelerada de una solución oral</p>
+<p>La degradación de un fármaco en solución oral es de primer orden. Se midió <span class="math notranslate nohighlight">\(k\)</span> a <span class="math notranslate nohighlight">\(40\)</span>, <span class="math notranslate nohighlight">\(50\)</span> y <span class="math notranslate nohighlight">\(60\ ^\circ\mathrm{C}\)</span>. Se aplica la forma lineal de Arrhenius, se extrapola a <span class="math notranslate nohighlight">\(25\ ^\circ\mathrm{C}\)</span> y se estima el tiempo en perder el 10 % (<span class="math notranslate nohighlight">\(t_{90}\)</span>). Los datos de la tabla se pueden editar.</p>
+</div>
+<iframe class="quim-embed" title="Estabilidad acelerada" data-src="app/kinetica_integradas.html?embed=1&only=%23ctrlSt%7C%23pairSt%7C%23outSt"></iframe><p>Con los datos iniciales, el ajuste lineal da:</p>
+<div class="math notranslate nohighlight">
+\[
+\ln k=24{,}755-\frac{9572\ \mathrm{K}}{T}\ \Rightarrow\ E_a=(9572\ \mathrm{K})\,R=79{,}6\ \mathrm{kJ\,mol^{-1}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+k_{25\,^\circ\mathrm{C}}=6{,}42\times10^{-4}\ \mathrm{d^{-1}}\ \Rightarrow\ t_{90}=\frac{\ln(1/0{,}9)}{k}=164\ \mathrm{d}
+\]</div>
+<div class="admonition warning">
+<p class="admonition-title">Advertencia</p>
+<p>La extrapolación supone el mismo mecanismo entre 25 y 60 °C. Un cambio de fase, la fusión de un excipiente o la humedad pueden romper la recta.</p>
+</div>
+<p>La autoevaluación de este tema está en <a class="reference internal" href="cinetica2_autoevaluacion.html"><span class="doc">Autoevaluación: Cinética química II</span></a>.</p>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cinetica1_autoevaluacion.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Autoevaluación: Cinética química I</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cinetica2_autoevaluacion.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Autoevaluación: Cinética química II</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuaciones-integradas">Ecuaciones integradas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orden-desde-las-ecuaciones-integradas">Orden desde las ecuaciones integradas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tiempo-de-vida-media">Tiempo de vida media</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-tiempo-de-vida-media">Método del tiempo de vida media</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencia-de-k-con-la-temperatura">Dependencia de <span class="math notranslate nohighlight">\(k\)</span> con la temperatura</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catalizadores">Catalizadores</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Prof. Carlos Morales
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
