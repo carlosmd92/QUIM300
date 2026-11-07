@@ -1,0 +1,108 @@
+% Plantilla común de los resúmenes QUIM300 (Universidad Andrés Bello).
+% Uso: \documentclass[10pt,letterpaper]{article} \usepackage{resumen}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{resumen}[2026/11/06 Resumenes QUIM300]
+
+\RequirePackage[spanish,es-nodecimaldot]{babel}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage{amsmath,amssymb,mathtools}
+\RequirePackage{booktabs,array,tabularx}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{siunitx}
+\RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
+\RequirePackage[letterpaper,top=2.2cm,bottom=2cm,left=2cm,right=2cm,headheight=14pt,headsep=0.5cm,footskip=0.9cm]{geometry}
+\RequirePackage{microtype}
+\RequirePackage{enumitem}
+\RequirePackage{titlesec}
+\RequirePackage{multicol}
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage[hidelinks]{hyperref}
+
+\pgfplotsset{compat=1.17}
+\pgfkeys{/pgf/number format/use comma}
+\usetikzlibrary{arrows.meta,calc,positioning,decorations.pathreplacing,patterns}
+
+% Colores de la página web
+\definecolor{acc}{HTML}{1F5FBF}
+\definecolor{accsoft}{HTML}{E8F0FC}
+\definecolor{teal}{HTML}{0C8486}
+\definecolor{tealsoft}{HTML}{E3F4F4}
+\definecolor{bad}{HTML}{A8231B}
+\definecolor{warnsoft}{HTML}{FFF3D9}
+\definecolor{warn}{HTML}{D9962B}
+\definecolor{muted}{HTML}{59627A}
+\definecolor{line}{HTML}{DFE4EF}
+
+% Tipografía: texto sans, matemática estándar
+\renewcommand{\familydefault}{\sfdefault}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt plus 1pt}
+\linespread{1.04}
+\setlist{nosep,leftmargin=1.2em,itemsep=1pt}
+\renewcommand{\arraystretch}{1.18}
+\captionsetup{font={small,color=muted},labelformat=empty,skip=2pt}
+
+% siunitx: coma decimal, unidades con potencias negativas
+\sisetup{output-decimal-marker={,},per-mode=power,inter-unit-product=\ensuremath{{}\cdot{}},
+  exponent-product=\times,mode=text,group-separator={\,},group-minimum-digits=5}
+
+\DeclareSIUnit\molar{M}
+\DeclareSIUnit\mmHg{mmHg}
+\DeclareSIUnit\torr{torr}
+\DeclareSIUnit\dina{dina}
+
+% Encabezado y pie institucionales
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{acc}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{line}\leaders\hrule height \footrulewidth\hfill}}
+\fancyhead[L]{\small\bfseries\color{acc}Universidad Andrés Bello}
+\fancyhead[R]{\small\color{muted}Fisicoquímica Aplicada | QUIM300}
+\fancyfoot[L]{\small\color{muted}Prof. Carlos Morales}
+\fancyfoot[C]{\small\color{muted}Pág. \thepage\ de \pageref{LastPage}}
+\fancyfoot[R]{\small\color{muted}Semestre 2026-2}
+
+% Secciones compactas
+\titleformat{\section}{\large\bfseries\color{acc}}{\thesection}{0.6em}{}[{\color{line}\titlerule}]
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{8pt plus 2pt}{4pt}
+\titlespacing*{\subsection}{0pt}{5pt plus 1pt}{2pt}
+
+% Cajas
+\tcbset{
+  clave/.style={enhanced,colback=white,colframe=acc,boxrule=0.9pt,arc=2pt,left=5pt,right=5pt,top=2pt,bottom=2pt,
+    boxsep=1pt,before skip=4pt,after skip=4pt,halign=flush center,breakable=false},
+  apoyo/.style={enhanced,colback=accsoft,colframe=accsoft,boxrule=0pt,arc=2pt,leftrule=3pt,colbacktitle=accsoft,
+    left=5pt,right=5pt,top=2pt,bottom=2pt,boxsep=1pt,before skip=4pt,after skip=4pt,borderline west={3pt}{0pt}{acc}},
+  nota/.style={enhanced,colback=tealsoft,colframe=tealsoft,boxrule=0pt,arc=2pt,left=5pt,right=5pt,top=2pt,bottom=2pt,
+    boxsep=1pt,before skip=4pt,after skip=4pt,borderline west={3pt}{0pt}{teal}},
+  alerta/.style={enhanced,colback=warnsoft,colframe=warnsoft,boxrule=0pt,arc=2pt,left=5pt,right=5pt,top=2pt,bottom=2pt,
+    boxsep=1pt,before skip=4pt,after skip=4pt,borderline west={3pt}{0pt}{warn}}
+}
+\newtcolorbox{clave}{clave}      % ecuación central
+\newtcolorbox{apoyo}{apoyo}      % desarrollo o ecuación secundaria
+\newtcolorbox{nota}{nota}        % idea o consejo
+\newtcolorbox{alerta}{alerta}    % error frecuente o aviso
+
+% Bloque de título
+\newcommand{\titulo}[2]{%
+  \begin{center}\vspace{-4pt}%
+  {\LARGE\bfseries #1}\\[2pt]{\color{muted}\large #2}\\[-2pt]{\color{acc}\rule{\linewidth}{1.4pt}}%
+  \end{center}\vspace{-6pt}}
+
+% Estilo de gráficos pgfplots
+\pgfplotsset{resumen/.style={width=0.48\linewidth,height=4.2cm,tick label style={font=\scriptsize},
+  label style={font=\scriptsize},axis lines=left,every axis plot/.append style={line width=1.2pt},
+  grid=major,grid style={line}}}
+
+\newcommand{\M}{\,\mathrm{M}}
+\endinput

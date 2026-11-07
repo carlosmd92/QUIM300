@@ -12,6 +12,8 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <style>
 @page{@top-right{content:"Fisicoquímica de superficies"}}
 .ctrl button.btn{padding:6px 14px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+@media (max-width:760px){.split{grid-template-columns:1fr}}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.88rem;color:var(--muted);margin:4px 0 0}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:-1px;margin-right:5px}
 </style>
@@ -27,142 +29,129 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <!-- 1 -->
 <section class="card" id="s1">
   <h3><span class="badge">1</span>Interfase y tensión superficial</h3>
-  <p>Dos fases en contacto no se tocan en una línea. Entre ambas hay una capa de 1 a 10 nm (\( 10 \) a \( 100\ \mathring{A} \)) donde las moléculas ya no ven el entorno que tienen en el interior de cada fase. Esa capa es la interfase, y en ella ocurren el mojado, la adsorción y la estabilidad de gotas, espumas y emulsiones.</p>
-
-  <h4>Qué siente una molécula en la superficie</h4>
-  <p style="margin:0 0 6px">Una molécula del seno del líquido tiene vecinos en todas direcciones y las atracciones se anulan. Una de la superficie no tiene vecinos del lado del vapor, de modo que queda una fuerza neta hacia el interior (flechas rojas). Al calentar, las moléculas se agitan más y esa cohesión neta se debilita.</p>
+  <p>La <b>interfase</b> es la zona tridimensional, de 10 a 100 \( \mathring{A} \), que separa dos fases. Dentro de una fase cada molécula está rodeada en todas direcciones y las atracciones se anulan. En la interfase eso no ocurre, y de ahí sale todo lo que sigue.</p>
   <div class="ctrl">
     <label><i>T</i> = <b id="tVal"></b> K <input type="range" id="tSl" min="280" max="400" step="5" value="300"></label>
     <button class="btn sec" type="button" id="btnMol">Pausar</button>
   </div>
   <div class="figpair">
-    <figure><svg id="figMol" role="img" aria-label="Moléculas de etanol en movimiento con fuerza neta hacia el interior en las de la superficie"></svg><figcaption>Etanol líquido. Las moléculas de la capa superficial reciben una fuerza neta hacia el seno del líquido.</figcaption></figure>
-    <figure><svg id="figGT" role="img" aria-label="Tensión superficial del etanol contra la temperatura"></svg><figcaption>Tensión superficial del etanol contra la temperatura.</figcaption></figure>
+    <figure><svg id="figMol" role="img" aria-label="Moléculas de etanol en movimiento con fuerza neta hacia el interior en las de la superficie"></svg><figcaption>Etanol líquido: las moléculas de la superficie reciben una fuerza neta hacia el interior (flechas rojas). Al calentar se agitan más.</figcaption></figure>
+    <figure><svg id="figGT" role="img" aria-label="Tensión superficial del etanol contra la temperatura"></svg><figcaption>La tensión superficial del etanol disminuye al subir \( T \).</figcaption></figure>
   </div>
   <p class="readout" id="outGT"></p>
 
-  <h4>La tensión superficial como energía y como fuerza</h4>
-  <p>Para agrandar la superficie hay que llevar moléculas del interior a la interfase, y eso cuesta energía. La energía por unidad de área nueva es la tensión superficial \( \gamma \). A \( T \) y \( P \) constantes:</p>
+  <h4>Tensión superficial</h4>
+  <p>Una molécula de la superficie tiene una fuerza neta hacia el interior, así que el sistema tiende a minimizar su superficie. La <b>tensión superficial</b> \( \gamma \) es la energía que hay que aplicar para aumentar la superficie en una unidad de área, y mide las fuerzas internas que se deben vencer. A \( P \) y \( T \) constantes:</p>
   <div class="formula key">\[ dG=\gamma\,d\mathcal{A}\qquad\Longrightarrow\qquad \gamma=\left(\frac{\partial G}{\partial\mathcal{A}}\right)_{T,P}>0 \]</div>
-  <div class="grid">
-    <div class="mini"><h4>Energía por área</h4><p>\( \mathrm{J\,m^{-2}} \). Es la lectura termodinámica.</p></div>
-    <div class="mini"><h4>Fuerza por longitud</h4><p>\( \mathrm{N\,m^{-1}} \). Es la lectura mecánica: la fuerza con que la película tira de un borde de longitud \( \ell \).</p></div>
-    <div class="mini"><h4>Equivalencias</h4><p>\( 1\ \mathrm{mN\,m^{-1}}=1\ \mathrm{mJ\,m^{-2}} \)<br>\( 1\ \mathrm{mN\,m^{-1}}=1\ \mathrm{dina\,cm^{-1}} \)</p></div>
+  <div class="cols3">
+    <div class="mini"><h4>Energía por área</h4><p>\( \mathrm{J\,m^{-2}} \): lectura termodinámica.</p></div>
+    <div class="mini"><h4>Fuerza por longitud</h4><p>\( \mathrm{N\,m^{-1}} \): lo que tira la película de un borde de longitud \( \ell \).</p></div>
+    <div class="mini"><h4>Equivalencias</h4><p>\( 1\ \mathrm{dina\,cm^{-1}}=1\ \mathrm{mN\,m^{-1}} \)<br>\( 1\ \mathrm{erg\,cm^{-2}}=1\ \mathrm{mJ\,m^{-2}} \)</p></div>
   </div>
-  <p style="margin:0 0 6px">En un marco de alambre con una película de jabón, la barra se desplaza \( \Delta x \) y se agregan dos caras de área \( \ell\,\Delta x \). Estire la película y luego suéltela.</p>
-  <div class="ctrl">
-    <label>\( \Delta x= \) <b id="dxVal"></b> cm <input type="range" id="dxSl" min="0" max="50" step="1" value="25"></label>
-    <button class="btn sec" type="button" id="btnSoltar">Soltar</button>
-  </div>
-  <figure><svg id="figFrame" style="max-width:520px;display:block;margin:0 auto" role="img" aria-label="Marco de alambre con una película de jabón y una barra móvil"></svg><figcaption>Película de laurilsulfato de sodio, \( \gamma=27\ \mathrm{mN\,m^{-1}} \), sobre un marco de ancho \( \ell=6{,}0\ \mathrm{cm} \).</figcaption></figure>
-  <p class="readout" id="outFrame"></p>
-  <div class="grid">
-    <div class="mini"><h4>Estirar</h4><p>\( \Delta\mathcal{A}>0 \) y \( \Delta G>0 \). Requiere trabajo externo.</p></div>
-    <div class="mini"><h4>Equilibrio</h4><p>\( \Delta\mathcal{A}=0 \) y \( \Delta G=0 \). La barra queda quieta.</p></div>
-    <div class="mini"><h4>Soltar</h4><p>\( \Delta\mathcal{A}<0 \) y \( \Delta G<0 \). La película se contrae sola: proceso espontáneo.</p></div>
-  </div>
-
-  <h4>Ejemplo: trabajo para estirar la película</h4>
-  <p>Con \( \gamma=27\ \mathrm{mN\,m^{-1}} \) y \( \ell=6{,}0\ \mathrm{cm} \), la barra se corre \( 2{,}5\ \mathrm{cm} \). La película tiene dos caras. Calcule el trabajo.</p>
-  <div class="formula">\[ \Delta\mathcal{A}=2\,\ell\,\Delta x=2\,(0{,}060\ \mathrm{m})(0{,}025\ \mathrm{m})=3{,}0\times10^{-3}\ \mathrm{m^2} \]</div>
-  <div class="formula key">\[ W=\gamma\,\Delta\mathcal{A}=(27\times10^{-3}\ \mathrm{N\,m^{-1}})(3{,}0\times10^{-3}\ \mathrm{m^2})=8{,}1\times10^{-5}\ \mathrm{J}=81\ \mu\mathrm{J} \]</div>
-
-  <h4>Efecto de la temperatura</h4>
-  <p>\( \gamma \) disminuye al subir \( T \) y se anula en la temperatura crítica \( T_c \). La ecuación de Katayama&ndash;Guggenheim lo describe con un exponente \( n \) que para líquidos orgánicos vale \( 11/9\approx1{,}22 \). Con dos temperaturas se elimina la constante \( \gamma_0 \):</p>
-  <div class="formula key">\[ \gamma=\gamma_0\left(1-\frac{T}{T_c}\right)^{n}\qquad\Rightarrow\qquad \gamma_2=\gamma_1\left(\frac{1-T_2/T_c}{1-T_1/T_c}\right)^{n} \]</div>
-  <p>Ejemplo: el etanol (\( T_c=513{,}9\ \mathrm{K} \)) tiene \( \gamma_1=22{,}0\ \mathrm{mN\,m^{-1}} \) a \( 25\ ^\circ\mathrm{C} \). Su valor a \( 50\ ^\circ\mathrm{C} \) es:</p>
-  <div class="formula">\[ \gamma_2=22{,}0\left(\frac{1-323{,}15/513{,}9}{1-298{,}15/513{,}9}\right)^{11/9}=22{,}0\,(0{,}884)^{11/9}=22{,}0\times0{,}860=18{,}9\ \mathrm{mN\,m^{-1}} \]</div>
   <div class="tw"><table>
-    <tr><th class="l">Líquido (valores representativos, 20 a 25 &deg;C)</th><th>\( \gamma\ (\mathrm{mN\,m^{-1}}) \)</th><th class="l">Qué domina la cohesión</th></tr>
-    <tr><td class="l">Etanol</td><td>\( \approx22 \)</td><td class="l">Un enlace de hidrógeno por molécula y una cadena apolar</td></tr>
-    <tr><td class="l">Aceite de oliva</td><td>\( \approx33 \)</td><td class="l">Fuerzas de dispersión entre cadenas largas</td></tr>
-    <tr><td class="l">Propilenglicol</td><td>\( \approx36 \)</td><td class="l">Dos grupos \( -\mathrm{OH} \)</td></tr>
-    <tr><td class="l">Glicerina</td><td>\( \approx63 \)</td><td class="l">Tres grupos \( -\mathrm{OH} \): red densa de enlaces de hidrógeno</td></tr>
+    <tr><th class="l">Líquido</th><th>\( \gamma\ (\mathrm{dina\,cm^{-1}}) \)</th><th class="l">Interacción que domina</th></tr>
+    <tr><td class="l">Hg</td><td>476</td><td class="l">Enlace metálico</td></tr>
+    <tr><td class="l">H<sub>2</sub>O</td><td>72,8</td><td class="l">Enlace de hidrógeno</td></tr>
+    <tr><td class="l">C<sub>6</sub>H<sub>6</sub></td><td>28,9</td><td class="l">Interacción entre electrones \( \pi \)</td></tr>
+    <tr><td class="l">Heptano</td><td>19,7</td><td class="l">Fuerzas de dispersión</td></tr>
   </table></div>
+
+  <h4>Formulación termodinámica</h4>
+  <p>Como \( \gamma>0 \), aumentar el área cuesta energía y reducirla ocurre sola: el sistema busca el área mínima. Con \( \gamma \) constante:</p>
+  <div class="formula key">\[ \Delta G=\int_{\mathcal{A}_1}^{\mathcal{A}_2}\gamma\,d\mathcal{A}\quad\Rightarrow\quad \Delta G=\gamma\,(\mathcal{A}_2-\mathcal{A}_1) \]</div>
+  <div class="split">
+    <div>
+      <div class="tw"><table>
+        <tr><th>\( \Delta G \)</th><th>\( \Delta\mathcal{A} \)</th><th>Proceso</th></tr>
+        <tr><td>\( \gt 0 \)</td><td>\( \mathcal{A}_2\gt\mathcal{A}_1 \)</td><td>No espontáneo</td></tr>
+        <tr><td>\( =0 \)</td><td>\( \mathcal{A}_2=\mathcal{A}_1 \)</td><td>Equilibrio</td></tr>
+        <tr><td>\( \lt 0 \)</td><td>\( \mathcal{A}_2\lt\mathcal{A}_1 \)</td><td>Espontáneo</td></tr>
+      </table></div>
+      <p class="readout">Película de jabón en un marco de alambre: estirar es \( \Delta\mathcal{A}\gt0 \); al soltar, la película se contrae sola.</p>
+    </div>
+    <div>
+      <div class="ctrl">
+        <label>\( \Delta x= \) <b id="dxVal"></b> cm <input type="range" id="dxSl" min="0" max="50" step="1" value="25"></label>
+        <button class="btn sec" type="button" id="btnSoltar">Soltar</button>
+      </div>
+      <figure><svg id="figFrame" role="img" aria-label="Marco de alambre con una película de jabón y una barra móvil"></svg></figure>
+    </div>
+  </div>
+  <p class="readout" id="outFrame"></p>
+  <p><b>Ejemplo.</b> Película de laurilsulfato (\( \gamma=27\ \mathrm{mN\,m^{-1}} \)), ancho \( \ell=6{,}0\ \mathrm{cm} \), con dos caras, estirada \( \Delta x=2{,}5\ \mathrm{cm} \):</p>
+  <div class="formula key">\[ W=\gamma\,\Delta\mathcal{A}=(27\times10^{-3}\ \mathrm{N\,m^{-1}})\,[2\,(0{,}060\ \mathrm{m})(0{,}025\ \mathrm{m})]=8{,}1\times10^{-5}\ \mathrm{J}=81\ \mu\mathrm{J} \]</div>
+
+  <h4>Dependencia con la temperatura</h4>
+  <p>\( \gamma \) disminuye al subir \( T \) y se anula en la temperatura crítica \( T_c \). La ecuación de Katayama&ndash;Guggenheim usa \( \gamma_0 \), una constante del líquido, y un exponente \( n=11/9\approx1{,}22\approx1 \) para líquidos orgánicos. Con dos temperaturas se elimina \( \gamma_0 \):</p>
+  <div class="formula key">\[ \gamma=\gamma_0\left(1-\frac{T}{T_c}\right)^{n}\quad\Rightarrow\quad \gamma_2=\gamma_1\left(\frac{1-T_2/T_c}{1-T_1/T_c}\right)^{n} \]</div>
+  <p>Etanol (\( T_c=513{,}9\ \mathrm{K} \)) con \( \gamma_1=22{,}0\ \mathrm{mN\,m^{-1}} \) a \( 25\ ^\circ\mathrm{C} \), a \( 50\ ^\circ\mathrm{C} \):</p>
+  <div class="formula">\[ \gamma_2=22{,}0\left(\frac{1-323{,}15/513{,}9}{1-298{,}15/513{,}9}\right)^{11/9}=22{,}0\,(0{,}884)^{11/9}=18{,}9\ \mathrm{mN\,m^{-1}} \]</div>
 </section>
 
 <!-- 2 -->
 <section class="card" id="s2">
   <h3><span class="badge">2</span>Interfases curvas: Young&ndash;Laplace</h3>
-  <p>Una interfase curva se comporta como una membrana tensa: la presión es mayor del lado cóncavo. Para una gota esférica de radio \( r \) la tensión superficial comprime el interior:</p>
-  <div class="formula key">\[ P_{\mathrm{in}}=P_{\mathrm{ext}}+\frac{2\gamma}{r}\qquad\Rightarrow\qquad \Delta P=\frac{2\gamma}{r} \]</div>
-  <div class="grid">
-    <div class="mini"><h4>Gota y burbuja</h4><p>Una sola interfase. \( \Delta P=2\gamma/r \). Una burbuja en un líquido es una cavidad de vapor o gas.</p></div>
-    <div class="mini"><h4>Pompa</h4><p>Película con dos interfases, una por cada cara. \( \Delta P=4\gamma/r \).</p></div>
-    <div class="mini"><h4>Tamaño</h4><p>\( \Delta P\propto1/r \): las gotas pequeñas están a mucha más presión que las grandes.</p></div>
+  <p>Al minimizar el área, las interfases se curvan, y la curvatura genera una diferencia de presión entre el interior y el exterior de la fase. Para una esfera de radio \( r \):</p>
+  <div class="formula key">\[ P_{\mathrm{in}}=P_{\mathrm{ext}}+\frac{2\gamma}{r}\qquad\Rightarrow\qquad \Delta P=P_{\mathrm{in}}-P_{\mathrm{ext}}=\frac{2\gamma}{r} \]</div>
+  <div class="cols3">
+    <div class="mini"><h4>Gota</h4><p>Líquido rodeado por su vapor. \( \Delta P=2\gamma/r \).</p></div>
+    <div class="mini"><h4>Burbuja (cavidad)</h4><p>Hueco de vapor o gas dentro de un líquido. \( \Delta P=2\gamma/r \).</p></div>
+    <div class="mini"><h4>Pompa</h4><p>Película con dos interfases. \( \Delta P=4\gamma/r \).</p></div>
   </div>
-  <p style="margin:0 0 6px">Elija el sistema y el radio. La aguja del manómetro usa escala logarítmica, de \( 10\ \mathrm{Pa} \) a \( 10^{7}\ \mathrm{Pa} \).</p>
+  <p>Esto explica la formación de gotas, los aerosoles, el ascenso capilar y la condensación capilar. Elija el sistema y el radio; el manómetro es logarítmico.</p>
   <div class="ctrl">
     <label>Sistema <select id="lqSel"></select></label>
     <label>Radio <b id="rVal"></b> <input type="range" id="rSl" min="0" max="100" value="55"></label>
   </div>
-  <figure><svg id="figLap" role="img" aria-label="Gota y manómetro con la sobrepresión de Laplace"></svg><figcaption>La sobrepresión crece a medida que el radio disminuye. La marca roja indica \( 1\ \mathrm{atm} \).</figcaption></figure>
+  <figure><svg id="figLap" role="img" aria-label="Gota y manómetro con la sobrepresión de Laplace"></svg><figcaption>La sobrepresión crece al disminuir el radio. La marca roja es \( 1\ \mathrm{atm} \).</figcaption></figure>
   <p class="readout" id="outLap"></p>
-  <div class="callout warn"><p><span class="lbl">Errores frecuentes.</span> Usar el diámetro en lugar del radio duplica el resultado de \( \Delta P \). Olvidar que una pompa tiene dos interfases da la mitad. Y \( \gamma \) debe ir en \( \mathrm{N\,m^{-1}} \), no en \( \mathrm{mN\,m^{-1}} \), para obtener pascales.</p></div>
-
-  <h4>Ejemplo: gota de un aerosol inhalado</h4>
-  <p>Una gota acuosa de \( 5{,}0\ \mu\mathrm{m} \) de diámetro (\( \gamma=72{,}0\ \mathrm{mN\,m^{-1}} \)) viaja por el aire de las vías respiratorias. Calcule su sobrepresión interior y compárela con \( 1\ \mathrm{atm} \).</p>
-  <ol class="steps">
-    <li>Radio: \( r=2{,}5\ \mu\mathrm{m}=2{,}5\times10^{-6}\ \mathrm{m} \).</li>
-    <li>Sobrepresión de Laplace:
-      <div class="formula" style="margin:8px 0">\[ \Delta P=\frac{2\gamma}{r}=\frac{2\,(72{,}0\times10^{-3}\ \mathrm{N\,m^{-1}})}{2{,}5\times10^{-6}\ \mathrm{m}}=5{,}76\times10^{4}\ \mathrm{Pa}=57{,}6\ \mathrm{kPa} \]</div></li>
-    <li>Comparación con la presión atmosférica:
-      <div class="formula" style="margin:8px 0">\[ \frac{57{,}6\ \mathrm{kPa}}{101{,}3\ \mathrm{kPa}}=0{,}57\ \mathrm{atm} \]</div></li>
-  </ol>
+  <div class="callout warn"><p><span class="lbl">Errores frecuentes.</span> Usar el diámetro en lugar del radio duplica \( \Delta P \). Olvidar que la pompa tiene dos interfases da la mitad. Y \( \gamma \) debe ir en \( \mathrm{N\,m^{-1}} \) para obtener pascales.</p></div>
+  <p><b>Ejemplo.</b> Gota acuosa de \( 5{,}0\ \mu\mathrm{m} \) de diámetro (\( \gamma=72{,}0\ \mathrm{mN\,m^{-1}} \)) en las vías respiratorias:</p>
+  <div class="formula key">\[ \Delta P=\frac{2\gamma}{r}=\frac{2\,(72{,}0\times10^{-3}\ \mathrm{N\,m^{-1}})}{2{,}5\times10^{-6}\ \mathrm{m}}=5{,}76\times10^{4}\ \mathrm{Pa}=57{,}6\ \mathrm{kPa}=0{,}57\ \mathrm{atm} \]</div>
 </section>
 
 <!-- 3 -->
 <section class="card" id="s3">
   <h3><span class="badge">3</span>Ecuación de Kelvin</h3>
-  <p>Las moléculas de una gota diminuta tienen menos vecinos que las de una superficie plana, y por eso escapan con más facilidad. La presión de vapor sobre una superficie curva se relaciona con la de la superficie plana mediante:</p>
-  <div class="formula key">\[ \ln\frac{P}{P_0}=\frac{2\gamma V}{r\,R\,T}\qquad V=\frac{M}{\rho} \]</div>
-  <div class="grid">
-    <div class="mini"><h4>Gota (menisco convexo)</h4><p>\( P>P_0 \). Cuanto menor el radio, mayor la presión de vapor.</p></div>
-    <div class="mini"><h4>Poro que moja (menisco cóncavo)</h4><p>El radio de curvatura se toma negativo y \( P\lt P_0 \): el vapor condensa antes de saturarse. Es la condensación capilar.</p></div>
-    <div class="mini"><h4>Magnitud</h4><p>Hacen falta radios de decenas de nanómetros o menos para que el efecto supere el 1 %.</p></div>
+  <p>Con partículas suficientemente pequeñas, la energía superficial modifica propiedades medibles. Un caso es la mayor presión de vapor de las gotas pequeñas:</p>
+  <div class="formula key">\[ \ln\frac{P}{P_0}=\frac{2\gamma}{r}\,\frac{V}{RT}\qquad V=\frac{M}{\rho} \]</div>
+  <div class="cols3">
+    <div class="mini"><h4>Gota (convexo)</h4><p>\( P\gt P_0 \): cuanto menor el radio, mayor la presión de vapor.</p></div>
+    <div class="mini"><h4>Poro que moja (cóncavo)</h4><p>El radio de curvatura cuenta como negativo y \( P\lt P_0 \): condensación capilar.</p></div>
+    <div class="mini"><h4>Alcance</h4><p>Con radios de pocos nanómetros la tensión superficial macroscópica deja de describir bien la interfase.</p></div>
   </div>
-  <p style="margin:0 0 6px">Agua a \( 298{,}15\ \mathrm{K} \). Cambie el radio y alterne entre una gota y un poro.</p>
   <div class="ctrl">
     <label>Geometría <select id="kmSel"><option value="gota">Gota (convexo)</option><option value="poro">Poro que moja (cóncavo)</option></select></label>
     <label>Radio <b id="rkVal"></b> <input type="range" id="rkSl" min="0" max="100" value="45"></label>
   </div>
   <div class="figpair">
-    <figure><svg id="figKel" role="img" aria-label="Gota o poro con barras de presión de vapor relativa"></svg><figcaption>Las barras comparan la presión de vapor sobre la superficie plana (gris) y sobre la curva (color).</figcaption></figure>
-    <figure><svg id="figKelC" role="img" aria-label="P sobre P0 contra radio"></svg><figcaption>Cociente \( P/P_0 \) contra el radio de curvatura.</figcaption></figure>
+    <figure><svg id="figKel" role="img" aria-label="Gota o poro con barras de presión de vapor relativa"></svg><figcaption>Barras de presión de vapor: superficie plana (gris) y superficie curva (color), agua a \( 298{,}15\ \mathrm{K} \).</figcaption></figure>
+    <figure><svg id="figKelC" role="img" aria-label="P sobre P0 contra radio"></svg><figcaption>\( P/P_0 \) contra el radio de curvatura.</figcaption></figure>
   </div>
   <p class="readout" id="outKel"></p>
-  <div class="callout warn"><p><span class="lbl">Alcance.</span> Con radios de pocos nanómetros la tensión superficial macroscópica deja de describir bien la interfase, de modo que los resultados son estimaciones. El efecto es la base de la maduración de Ostwald en nanosuspensiones y de la humedad que retienen los excipientes porosos.</p></div>
-
-  <h4>Ejemplo 1: nanogota de agua</h4>
-  <p>Una gota de agua de \( 20\ \mathrm{nm} \) de radio flota en aire húmedo a \( 298{,}15\ \mathrm{K} \) (\( \gamma=71{,}97\ \mathrm{mN\,m^{-1}} \), \( \rho=997{,}05\ \mathrm{kg\,m^{-3}} \)). ¿Cuánto mayor es su presión de vapor que la del agua plana?</p>
-  <div class="formula">\[ V=\frac{18{,}015\times10^{-3}\ \mathrm{kg\,mol^{-1}}}{997{,}05\ \mathrm{kg\,m^{-3}}}=1{,}807\times10^{-5}\ \mathrm{m^3\,mol^{-1}} \]</div>
-  <div class="formula">\[ \frac{2\gamma V}{rRT}=\frac{2\,(71{,}97\times10^{-3})(1{,}807\times10^{-5})}{(20\times10^{-9})(8{,}314)(298{,}15)}=0{,}0525 \]</div>
-  <div class="formula key">\[ \frac{P}{P_0}=e^{0{,}0525}=1{,}054 \]</div>
-  <p>Es un 5,4 % más que sobre el agua plana.</p>
-  <h4>Ejemplo 2: condensación en un poro de sílice</h4>
-  <p>Un excipiente poroso tiene poros cilíndricos de \( 4{,}0\ \mathrm{nm} \) de radio que el agua moja por completo. ¿A qué humedad relativa se llenan de líquido a \( 298{,}15\ \mathrm{K} \)?</p>
-  <div class="formula">\[ \ln\frac{P}{P_0}=-\frac{2\gamma V}{rRT}=-\frac{2\,(71{,}97\times10^{-3})(1{,}807\times10^{-5})}{(4{,}0\times10^{-9})(8{,}314)(298{,}15)}=-0{,}262 \]</div>
-  <div class="formula key">\[ \frac{P}{P_0}=e^{-0{,}262}=0{,}769\quad\Rightarrow\quad \text{humedad relativa}\approx77\ \% \]</div>
+  <p><b>Ejemplo 1.</b> Nanogota de agua de \( 20\ \mathrm{nm} \) de radio a \( 298{,}15\ \mathrm{K} \) (\( \gamma=71{,}97\ \mathrm{mN\,m^{-1}} \), \( V=1{,}807\times10^{-5}\ \mathrm{m^3\,mol^{-1}} \)):</p>
+  <div class="formula">\[ \ln\frac{P}{P_0}=\frac{2\,(71{,}97\times10^{-3})(1{,}807\times10^{-5})}{(20\times10^{-9})(8{,}314)(298{,}15)}=0{,}0525\ \Rightarrow\ \frac{P}{P_0}=1{,}054 \]</div>
+  <p><b>Ejemplo 2.</b> Poro cilíndrico de sílice de \( 4{,}0\ \mathrm{nm} \) de radio que el agua moja: el radio entra negativo.</p>
+  <div class="formula key">\[ \ln\frac{P}{P_0}=-\frac{2\,(71{,}97\times10^{-3})(1{,}807\times10^{-5})}{(4{,}0\times10^{-9})(8{,}314)(298{,}15)}=-0{,}262\ \Rightarrow\ \frac{P}{P_0}=0{,}769\ (\approx77\ \%\ \text{de humedad relativa}) \]</div>
 </section>
 
 <!-- 4 -->
 <section class="card" id="s4">
   <h3><span class="badge">4</span>Capilaridad</h3>
-  <p>Cuando un tubo fino se sumerge en un líquido, el nivel interior deja de coincidir con el exterior. Lo decide el ángulo de contacto \( \theta \), que resulta de equilibrar las tres tensiones en la línea donde se encuentran sólido, líquido y gas:</p>
-  <div class="formula key">\[ \gamma_{SG}=\gamma_{SL}+\gamma_{LG}\cos\theta\qquad\Rightarrow\qquad \cos\theta=\frac{\gamma_{SG}-\gamma_{SL}}{\gamma_{LG}} \]</div>
-  <div class="grid">
-    <div class="mini"><h4>\( \theta\lt90^\circ \): moja</h4><p>Domina la adhesión con el sólido. El menisco es cóncavo y el líquido asciende.</p></div>
-    <div class="mini"><h4>\( \theta>90^\circ \): no moja</h4><p>Domina la cohesión del líquido. El menisco es convexo y el líquido desciende.</p></div>
+  <p>Al introducir un tubo capilar en un líquido, éste asciende o desciende. Lo determinan tres interfases: líquido/sólido, líquido/gas y sólido/gas. El balance de fuerzas en la línea de contacto da la ecuación de Young:</p>
+  <div class="formula key">\[ \gamma_{SG}=\gamma_{SL}+\gamma_{LG}\cos\theta\quad\Rightarrow\quad \cos\theta=\frac{\gamma_{SG}-\gamma_{SL}}{\gamma_{LG}} \]</div>
+  <div class="cols3">
+    <div class="mini"><h4>\( 0\le\theta\lt90^\circ \): moja</h4><p>Domina la adhesión (moléculas distintas). Menisco cóncavo: ascenso.</p></div>
+    <div class="mini"><h4>\( 90^\circ\lt\theta\le180^\circ \): no moja</h4><p>Domina la cohesión (moléculas iguales). Menisco convexo: descenso. Caso del Hg.</p></div>
+    <div class="mini"><h4>Altura</h4><p>\( h\gt0 \): ascenso. \( h\lt0 \): descenso. Como \( h\propto1/r \), el efecto es grande en tubos finos.</p></div>
   </div>
-  <p>La columna que sube se sostiene mientras su peso iguala a la fuerza vertical con que la tensión superficial tira del contorno del tubo:</p>
+  <p>En equilibrio, el peso de la columna iguala a la fuerza vertical de la tensión sobre el contorno del tubo:</p>
   <ol class="steps">
     <li>Peso de la columna: \( \pi r^{2}\,h\,(\rho^{L}-\rho^{V})\,g \).</li>
     <li>Fuerza hacia arriba sobre la circunferencia: \( 2\pi r\,\gamma\cos\theta \).</li>
-    <li>Se igualan y se despeja \( h \):
-      <div class="formula key" style="margin:8px 0">\[ h=\frac{2\gamma\cos\theta}{r\,g\,(\rho^{L}-\rho^{V})}\approx\frac{2\gamma\cos\theta}{r\,g\,\rho^{L}} \]</div></li>
+    <li>Se igualan y se despeja \( h \); con \( \theta=0 \) y \( \rho^{L}\gg\rho^{V} \) se simplifica:
+      <div class="formula key" style="margin:6px 0">\[ h=\frac{2\gamma\cos\theta}{g\,(\rho^{L}-\rho^{V})\,r}\ \longrightarrow\ h=\frac{2\gamma}{r\,g\,\rho^{L}} \]</div></li>
   </ol>
-  <p>La aproximación vale cuando la densidad del vapor es despreciable. Si \( h>0 \) hay ascenso y si \( h\lt0 \), descenso. Como \( h\propto1/r \), el efecto es grande en tubos finos.</p>
-  <p style="margin:0 0 6px">Elija un par líquido&ndash;sólido, el radio y el ángulo de contacto, y sumerja el tubo.</p>
   <div class="ctrl">
     <label>Par <select id="cpSel"></select></label>
     <label>Radio <b id="rcVal"></b> mm <input type="range" id="rcSl" min="5" max="100" value="25"></label>
@@ -171,33 +160,31 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   </div>
   <div class="figpair">
     <figure><svg id="figCap" role="img" aria-label="Capilar sumergido con menisco y altura de la columna"></svg><figcaption>La altura se recorta en el dibujo si excede la regla; el valor numérico es el real.</figcaption></figure>
-    <figure><svg id="figCapC" role="img" aria-label="Altura contra radio del capilar"></svg><figcaption>Altura \( h \) contra el radio del capilar, para el par y el ángulo elegidos.</figcaption></figure>
+    <figure><svg id="figCapC" role="img" aria-label="Altura contra radio del capilar"></svg><figcaption>\( h \) contra el radio del capilar para el par y el ángulo elegidos.</figcaption></figure>
   </div>
   <p class="readout" id="outCap"></p>
-  <div class="callout warn"><p><span class="lbl">Errores frecuentes.</span> El signo lo fija solo \( \cos\theta \), y no la magnitud de \( \gamma \). El radio es el del tubo, no el diámetro. Y si el tubo no está limpio, \( \theta \) cambia y la altura también.</p></div>
-
-  <h4>Ejemplo: sangre en un capilar de microhematocrito</h4>
-  <p>El tubo tiene \( 1{,}1\ \mathrm{mm} \) de diámetro interno. La sangre tiene \( \gamma=58\ \mathrm{mN\,m^{-1}} \) y \( \rho=1050\ \mathrm{kg\,m^{-3}} \). Suponga mojado completo (\( \theta=0 \)) y desprecie la densidad del aire. Calcule la altura que alcanzaría.</p>
+  <div class="callout warn"><p><span class="lbl">Errores frecuentes.</span> El signo lo fija solo \( \cos\theta \), no la magnitud de \( \gamma \). El radio es el del tubo, no el diámetro. Si el tubo no está limpio, \( \theta \) cambia y la altura también.</p></div>
+  <p><b>Ejemplo.</b> Capilar de microhematocrito de \( 1{,}1\ \mathrm{mm} \) de diámetro interno; sangre con \( \gamma=58\ \mathrm{mN\,m^{-1}} \), \( \rho=1050\ \mathrm{kg\,m^{-3}} \), \( \theta=0 \), densidad del aire despreciable:</p>
   <div class="formula key">\[ h=\frac{2\gamma}{r\,g\,\rho}=\frac{2\,(58\times10^{-3}\ \mathrm{N\,m^{-1}})}{(0{,}55\times10^{-3}\ \mathrm{m})(9{,}81\ \mathrm{m\,s^{-2}})(1050\ \mathrm{kg\,m^{-3}})}=2{,}05\times10^{-2}\ \mathrm{m}\approx2{,}0\ \mathrm{cm} \]</div>
 </section>
 
 <!-- 5 -->
 <section class="card" id="s5">
   <h3><span class="badge">5</span>Disoluciones y adsorción: isoterma de Gibbs</h3>
-  <p>Un soluto cambia la tensión superficial del disolvente, y lo hace porque su concentración en la superficie no coincide con la del interior. Según cómo varía \( \gamma \) con la concentración hay tres comportamientos:</p>
-  <div class="grid">
-    <div class="mini"><h4>Tipo I</h4><p>\( \gamma \) sube levemente. Sales inorgánicas y azúcares. El soluto se aleja de la superficie.</p></div>
-    <div class="mini"><h4>Tipo II</h4><p>\( \gamma \) baja de forma gradual. Orgánicos solubles con una parte polar y otra apolar, como los alcoholes.</p></div>
-    <div class="mini"><h4>Tipo III</h4><p>\( \gamma \) cae con muy poco soluto y luego se aplana. Tensioactivos y detergentes.</p></div>
+  <p>La tensión superficial del disolvente cambia al agregar un soluto, según la concentración, la interacción soluto&ndash;solvente y la temperatura. Hay tres comportamientos:</p>
+  <div class="cols3">
+    <div class="mini"><h4>Tipo I</h4><p>\( \gamma \) sube levemente. Sales inorgánicas, sacarosa. Adsorción negativa: el soluto no se acumula en la interfase.</p></div>
+    <div class="mini"><h4>Tipo II</h4><p>\( \gamma \) baja de forma gradual. Orgánicos solubles con un grupo polar (\( -\mathrm{COOH} \), \( -\mathrm{OH} \), \( -\mathrm{NH_3^+} \)) y una cadena hidrocarbonada.</p></div>
+    <div class="mini"><h4>Tipo III</h4><p>\( \gamma \) cae con muy poco soluto. Moléculas anfifílicas: detergentes y tensioactivos. Adsorción positiva: el soluto se acumula.</p></div>
   </div>
-  <p>La cantidad de soluto que sobra o falta en la superficie, por unidad de área, es el exceso superficial \( \Gamma \). Se calcula a partir de cómo cambia \( \gamma \) con la concentración:</p>
-  <div class="formula key">\[ \Gamma=-\frac{c}{RT}\left(\frac{\partial\gamma}{\partial c}\right)_T=-\frac{1}{RT}\left(\frac{\partial\gamma}{\partial\ln c}\right)_T \]</div>
-  <div class="grid">
-    <div class="mini"><h4>\( \partial\gamma/\partial c\lt0 \)</h4><p>\( \Gamma>0 \): adsorción positiva. El soluto se acumula y baja \( \gamma \).</p></div>
-    <div class="mini"><h4>\( \partial\gamma/\partial c>0 \)</h4><p>\( \Gamma\lt0 \): adsorción negativa. El soluto se aleja de la superficie.</p></div>
-    <div class="mini"><h4>Área por molécula</h4><p>\( \sigma=1/(\Gamma N_A) \), con \( \Gamma \) en \( \mathrm{mol\,m^{-2}} \).</p></div>
+  <p>El <b>exceso superficial</b> expresa los moles de soluto por unidad de área que se acumulan (positivo) o faltan (negativo) en la superficie. La isoterma de adsorción de Gibbs lo calcula desde la tensión superficial:</p>
+  <div class="formula">\[ \Gamma_{2(1)}=\frac{n^{\mathcal{A}}_{2(1)}}{\mathcal{A}},\qquad n^{\mathcal{A}}_{2(1)}=n_2-\sum n_2^{\alpha} \]</div>
+  <div class="formula key">\[ \Gamma_{2(1)}=-\frac{c_2}{RT}\left(\frac{\partial\gamma}{\partial c_2}\right)_T=-\frac{1}{RT}\left(\frac{\partial\gamma}{\partial\ln c_2}\right)_T \]</div>
+  <div class="cols3">
+    <div class="mini"><h4>\( \partial\gamma/\partial c_2\lt0 \)</h4><p>\( \Gamma_{2(1)}\gt0 \): adsorción positiva.</p></div>
+    <div class="mini"><h4>\( \partial\gamma/\partial c_2\gt0 \)</h4><p>\( \Gamma_{2(1)}\lt0 \): adsorción negativa.</p></div>
+    <div class="mini"><h4>Área por molécula</h4><p>\( \sigma=1/(\Gamma_{2(1)}N_A) \), con \( \Gamma \) en \( \mathrm{mol\,m^{-2}} \).</p></div>
   </div>
-  <p style="margin:0 0 6px">Elija el soluto y la concentración. Las moléculas se acomodan en la superficie según \( \Gamma \), y la tangente a la curva es la pendiente que entra en la isoterma.</p>
   <div class="ctrl">
     <label>Soluto <select id="slSel"><option value="tens">Tensioactivo tipo polisorbato (tipo III)</option><option value="sal">Sal inorgánica (tipo I)</option></select></label>
     <label><i>c</i> = <b id="cgVal"></b> <span id="cgUn"></span> <input type="range" id="cgSl" min="0" max="100" value="50"></label>
@@ -207,29 +194,15 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <figure><svg id="figGib" role="img" aria-label="Moléculas de soluto en el seno del líquido y adsorbidas en la superficie"></svg><figcaption id="capGib"></figcaption></figure>
     <div>
       <figure><svg id="figGibA" role="img" aria-label="Tensión superficial contra concentración con tangente"></svg><figcaption>\( \gamma \) contra concentración, con la tangente en el punto elegido.</figcaption></figure>
-      <figure><svg id="figGibB" role="img" aria-label="Exceso superficial contra concentración"></svg><figcaption>Exceso superficial \( \Gamma \) contra concentración.</figcaption></figure>
+      <figure><svg id="figGibB" role="img" aria-label="Exceso superficial contra concentración"></svg><figcaption>\( \Gamma_{2(1)} \) contra concentración.</figcaption></figure>
     </div>
   </div>
   <p class="readout" id="outGib"></p>
-
-  <h4>Ejemplo 1: pendiente medida en un laurilsulfato</h4>
-  <p>A \( 298{,}15\ \mathrm{K} \), la pendiente límite de \( \gamma \) contra \( \ln c \) para una disolución de laurilsulfato de sodio es \( -9{,}0\ \mathrm{mN\,m^{-1}} \). Calcule \( \Gamma \) y el área que ocupa cada molécula en la superficie.</p>
-  <div class="formula">\[ \Gamma=-\frac{1}{RT}\left(\frac{\partial\gamma}{\partial\ln c}\right)_T=\frac{9{,}0\times10^{-3}\ \mathrm{N\,m^{-1}}}{(8{,}314\ \mathrm{J\,mol^{-1}K^{-1}})(298{,}15\ \mathrm{K})}=3{,}63\times10^{-6}\ \mathrm{mol\,m^{-2}} \]</div>
-  <div class="formula key">\[ \sigma=\frac{1}{\Gamma\,N_A}=\frac{1}{(3{,}63\times10^{-6}\ \mathrm{mol\,m^{-2}})(6{,}022\times10^{23}\ \mathrm{mol^{-1}})}=4{,}57\times10^{-19}\ \mathrm{m^2}=45{,}7\ \mathring{A}^{2} \]</div>
-  <h4>Ejemplo 2: ajuste empírico de un polisorbato</h4>
-  <p>Por debajo de su concentración micelar crítica, la tensión superficial de un polisorbato a \( 298{,}15\ \mathrm{K} \) se ajusta bien con</p>
-  <div class="formula">\[ \gamma=\gamma_0-RT\,\Gamma_{\max}\ln\!\left(1+\frac{c}{a}\right),\qquad \gamma_0=72{,}0\ \mathrm{mN\,m^{-1}},\ \Gamma_{\max}=2{,}8\times10^{-6}\ \mathrm{mol\,m^{-2}},\ a=0{,}10\ \mu\mathrm{mol\,L^{-1}} \]</div>
-  <p>Calcule \( \Gamma \) y el área por molécula a \( c=2{,}0\ \mu\mathrm{mol\,L^{-1}} \).</p>
-  <ol class="steps">
-    <li>Se deriva respecto de \( c \):
-      <div class="formula" style="margin:8px 0">\[ \left(\frac{\partial\gamma}{\partial c}\right)_T=-\frac{RT\,\Gamma_{\max}}{a+c} \]</div></li>
-    <li>Se reemplaza en la isoterma de Gibbs:
-      <div class="formula key" style="margin:8px 0">\[ \Gamma=-\frac{c}{RT}\left(\frac{\partial\gamma}{\partial c}\right)_T=\Gamma_{\max}\,\frac{c}{a+c}=(2{,}8\times10^{-6}\ \mathrm{mol\,m^{-2}})\,\frac{2{,}0}{0{,}10+2{,}0}=2{,}67\times10^{-6}\ \mathrm{mol\,m^{-2}} \]</div></li>
-    <li>Área por molécula:
-      <div class="formula" style="margin:8px 0">\[ \sigma=\frac{1}{\Gamma N_A}=\frac{1}{(2{,}67\times10^{-6})(6{,}022\times10^{23})}=6{,}2\times10^{-19}\ \mathrm{m^2}=62\ \mathring{A}^{2} \]</div></li>
-  </ol>
-  <p>A esa concentración la superficie está al 95 % de su saturación, \( \Gamma/\Gamma_{\max}=0{,}95 \).</p>
-  <div class="callout warn"><p><span class="lbl">Errores frecuentes.</span> Con la pendiente de \( \gamma \) contra \( \ln c \), el factor \( c \) ya está dentro de la derivada: no se multiplica otra vez por \( c \). Y el signo menos de la isoterma es el que vuelve positivo a \( \Gamma \) cuando \( \gamma \) disminuye.</p></div>
+  <p><b>Ejemplo 1.</b> Pendiente límite \( (\partial\gamma/\partial\ln c)_T=-9{,}0\ \mathrm{mN\,m^{-1}} \) para laurilsulfato de sodio a \( 298{,}15\ \mathrm{K} \):</p>
+  <div class="formula">\[ \Gamma=\frac{9{,}0\times10^{-3}\ \mathrm{N\,m^{-1}}}{(8{,}314\ \mathrm{J\,mol^{-1}K^{-1}})(298{,}15\ \mathrm{K})}=3{,}63\times10^{-6}\ \mathrm{mol\,m^{-2}}\ \Rightarrow\ \sigma=\frac{1}{\Gamma N_A}=4{,}57\times10^{-19}\ \mathrm{m^2}=45{,}7\ \mathring{A}^{2} \]</div>
+  <p><b>Ejemplo 2.</b> Un polisorbato por debajo de su concentración micelar crítica sigue \( \gamma=\gamma_0-RT\,\Gamma_{\max}\ln(1+c/a) \), con \( \Gamma_{\max}=2{,}8\times10^{-6}\ \mathrm{mol\,m^{-2}} \) y \( a=0{,}10\ \mu\mathrm{mol\,L^{-1}} \). Derivando, \( (\partial\gamma/\partial c)_T=-RT\Gamma_{\max}/(a+c) \), y la isoterma da, a \( c=2{,}0\ \mu\mathrm{mol\,L^{-1}} \):</p>
+  <div class="formula key">\[ \Gamma=-\frac{c}{RT}\left(\frac{\partial\gamma}{\partial c}\right)_T=\Gamma_{\max}\frac{c}{a+c}=(2{,}8\times10^{-6})\frac{2{,}0}{2{,}1}=2{,}67\times10^{-6}\ \mathrm{mol\,m^{-2}}\ \Rightarrow\ \sigma=62\ \mathring{A}^{2} \]</div>
+  <div class="callout warn"><p><span class="lbl">Errores frecuentes.</span> Con la pendiente de \( \gamma \) contra \( \ln c \), el factor \( c \) ya está dentro de la derivada: no se multiplica otra vez. El signo menos de la isoterma es el que hace positivo a \( \Gamma \) cuando \( \gamma \) disminuye.</p></div>
 </section>
 
 </main>
@@ -329,12 +302,12 @@ function paintFrame(){
     '<line x1="'+x0+'" y1="'+yb+'" x2="'+(x0+9*36+10)+'" y2="'+yb+'" stroke="#59627a" stroke-width="3"/>'+
     '<line x1="'+x0+'" y1="'+yt+'" x2="'+x0+'" y2="'+yb+'" stroke="#59627a" stroke-width="3"/>'+
     '<line x1="'+x1+'" y1="'+(yt-8)+'" x2="'+x1+'" y2="'+(yb+8)+'" stroke="#a8231b" stroke-width="6" stroke-linecap="round"/>'+
-    '<text x="'+(x0+10)+'" y="'+(yt+22)+'" font-size="13" fill="#1f5fbf">pel\u00edcula (dos caras)</text>';
+    '<text x="'+(x0+10)+'" y="'+(yt+22)+'" font-size="17" fill="#1f5fbf">pel\u00edcula (dos caras)</text>';
   var fx=x1+8;
   h+='<line x1="'+(x1+8)+'" y1="'+((yt+yb)/2)+'" x2="'+(x1+8+30)+'" y2="'+((yt+yb)/2)+'" stroke="#a8231b" stroke-width="2" marker-end="url(#arF)"/>'+
-     '<text x="'+(x1+8)+'" y="'+((yt+yb)/2-8)+'" font-size="12" fill="#a8231b">fuerza</text>';
-  h+='<line x1="'+x0+'" y1="'+(yb+22)+'" x2="'+x1+'" y2="'+(yb+22)+'" stroke="#59627a" stroke-width="1.2"/><text x="'+((x0+x1)/2)+'" y="'+(yb+40)+'" text-anchor="middle" font-size="12" fill="#59627a">largo = '+comma(4+fr.dx,1)+' cm</text>';
-  h+='<text x="'+(x0-8)+'" y="'+((yt+yb)/2+4)+'" text-anchor="end" font-size="12" fill="#59627a">\u2113 = 6,0 cm</text>';
+     '<text x="'+(x1+8)+'" y="'+((yt+yb)/2-8)+'" font-size="16" fill="#a8231b">fuerza</text>';
+  h+='<line x1="'+x0+'" y1="'+(yb+22)+'" x2="'+x1+'" y2="'+(yb+22)+'" stroke="#59627a" stroke-width="1.2"/><text x="'+((x0+x1)/2)+'" y="'+(yb+40)+'" text-anchor="middle" font-size="16" fill="#59627a">largo = '+comma(4+fr.dx,1)+' cm</text>';
+  h+='<text x="'+(x0-8)+'" y="'+((yt+yb)/2+4)+'" text-anchor="end" font-size="16" fill="#59627a">\u2113 = 6,0 cm</text>';
   svg.innerHTML=ARROW('arF')+h;
   $('#dxVal').textContent=comma(fr.dx,1);
   var dA=2*LFR*fr.dx/100,W=GFR*dA;
