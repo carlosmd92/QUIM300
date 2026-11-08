@@ -436,31 +436,30 @@ function drawCat(){
      La amplitud de la barrera se resuelve por bisección para que el máximo valga exactamente Ea. */
   var sg=function(u){return 1/(1+Math.exp(-(u-0.62)*9));},s0=sg(0),s1=sg(1);
   var S=function(u){return (sg(u)-s0)/(s1-s0);};
-  var prof=function(Ea,c){
+  var prof=function(Ea,c,cap){
     var f=function(u,B){return dEr*S(u)+B*Math.exp(-Math.pow((u-c)/0.2,2));};
     var mx=function(B){var m=-1e9,u,v;for(u=0;u<=1.0001;u+=0.002){v=f(u,B);if(v>m)m=v;}return m;};
     var lo=0,hi=600,B,k;
     for(k=0;k<50;k++){B=(lo+hi)/2;if(mx(B)<Ea)lo=B;else hi=B;}
+    var g=function(u){var y=f(u,B);return cap?Math.min(y,cap(u)):y;};
     var up=0,m=-1e9,u,v;
-    for(u=0;u<=1.0001;u+=0.0005){v=f(u,B);if(v>m){m=v;up=u;}}
+    for(u=0;u<=1.0001;u+=0.0005){v=g(u);if(v>m){m=v;up=u;}}
     var d='',i;
-    for(i=0;i<=240;i++){u=i/240;d+=(i?'L':'M')+(X0+XW*u).toFixed(1)+' '+(yR-f(u,B)*sc).toFixed(1);}
-    return {d:d,x:X0+XW*up,y:yR-m*sc,E:m};
+    for(i=0;i<=240;i++){u=i/240;d+=(i?'L':'M')+(X0+XW*u).toFixed(1)+' '+(yR-g(u)*sc).toFixed(1);}
+    return {d:d,x:X0+XW*up,y:yR-m*sc,E:m,g:g};
   };
-  var pU=prof(E0,0.5),pC=prof(Ec,0.5);
+  var pC,pU=prof(E0,0.512);pC=prof(Ec,0.488,pU.g);
   var s='<line x1="46" y1="232" x2="404" y2="232" stroke="#59627a" stroke-width="1.5"/><line x1="46" y1="16" x2="46" y2="232" stroke="#59627a" stroke-width="1.5"/>'+
     '<text x="225" y="248" text-anchor="middle" font-size="13" fill="#59627a">avance de la reacción</text><text transform="translate(16 124) rotate(-90)" text-anchor="middle" font-size="13" fill="#59627a">energía</text>';
   s+='<path d="'+pU.d+'" fill="none" stroke="#1f5fbf" stroke-width="3.2" stroke-linejoin="round"/>'+
      '<path d="'+pC.d+'" fill="none" stroke="#0c8486" stroke-width="3" stroke-dasharray="8 5" stroke-linejoin="round"/>';
-  /* Las flechas parten de los máximos: a +-7 px del pico, donde la curva es plana y la altura difiere menos de 1 px. */
-  var xr=pU.x+7,xl=pC.x-7;
-  var hAt=function(p,x){return p.y;};
-  s+='<line x1="'+X0+'" y1="'+yR+'" x2="'+(xr+40)+'" y2="'+yR+'" stroke="#98a1b8" stroke-dasharray="3 4"/>';
-  var arrow=function(x,y,col){return '<line x1="'+x.toFixed(1)+'" y1="'+yR+'" x2="'+x.toFixed(1)+'" y2="'+(y+9).toFixed(1)+'" stroke="'+col+'" stroke-width="2"/>'+
-    '<polygon points="'+x.toFixed(1)+','+y.toFixed(1)+' '+(x-5).toFixed(1)+','+(y+11).toFixed(1)+' '+(x+5).toFixed(1)+','+(y+11).toFixed(1)+'" fill="'+col+'"/>';};
-  s+=arrow(xr,pU.y,'#a8231b')+arrow(xl,pC.y,'#0c8486');
-  s+='<text x="'+(xr+9).toFixed(1)+'" y="'+((pU.y+pC.y)/2+4).toFixed(1)+'" font-size="14" font-weight="700" fill="#a8231b" stroke="#fff" stroke-width="4" paint-order="stroke">E<tspan dy="4" font-size="10">a</tspan></text>';
-  s+='<text x="'+(xl-9).toFixed(1)+'" y="'+((yR+pC.y)/2+4).toFixed(1)+'" text-anchor="end" font-size="14" font-weight="700" fill="#0c8486" stroke="#fff" stroke-width="4" paint-order="stroke">E<tspan dy="4" font-size="10">a,cat</tspan></text>';
+  /* Cada flecha se ubica en el máximo calculado de su propia curva (x e y del argmax). */
+  s+='<line x1="'+X0+'" y1="'+yR+'" x2="'+(pU.x+40).toFixed(1)+'" y2="'+yR+'" stroke="#98a1b8" stroke-dasharray="3 4"/>';
+  var arrow=function(p,col){return '<line x1="'+p.x.toFixed(1)+'" y1="'+yR+'" x2="'+p.x.toFixed(1)+'" y2="'+(p.y+9).toFixed(1)+'" stroke="'+col+'" stroke-width="2"/>'+
+    '<polygon points="'+p.x.toFixed(1)+','+p.y.toFixed(1)+' '+(p.x-4).toFixed(1)+','+(p.y+11).toFixed(1)+' '+(p.x+4).toFixed(1)+','+(p.y+11).toFixed(1)+'" fill="'+col+'"/>';};
+  s+=arrow(pU,'#a8231b')+arrow(pC,'#0c8486');
+  s+='<text x="'+(pU.x+9).toFixed(1)+'" y="'+((pU.y+pC.y)/2+4).toFixed(1)+'" font-size="14" font-weight="700" fill="#a8231b" stroke="#fff" stroke-width="4" paint-order="stroke">E<tspan dy="4" font-size="10">a</tspan></text>';
+  s+='<text x="'+(pC.x-9).toFixed(1)+'" y="'+((yR+pC.y)/2+4).toFixed(1)+'" text-anchor="end" font-size="14" font-weight="700" fill="#0c8486" stroke="#fff" stroke-width="4" paint-order="stroke">E<tspan dy="4" font-size="10">a,cat</tspan></text>';
   s+='<text x="64" y="'+(yR+16)+'" font-size="13" fill="#1c2333">Reactivos</text><text x="392" y="'+(yR-dEr*sc+16)+'" text-anchor="end" font-size="13" fill="#1c2333">Productos</text>';
   s+='<line x1="64" y1="30" x2="94" y2="30" stroke="#1f5fbf" stroke-width="3.2"/><text x="100" y="34" font-size="12" fill="#1c2333">sin catalizador</text><line x1="64" y1="48" x2="94" y2="48" stroke="#0c8486" stroke-width="3" stroke-dasharray="8 5"/><text x="100" y="52" font-size="12" fill="#1c2333">con catalizador</text>';
   svg.innerHTML=s;
