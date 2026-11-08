@@ -238,6 +238,18 @@ function glide(o,key,to,ms,draw){
   })(performance.now());
 }
 function ARROW(id){return '<defs><marker id="'+id+'" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a8231b"/></marker></defs>';}
+function KIT(p){
+  var rg=function(n,a,b,c){return '<radialGradient id="'+p+n+'" cx=".34" cy=".3" r=".78"><stop offset="0" stop-color="'+a+'"/><stop offset=".55" stop-color="'+b+'"/><stop offset="1" stop-color="'+c+'"/></radialGradient>';};
+  return '<defs>'+
+    '<linearGradient id="'+p+'Liq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6f1fd"/><stop offset="1" stop-color="#aecff3"/></linearGradient>'+
+    '<linearGradient id="'+p+'Mt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9aa3b6"/><stop offset=".5" stop-color="#e4e8f0"/><stop offset="1" stop-color="#6b748a"/></linearGradient>'+
+    '<linearGradient id="'+p+'MtH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7c869b"/><stop offset=".45" stop-color="#e9edf4"/><stop offset="1" stop-color="#7c869b"/></linearGradient>'+
+    '<linearGradient id="'+p+'Gl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity=".9"/><stop offset=".5" stop-color="#cfd9ea" stop-opacity=".55"/><stop offset="1" stop-color="#ffffff" stop-opacity=".9"/></linearGradient>'+
+    '<linearGradient id="'+p+'Fi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8f3ff"/><stop offset=".5" stop-color="#b9d8f7"/><stop offset="1" stop-color="#d6e8fb"/></linearGradient>'+
+    rg('Bl','#9fc2f4','#2a6bd0','#17489a')+rg('Gy','#e4e8f1','#98a1b8','#6b748a')+rg('Gr','#8fd9ac','#1f9a58','#136a3b')+rg('Rd','#f2a39d','#c8362c','#8c1c14')+rg('Dr','#f4f9ff','#c4dcf7','#7fb0ea')+rg('Fc','#ffffff','#f4f6fb','#d3d9e6')+
+    '<filter id="'+p+'Sh" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="1.6" stdDeviation="1.7" flood-color="#1c2333" flood-opacity=".3"/></filter>'+
+  '</defs>';
+}
 function rnd(a){return (Math.random()-.5)*a;}
 function shown(e){if(document.body.classList.contains('embed'))return true;var v=e.closest('.view');return !!v&&!v.hidden;}
 
@@ -247,11 +259,11 @@ ETOH.g0=ETOH.g1/Math.pow(1-ETOH.T1/ETOH.Tc,ETOH.n);
 function gEt(T){return ETOH.g0*Math.pow(1-T/ETOH.Tc,ETOH.n);}
 var mol={run:!RM,m:[],gas:[],SY:110};
 function initMol(){
-  var svg=$('#figMol'),i,h=ARROW('arM');svg.setAttribute('viewBox','0 0 300 290');
-  h+='<rect x="8" y="'+mol.SY+'" width="284" height="172" rx="4" fill="#d7e8fb"/><line x1="8" y1="'+mol.SY+'" x2="292" y2="'+mol.SY+'" stroke="#1f5fbf" stroke-width="2.5"/>'+
+  var svg=$('#figMol'),i,h=KIT('mo')+ARROW('arM');svg.setAttribute('viewBox','0 0 300 290');
+  h+='<rect x="8" y="'+mol.SY+'" width="284" height="172" rx="6" fill="url(#moLiq)" stroke="#9db9dc"/><line x1="8" y1="'+mol.SY+'" x2="292" y2="'+mol.SY+'" stroke="#1f5fbf" stroke-width="2.5"/>'+
      '<text x="14" y="26" font-size="13" fill="#59627a">vapor</text><text x="284" y="'+(mol.SY+166)+'" text-anchor="end" font-size="13" fill="#59627a">l\u00edquido</text>';
-  for(i=0;i<34;i++){h+='<line id="mf'+i+'" stroke="#a8231b" stroke-width="2.4" marker-end="url(#arM)" visibility="hidden"/><circle id="mc'+i+'" r="8" fill="#1f5fbf" stroke="#fff" stroke-width="1.5"/>';}
-  for(i=0;i<5;i++)h+='<circle id="gc'+i+'" r="5" fill="#98a1b8"/>';
+  for(i=0;i<34;i++){h+='<line id="mf'+i+'" stroke="#a8231b" stroke-width="2.4" marker-end="url(#arM)" visibility="hidden"/><circle id="mc'+i+'" r="8" fill="url(#moBl)" stroke="#17489a" stroke-width=".8" filter="url(#moSh)"/>';}
+  for(i=0;i<5;i++)h+='<circle id="gc'+i+'" r="5" fill="url(#moGy)" stroke="#6b748a" stroke-width=".6"/>';
   svg.innerHTML=h;
   for(i=0;i<34;i++){var c=i%6,r=Math.floor(i/6);mol.m.push({x:30+c*44+rnd(14),y:mol.SY+20+r*28+rnd(10),vx:rnd(1),vy:rnd(1),e:$('#mc'+i),f:$('#mf'+i)});}
   for(i=0;i<5;i++)mol.gas.push({x:30+i*52,y:30+rnd(40)+20,vx:rnd(2),vy:rnd(2),e:$('#gc'+i)});
@@ -297,11 +309,12 @@ var fr={dx:2.5},GFR=27e-3,LFR=0.060;
 function paintFrame(){
   var svg=$('#figFrame');svg.setAttribute('viewBox','0 0 520 220');
   var x0=100,x1=x0+(4+fr.dx)*36,yt=50,yb=170;
-  var h='<rect x="'+x0+'" y="'+yt+'" width="'+(x1-x0)+'" height="'+(yb-yt)+'" fill="#bcd9f7" fill-opacity=".75"/>'+
-    '<line x1="'+x0+'" y1="'+yt+'" x2="'+(x0+9*36+10)+'" y2="'+yt+'" stroke="#59627a" stroke-width="3"/>'+
-    '<line x1="'+x0+'" y1="'+yb+'" x2="'+(x0+9*36+10)+'" y2="'+yb+'" stroke="#59627a" stroke-width="3"/>'+
-    '<line x1="'+x0+'" y1="'+yt+'" x2="'+x0+'" y2="'+yb+'" stroke="#59627a" stroke-width="3"/>'+
-    '<line x1="'+x1+'" y1="'+(yt-8)+'" x2="'+x1+'" y2="'+(yb+8)+'" stroke="#a8231b" stroke-width="6" stroke-linecap="round"/>'+
+  var h=KIT('fr')+'<rect x="'+x0+'" y="'+yt+'" width="'+(x1-x0)+'" height="'+(yb-yt)+'" fill="url(#frFi)" fill-opacity=".9"/>'+
+    '<rect x="'+(x0+4)+'" y="'+(yt+5)+'" width="'+Math.max(0,x1-x0-8)+'" height="9" rx="4" fill="#fff" fill-opacity=".45"/>'+
+    '<rect x="'+(x0-3)+'" y="'+(yt-3)+'" width="'+(9*36+16)+'" height="6" rx="3" fill="url(#frMt)" stroke="#59627a" stroke-width=".8" filter="url(#frSh)"/>'+
+    '<rect x="'+(x0-3)+'" y="'+(yb-3)+'" width="'+(9*36+16)+'" height="6" rx="3" fill="url(#frMt)" stroke="#59627a" stroke-width=".8" filter="url(#frSh)"/>'+
+    '<rect x="'+(x0-3)+'" y="'+(yt-3)+'" width="6" height="'+(yb-yt+6)+'" rx="3" fill="url(#frMtH)" stroke="#59627a" stroke-width=".8" filter="url(#frSh)"/>'+
+    '<rect x="'+(x1-4)+'" y="'+(yt-9)+'" width="8" height="'+(yb-yt+18)+'" rx="4" fill="url(#frRd)" stroke="#8c1c14" stroke-width=".8" filter="url(#frSh)"/>'+
     '<text x="'+(x0+10)+'" y="'+(yt+22)+'" font-size="17" fill="#1f5fbf">pel\u00edcula (dos caras)</text>';
   var fx=x1+8;
   h+='<line x1="'+(x1+8)+'" y1="'+((yt+yb)/2)+'" x2="'+(x1+8+30)+'" y2="'+((yt+yb)/2)+'" stroke="#a8231b" stroke-width="2" marker-end="url(#arF)"/>'+
@@ -321,9 +334,9 @@ function rLap(){return Math.pow(10,-7+5*(+$('#rSl').value)/100);}
 function rTxt(r){return r<1e-6?comma(r*1e9,0)+' nm':r<1e-3?comma(r*1e6,r<1e-5?1:0)+' \u00b5m':r<1e-2?comma(r*1e3,2)+' mm':comma(r*1e2,1)+' cm';}
 function paintLap(){
   var svg=$('#figLap'),s=LAP[+$('#lqSel').value];svg.setAttribute('viewBox','0 0 520 260');
-  var cx=372,cy=210,Rg=108,h='';
+  var cx=372,cy=210,Rg=108,h=KIT('la');
   var ang=function(f){return Math.PI*(1-f);};
-  h+='<path d="M'+(cx-Rg)+' '+cy+' A'+Rg+' '+Rg+' 0 0 1 '+(cx+Rg)+' '+cy+'" fill="#fbfcfe" stroke="#b9c2d6" stroke-width="2"/>';
+  h+='<path d="M'+(cx-Rg)+' '+cy+' A'+Rg+' '+Rg+' 0 0 1 '+(cx+Rg)+' '+cy+'" fill="url(#laFc)" stroke="#8c96ad" stroke-width="3" filter="url(#laSh)"/>';
   var fe=Math.max(0,Math.min(1,lapG.f)),ea=ang(fe);
   h+='<path d="M'+(cx-Rg)+' '+cy+' A'+Rg+' '+Rg+' 0 0 1 '+(cx+Rg*Math.cos(ea)).toFixed(1)+' '+(cy-Rg*Math.sin(ea)).toFixed(1)+' L'+cx+' '+cy+' Z" fill="#0c8486" fill-opacity=".14"/>';
   for(var k=1;k<=7;k++){var a=ang((k-1)/6);
@@ -332,11 +345,12 @@ function paintLap(){
   var fa=(lg(101325)-1)/6,aa=ang(fa);
   h+='<line x1="'+(cx+(Rg-14)*Math.cos(aa)).toFixed(1)+'" y1="'+(cy-(Rg-14)*Math.sin(aa)).toFixed(1)+'" x2="'+(cx+(Rg+4)*Math.cos(aa)).toFixed(1)+'" y2="'+(cy-(Rg+4)*Math.sin(aa)).toFixed(1)+'" stroke="#a8231b" stroke-width="3"/>'+
      '<text x="'+(cx+(Rg-26)*Math.cos(aa)).toFixed(1)+'" y="'+(cy-(Rg-26)*Math.sin(aa)+14).toFixed(1)+'" font-size="12" font-weight="700" fill="#a8231b" text-anchor="middle">1 atm</text>';
-  h+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+(Rg-12)*Math.cos(ea)).toFixed(1)+'" y2="'+(cy-(Rg-12)*Math.sin(ea)).toFixed(1)+'" stroke="#1c2333" stroke-width="3.5" stroke-linecap="round"/><circle cx="'+cx+'" cy="'+cy+'" r="7" fill="#1c2333"/>';
+  h+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+(Rg-12)*Math.cos(ea)).toFixed(1)+'" y2="'+(cy-(Rg-12)*Math.sin(ea)).toFixed(1)+'" stroke="#1c2333" stroke-width="3.5" stroke-linecap="round" filter="url(#laSh)"/><circle cx="'+cx+'" cy="'+cy+'" r="8" fill="url(#laGy)" stroke="#1c2333" stroke-width="1.5"/>';
   h+='<text x="'+cx+'" y="'+(cy+30)+'" text-anchor="middle" font-size="13" fill="#59627a">\u0394P (Pa)</text>';
   var rr=lapD.rad,dx=120,dy=130;
-  h+='<circle cx="'+dx+'" cy="'+dy+'" r="'+rr.toFixed(1)+'" fill="#d7e8fb" stroke="#1f5fbf" stroke-width="3"/>';
-  if(s.k===4)h+='<circle cx="'+dx+'" cy="'+dy+'" r="'+Math.max(2,rr-7).toFixed(1)+'" fill="#fcfdff" stroke="#1f5fbf" stroke-width="2"/>';
+  h+='<circle cx="'+dx+'" cy="'+dy+'" r="'+rr.toFixed(1)+'" fill="url(#laDr)" stroke="#2f6fc9" stroke-width="2.4" filter="url(#laSh)"/>';
+  if(s.k===4)h+='<circle cx="'+dx+'" cy="'+dy+'" r="'+Math.max(2,rr-7).toFixed(1)+'" fill="#fcfdff" stroke="#2f6fc9" stroke-width="1.6"/>';
+  h+='<ellipse cx="'+(dx-rr*.35).toFixed(1)+'" cy="'+(dy-rr*.45).toFixed(1)+'" rx="'+(rr*.22).toFixed(1)+'" ry="'+(rr*.12).toFixed(1)+'" fill="#fff" fill-opacity=".7" transform="rotate(-30 '+(dx-rr*.35).toFixed(1)+' '+(dy-rr*.45).toFixed(1)+')"/>';
   h+='<line x1="'+dx+'" y1="'+dy+'" x2="'+(dx+rr).toFixed(1)+'" y2="'+dy+'" stroke="#a8231b" stroke-width="2.2"/><text x="'+(dx+rr/2).toFixed(1)+'" y="'+(dy-6)+'" text-anchor="middle" font-size="13" font-weight="700" fill="#a8231b">r</text>';
   h+='<text x="'+dx+'" y="'+(dy+rr+22)+'" text-anchor="middle" font-size="14" fill="#1c2333">r = '+rTxt(rLap())+'</text>';
   svg.innerHTML=h;
@@ -356,22 +370,22 @@ var kel={rad:30,bar:1.05};
 function rKel(){return Math.pow(10,-9+3*(+$('#rkSl').value)/100);}
 function paintKel(){
   var svg=$('#figKel'),mode=$('#kmSel').value,r=rKel();svg.setAttribute('viewBox','0 0 300 290');
-  var col=mode==='gota'?'#1f5fbf':'#0c8486',h='',base=262,u=70;
+  var col=mode==='gota'?'#1f5fbf':'#0c8486',h=KIT('ke'),base=262,u=70;
   var rad=kel.rad;
   if(mode==='gota'){
-    h+='<circle cx="100" cy="150" r="'+rad.toFixed(1)+'" fill="#d7e8fb" stroke="'+col+'" stroke-width="3"/><text x="100" y="'+(150+rad+22).toFixed(0)+'" text-anchor="middle" font-size="13" fill="#1c2333">gota convexa</text>';
+    h+='<circle cx="100" cy="150" r="'+rad.toFixed(1)+'" fill="url(#keDr)" stroke="#2f6fc9" stroke-width="2.4" filter="url(#keSh)"/><ellipse cx="'+(100-rad*.35).toFixed(1)+'" cy="'+(150-rad*.45).toFixed(1)+'" rx="'+(rad*.22).toFixed(1)+'" ry="'+(rad*.12).toFixed(1)+'" fill="#fff" fill-opacity=".7" transform="rotate(-30 '+(100-rad*.35).toFixed(1)+' '+(150-rad*.45).toFixed(1)+')"/><text x="100" y="'+(150+rad+22).toFixed(0)+'" text-anchor="middle" font-size="13" fill="#1c2333">gota convexa</text>';
   }else{
     var w=Math.max(8,rad*0.7),x1=100-w,x2=100+w;
-    h+='<rect x="'+(x1-8)+'" y="80" width="'+(x2-x1+16)+'" height="170" fill="#e6eaf3"/>'+
-       '<path d="M'+x1+' 170 Q100 196 '+x2+' 170 L'+x2+' 250 L'+x1+' 250 Z" fill="#d7e8fb"/>'+
+    h+='<rect x="'+(x1-8)+'" y="80" width="'+(x2-x1+16)+'" height="170" fill="#c9d1e0" stroke="#8c96ad" stroke-width=".8"/>'+
+       '<path d="M'+x1+' 170 Q100 196 '+x2+' 170 L'+x2+' 250 L'+x1+' 250 Z" fill="url(#keLiq)"/>'+
        '<path d="M'+x1+' 170 Q100 196 '+x2+' 170" fill="none" stroke="'+col+'" stroke-width="3"/>'+
        '<rect x="'+x1+'" y="80" width="'+(x2-x1)+'" height="90" fill="#fcfdff"/>'+
        '<line x1="'+x1+'" y1="80" x2="'+x1+'" y2="250" stroke="#59627a" stroke-width="3"/><line x1="'+x2+'" y1="80" x2="'+x2+'" y2="250" stroke="#59627a" stroke-width="3"/>'+
        '<text x="100" y="272" text-anchor="middle" font-size="13" fill="#1c2333">poro con menisco c\u00f3ncavo</text>';
   }
   h+='<line x1="188" y1="'+(base-u)+'" x2="292" y2="'+(base-u)+'" stroke="#98a1b8" stroke-dasharray="4 4"/>'+
-     '<rect x="198" y="'+(base-u)+'" width="34" height="'+u+'" fill="#98a1b8"/><text x="215" y="'+(base+16)+'" text-anchor="middle" font-size="13" fill="#59627a">P\u2080</text>'+
-     '<rect x="246" y="'+(base-u*kel.bar).toFixed(1)+'" width="34" height="'+(u*kel.bar).toFixed(1)+'" fill="'+col+'"/><text x="263" y="'+(base+16)+'" text-anchor="middle" font-size="13" fill="'+col+'">P</text>'+
+     '<rect x="198" y="'+(base-u)+'" width="34" height="'+u+'" rx="3" fill="url(#keMtH)" stroke="#6b748a" stroke-width=".8" filter="url(#keSh)"/><text x="215" y="'+(base+16)+'" text-anchor="middle" font-size="13" fill="#59627a">P\u2080</text>'+
+     '<rect x="246" y="'+(base-u*kel.bar).toFixed(1)+'" width="34" height="'+(u*kel.bar).toFixed(1)+'" rx="3" fill="'+col+'" stroke="#1c2333" stroke-opacity=".35" stroke-width=".8" filter="url(#keSh)"/><text x="263" y="'+(base+16)+'" text-anchor="middle" font-size="13" fill="'+col+'">P</text>'+
      '<line x1="188" y1="'+base+'" x2="292" y2="'+base+'" stroke="#59627a" stroke-width="1.5"/>';
   svg.innerHTML=h;
 }
@@ -397,12 +411,12 @@ function hCap(rm,th){var p=CP[+$('#cpSel').value];return 2*p.g*Math.cos(th*Math.
 function paintCap(){
   var svg=$('#figCap'),th=+$('#thSl').value,rm=+$('#rcSl').value/100;svg.setAttribute('viewBox','0 0 360 330');
   var lev=262,top=lev-cap.px,cx=170,w=6+16*(rm-0.05)/0.95,x1=cx-w,x2=cx+w,d=13*Math.cos(th*Math.PI/180);
-  var h='<rect x="20" y="'+lev+'" width="320" height="60" fill="#d7e8fb"/><line x1="20" y1="'+lev+'" x2="340" y2="'+lev+'" stroke="#1f5fbf" stroke-width="2"/>';
+  var h=KIT('cp')+'<rect x="20" y="'+lev+'" width="320" height="60" rx="4" fill="url(#cpLiq)" stroke="#9db9dc"/><line x1="20" y1="'+lev+'" x2="340" y2="'+lev+'" stroke="#1f5fbf" stroke-width="2"/>';
   if(cap.px<0)h+='<rect x="'+x1+'" y="'+(lev+1)+'" width="'+(x2-x1)+'" height="'+(top-lev)+'" fill="#fcfdff"/>';
   var e=top-d,c=top+d;
-  h+='<path d="M'+x1+' '+e.toFixed(1)+' Q'+cx+' '+c.toFixed(1)+' '+x2+' '+e.toFixed(1)+' L'+x2+' 300 L'+x1+' 300 Z" fill="#d7e8fb"/>'+
+  h+='<path d="M'+x1+' '+e.toFixed(1)+' Q'+cx+' '+c.toFixed(1)+' '+x2+' '+e.toFixed(1)+' L'+x2+' 300 L'+x1+' 300 Z" fill="url(#cpLiq)"/>'+
      '<path d="M'+x1+' '+e.toFixed(1)+' Q'+cx+' '+c.toFixed(1)+' '+x2+' '+e.toFixed(1)+'" fill="none" stroke="#1f5fbf" stroke-width="2.6"/>'+
-     '<line x1="'+(x1-2)+'" y1="20" x2="'+(x1-2)+'" y2="305" stroke="#59627a" stroke-width="3.5"/><line x1="'+(x2+2)+'" y1="20" x2="'+(x2+2)+'" y2="305" stroke="#59627a" stroke-width="3.5"/>';
+     '<rect x="'+(x1-6)+'" y="20" width="6" height="285" rx="3" fill="url(#cpGl)" stroke="#8c96ad" stroke-width=".9"/><rect x="'+x2+'" y="20" width="6" height="285" rx="3" fill="url(#cpGl)" stroke="#8c96ad" stroke-width=".9"/>';
   for(var cm=0;cm<=15;cm++){var yy=lev-cm*14;if(yy<24)break;h+='<line x1="300" y1="'+yy+'" x2="'+(cm%5===0?312:306)+'" y2="'+yy+'" stroke="#59627a"/>'+(cm%5===0?'<text x="316" y="'+(yy+4)+'" font-size="11" fill="#59627a">'+cm+'</text>':'');}
   h+='<line x1="300" y1="'+lev+'" x2="300" y2="'+(lev-15*14)+'" stroke="#59627a"/><text x="318" y="18" font-size="11" fill="#59627a">cm</text>';
   h+='<line x1="'+(x2+22)+'" y1="'+lev+'" x2="'+(x2+22)+'" y2="'+(top+(d>0?d*.5:-d*.5)).toFixed(1)+'" stroke="#a8231b" stroke-width="2"/><text x="'+(x2+28)+'" y="'+((lev+top)/2+4).toFixed(0)+'" font-size="15" font-weight="700" fill="#a8231b">h</text>';
@@ -434,13 +448,13 @@ var SAL={g0:72.0,s:1.8};
 function GS(cL){return -(cL*1000)/(R*298.15)*(SAL.s*1e-3/1000);}
 var gib={run:!RM,bulk:[],ads:[],ion:[],SY:96,nb:10,na:4,mode:'tens'};
 function initGib(){
-  var svg=$('#figGib'),i,h='';svg.setAttribute('viewBox','0 0 300 290');
-  h+='<rect x="8" y="'+gib.SY+'" width="284" height="180" rx="4" fill="#d7e8fb"/><line x1="8" y1="'+gib.SY+'" x2="292" y2="'+gib.SY+'" stroke="#1f5fbf" stroke-width="2.5"/>'+
+  var svg=$('#figGib'),i,h=KIT('gi');svg.setAttribute('viewBox','0 0 300 290');
+  h+='<rect x="8" y="'+gib.SY+'" width="284" height="180" rx="6" fill="url(#giLiq)" stroke="#9db9dc"/><line x1="8" y1="'+gib.SY+'" x2="292" y2="'+gib.SY+'" stroke="#1f5fbf" stroke-width="2.5"/>'+
      '<rect id="gBand" x="8" y="'+gib.SY+'" width="284" height="34" fill="none" stroke="#a8231b" stroke-dasharray="5 4" visibility="hidden"/>'+
      '<text x="14" y="22" font-size="13" fill="#59627a">vapor</text><text id="gBandT" x="14" y="'+(gib.SY+30)+'" font-size="12" fill="#a8231b" visibility="hidden">zona empobrecida</text>';
-  for(i=0;i<30;i++)h+='<g id="gb'+i+'" visibility="hidden"><line x1="0" y1="0" x2="0" y2="-13" stroke="#17703f" stroke-width="2.4"/><circle r="5" fill="#17703f" stroke="#fff" stroke-width="1"/></g>';
-  for(i=0;i<16;i++)h+='<g id="ga'+i+'" visibility="hidden"><line x1="0" y1="0" x2="0" y2="-15" stroke="#17703f" stroke-width="2.6"/><circle r="5.5" fill="#17703f" stroke="#fff" stroke-width="1"/></g>';
-  for(i=0;i<24;i++)h+='<circle id="gi'+i+'" r="4.5" fill="'+(i%2?'#59627a':'#a8231b')+'" stroke="#fff" stroke-width="1" visibility="hidden"/>';
+  for(i=0;i<30;i++)h+='<g id="gb'+i+'" visibility="hidden"><line x1="0" y1="0" x2="0" y2="-13" stroke="#17703f" stroke-width="2.4"/><circle r="5" fill="url(#giGr)" stroke="#136a3b" stroke-width=".7" filter="url(#giSh)"/></g>';
+  for(i=0;i<16;i++)h+='<g id="ga'+i+'" visibility="hidden"><line x1="0" y1="0" x2="0" y2="-15" stroke="#17703f" stroke-width="2.6"/><circle r="5.5" fill="url(#giGr)" stroke="#136a3b" stroke-width=".7" filter="url(#giSh)"/></g>';
+  for(i=0;i<24;i++)h+='<circle id="gi'+i+'" r="4.5" fill="url(#'+(i%2?'giGy':'giRd')+')" stroke="'+(i%2?'#4a526a':'#8c1c14')+'" stroke-width=".7" visibility="hidden"/>';
   svg.innerHTML=h;
   for(i=0;i<30;i++)gib.bulk.push({x:30+rnd(1)*0+Math.random()*240,y:gib.SY+30+Math.random()*130,vx:rnd(1),vy:rnd(1),a:rnd(120),e:$('#gb'+i)});
   for(i=0;i<16;i++)gib.ads.push({x:22+i*(256/15),y:gib.SY+7,e:$('#ga'+i),p:Math.random()*6});
