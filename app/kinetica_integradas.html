@@ -430,20 +430,35 @@ function drawEn(){
 }
 function drawCat(){
   var Ec=+$('#ecSl').value,E0=80;$('#ecVal').textContent=Ec;
-  var svg=$('#figCat'),W=420,H=250,sc=150/E0,yR=210,yP=225;svg.setAttribute('viewBox','0 0 '+W+' '+H);
-  var pk=function(E){return yR-E*sc;};
+  var svg=$('#figCat'),W=420,H=250,sc=150/E0,yR=210,X0=62,XW=328,dEr=-8;
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  /* Perfil de energía: escalón suave reactivos -> productos más una barrera gaussiana.
+     La amplitud de la barrera se resuelve por bisección para que el máximo valga exactamente Ea. */
+  var sg=function(u){return 1/(1+Math.exp(-(u-0.62)*9));},s0=sg(0),s1=sg(1);
+  var S=function(u){return (sg(u)-s0)/(s1-s0);};
+  var prof=function(Ea,c){
+    var f=function(u,B){return dEr*S(u)+B*Math.exp(-Math.pow((u-c)/0.2,2));};
+    var mx=function(B){var m=-1e9,u,v;for(u=0;u<=1.0001;u+=0.002){v=f(u,B);if(v>m)m=v;}return m;};
+    var lo=0,hi=600,B,k;
+    for(k=0;k<50;k++){B=(lo+hi)/2;if(mx(B)<Ea)lo=B;else hi=B;}
+    var up=0,m=-1e9,u,v;
+    for(u=0;u<=1.0001;u+=0.0005){v=f(u,B);if(v>m){m=v;up=u;}}
+    var d='',i;
+    for(i=0;i<=240;i++){u=i/240;d+=(i?'L':'M')+(X0+XW*u).toFixed(1)+' '+(yR-f(u,B)*sc).toFixed(1);}
+    return {d:d,x:X0+XW*up,y:yR-m*sc,E:m};
+  };
+  var pU=prof(E0,0.58),pC=prof(Ec,0.42);
   var s='<line x1="46" y1="232" x2="404" y2="232" stroke="#59627a" stroke-width="1.5"/><line x1="46" y1="16" x2="46" y2="232" stroke="#59627a" stroke-width="1.5"/>'+
-    '<text x="225" y="248" text-anchor="middle" font-size="13" fill="#59627a">avance de la reacci\u00f3n</text><text transform="translate(16 124) rotate(-90)" text-anchor="middle" font-size="13" fill="#59627a">energ\u00eda</text>';
-  var curve=function(E,col,w,dash){var y=pk(E);return '<path d="M62 '+yR+' C110 '+yR+' 130 '+y+' 215 '+y+' C300 '+y+' 320 '+yP+' 390 '+yP+'" fill="none" stroke="'+col+'" stroke-width="'+w+'"'+(dash?' stroke-dasharray="8 5"':'')+'/>';};
-  s+=curve(E0,'#1f5fbf',3.2,false)+curve(Ec,'#0c8486',3,true);
-  s+='<line x1="62" y1="'+yR+'" x2="266" y2="'+yR+'" stroke="#98a1b8" stroke-dasharray="3 4"/>'+
-     '<line x1="215" y1="'+pk(E0)+'" x2="266" y2="'+pk(E0)+'" stroke="#a8231b" stroke-opacity=".55" stroke-dasharray="3 4"/>'+
-     '<line x1="164" y1="'+pk(Ec)+'" x2="215" y2="'+pk(Ec)+'" stroke="#0c8486" stroke-opacity=".55" stroke-dasharray="3 4"/>';
-  s+='<line x1="250" y1="'+yR+'" x2="250" y2="'+(pk(E0)+3)+'" stroke="#a8231b" stroke-width="2"/><polygon points="250,'+pk(E0)+' 245,'+(pk(E0)+11)+' 255,'+(pk(E0)+11)+'" fill="#a8231b"/>'+
-     '<text x="243" y="'+(pk(E0)+34)+'" text-anchor="end" font-size="14" font-weight="700" fill="#a8231b">E<tspan dy="4" font-size="10">a</tspan></text>';
-  s+='<line x1="180" y1="'+yR+'" x2="180" y2="'+(pk(Ec)+3)+'" stroke="#0c8486" stroke-width="2"/><polygon points="180,'+pk(Ec)+' 175,'+(pk(Ec)+11)+' 185,'+(pk(Ec)+11)+'" fill="#0c8486"/>'+
-     '<text x="172" y="'+((yR+pk(Ec))/2+4)+'" text-anchor="end" font-size="14" font-weight="700" fill="#0c8486">E<tspan dy="4" font-size="10">a,cat</tspan></text>';
-  s+='<text x="64" y="'+(yR+16)+'" font-size="13" fill="#1c2333">Reactivos</text><text x="392" y="'+(yP+16)+'" text-anchor="end" font-size="13" fill="#1c2333">Productos</text>';
+    '<text x="225" y="248" text-anchor="middle" font-size="13" fill="#59627a">avance de la reacción</text><text transform="translate(16 124) rotate(-90)" text-anchor="middle" font-size="13" fill="#59627a">energía</text>';
+  s+='<path d="'+pU.d+'" fill="none" stroke="#1f5fbf" stroke-width="3.2" stroke-linejoin="round"/>'+
+     '<path d="'+pC.d+'" fill="none" stroke="#0c8486" stroke-width="3" stroke-dasharray="8 5" stroke-linejoin="round"/>';
+  s+='<line x1="'+X0+'" y1="'+yR+'" x2="'+(pU.x+34).toFixed(1)+'" y2="'+yR+'" stroke="#98a1b8" stroke-dasharray="3 4"/>';
+  var arrow=function(p,col){return '<line x1="'+p.x.toFixed(1)+'" y1="'+yR+'" x2="'+p.x.toFixed(1)+'" y2="'+(p.y+9).toFixed(1)+'" stroke="'+col+'" stroke-width="2"/>'+
+    '<polygon points="'+p.x.toFixed(1)+','+p.y.toFixed(1)+' '+(p.x-5).toFixed(1)+','+(p.y+11).toFixed(1)+' '+(p.x+5).toFixed(1)+','+(p.y+11).toFixed(1)+'" fill="'+col+'"/>';};
+  s+=arrow(pU,'#a8231b')+arrow(pC,'#0c8486');
+  s+='<text x="'+(pU.x+8).toFixed(1)+'" y="'+((yR+pU.y)/2-10).toFixed(1)+'" font-size="14" font-weight="700" fill="#a8231b" stroke="#fff" stroke-width="4" paint-order="stroke">E<tspan dy="4" font-size="10">a</tspan></text>';
+  s+='<text x="'+(pC.x-8).toFixed(1)+'" y="'+((yR+pC.y)/2+4).toFixed(1)+'" text-anchor="end" font-size="14" font-weight="700" fill="#0c8486" stroke="#fff" stroke-width="4" paint-order="stroke">E<tspan dy="4" font-size="10">a,cat</tspan></text>';
+  s+='<text x="64" y="'+(yR+16)+'" font-size="13" fill="#1c2333">Reactivos</text><text x="392" y="'+(yR-dEr*sc+16)+'" text-anchor="end" font-size="13" fill="#1c2333">Productos</text>';
   s+='<line x1="64" y1="30" x2="94" y2="30" stroke="#1f5fbf" stroke-width="3.2"/><text x="100" y="34" font-size="12" fill="#1c2333">sin catalizador</text><line x1="64" y1="48" x2="94" y2="48" stroke="#0c8486" stroke-width="3" stroke-dasharray="8 5"/><text x="100" y="52" font-size="12" fill="#1c2333">con catalizador</text>';
   svg.innerHTML=s;
   var fac=Math.exp((E0-Ec)*1000/(R*298.15));
